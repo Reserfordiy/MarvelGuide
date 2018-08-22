@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MarvelGuide.Core.Models
 {
-    class Roule : IRoule
+    public class Roule : IRoule
     {
         public int Id { get; set; }
 
