@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MarvelGuide.Core.Models
 {
-    class Picture
+    public class Picture
     {
         public int Id { get; set; }
 

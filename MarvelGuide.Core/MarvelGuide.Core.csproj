@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataStorages\BaseRepository.cs" />
+    <Compile Include="DataStorages\DBRepository.cs" />
     <Compile Include="Intefraces\IRepository.cs" />
     <Compile Include="Intefraces\IRoule.cs" />
     <Compile Include="Intefraces\IStorage.cs" />

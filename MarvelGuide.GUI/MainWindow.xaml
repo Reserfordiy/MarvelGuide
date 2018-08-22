@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
-        Title="Обучающий гайд" Height="480" MinHeight="460" MaxHeight="500" Width="580" MinWidth="540" MaxWidth="640" KeyDown="Window_KeyDown" FontFamily="Verdana">
+        Title="Обучающий гайд" Height="480" MinHeight="460" MaxHeight="500" Width="580" MinWidth="540" MaxWidth="640" FontFamily="Verdana">
     <Grid>
         
     </Grid>
