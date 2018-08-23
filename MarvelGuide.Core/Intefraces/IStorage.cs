@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MarvelGuide.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace MarvelGuide.Core.Intefraces
 {
     public interface IStorage
     {
-        IRepository<IDocument> Roules { get; }
+        IRepository<Document> Documents { get; }
     }
 }

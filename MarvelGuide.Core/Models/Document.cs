@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MarvelGuide.Core.Models
 {
-    public class Document : IDocument
+    public class Document
     {
         public int Id { get; set; }
 

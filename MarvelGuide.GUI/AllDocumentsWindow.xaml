@@ -6,24 +6,44 @@
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
         Title="Обучающий гайд" Height="480" MinHeight="460" MaxHeight="515" Width="580" MinWidth="550" MaxWidth="635" FontFamily="Verdana">
-    <Grid Background="#FFEAF6FB">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+    <ScrollViewer>
+        <Grid Background="#FFEAF6FB">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="10 6" FontSize="16" Margin="0 22 30 0" Click="BackButton_Click">Вернуться назад</Button>
+            <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="10 6" FontSize="16" Margin="0 22 30 0" Click="BackButton_Click">Вернуться назад</Button>
 
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="22" Margin="30 60 0 10">Доступные документы:</TextBlock>
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="21" Margin="45 60 0 10">Доступные документы:</TextBlock>
 
-        <ListBox Name="AllDocumentsListBox" Margin="30 10 30 40" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" Grid.Row="1">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <TextBlock Name="DocumentNameTextBlock"></TextBlock>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </Grid>
+            <ListBox Name="AllDocumentsListBox" Margin="30 10 30 40" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="1">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <DockPanel Grid.Column="0" Grid.RowSpan="2" Margin="0 10 10 10" VerticalAlignment="Top">
+                                <Border BorderThickness="0" BorderBrush="#FF715C4E">
+                                    <Image Name="DocumentImage" Width="64" Height="64" Source="Images/document_icon.png" HorizontalAlignment="Left"></Image>
+                                </Border>
+                            </DockPanel>
+
+                            <TextBlock Grid.Column="1" Name="DocumentNameTextBlock" FontFamily="Calibri" VerticalAlignment="Top" FontSize="18" Margin="10 10 30 10" Initialized="DocumentNameTextBlock_Initialized"></TextBlock>
+
+                            <Button Grid.Row="1" Grid.Column="1" Name="ReadButton" FontFamily="Verdana" Margin="10 2 30 10" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6 4">Читать</Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </ScrollViewer>
 </Window>

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MarvelGuide.Core;
+using MarvelGuide.Core.Intefraces;
+using MarvelGuide.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +22,28 @@ namespace MarvelGuide.GUI
     /// </summary>
     public partial class AllDocumentsWindow : Window
     {
+        IStorage _storage;
+
+
         public AllDocumentsWindow()
         {
+            _storage = Factory.Instance.GetStorage();
+
             InitializeComponent();
+
+            PublishingTheDocuments();
         }
+
+
+        private void PublishingTheDocuments()
+        {
+            AllDocumentsListBox.ItemsSource = _storage.Documents.Items;
+        }
+
+
+
+
+
 
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -32,6 +53,17 @@ namespace MarvelGuide.GUI
             mainWindow.Show();
 
             Close();
+        }
+
+
+
+        private void DocumentNameTextBlock_Initialized(object sender, EventArgs e)
+        {
+            TextBlock DocumentNameTextBlock = sender as TextBlock;
+
+            Document document = DocumentNameTextBlock.DataContext as Document;
+
+            DocumentNameTextBlock.Text = document.Name;
         }
     }
 }
