@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
-        Title="Обучающий гайд" Height="480" MinHeight="460" MaxHeight="515" Width="580" MinWidth="550" MaxWidth="635" FontFamily="Verdana">
+        Title="Обучающий гайд" Height="480" MinHeight="460" Width="580" MinWidth="550" MaxWidth="635" FontFamily="Verdana">
     <ScrollViewer>
         <Grid Background="#FFEAF6FB">
             <Grid.RowDefinitions>
@@ -13,7 +13,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="10 6" FontSize="16" Margin="0 22 30 0" Click="BackButton_Click">Вернуться назад</Button>
+            <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="0 20 30 0" Click="BackButton_Click">Вернуться назад</Button>
 
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="21" Margin="45 60 0 10">Доступные документы:</TextBlock>
 
@@ -39,7 +39,7 @@
 
                             <TextBlock Grid.Column="1" Name="DocumentNameTextBlock" FontFamily="Calibri" VerticalAlignment="Top" FontSize="18" Margin="10 10 30 10" Initialized="DocumentNameTextBlock_Initialized"></TextBlock>
 
-                            <Button Grid.Row="1" Grid.Column="1" Name="ReadButton" FontFamily="Verdana" Margin="10 2 30 10" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6 4">Читать</Button>
+                            <Button Grid.Row="1" Grid.Column="1" Name="ReadButton" FontFamily="Verdana" Margin="10 2 30 10" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6 4" Click="ReadButton_Click">Читать</Button>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

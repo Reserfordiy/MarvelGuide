@@ -65,5 +65,20 @@ namespace MarvelGuide.GUI
 
             DocumentNameTextBlock.Text = document.Name;
         }
+
+
+
+        private void ReadButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button ReadButton = sender as Button;
+
+            Document document = ReadButton.DataContext as Document;
+
+            DocumentWindow documentWindow = new DocumentWindow(document);
+
+            documentWindow.Show();
+
+            Close();
+        }
     }
 }
