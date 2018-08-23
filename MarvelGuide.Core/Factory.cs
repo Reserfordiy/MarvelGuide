@@ -18,7 +18,7 @@ namespace MarvelGuide.Core
         private Factory() { }
 
         
-        public IRoule GetGame() => new Roule();
+        public IDocument GetGame() => new Document();
         
 
         private IStorage _storage;

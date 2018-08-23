@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MarvelGuide.Core.Intefraces
 {
-    public interface IRoule
+    public interface IDocument
     {
         int Id { get; set; }
 

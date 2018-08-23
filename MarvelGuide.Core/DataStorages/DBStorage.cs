@@ -9,10 +9,10 @@ namespace MarvelGuide.Core.DataStorages
 {
     internal class DBStorage : IStorage
     {
-        IRepository<IRoule> _roules;
+        IRepository<IDocument> _roules;
 
 
-        public IRepository<IRoule> Roules
+        public IRepository<IDocument> Roules
         {
             get
             {

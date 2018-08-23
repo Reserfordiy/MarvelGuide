@@ -8,6 +8,6 @@ namespace MarvelGuide.Core.Intefraces
 {
     public interface IStorage
     {
-        IRepository<IRoule> Roules { get; }
+        IRepository<IDocument> Roules { get; }
     }
 }
