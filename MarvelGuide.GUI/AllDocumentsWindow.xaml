@@ -17,7 +17,7 @@
 
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="21" Margin="45 60 0 10">Доступные документы:</TextBlock>
 
-            <ListBox Name="AllDocumentsListBox" Margin="30 10 30 40" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="1">
+            <ListBox Name="AllDocumentsListBox" Margin="30 10 30 40" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="1" Style="{DynamicResource TransparentListBox}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

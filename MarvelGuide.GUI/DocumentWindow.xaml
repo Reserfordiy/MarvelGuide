@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
-        Title="Обучающий гайд" Height="480" MinHeight="460" Width="580" MinWidth="550" MaxWidth="635" FontFamily="Verdana">
+        Title="Обучающий гайд" Height="650" MinHeight="300" Width="700" MinWidth="700" MaxWidth="700" FontFamily="Verdana">
     <ScrollViewer>
         <Grid Background="#FFEAF6FB">
             <Grid.RowDefinitions>
@@ -17,7 +17,7 @@
 
             <TextBlock Grid.Row="0" Name="DocumentNameTextBlock" HorizontalAlignment="Center" Margin="50 70 50 10" FontFamily="calibri" FontSize="23">Название документа</TextBlock>
 
-            <TextBlock Grid.Row="1" Name="DocumentContentTextBlock" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30 10 30 50" FontFamily="calibri" FontSize="16">Здесь будет отображаться текст документа</TextBlock>
+            <TextBlock Grid.Row="1" Name="DocumentContentTextBlock" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30 10 30 50" FontFamily="calibri" FontSize="16">Здесь будет отображаться текст документа</TextBlock>
         </Grid>
     </ScrollViewer>
 </Window>
