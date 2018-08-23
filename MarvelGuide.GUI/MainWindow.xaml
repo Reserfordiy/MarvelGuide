@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15 10" FontSize="20">Просмотреть все документы</Button>
+        <Button Name="ShowDocumentsButton" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15 10" FontSize="20" Click="ShowDocumentsButton_Click">Просмотреть все документы</Button>
 
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontSize="25" Margin="50 50 50 0" FontFamily="Calibri">Войти в личный кабинет:</TextBlock>
 

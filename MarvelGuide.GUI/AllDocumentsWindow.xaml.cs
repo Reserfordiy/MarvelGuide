@@ -10,27 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MarvelGuide.GUI
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для AllDocumentsWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AllDocumentsWindow : Window
     {
-        public MainWindow()
+        public AllDocumentsWindow()
         {
             InitializeComponent();
         }
 
 
-        private void ShowDocumentsButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            AllDocumentsWindow allDocumentsWindow = new AllDocumentsWindow();
+            MainWindow mainWindow = new MainWindow();
 
-            allDocumentsWindow.Show();
+            mainWindow.Show();
 
             Close();
         }

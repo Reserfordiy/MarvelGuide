@@ -1,0 +1,29 @@
+﻿<Window x:Class="MarvelGuide.GUI.AllDocumentsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MarvelGuide.GUI"
+        mc:Ignorable="d"
+        Title="Обучающий гайд" Height="480" MinHeight="460" MaxHeight="515" Width="580" MinWidth="550" MaxWidth="635" FontFamily="Verdana">
+    <Grid Background="#FFEAF6FB">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="10 6" FontSize="16" Margin="0 22 30 0" Click="BackButton_Click">Вернуться назад</Button>
+
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="22" Margin="30 60 0 10">Доступные документы:</TextBlock>
+
+        <ListBox Name="AllDocumentsListBox" Margin="30 10 30 40" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Name="DocumentNameTextBlock"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
