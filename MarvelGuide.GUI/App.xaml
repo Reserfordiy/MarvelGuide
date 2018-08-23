@@ -124,8 +124,8 @@
         <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>-->
         <LinearGradientBrush x:Key="AttentionButton.Static.Background" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-            <GradientStop Color="#FFF5A364" Offset="1"/>
-            <GradientStop Color="#FFFDE9D2"/>
+            <GradientStop Color="#FFCAEDCC" Offset="1"/>
+            <GradientStop Color="#FFE1F3E2"/>
         </LinearGradientBrush>
         <LinearGradientBrush x:Key="AttentionButton.Static.Background1" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
             <GradientStop Color="#FFAFAAA5" Offset="1"/>
@@ -133,22 +133,22 @@
         </LinearGradientBrush>
         <SolidColorBrush x:Key="AttentionButton.Static.Border" Color="#CC6F6252"/>
         <LinearGradientBrush x:Key="AttentionButton.MouseOver.Background" EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FFF0A972" Offset="1"/>
-            <GradientStop Color="#FFFDF4E8"/>
+            <GradientStop Color="#FFB5E1B8" Offset="1"/>
+            <GradientStop Color="#FFD2ECD3"/>
         </LinearGradientBrush>
         <LinearGradientBrush x:Key="AttentionButton.MouseOver.Background1" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
             <GradientStop Color="#FFBEBAB6" Offset="1"/>
             <GradientStop Color="#FFEDE4D8"/>
         </LinearGradientBrush>
         <SolidColorBrush x:Key="AttentionButton.MouseOver.Border" Color="#CC6F6252"/>
-        <SolidColorBrush x:Key="AttentionButton.Pressed.Background" Color="#FFF6D2B7"/>
+        <SolidColorBrush x:Key="AttentionButton.Pressed.Background" Color="#FFC2E7C5"/>
         <SolidColorBrush x:Key="AttentionButton.Pressed.Background1" Color="#FFD5CEC7"/>
         <SolidColorBrush x:Key="AttentionButton.Pressed.Border" Color="#CC6F6252"/>
 
-        
+
         <Style x:Key="AttentionButtonsStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource AttentionButton.Static.Background1}"/>
+            <Setter Property="Background" Value="{StaticResource AttentionButton.Static.Background}"/>
             <Setter Property="BorderBrush" Value="{StaticResource AttentionButton.Static.Border}"/>
             <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>-->
             <Setter Property="Foreground" Value="#FF29022D"/>
@@ -167,11 +167,11 @@
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource AttentionButton.MouseOver.Background1}"/>
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource AttentionButton.MouseOver.Background}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource AttentionButton.MouseOver.Border}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource AttentionButton.Pressed.Background1}"/>
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource AttentionButton.Pressed.Background}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource AttentionButton.Pressed.Border}"/>
                             </Trigger>
                             <!--<Trigger Property="IsEnabled" Value="false">

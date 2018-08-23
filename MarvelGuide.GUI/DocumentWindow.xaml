@@ -13,7 +13,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="0 20 30 0" Click="BackButton_Click">Вернуться назад</Button>
+            <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="0 20 30 0" Click="BackButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Вернуться назад</Button>
 
             <TextBlock Grid.Row="0" Name="DocumentNameTextBlock" HorizontalAlignment="Center" Margin="50 70 50 10" FontFamily="calibri" FontSize="23">Название документа</TextBlock>
 

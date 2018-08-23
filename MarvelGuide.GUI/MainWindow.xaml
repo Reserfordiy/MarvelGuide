@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Button Name="ShowDocumentsButton" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15 10" FontSize="20" Click="ShowDocumentsButton_Click">Просмотреть все документы</Button>
+        <Button Name="ShowDocumentsButton" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15 10" FontSize="20" Click="ShowDocumentsButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Просмотреть все документы</Button>
 
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontSize="25" Margin="50 50 50 0" FontFamily="Calibri">Войти в личный кабинет:</TextBlock>
 
@@ -27,7 +27,7 @@
             <TextBox Name="LoginTextBox" Grid.Row="0" HorizontalAlignment="Stretch" Padding="6 3" FontFamily="Calibri" Margin="0 10 0 5" FontSize="18" GotFocus="LoginTextBox_GotFocus">Логин</TextBox>
             <TextBox Name="PasswordTextBox" Grid.Row="1" HorizontalAlignment="Stretch" Padding="6 3" FontFamily="Calibri" Margin="0 5 0 20" FontSize="18" GotFocus="PasswordTextBox_GotFocus">Пароль</TextBox>
 
-            <Button Name="LoginButton" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Padding="16 7" FontSize="14" Click="LoginButton_Click">Войти</Button>
+            <Button Name="LoginButton" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Padding="16 7" FontSize="14" Click="LoginButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Войти</Button>
         </Grid>
     </Grid>
 </Window>
