@@ -11,7 +11,7 @@ namespace MarvelGuide.Core
     public class Context : DbContext
     {
         public DbSet<Document> Roules { get; set; }
-
+        public DbSet<User> Users { get; set; }
         public DbSet<Picture> Pictures { get; set; }
 
 
