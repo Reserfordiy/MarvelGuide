@@ -35,25 +35,25 @@ namespace MarvelGuide.Core.DataStorages
                     _loaded = true;
                 }
 
-                SaveDocumentsToJson();
+                //SaveDocumentsToJson();
 
                 return _documents;
             }
         }
 
 
-        public void SaveDocumentsToJson()
-        {
-            using (var sw = new StreamWriter("../../../MarvelGuide.Core/Data/Documents.json"))
-            {
-                using (var jsonWriter = new JsonTextWriter(sw))
-                {
-                    jsonWriter.Formatting = Formatting.Indented;
+        //public void SaveDocumentsToJson()
+        //{
+        //    using (var sw = new StreamWriter("../../../MarvelGuide.Core/Data/Documents.json"))
+        //    {
+        //        using (var jsonWriter = new JsonTextWriter(sw))
+        //        {
+        //            jsonWriter.Formatting = Formatting.Indented;
 
-                    var serializer = new JsonSerializer();
-                    serializer.Serialize(jsonWriter, _documents.Items);
-                }
-            }
-        }
+        //            var serializer = new JsonSerializer();
+        //            serializer.Serialize(jsonWriter, _documents.Items);
+        //        }
+        //    }
+        //}
     }
 }

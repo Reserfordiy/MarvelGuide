@@ -10,7 +10,7 @@ namespace MarvelGuide.Core.DataStorages
 {
     internal class JSONStorage : IStorage
     {
-        private const string filePath = "";
+        private const string filePath = "../../../MarvelGuide.Core/Data/Documents.json";
 
 
         IRepository<Document> _documents;
