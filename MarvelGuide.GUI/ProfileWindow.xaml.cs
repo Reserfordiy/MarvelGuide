@@ -1,4 +1,5 @@
-﻿using MarvelGuide.Core.Models;
+﻿using MarvelGuide.Core.Intefraces;
+using MarvelGuide.Core.Models;
 using MarvelGuide.Core.SpecialMethods;
 using System;
 using System.Collections.Generic;
@@ -37,18 +38,48 @@ namespace MarvelGuide.GUI
         private const string agent = "Агент Поддержки";
         private const string moderator = "Модератор";
 
+        private const string allEmployeesStart = "Работают под подчинением ";
+        private const string creatorsEmployeesEnd = " сотрудников. Среди них:";
+
+        private const string employer = "Непосредственный начальник";
+
+        private const string employeeManagers = "Менеджеров";
+        private const string employeeEditors = "Редакторов";
+        private const string employeeAgents = "Агентов Поддержки";
+        private const string employeeModerators = "Модераторов";
+
+        private const string managerJob = "Менеджерская должность";
+
+        private const string editorsRubric = "Редакторская рубрика";
+        private const string editorsFrequencyStart = "Частота размещения постов: 1/";
+        private const string editorsFrequencyEnd = " поста в сутки";
+
+        private const string agentsNumber = "Номер агента";
+        private const string agentsFirstWords = "Приветствие агента";
+        private const string agentsLastWords = "Подпись агента";
+
+
+        private const string showDetailsButton = "Показать подробности";
+        private const string hideDetailsButton = "Скрыть подробности";
+
+
         private const string defaultImageSource = "default.jpg";
 
 
+        IStorage _storage;
         User _user;
 
         List<string> _personalData;
 
         string _job;
 
+        bool _shown = false;
+        int _additionalData = 0;
 
-        public ProfileWindow(User user)
+
+        public ProfileWindow(User user, IStorage storage)
         {
+            _storage = storage;
             _user = user;
 
             InitializeComponent();
@@ -115,6 +146,106 @@ namespace MarvelGuide.GUI
             {
                 AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(defaultImageSource, "../MarvelGuide.Core/Avatars")));
             }
+        }
+
+
+
+        private void ShowDetailsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!_shown)
+            {
+                _shown = true;
+
+                if (_user.Creator) { CreatorsDetails(); }
+                if (_user.SuperAdmin) { SuperAdminsDetails(); }
+                if (_user.AdminEditor) { AdminEditorDetails(); }
+                if (_user.AdminAgent) { AdminAgentDetails(); }
+                if (_user.Manager) { ManagersDetails(); }
+                if (_user.Editor) { EditorsDetails(); }
+                if (_user.Agent) { AgentsDetails(); }
+                if (_user.Moderator) { ModeratorsDetails(); }
+
+                ShowDetailsButton.Content = hideDetailsButton;
+            }
+
+            else
+            {
+                _shown = false;
+
+                _personalData = _personalData.Take(_personalData.Count - _additionalData).ToList();
+
+                ShowDetailsButton.Content = showDetailsButton;
+
+                _additionalData = 0;
+            }
+
+            PersonalDataListBox.ItemsSource = null;
+            PersonalDataListBox.ItemsSource = _personalData;
+        }
+
+        
+        private void CreatorsDetails()
+        {
+            _personalData.Add(allEmployeesStart + _storage.Users.Items.Count().ToString() + creatorsEmployeesEnd);
+            _personalData.Add(employeeManagers + adding + _storage.Users.Items.Count(u => u.Manager).ToString());
+            _personalData.Add(employeeEditors + adding + _storage.Users.Items.Count(u => u.Editor).ToString());
+            _personalData.Add(employeeAgents + adding + _storage.Users.Items.Count(u => u.Agent).ToString());
+            _personalData.Add(employeeModerators + adding + _storage.Users.Items.Count(u => u.Moderator).ToString());
+
+            _additionalData += 5;
+        }
+
+        private void SuperAdminsDetails()
+        {
+            _personalData.Add(allEmployeesStart + _storage.Users.Items.Count(u => u.Manager).ToString() + " " + employeeManagers);
+
+            _additionalData++;
+        }
+
+        private void AdminEditorDetails()
+        {
+            _personalData.Add(allEmployeesStart + _storage.Users.Items.Count(u => u.Editor).ToString() + " " + employeeEditors);
+
+            _additionalData++;
+        }
+
+        private void AdminAgentDetails()
+        {
+            _personalData.Add(allEmployeesStart + _storage.Users.Items.Count(u => u.Agent).ToString() + " " + employeeAgents);
+
+            _additionalData++;
+        }
+
+        private void ManagersDetails()
+        {
+            _personalData.Add(managerJob + adding + _user.ManagersRole);
+            _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Surname);
+
+            _additionalData += 2;
+        }
+
+        private void EditorsDetails()
+        {
+            _personalData.Add(editorsRubric + adding + _user.EditorsRubric);
+            _personalData.Add(editorsFrequencyStart + _user.EditorsFrequency.ToString() + editorsFrequencyEnd);
+            _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Surname);
+
+            _additionalData += 3;
+        }
+
+        private void AgentsDetails()
+        {
+            _personalData.Add(agentsNumber + adding + _user.AgentsNumber.ToString());
+            _personalData.Add(agentsFirstWords + adding + _user.AgentsFirstWords);
+            _personalData.Add(agentsLastWords + adding + _user.AgentsLastWords);
+            _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Surname);
+
+            _additionalData += 4;
+        }
+
+        private void ModeratorsDetails()
+        {
+            _additionalData += 0;
         }
     }
 }

@@ -125,7 +125,7 @@ namespace MarvelGuide.GUI
 
             else
             {
-                ProfileWindow profileWindow = new ProfileWindow(user);
+                ProfileWindow profileWindow = new ProfileWindow(user, _storage);
 
                 profileWindow.Show();
 
