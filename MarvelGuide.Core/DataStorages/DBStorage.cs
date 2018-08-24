@@ -35,10 +35,10 @@ namespace MarvelGuide.Core.DataStorages
                     _users = new DBRepository<User>(_context.Users.ToList());
 
                     _loaded = true;
-                }
 
-                //SaveDocumentsToJson();
-                SaveUsersToJson();
+                    //SaveDocumentsToJson();
+                    SaveUsersToJson();
+                }                
 
                 return _documents;
             }

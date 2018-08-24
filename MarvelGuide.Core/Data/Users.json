@@ -1,6 +1,10 @@
 [
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 10,
+      "ImageSource": "romanov.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 7,
     "Name": "Максим",
     "Surname": "Романов",
@@ -22,7 +26,11 @@
     "AgentsLastWords": null
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 12,
+      "ImageSource": "sanochkin.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 8,
     "Name": "Юрий",
     "Surname": "Саночкин",
@@ -44,7 +52,11 @@
     "AgentsLastWords": "С уважением и вниманием"
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 8,
+      "ImageSource": "napartovich.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 9,
     "Name": "Илья",
     "Surname": "Напартович",
@@ -88,7 +100,11 @@
     "AgentsLastWords": null
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 5,
+      "ImageSource": "grigorieva.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 11,
     "Name": "Ольга",
     "Surname": "Григорьева",
@@ -110,7 +126,11 @@
     "AgentsLastWords": "Всегда на связи"
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 13,
+      "ImageSource": "sharvadze.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 12,
     "Name": "Елена ",
     "Surname": "Шарвадзе",
@@ -132,7 +152,11 @@
     "AgentsLastWords": null
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 6,
+      "ImageSource": "malygina.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 13,
     "Name": "Екатерина",
     "Surname": "Малыгина",
@@ -154,7 +178,11 @@
     "AgentsLastWords": null
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 7,
+      "ImageSource": "matveeva.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 14,
     "Name": "Екатерина",
     "Surname": "Матвеева",
@@ -176,7 +204,11 @@
     "AgentsLastWords": null
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 15,
+      "ImageSource": "stepanov.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 15,
     "Name": "Владимир",
     "Surname": "Степанов",
@@ -198,7 +230,11 @@
     "AgentsLastWords": null
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 14,
+      "ImageSource": "soloveychik.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 16,
     "Name": "Алиса",
     "Surname": "Соловейчик",
@@ -220,7 +256,11 @@
     "AgentsLastWords": null
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 18,
+      "ImageSource": "ziminovskiy.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 17,
     "Name": "Георгий",
     "Surname": "Зиминовский",
@@ -264,7 +304,11 @@
     "AgentsLastWords": null
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 11,
+      "ImageSource": "sanadze.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 20,
     "Name": "Георгий",
     "Surname": "Санадзе",
@@ -286,7 +330,11 @@
     "AgentsLastWords": "Искренне Ваш"
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 9,
+      "ImageSource": "pischalova.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 21,
     "Name": "Валерия",
     "Surname": "Пищалова",
@@ -308,11 +356,15 @@
     "AgentsLastWords": null
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 17,
+      "ImageSource": "zavileyskaya.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 22,
     "Name": "Екатерина",
     "Surname": "Завилейская",
-    "Login": "ekaterinaz ",
+    "Login": "ekaterinaz",
     "Password": "765555",
     "Creator": false,
     "SuperAdmin": false,
@@ -330,7 +382,11 @@
     "AgentsLastWords": null
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 4,
+      "ImageSource": "golubev.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 23,
     "Name": "Игорь",
     "Surname": "Голубев",
@@ -352,7 +408,11 @@
     "AgentsLastWords": "Добра"
   },
   {
-    "Avatar": null,
+    "Avatar": {
+      "Id": 3,
+      "ImageSource": "garin.jpg",
+      "IsBorderRequired": true
+    },
     "Id": 24,
     "Name": "Роман",
     "Surname": "Гарин",

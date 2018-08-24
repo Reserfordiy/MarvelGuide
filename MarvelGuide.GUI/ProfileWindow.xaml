@@ -23,7 +23,7 @@
             
             <DockPanel Grid.Row="1" Margin="80 50 40 15" Width="200" Height="200" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                 <Border BorderThickness="1.2" BorderBrush="#FF715C4E">
-                    <Image Name="AvatarImage" Stretch="UniformToFill" Source="Images/пейзаж1.jpg"></Image>
+                    <Image Name="AvatarImage" Stretch="UniformToFill" Source="Images/пейзаж1.jpg" Initialized="AvatarImage_Initialized"></Image>
                 </Border>
             </DockPanel>
 

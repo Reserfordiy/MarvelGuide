@@ -1,4 +1,5 @@
 ﻿using MarvelGuide.Core.Models;
+using MarvelGuide.Core.SpecialMethods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,8 @@ namespace MarvelGuide.GUI
         private const string editor = "Редактор";
         private const string agent = "Агент Поддержки";
         private const string moderator = "Модератор";
+
+        private const string defaultImageSource = "default.jpg";
 
 
         User _user;
@@ -101,6 +104,17 @@ namespace MarvelGuide.GUI
             mainWindow.Show();
         }
 
-        
+
+        private void AvatarImage_Initialized(object sender, EventArgs e)
+        {
+            try
+            {
+                AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(_user.Avatar.ImageSource, "../MarvelGuide.Core/Avatars")));
+            }
+            catch
+            {
+                AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(defaultImageSource, "../MarvelGuide.Core/Avatars")));
+            }
+        }
     }
 }
