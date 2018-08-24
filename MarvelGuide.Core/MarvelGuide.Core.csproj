@@ -36,6 +36,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -51,6 +54,8 @@
     <Compile Include="DataStorages\BaseRepository.cs" />
     <Compile Include="DataStorages\DBRepository.cs" />
     <Compile Include="DataStorages\DBStorage.cs" />
+    <Compile Include="DataStorages\JSONRepository.cs" />
+    <Compile Include="DataStorages\JSONStorage.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="Intefraces\IRepository.cs" />
     <Compile Include="Intefraces\IDocument.cs" />
@@ -75,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\Documents.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -88,5 +94,6 @@
       <DependentUpon>201808231813022_UsersAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
