@@ -10,5 +10,6 @@ namespace MarvelGuide.Core.Intefraces
     public interface IStorage
     {
         IRepository<Document> Documents { get; }
+        IRepository<User> Users { get; }
     }
 }

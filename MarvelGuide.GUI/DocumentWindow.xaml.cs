@@ -36,11 +36,15 @@ namespace MarvelGuide.GUI
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            Close();
+        }
+
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
             AllDocumentsWindow allDocumentsWindow = new AllDocumentsWindow();
 
             allDocumentsWindow.Show();
-
-            Close();
         }
     }
 }

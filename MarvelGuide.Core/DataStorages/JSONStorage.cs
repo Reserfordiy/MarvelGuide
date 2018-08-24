@@ -10,26 +10,48 @@ namespace MarvelGuide.Core.DataStorages
 {
     internal class JSONStorage : IStorage
     {
-        private const string filePath = "../../../MarvelGuide.Core/Data/Documents.json";
+        private const string documentsFilePath = "../../../MarvelGuide.Core/Data/Documents.json";
+        private const string usersFilePath = "../../../MarvelGuide.Core/Data/Users.json";
 
 
         IRepository<Document> _documents;
+        IRepository<User> _users;
 
-        bool _loaded;
+        bool _documentsLoaded;
+        bool _usersLoaded;
 
 
         public IRepository<Document> Documents
         {
             get
             {
-                if (_loaded)
+                if (_documentsLoaded)
                 {
                     return _documents;
                 }
 
-                _documents = new JSONRepository<Document>(filePath);
+                _documentsLoaded = true;
+
+                _documents = new JSONRepository<Document>(documentsFilePath);
 
                 return _documents;
+            }
+        }
+
+        public IRepository<User> Users
+        {
+            get
+            {
+                if (_usersLoaded)
+                {
+                    return _users;
+                }
+
+                _usersLoaded = true;
+
+                _users = new JSONRepository<User>(usersFilePath);
+
+                return _users;
             }
         }
     }

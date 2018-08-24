@@ -13,6 +13,7 @@ namespace MarvelGuide.Core.DataStorages
     internal class DBStorage : IStorage
     {
         IRepository<Document> _documents;
+        IRepository<User> _users;
 
         bool _loaded;
 
@@ -31,15 +32,19 @@ namespace MarvelGuide.Core.DataStorages
                 using (_context = new Context())
                 {
                     _documents = new DBRepository<Document>(_context.Roules.ToList());
+                    _users = new DBRepository<User>(_context.Users.ToList());
 
                     _loaded = true;
                 }
 
                 //SaveDocumentsToJson();
+                SaveUsersToJson();
 
                 return _documents;
             }
         }
+
+        public IRepository<User> Users => _users;
 
 
         //public void SaveDocumentsToJson()
@@ -55,5 +60,19 @@ namespace MarvelGuide.Core.DataStorages
         //        }
         //    }
         //}
+
+        public void SaveUsersToJson()
+        {
+            using (var sw = new StreamWriter("../../../MarvelGuide.Core/Data/Users.json"))
+            {
+                using (var jsonWriter = new JsonTextWriter(sw))
+                {
+                    jsonWriter.Formatting = Formatting.Indented;
+
+                    var serializer = new JsonSerializer();
+                    serializer.Serialize(jsonWriter, _users.Items);
+                }
+            }
+        }
     }
 }

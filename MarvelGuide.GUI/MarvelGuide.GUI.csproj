@@ -131,9 +131,14 @@
       <Name>MarvelGuide.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\пейзаж1.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\document_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ЮраСаночкин1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

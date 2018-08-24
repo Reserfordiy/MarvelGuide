@@ -72,6 +72,14 @@
     <Compile Include="Migrations\201808231813022_UsersAdded.Designer.cs">
       <DependentUpon>201808231813022_UsersAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808241944374_AllJobsAndParametrsAdded.cs" />
+    <Compile Include="Migrations\201808241944374_AllJobsAndParametrsAdded.Designer.cs">
+      <DependentUpon>201808241944374_AllJobsAndParametrsAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808241945316_SomeBugsFixed.cs" />
+    <Compile Include="Migrations\201808241945316_SomeBugsFixed.Designer.cs">
+      <DependentUpon>201808241945316_SomeBugsFixed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Document.cs" />
@@ -81,6 +89,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Data\Documents.json" />
+    <None Include="Data\Users.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +101,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808231813022_UsersAdded.resx">
       <DependentUpon>201808231813022_UsersAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808241944374_AllJobsAndParametrsAdded.resx">
+      <DependentUpon>201808241944374_AllJobsAndParametrsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808241945316_SomeBugsFixed.resx">
+      <DependentUpon>201808241945316_SomeBugsFixed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
