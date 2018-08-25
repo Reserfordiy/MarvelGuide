@@ -42,6 +42,10 @@ namespace MarvelGuide.GUI
         private const string creatorsEmployeesEnd = " сотрудников. Среди них:";
 
         private const string employer = "Непосредственный начальник";
+        private const string employerForManager = " (менеджерство)";
+        private const string employerForAgent = " (Поддержка)";
+        private const string employerForEditor = " (редакторство)";
+        private const string employerForModerator = " (модераторство)";
 
         private const string employeeManagers = "Менеджеров";
         private const string employeeEditors = "Редакторов";
@@ -54,7 +58,7 @@ namespace MarvelGuide.GUI
         private const string editorsFrequencyStart = "Частота размещения постов: 1/";
         private const string editorsFrequencyEnd = " поста в сутки";
 
-        private const string agentsNumber = "Номер агента";
+        private const string agentsNumber = "Агентский номер";
         private const string agentsFirstWords = "Приветствие агента";
         private const string agentsLastWords = "Подпись агента";
 
@@ -72,6 +76,7 @@ namespace MarvelGuide.GUI
         List<string> _personalData;
 
         string _job;
+        int _amountOfRegularJobs;
 
         bool _shown = false;
         int _additionalData = 0;
@@ -89,7 +94,7 @@ namespace MarvelGuide.GUI
 
 
         private void FormingPersonalData()
-        {
+        { 
             _personalData = new List<string>
             {
                 login + adding + _user.Login,
@@ -100,10 +105,10 @@ namespace MarvelGuide.GUI
             if (_user.SuperAdmin) { _job += splitting + superAdmin; }
             if (_user.AdminEditor) { _job += splitting + adminEditor; }
             if (_user.AdminAgent) { _job += splitting + adminAgent; }
-            if (_user.Manager) { _job += splitting + manager; }
-            if (_user.Editor) { _job += splitting + editor; }
-            if (_user.Agent) { _job += splitting + agent; }
-            if (_user.Moderator) { _job += splitting + moderator; }
+            if (_user.Manager) { _job += splitting + manager; _amountOfRegularJobs++; }
+            if (_user.Editor) { _job += splitting + editor; _amountOfRegularJobs++; }
+            if (_user.Agent) { _job += splitting + agent; _amountOfRegularJobs++; }
+            if (_user.Moderator) { _job += splitting + moderator; _amountOfRegularJobs++; }
 
             if (_job[0] == splitting[0])
             {
@@ -224,7 +229,14 @@ namespace MarvelGuide.GUI
 
             if (!_user.Creator && !_user.SuperAdmin && !_user.AdminAgent && !_user.AdminEditor)
             {
-                _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Surname);
+                if (_amountOfRegularJobs == 1)
+                {
+                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Surname);
+                }
+                else
+                {
+                    _personalData.Add(employer + employerForManager + adding + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Surname);
+                }
 
                 _additionalData++;
             }
@@ -239,7 +251,14 @@ namespace MarvelGuide.GUI
 
             if (!_user.Creator && !_user.SuperAdmin && !_user.AdminAgent && !_user.AdminEditor)
             {
-                _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Surname);
+                if (_amountOfRegularJobs == 1)
+                {
+                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Surname);
+                }
+                else
+                {
+                    _personalData.Add(employer + employerForEditor + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Surname);
+                }
 
                 _additionalData++;
             }
@@ -255,7 +274,14 @@ namespace MarvelGuide.GUI
 
             if (!_user.Creator && !_user.SuperAdmin && !_user.AdminAgent && !_user.AdminEditor)
             {
-                _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Surname);
+                if (_amountOfRegularJobs == 1)
+                {
+                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Surname);
+                }
+                else
+                {
+                    _personalData.Add(employer + employerForAgent + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Surname);
+                }
 
                 _additionalData++;
             }

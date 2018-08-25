@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MarvelGuide.Core.SpecialMethods
 {
-    public class WorkWithImages
+    public static class WorkWithImages
     {
         public static string GetDestinationPath(string fileName, string folderName)
         {
