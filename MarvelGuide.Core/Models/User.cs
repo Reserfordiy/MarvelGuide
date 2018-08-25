@@ -13,8 +13,16 @@ namespace MarvelGuide.Core.Models
         public string Name { get; set; }
         public string Surname { get; set; }
 
+        public bool Male { get; set; }
+
         public string Login { get; set; }
         public string Password { get; set; }
+
+        public bool SuperDeveloper { get; set; }
+        public bool DeveloperManager { get; set; }
+        public bool DeveloperAgent { get; set; }
+        public bool DeveloperEditor { get; set; }
+        public bool DeveloperModerator { get; set; }
 
         public bool Creator { get; set; }
         public bool SuperAdmin { get; set; }

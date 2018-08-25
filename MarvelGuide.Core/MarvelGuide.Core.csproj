@@ -80,6 +80,10 @@
     <Compile Include="Migrations\201808241945316_SomeBugsFixed.Designer.cs">
       <DependentUpon>201808241945316_SomeBugsFixed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808251729127_DevelopersFieldsAdded.cs" />
+    <Compile Include="Migrations\201808251729127_DevelopersFieldsAdded.Designer.cs">
+      <DependentUpon>201808251729127_DevelopersFieldsAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Document.cs" />
@@ -109,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808241945316_SomeBugsFixed.resx">
       <DependentUpon>201808241945316_SomeBugsFixed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808251729127_DevelopersFieldsAdded.resx">
+      <DependentUpon>201808251729127_DevelopersFieldsAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

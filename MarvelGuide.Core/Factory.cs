@@ -23,6 +23,6 @@ namespace MarvelGuide.Core
 
         private IStorage _storage;
 
-        public IStorage GetStorage() => _storage ?? (_storage = new JSONStorage());
+        public IStorage GetStorage() => _storage ?? (_storage = new DBStorage());
     }
 }
