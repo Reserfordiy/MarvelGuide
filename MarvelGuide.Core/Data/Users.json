@@ -574,5 +574,37 @@
     "AgentsNumber": 10,
     "AgentsFirstWords": "Здравствуйте!",
     "AgentsLastWords": "Удачи и хорошего настроения"
+  },
+  {
+    "Avatar": {
+      "Id": 23,
+      "ImageSource": "shenkova.jpg",
+      "IsBorderRequired": true
+    },
+    "Id": 26,
+    "Name": "Анастасия",
+    "Surname": "Шенькова",
+    "Male": false,
+    "Login": "anastasiyash",
+    "Password": "419480",
+    "SuperDeveloper": false,
+    "DeveloperManager": false,
+    "DeveloperAgent": false,
+    "DeveloperEditor": false,
+    "DeveloperModerator": false,
+    "Creator": false,
+    "SuperAdmin": false,
+    "AdminEditor": false,
+    "AdminAgent": false,
+    "Manager": false,
+    "Editor": true,
+    "Agent": false,
+    "Moderator": false,
+    "ManagersRole": null,
+    "EditorsRubric": "Старс",
+    "EditorsFrequency": 1,
+    "AgentsNumber": 0,
+    "AgentsFirstWords": null,
+    "AgentsLastWords": null
   }
 ]

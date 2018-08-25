@@ -60,8 +60,12 @@ namespace MarvelGuide.GUI
         private const string managerJob = "Менеджерская должность";
 
         private const string editorsRubric = "Редакторская рубрика";
-        private const string editorsFrequencyStart = "Частота размещения постов: 1/";
-        private const string editorsFrequencyEnd = " поста в сутки";
+        private const string editorsFrequencyFractionStart = "Частота размещения постов:  1/";
+        private const string editorsFrequencyIntegerStart = "Частота размещения постов:  ";
+        private const string editorsFrequencyFractionEnd = " поста в сутки";
+        private const string editorsFrequencyInteger1End = " пост в сутки";
+        private const string editorsFrequencyInteger234End = " поста в сутки";
+        private const string editorsFrequencyInteger5End = " постов в сутки";
 
         private const string agentsNumber = "Агентский номер";
         private const string agentsFirstWords = "Приветствие агента";
@@ -90,6 +94,7 @@ namespace MarvelGuide.GUI
         int _additionalData = 0;
         bool _detailsShown = false;
         bool _goingToTheTeamWindow = false;
+        bool _goingToTheDeveloperMode = false;
 
         bool _personalPage = true;
 
@@ -159,9 +164,10 @@ namespace MarvelGuide.GUI
         }
 
 
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!_goingToTheTeamWindow)
+            if (!_goingToTheTeamWindow && !_goingToTheDeveloperMode)
             {
                 if (_personalPage)
                 {
@@ -175,6 +181,13 @@ namespace MarvelGuide.GUI
 
                     profileWindow.Show();
                 }
+            }
+
+            else if (_goingToTheDeveloperMode)
+            {
+                TheTeamWindow theTeamWindow = new TheTeamWindow(_user, true);
+
+                theTeamWindow.Show();
             }
 
             else
@@ -308,7 +321,15 @@ namespace MarvelGuide.GUI
         private void EditorsDetails()
         {
             _personalData.Add(editorsRubric + adding + _user.EditorsRubric);
-            _personalData.Add(editorsFrequencyStart + _user.EditorsFrequency.ToString() + editorsFrequencyEnd);
+
+            if (_user.EditorsFrequency > 1)
+            {
+                _personalData.Add(editorsFrequencyFractionStart + _user.EditorsFrequency.ToString() + editorsFrequencyFractionEnd);
+            }
+            else
+            {
+                _personalData.Add(editorsFrequencyIntegerStart + _user.EditorsFrequency.ToString() + editorsFrequencyInteger1End);
+            }
 
             _additionalData += 2;
 
@@ -424,7 +445,7 @@ namespace MarvelGuide.GUI
 
         private void DeveloperModeButton_Initialized(object sender, EventArgs e)
         {
-            if (!_user.SuperDeveloper)
+            if (!_user.SuperDeveloper || !_personalPage)
             {
                 DeveloperModeButton.Visibility = Visibility.Hidden;
                 DeveloperModeButton.Height = 0;
@@ -435,7 +456,9 @@ namespace MarvelGuide.GUI
 
         private void DeveloperModeButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Этого функционала еще нет, извините.", "Ошибка!");
+            _goingToTheDeveloperMode = true;
+
+            Close();
         }        
     }
 }

@@ -29,11 +29,15 @@ namespace MarvelGuide.GUI
 
         private const string defaultButtonContent = "Открыть профиль";
         private const string yourProfileButtonContent = "В свой личный кабинет";
+        private const string editProfileButtonContent = "Редактировать сотрудника";
+        private const string addProfileButtonContent = "Добавить нового сотрудника";
 
 
         IStorage _storage;
 
         User _user;
+
+        bool _lookingInTheDeveloperMode = false;
 
         List<User> _theTeam;
         List<User> _unsortedTeam;
@@ -43,11 +47,12 @@ namespace MarvelGuide.GUI
         User _visitedUser = null;
 
 
-        public TheTeamWindow(User user)
+        public TheTeamWindow(User user, bool lookingInTheDeveloperMode)
         {
             _storage = Factory.Instance.GetStorage();
 
             _user = user;
+            _lookingInTheDeveloperMode = lookingInTheDeveloperMode;
 
             _theTeam = new List<User>();
             _unsortedTeam = _storage.Users.Items.ToList();
@@ -58,6 +63,8 @@ namespace MarvelGuide.GUI
 
             TheTeamListBox.ItemsSource = _theTeam;
         }
+
+        public TheTeamWindow(User user) : this (user, false) { }
 
 
 
@@ -167,33 +174,48 @@ namespace MarvelGuide.GUI
 
             User user = ReadButton.DataContext as User;
 
-            if (user == _user)
+            if (!_lookingInTheDeveloperMode)
             {
-                ReadButton.Content = yourProfileButtonContent;
+                if (user == _user)
+                {
+                    ReadButton.Content = yourProfileButtonContent;
+                }
+                else
+                {
+                    ReadButton.Content = defaultButtonContent;
+                }
             }
             else
             {
-                ReadButton.Content = defaultButtonContent;
+                ReadButton.Content = editProfileButtonContent;
             }
         }
 
+
         private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
-            Button ReadButton = sender as Button;
-
-            User visitedUser = ReadButton.DataContext as User;
-
-            if (visitedUser == _user)
+            if (!_lookingInTheDeveloperMode)
             {
-                Close();
+                Button ReadButton = sender as Button;
+
+                User visitedUser = ReadButton.DataContext as User;
+
+                if (visitedUser == _user)
+                {
+                    Close();
+                }
+                else
+                {
+                    _visitedUser = visitedUser;
+
+                    _goingBackToProfile = false;
+
+                    Close();
+                }
             }
             else
             {
-                _visitedUser = visitedUser;
-
-                _goingBackToProfile = false;
-
-                Close();
+                MessageBox.Show("Извините, этого функционала еще нет.", "Ошибка!");
             }
         }
     }
