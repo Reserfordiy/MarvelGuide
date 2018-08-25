@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
-        Title="Обучающий гайд" Height="520" MinHeight="460" Width="620" MinWidth="590" MaxWidth="675" FontFamily="Verdana" Closing="Window_Closing" WindowState="Maximized">
+        Title="Обучающий гайд" Height="620" MinHeight="460" Width="620" MinWidth="590" MaxWidth="675" FontFamily="Verdana" Closing="Window_Closing" WindowState="Maximized">
     <ScrollViewer>
         <Grid Background="#FFEAF6FB">
             <Grid.RowDefinitions>
@@ -15,7 +15,7 @@
 
             <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="0 20 30 0" Click="BackButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Вернуться назад</Button>
 
-            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="22.5" Margin="90 60 0 10">Наша команда:</TextBlock>
+            <TextBlock Name="TitleTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="22.5" Margin="90 60 0 10" Initialized="TitleTextBlock_Initialized">Наша команда:</TextBlock>
 
             <ListBox Name="TheTeamListBox" Margin="75 10 75 60" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="1" Style="{DynamicResource TransparentListBox}">
                 <ListBox.ItemTemplate>

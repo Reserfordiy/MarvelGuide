@@ -26,11 +26,17 @@ namespace MarvelGuide.GUI
         private const string manager = "Менеджер";
 
         private const string defaultImageSource = "default.jpg";
+        private const string noneImageSource = "none.jpg";
+
+        private const string noneText = "none";
 
         private const string defaultButtonContent = "Открыть профиль";
         private const string yourProfileButtonContent = "В свой личный кабинет";
-        private const string editProfileButtonContent = "Редактировать сотрудника";
+        private const string editProfileButtonContent = "Редактировать";
         private const string addProfileButtonContent = "Добавить нового сотрудника";
+
+        private const string normalTitle = "Наша команда:";
+        private const string developerTitle = "Отредактируйте данные о сотрудниках";
 
 
         IStorage _storage;
@@ -89,6 +95,11 @@ namespace MarvelGuide.GUI
 
         private void FormingTheTeam()
         {
+            if (_lookingInTheDeveloperMode)
+            {
+                _theTeam.Add(new User { Id = -1 });
+            }
+
             SwitchingTheMembers(u => u.Creator);
             SwitchingTheMembers(u => u.SuperAdmin);
             SwitchingTheMembers(u => u.AdminEditor);
@@ -131,7 +142,14 @@ namespace MarvelGuide.GUI
 
             User user = UserNameTextBlock.DataContext as User;
 
-            UserNameTextBlock.Text = user.Name + " " + user.Surname;
+            if (user.Id != -1)
+            {
+                UserNameTextBlock.Text = user.Name + " " + user.Surname;
+            }
+            else
+            {
+                UserNameTextBlock.Text = noneText;
+            }
         }
 
         private void UserJobTextBlock_Initialized(object sender, EventArgs e)
@@ -140,14 +158,21 @@ namespace MarvelGuide.GUI
 
             User user = UserJobTextBlock.DataContext as User;
 
-            string job = user.Job();
-
-            if (job.IndexOf(manager) != -1)
+            if (user.Id != -1)
             {
-                job = job.Substring(0, job.IndexOf(manager)) + user.ManagersRole + job.Substring(job.IndexOf(manager) + manager.Length);
-            }
+                string job = user.Job();
 
-            UserJobTextBlock.Text = job;
+                if (job.IndexOf(manager) != -1)
+                {
+                    job = job.Substring(0, job.IndexOf(manager)) + user.ManagersRole + job.Substring(job.IndexOf(manager) + manager.Length);
+                }
+
+                UserJobTextBlock.Text = job;
+            }
+            else
+            {
+                UserJobTextBlock.Text = noneText;
+            }
         }
 
         private void AvatarImage_Initialized(object sender, EventArgs e)
@@ -156,13 +181,28 @@ namespace MarvelGuide.GUI
 
             User user = AvatarImage.DataContext as User;
 
-            try
+            if (user.Id != -1)
             {
-                AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(user.Avatar.ImageSource, "../MarvelGuide.Core/Avatars")));
+                try
+                {
+                    AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(user.Avatar.ImageSource, "../MarvelGuide.Core/Avatars")));
+                }
+                catch
+                {
+                    try
+                    {
+                        AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(defaultImageSource, "../MarvelGuide.Core/Avatars")));
+                    }
+                    catch { }
+                }
             }
-            catch
+            else
             {
-                AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(defaultImageSource, "../MarvelGuide.Core/Avatars")));
+                try
+                {
+                    AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(noneImageSource, "../MarvelGuide.Core/Avatars")));
+                }
+                catch { }
             }
         }
 
@@ -187,7 +227,14 @@ namespace MarvelGuide.GUI
             }
             else
             {
-                ReadButton.Content = editProfileButtonContent;
+                if (user.Id != -1)
+                {
+                    ReadButton.Content = editProfileButtonContent;
+                }
+                else
+                {
+                    ReadButton.Content = addProfileButtonContent;
+                }
             }
         }
 
@@ -216,6 +263,21 @@ namespace MarvelGuide.GUI
             else
             {
                 MessageBox.Show("Извините, этого функционала еще нет.", "Ошибка!");
+            }
+        }
+
+
+
+        private void TitleTextBlock_Initialized(object sender, EventArgs e)
+        {
+            if (_lookingInTheDeveloperMode)
+            {
+                TitleTextBlock.Text = developerTitle;
+                TitleTextBlock.Margin = new Thickness(90, 75, 0, 10);
+            }
+            else
+            {
+                TitleTextBlock.Text = normalTitle;
             }
         }
     }
