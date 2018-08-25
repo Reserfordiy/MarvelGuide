@@ -35,5 +35,35 @@ namespace MarvelGuide.Core.Models
         public string AgentsLastWords { get; set; }
 
         public virtual Picture Avatar { get; set; }
+
+
+        public string Job()
+        {
+            const string splitting = "; ";
+
+            const string creator = "Создатель";
+            const string superAdmin = "Главный администратор";
+            const string adminEditor = "Исполнительный администратор";
+            const string adminAgent = "Директор Поддержки";
+            const string manager = "Менеджер";
+            const string editor = "Редактор";
+            const string agent = "Агент Поддержки";
+            const string moderator = "Модератор";
+
+            string job = "";
+
+            if (Creator) { job += splitting + creator; }
+            if (SuperAdmin) { job += splitting + superAdmin; }
+            if (AdminEditor) { job += splitting + adminEditor; }
+            if (AdminAgent) { job += splitting + adminAgent; }
+            if (Manager) { job += splitting + manager; }
+            if (Editor) { job += splitting + editor; }
+            if (Agent) { job += splitting + agent; }
+            if (Moderator) { job += splitting + moderator; }
+
+            job = job.Remove(0, splitting.Count());
+
+            return job;
+        }
     }
 }

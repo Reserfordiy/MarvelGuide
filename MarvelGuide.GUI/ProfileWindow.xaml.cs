@@ -1,4 +1,5 @@
-﻿using MarvelGuide.Core.Intefraces;
+﻿using MarvelGuide.Core;
+using MarvelGuide.Core.Intefraces;
 using MarvelGuide.Core.Models;
 using MarvelGuide.Core.SpecialMethods;
 using System;
@@ -23,20 +24,10 @@ namespace MarvelGuide.GUI
     public partial class ProfileWindow : Window
     {
         private const string adding = ":  ";
-        private const string splitting = "; ";
 
         private const string login = "Логин в системе";
         private const string name = "Ф.И. сотрудника";
         private const string job = "Должность";
-
-        private const string creator = "Создатель";
-        private const string superAdmin = "Главный администратор";
-        private const string adminEditor = "Исполнительный администратор";
-        private const string adminAgent = "Директор Поддержки";
-        private const string manager = "Менеджер";
-        private const string editor = "Редактор";
-        private const string agent = "Агент Поддержки";
-        private const string moderator = "Модератор";
 
         private const string securityManagerRole = "Менеджер по безопасности";
 
@@ -80,27 +71,49 @@ namespace MarvelGuide.GUI
         private const string showDetailsButton = "Показать подробности";
         private const string hideDetailsButton = "Скрыть подробности";
 
+        private const string exitOwnProfile = "Выйти";
+        private const string exitForeignProfile = "Назад";
+
 
         private const string defaultImageSource = "default.jpg";
 
 
         IStorage _storage;
+
         User _user;
+        User _userWhoWatches;
 
         List<string> _personalData;
 
-        string _job;
         int _amountOfRegularJobs;
 
-        bool _shown = false;
         int _additionalData = 0;
+        bool _detailsShown = false;
+        bool _goingToTheTeamWindow = false;
 
-        public static string Employees => employees;
+        bool _personalPage = true;
 
-        public ProfileWindow(User user, IStorage storage)
+
+
+        public ProfileWindow(User user)
         {
-            _storage = storage;
+            _storage = Factory.Instance.GetStorage();
+
             _user = user;
+
+            InitializeComponent();
+
+            FormingPersonalData();
+        }
+
+        public ProfileWindow(User user, User userWhoWatches)
+        {
+            _personalPage = false;
+
+            _user = user;
+            _userWhoWatches = userWhoWatches;
+
+            _storage = Factory.Instance.GetStorage();
 
             InitializeComponent();
 
@@ -113,24 +126,14 @@ namespace MarvelGuide.GUI
             _personalData = new List<string>
             {
                 login + adding + _user.Login,
-                name + adding + _user.Surname + " " + _user.Name
+                name + adding + _user.Surname + " " + _user.Name,
+                job + adding + _user.Job()
             };
-             
-            if (_user.Creator) { _job += splitting + creator; }
-            if (_user.SuperAdmin) { _job += splitting + superAdmin; }
-            if (_user.AdminEditor) { _job += splitting + adminEditor; }
-            if (_user.AdminAgent) { _job += splitting + adminAgent; }
-            if (_user.Manager) { _job += splitting + manager; _amountOfRegularJobs++; }
-            if (_user.Editor) { _job += splitting + editor; _amountOfRegularJobs++; }
-            if (_user.Agent) { _job += splitting + agent; _amountOfRegularJobs++; }
-            if (_user.Moderator) { _job += splitting + moderator; _amountOfRegularJobs++; }
 
-            if (_job[0] == splitting[0])
-            {
-                _job = _job.Remove(0, splitting.Count());
-            }
-
-            _personalData.Add(job + adding + _job);
+            if (_user.Manager) { _amountOfRegularJobs++; }
+            if (_user.Editor) { _amountOfRegularJobs++; }
+            if (_user.Agent) { _amountOfRegularJobs++; }
+            if (_user.Moderator) { _amountOfRegularJobs++; }
 
             PersonalDataListBox.ItemsSource = _personalData;
         }
@@ -146,14 +149,51 @@ namespace MarvelGuide.GUI
             CharacteristicTextBlock.Text = characteristic;
         }
 
+        
+
+        private void ShowTheTeamButton_Click(object sender, RoutedEventArgs e)
+        {
+            _goingToTheTeamWindow = true;
+
+            Close();
+        }
 
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            if (!_goingToTheTeamWindow)
+            {
+                if (_personalPage)
+                {
+                    MainWindow mainWindow = new MainWindow();
 
-            mainWindow.Show();
+                    mainWindow.Show();
+                }
+                else
+                {
+                    ProfileWindow profileWindow = new ProfileWindow(_userWhoWatches);
+
+                    profileWindow.Show();
+                }
+            }
+
+            else
+            {
+                if (_personalPage)
+                {
+                    TheTeamWindow theTeamWindow = new TheTeamWindow(_user);
+
+                    theTeamWindow.Show();
+                }
+                else
+                {
+                    TheTeamWindow theTeamWindow = new TheTeamWindow(_userWhoWatches);
+
+                    theTeamWindow.Show();
+                }                
+            }
         }
+
 
 
         private void AvatarImage_Initialized(object sender, EventArgs e)
@@ -172,9 +212,9 @@ namespace MarvelGuide.GUI
 
         private void ShowDetailsButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!_shown)
+            if (!_detailsShown)
             {
-                _shown = true;
+                _detailsShown = true;
 
                 if (_user.Creator) { CreatorsDetails(); }
                 if (_user.SuperAdmin) { SuperAdminsDetails(); }
@@ -190,7 +230,7 @@ namespace MarvelGuide.GUI
 
             else
             {
-                _shown = false;
+                _detailsShown = false;
 
                 _personalData = _personalData.Take(_personalData.Count - _additionalData).ToList();
 
@@ -338,5 +378,46 @@ namespace MarvelGuide.GUI
                 Close();
             }
         }
+
+
+
+        private void ShowTheTeamButton_Initialized(object sender, EventArgs e)
+        {
+            if (!_personalPage)
+            {
+                ShowTheTeamButton.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void ProfileTitleTextBlock_Initialized(object sender, EventArgs e)
+        {
+            if (!_personalPage)
+            {
+                ProfileTitleTextBlock.Text += " " + _user.Name[0].ToString() + ". " + _user.Surname[0].ToString() + ".";
+            }
+        }
+
+        private void ExitProfileButton_Initialized(object sender, EventArgs e)
+        {
+            if (_personalPage)
+            {
+                ExitProfileButton.Content = exitOwnProfile;
+            }
+            else
+            {
+                ExitProfileButton.Content = exitForeignProfile;
+            }
+        }
+
+
+        private void ExitProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!_personalPage)
+            {
+                _goingToTheTeamWindow = true;
+            }
+
+            Close();
+        }        
     }
 }

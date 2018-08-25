@@ -103,7 +103,7 @@ namespace MarvelGuide.GUI
                 Authorization();
             }
 
-            else if (e.Key == Key.Tab && PasswordTextBox.IsFocused)
+            else if (e.Key == Key.Tab && !LoginTextBox.IsFocused)
             {
                 LoginTextBox.Focus();
 
@@ -134,7 +134,7 @@ namespace MarvelGuide.GUI
 
             else
             {
-                ProfileWindow profileWindow = new ProfileWindow(user, _storage);
+                ProfileWindow profileWindow = new ProfileWindow(user);
 
                 profileWindow.Show();
 
