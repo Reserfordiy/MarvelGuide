@@ -418,6 +418,24 @@ namespace MarvelGuide.GUI
             }
 
             Close();
+        }
+
+
+
+        private void DeveloperModeButton_Initialized(object sender, EventArgs e)
+        {
+            if (!_user.SuperDeveloper)
+            {
+                DeveloperModeButton.Visibility = Visibility.Hidden;
+                DeveloperModeButton.Height = 0;
+                DeveloperModeButton.Margin = new Thickness(0);
+            }
+        }
+
+
+        private void DeveloperModeButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Этого функционала еще нет, извините.", "Ошибка!");
         }        
     }
 }

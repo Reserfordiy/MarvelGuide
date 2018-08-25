@@ -28,6 +28,7 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     
@@ -37,7 +38,8 @@
                         </Border>
                     </DockPanel>
 
-                    <Button Name="ShowTheTeamButton" Grid.Row="1" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="80 10 40 10" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="ShowTheTeamButton_Click" Initialized="ShowTheTeamButton_Initialized">Посмотреть команду</Button>
+                    <Button Name="DeveloperModeButton" Grid.Row="1" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="80 10 40 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="DeveloperModeButton_Click" Initialized="DeveloperModeButton_Initialized">Режим разработчика</Button>
+                    <Button Name="ShowTheTeamButton" Grid.Row="2" Width="187" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="80 10 40 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="ShowTheTeamButton_Click" Initialized="ShowTheTeamButton_Initialized">Посмотреть команду</Button>
                 </Grid>
 
                 <Grid Grid.Column="1" Margin="-20 35 60 0">
