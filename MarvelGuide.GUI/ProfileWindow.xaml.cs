@@ -38,6 +38,8 @@ namespace MarvelGuide.GUI
         private const string agent = "Агент Поддержки";
         private const string moderator = "Модератор";
 
+        private const string securityManagerRole = "Менеджер по безопасности";
+
         private const string creatorsEmployeesFirst = "Работают под подчинением";        
         private const string creatorsEmployeesSecond = "Среди них:";
 
@@ -254,6 +256,13 @@ namespace MarvelGuide.GUI
 
                 _additionalData++;
             }
+
+            if (_user.ManagersRole.IndexOf(securityManagerRole) != -1)
+            {
+                _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Moderator).ToString() + employeeModerators + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.Moderator)));
+
+                _additionalData++;
+            }
         }
 
         private void EditorsDetails()
@@ -303,7 +312,21 @@ namespace MarvelGuide.GUI
 
         private void ModeratorsDetails()
         {
-            _additionalData += 0;
+            User securityManager = _storage.Users.Items.FirstOrDefault(u => u.Manager && u.ManagersRole.IndexOf(securityManagerRole) != -1);
+
+            if (securityManager != null && !_user.Creator && !_user.SuperAdmin && !_user.AdminAgent && !_user.AdminEditor)
+            {
+                if (_amountOfRegularJobs == 1)
+                {
+                    _personalData.Add(employer + adding + securityManager.Name + " " + securityManager.Surname);
+                }
+                else
+                {
+                    _personalData.Add(employer + employerForModerator + adding + securityManager.Name + " " + securityManager.Surname);
+                }
+
+                _additionalData++;
+            }
         }
 
 
