@@ -38,8 +38,10 @@ namespace MarvelGuide.GUI
         private const string agent = "Агент Поддержки";
         private const string moderator = "Модератор";
 
-        private const string allEmployeesStart = "Работают под подчинением ";
-        private const string creatorsEmployeesEnd = " сотрудников. Среди них:";
+        private const string creatorsEmployeesFirst = "Работают под подчинением";        
+        private const string creatorsEmployeesSecond = "Среди них:";
+
+        private const string allEmployees = "Работают под подчинением";
 
         private const string employer = "Непосредственный начальник";
         private const string employerForManager = " (менеджерство)";
@@ -47,10 +49,16 @@ namespace MarvelGuide.GUI
         private const string employerForEditor = " (редакторство)";
         private const string employerForModerator = " (модераторство)";
 
-        private const string employeeManagers = "Менеджеров";
-        private const string employeeEditors = "Редакторов";
-        private const string employeeAgents = "Агентов Поддержки";
-        private const string employeeModerators = "Модераторов";
+        private const string creatorsEmployeeManagers = "Менеджеров";
+        private const string creatorsEmployeeEditors = "Редакторов";
+        private const string creatorsEmployeeAgents = "Агентов Поддержки";
+        private const string creatorsEmployeeModerators = "Модераторов";
+
+        private const string employees = " сотрудников";
+        private const string employeeManagers = " менеджеров";
+        private const string employeeEditors = " редакторов";
+        private const string employeeAgents = " агентов Поддержки";
+        private const string employeeModerators = " модераторов";
 
         private const string managerJob = "Менеджерская должность";
 
@@ -81,6 +89,7 @@ namespace MarvelGuide.GUI
         bool _shown = false;
         int _additionalData = 0;
 
+        public static string Employees => employees;
 
         public ProfileWindow(User user, IStorage storage)
         {
@@ -191,32 +200,33 @@ namespace MarvelGuide.GUI
         
         private void CreatorsDetails()
         {
-            _personalData.Add(allEmployeesStart + _storage.Users.Items.Count().ToString() + creatorsEmployeesEnd);
-            _personalData.Add(employeeManagers + adding + _storage.Users.Items.Count(u => u.Manager).ToString());
-            _personalData.Add(employeeEditors + adding + _storage.Users.Items.Count(u => u.Editor).ToString());
-            _personalData.Add(employeeAgents + adding + _storage.Users.Items.Count(u => u.Agent).ToString());
-            _personalData.Add(employeeModerators + adding + _storage.Users.Items.Count(u => u.Moderator).ToString());
+            _personalData.Add(creatorsEmployeesFirst + adding + _storage.Users.Items.Count().ToString() + employees);
+            _personalData.Add(creatorsEmployeesSecond);
+            _personalData.Add(creatorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager).ToString());
+            _personalData.Add(creatorsEmployeeEditors + adding + _storage.Users.Items.Count(u => u.Editor).ToString());
+            _personalData.Add(creatorsEmployeeAgents + adding + _storage.Users.Items.Count(u => u.Agent).ToString());
+            _personalData.Add(creatorsEmployeeModerators + adding + _storage.Users.Items.Count(u => u.Moderator).ToString());
 
-            _additionalData += 5;
+            _additionalData += 6;
         }
 
         private void SuperAdminsDetails()
         {
-            _personalData.Add(allEmployeesStart + _storage.Users.Items.Count(u => u.Manager).ToString() + " " + employeeManagers);
+            _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Manager).ToString() + employeeManagers);
 
             _additionalData++;
         }
 
         private void AdminEditorDetails()
         {
-            _personalData.Add(allEmployeesStart + _storage.Users.Items.Count(u => u.Editor).ToString() + " " + employeeEditors);
+            _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Editor).ToString() + employeeEditors);
 
             _additionalData++;
         }
 
         private void AdminAgentDetails()
         {
-            _personalData.Add(allEmployeesStart + _storage.Users.Items.Count(u => u.Agent).ToString() + " " + employeeAgents);
+            _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Agent).ToString() + employeeAgents);
 
             _additionalData++;
         }
