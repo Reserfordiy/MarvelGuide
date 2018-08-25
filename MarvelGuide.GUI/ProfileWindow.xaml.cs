@@ -393,7 +393,7 @@ namespace MarvelGuide.GUI
         {
             if (!_personalPage)
             {
-                ProfileTitleTextBlock.Text += " " + _user.Name[0].ToString() + ". " + _user.Surname[0].ToString() + ".";
+                ProfileTitleTextBlock.Text += " " + _user.GenitiveName();
             }
         }
 

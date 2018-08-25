@@ -45,6 +45,7 @@ namespace MarvelGuide.Core.Models
         public virtual Picture Avatar { get; set; }
 
 
+
         public string Job()
         {
             const string splitting = "; ";
@@ -72,6 +73,49 @@ namespace MarvelGuide.Core.Models
             job = job.Remove(0, splitting.Count());
 
             return job;
+        }
+
+
+
+        public string GenitiveName()
+        {
+            string genitiveName = Name;
+
+            if (Male)
+            {
+                if (genitiveName[genitiveName.Length - 1] == 'й' || genitiveName[genitiveName.Length - 1] == 'ь')
+                {
+                    genitiveName = genitiveName.Substring(0, genitiveName.Length - 1) + 'я';
+                }
+                else if(genitiveName[genitiveName.Length - 1] == 'я')
+                {
+                    genitiveName = genitiveName.Substring(0, genitiveName.Length - 1) + 'и';
+                }
+                else
+                {
+                    genitiveName += 'а';
+                }
+            }
+            else
+            {
+                if (genitiveName[genitiveName.Length - 1] == 'а')
+                {
+                    if (genitiveName[genitiveName.Length - 2] == 'г')
+                    {
+                        genitiveName = genitiveName.Substring(0, genitiveName.Length - 1).ToString() + 'и';
+                    }
+                    else
+                    {
+                        genitiveName = genitiveName.Substring(0, genitiveName.Length - 1).ToString() + 'ы';
+                    }
+                }
+                else
+                {
+                    genitiveName = genitiveName.Substring(0, genitiveName.Length - 1).ToString() + 'и';
+                }
+            }
+
+            return genitiveName;
         }
     }
 }
