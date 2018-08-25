@@ -102,13 +102,20 @@ namespace MarvelGuide.GUI
             {
                 Authorization();
             }
+
+            else if (e.Key == Key.Tab && PasswordTextBox.IsFocused)
+            {
+                LoginTextBox.Focus();
+
+                e.Handled = true;
+            }
         }
 
 
 
         private void Authorization()
         {
-            string login = LoginTextBox.Text;
+            string login = LoginTextBox.Text.TrimEnd(new char[] { ' ' });
             string password = PasswordTextBox.Text;
 
             var user = _storage.Users.Items.FirstOrDefault(u => u.Login == login && password == u.Password);
@@ -121,6 +128,8 @@ namespace MarvelGuide.GUI
                 PasswordTextBox.Text = defaultPassword;
                 LoginTextBox.Foreground = Brushes.Gray;
                 PasswordTextBox.Foreground = Brushes.Gray;
+
+                LoginTextBox.Focus();
             }
 
             else
