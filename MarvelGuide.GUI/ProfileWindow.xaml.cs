@@ -219,18 +219,30 @@ namespace MarvelGuide.GUI
         private void ManagersDetails()
         {
             _personalData.Add(managerJob + adding + _user.ManagersRole);
-            _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Surname);
 
-            _additionalData += 2;
+            _additionalData++;
+
+            if (!_user.Creator && !_user.SuperAdmin && !_user.AdminAgent && !_user.AdminEditor)
+            {
+                _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Surname);
+
+                _additionalData++;
+            }
         }
 
         private void EditorsDetails()
         {
             _personalData.Add(editorsRubric + adding + _user.EditorsRubric);
             _personalData.Add(editorsFrequencyStart + _user.EditorsFrequency.ToString() + editorsFrequencyEnd);
-            _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Surname);
 
-            _additionalData += 3;
+            _additionalData += 2;
+
+            if (!_user.Creator && !_user.SuperAdmin && !_user.AdminAgent && !_user.AdminEditor)
+            {
+                _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Surname);
+
+                _additionalData++;
+            }
         }
 
         private void AgentsDetails()
@@ -238,9 +250,15 @@ namespace MarvelGuide.GUI
             _personalData.Add(agentsNumber + adding + _user.AgentsNumber.ToString());
             _personalData.Add(agentsFirstWords + adding + _user.AgentsFirstWords);
             _personalData.Add(agentsLastWords + adding + _user.AgentsLastWords);
-            _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Surname);
 
-            _additionalData += 4;
+            _additionalData += 3;
+
+            if (!_user.Creator && !_user.SuperAdmin && !_user.AdminAgent && !_user.AdminEditor)
+            {
+                _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Surname);
+
+                _additionalData++;
+            }
         }
 
         private void ModeratorsDetails()
