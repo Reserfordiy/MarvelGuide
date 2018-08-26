@@ -70,7 +70,10 @@ namespace MarvelGuide.Core.Models
             if (Agent) { job += splitting + agent; }
             if (Moderator) { job += splitting + moderator; }
 
-            job = job.Remove(0, splitting.Count());
+            if (job.Length >= 1)
+            {
+                job = job.Remove(0, splitting.Count());
+            }
 
             return job;
         }
@@ -79,6 +82,11 @@ namespace MarvelGuide.Core.Models
 
         public string GenitiveName()
         {
+            if (Name == null || Name.Length <= 2)
+            {
+                return Name;
+            }
+
             string genitiveName = Name;
 
             if (Male)

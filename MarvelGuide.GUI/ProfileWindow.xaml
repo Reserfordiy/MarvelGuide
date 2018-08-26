@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
-        Title="Обучающий гайд" Height="580" MinHeight="470" MaxHeight="700" Width="830" MinWidth="680" MaxWidth="1050" FontFamily="Verdana" Closing="Window_Closing" KeyDown="Window_KeyDown">
+        Title="Обучающий гайд" Height="580" MinHeight="470" Width="870" MinWidth="700" MaxWidth="1050" FontFamily="Verdana" Closing="Window_Closing" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged">
     <ScrollViewer>
         <Grid Background="#FFEAF6FB">
             <Grid.RowDefinitions>
@@ -29,17 +29,20 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    
+
                     <DockPanel Grid.Row="0" Margin="80 50 40 15" Width="200" Height="200" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                         <Border BorderThickness="1.2" BorderBrush="#FF715C4E">
                             <Image Name="AvatarImage" Stretch="UniformToFill" Source="Images/пейзаж1.jpg" Initialized="AvatarImage_Initialized"></Image>
                         </Border>
                     </DockPanel>
 
-                    <Button Name="DeveloperModeButton" Grid.Row="1" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="80 10 40 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="DeveloperModeButton_Click" Initialized="DeveloperModeButton_Initialized">Режим разработчика</Button>
-                    <Button Name="ShowTheTeamButton" Grid.Row="2" Width="187" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="80 13 40 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="ShowTheTeamButton_Click" Initialized="ShowTheTeamButton_Initialized">Посмотреть команду</Button>
+                    <Button Name="UploadAvatarButton" Grid.Row="1" HorizontalAlignment="Center" Padding="6 4" FontSize="14.5" Margin="80 6.5 40 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="UploadAvatarButton_Click" Initialized="UploadAvatarButton_Initialized">Загрузить изображение</Button>
+
+                    <Button Name="DeveloperModeButton" Grid.Row="2" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="80 12 40 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="DeveloperModeButton_Click" Initialized="DeveloperModeButton_Initialized">Режим разработчика</Button>
+                    <Button Name="ShowTheTeamButton" Grid.Row="3" Width="187" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="80 12 40 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="ShowTheTeamButton_Click" Initialized="ShowTheTeamButton_Initialized">Посмотреть команду</Button>
                 </Grid>
 
                 <Grid Grid.Column="1" Margin="-20 35 60 0">
@@ -48,19 +51,160 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <ListBox Name="PersonalDataListBox" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Grid.Row="0" Style="{DynamicResource TransparentListBox}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <TextBlock Name="CharacteristicTextBlock" TextWrapping="Wrap" Grid.Column="0" Margin="0 7" FontFamily="Calibri" FontSize="19.5" Initialized="CharacteristicTextBlock_Initialized">Характеристика:  значение</TextBlock>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <Grid Grid.Row="0" Name="DeveloperModeGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                    <Button Name="ShowDetailsButton" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="8 5" FontSize="14" Margin="50 15 50 40" Width="185" Style="{DynamicResource AttentionButtonsStyle}" Click="ShowDetailsButton_Click">Показать подробности</Button>
+                        <TextBlock Grid.Row="0" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="10.5 10 0 3.5">Укажите личную информацию о сотруднике:</TextBlock>
+
+                        <TextBlock Grid.Row="1" FontSize="14" Margin="11.5 5 0 5">Полное имя:</TextBlock>
+                        <TextBox Grid.Row="2" FontSize="16" FontFamily="Calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray">Иван</TextBox>
+
+                        <TextBlock Grid.Row="3" FontSize="14" Margin="11.5 5 0 5">Фамилия:</TextBlock>
+                        <TextBox Grid.Row="4" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray">Иванов</TextBox>
+
+                        <TextBlock Grid.Row="5" FontSize="14" Margin="11.5 5 0 5">Пол:</TextBlock>
+                        <Grid Grid.Row="6" Margin="10 0 0 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <RadioButton FontSize="14" Margin="0 0 15 0">Мужской</RadioButton>
+                            <RadioButton Grid.Column="1" FontSize="14">Женский</RadioButton>
+                        </Grid>
+
+                        <TextBlock Grid.Row="7" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="10.5 18 0 3.5">Придумайте данные для аккаунта сотрудника:</TextBlock>
+
+                        <TextBlock Grid.Row="8" FontSize="14" Margin="11.5 5 0 5">Логин (рекомендуется на англ.):</TextBlock>
+                        <TextBox Grid.Row="9" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray">ivani</TextBox>
+
+                        <TextBlock Grid.Row="10" FontSize="14" Margin="11.5 5 0 5">Пароль (6 цифр):</TextBlock>
+                        <TextBox Grid.Row="11" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray">123456</TextBox>
+
+                        <TextBlock Grid.Row="12" FontSize="14" Margin="11.5 5 0 5">Подтвердите пароль:</TextBlock>
+                        <TextBox Grid.Row="13" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 10" Foreground="Gray">123456</TextBox>
+
+                        <TextBlock Grid.Row="14" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="10.5 18 0 10">Отметьте все должности сотрудника:</TextBlock>
+                        <Grid Name="CheckBoxGrid" Grid.Row="15" Margin="10 0 0 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <CheckBox Name="CreatorCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="0">Создатель</CheckBox>
+                            <CheckBox Name="SuperAdminCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="1">Главный администратор</CheckBox>
+                            <CheckBox Name="AdminEditorCheckBox"  Margin="10 3.5" FontSize="14"  Grid.Row="2">Исполнительный администратор</CheckBox>
+                            <CheckBox Name="AdminAgentCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="3">Директор Поддержки</CheckBox>
+                            <CheckBox Name="ManagerCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="4" Checked="ManagerCheckBox_Checked" Unchecked="ManagerCheckBox_Unchecked">Менеджер</CheckBox>
+                            <CheckBox Name="EditorCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="5" Checked="EditorCheckBox_Checked" Unchecked="EditorCheckBox_Unchecked">Редактор</CheckBox>
+                            <CheckBox Name="AgentChecBox" Margin="10 3.5" FontSize="14" Grid.Row="6" Checked="AgentChecBox_Checked" Unchecked="AgentChecBox_Unchecked">Агент</CheckBox>
+                            <CheckBox Name="ModeratorcheckBox" Margin="10 3.5" FontSize="14" Grid.Row="7">Модератор</CheckBox>
+                        </Grid>
+
+                        <Grid Name="ManagersRoleGrid" Grid.Row="16" Initialized="ManagersRoleGrid_Initialized">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="10.5 18 0 3.5">Менеджерская должность:</TextBlock>
+
+                            <TextBlock Grid.Row="1" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap">Развёрнутое название должности (при наличии нескольких перечислять через ";"):</TextBlock>
+                            <TextBox Grid.Row="2" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 10" Foreground="Gray">Менеджер по кадрам</TextBox>
+                        </Grid>
+
+                        <Grid Name="EditorsRoleGrid" Grid.Row="17" Initialized="EditorsRoleGrid_Initialized">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="10.5 18 0 3.5">Редакторская должность:</TextBlock>
+
+                            <TextBlock Grid.Row="1" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap">Название рубрики (на русском):</TextBlock>
+                            <TextBox Grid.Row="2" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray">Старс</TextBox>
+
+                            <TextBlock Grid.Row="3" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap" >Частота размещения (раз во сколько дней должен публиковаться пост):</TextBlock>
+                            <TextBox Grid.Row="4" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 10" Foreground="Gray">3</TextBox>
+                        </Grid>
+
+                        <Grid Name="AgentsRoleGrid" Grid.Row="18" Initialized="AgentsRoleGrid_Initialized">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="10.5 18 0 3.5">Должность Агента Поддержки:</TextBlock>
+
+                            <TextBlock Grid.Row="1" FontSize="14" Margin="11.5 5 0 5">Номер агента:</TextBlock>
+                            <TextBox Grid.Row="2" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray">14</TextBox>
+
+                            <TextBlock Grid.Row="3" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap" >Приветствие агента:</TextBlock>
+                            <TextBox Grid.Row="4" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray">Здравствуйте!</TextBox>
+
+                            <TextBlock Grid.Row="5" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap" >Подпись агента:</TextBlock>
+                            <TextBox Grid.Row="6" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 10" Foreground="Gray">С любовью</TextBox>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Name="NormalModeGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <ListBox Name="PersonalDataListBox" Grid.Row="0" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" Style="{DynamicResource TransparentListBox}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Name="CharacteristicTextBlock" TextWrapping="Wrap" Grid.Column="0" Margin="0 7" FontFamily="Calibri" FontSize="19.5" Initialized="CharacteristicTextBlock_Initialized">Характеристика:  значение</TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <Button Name="ShowDetailsButton" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="8 5" FontSize="14" Margin="50 15 50 40" Width="185" Style="{DynamicResource AttentionButtonsStyle}" Click="ShowDetailsButton_Click">Показать подробности</Button>
+                    </Grid>
                 </Grid>
             </Grid>
+
+            <Button Name="SaveDataButton" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18.5" Padding="11 7" Style="{DynamicResource AttentionButtonsStyle}" Initialized="SaveDataButton_Initialized" Click="SaveDataButton_Click" Margin="0 40 0 120">Сохранить данные</Button>
+            
         </Grid>
     </ScrollViewer>
 </Window>

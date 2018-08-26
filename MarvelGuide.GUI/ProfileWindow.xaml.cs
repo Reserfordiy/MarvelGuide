@@ -1,7 +1,7 @@
 ﻿using MarvelGuide.Core;
 using MarvelGuide.Core.Intefraces;
 using MarvelGuide.Core.Models;
-using MarvelGuide.Core.SpecialMethods;
+using MarvelGuide.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MarvelGuide.GUI.Helpers;
 
 namespace MarvelGuide.GUI
 {
@@ -78,6 +79,11 @@ namespace MarvelGuide.GUI
         private const string exitOwnProfile = "Выйти";
         private const string exitForeignProfile = "Назад";
 
+        private const string personalPageTitle = "Личный кабинет";
+        private const string watchingForeignPageTitle = "Профиль ";
+        private const string addingNewUserTitle = "Добавление нового сотрудника";
+        private const string editingUserTitle = "Изменение профиля ";
+
 
         private const string defaultImageSource = "default.jpg";
 
@@ -97,6 +103,7 @@ namespace MarvelGuide.GUI
         bool _goingToTheDeveloperMode = false;
 
         bool _personalPage = true;
+        bool _editingPage = false;
 
 
 
@@ -109,21 +116,26 @@ namespace MarvelGuide.GUI
             InitializeComponent();
 
             FormingPersonalData();
+            CheckingWhetherWeEditPage();
         }
 
-        public ProfileWindow(User user, User userWhoWatches)
+        public ProfileWindow(User user, User userWhoWatches, bool editingPage)
         {
             _personalPage = false;
 
             _user = user;
             _userWhoWatches = userWhoWatches;
+            _editingPage = editingPage;
 
             _storage = Factory.Instance.GetStorage();
 
             InitializeComponent();
 
-            FormingPersonalData();
+            CheckingWhetherWeEditPage();
         }
+
+        public ProfileWindow(User user, User userWhoWatches) : this (user, userWhoWatches, false) { }
+
 
 
         private void FormingPersonalData()
@@ -143,6 +155,26 @@ namespace MarvelGuide.GUI
             PersonalDataListBox.ItemsSource = _personalData;
         }
 
+        private void CheckingWhetherWeEditPage()
+        {
+            if (!_editingPage)
+            {
+                MaxHeight = 700;
+
+                DeveloperModeGrid.Visibility = Visibility.Hidden;
+                DeveloperModeGrid.Height = 0;
+
+                FormingPersonalData();
+            }
+            else
+            {
+                WindowState = WindowState.Maximized;
+
+                NormalModeGrid.Visibility = Visibility.Hidden;
+                NormalModeGrid.Height = 0;
+            }
+        }
+
 
 
         private void CharacteristicTextBlock_Initialized(object sender, EventArgs e)
@@ -152,15 +184,6 @@ namespace MarvelGuide.GUI
             string characteristic = CharacteristicTextBlock.DataContext as string;
 
             CharacteristicTextBlock.Text = characteristic;
-        }
-
-        
-
-        private void ShowTheTeamButton_Click(object sender, RoutedEventArgs e)
-        {
-            _goingToTheTeamWindow = true;
-
-            Close();
         }
 
 
@@ -183,9 +206,16 @@ namespace MarvelGuide.GUI
                 }
             }
 
-            else if (_goingToTheDeveloperMode)
+            else if (_goingToTheDeveloperMode && _personalPage)
             {
                 TheTeamWindow theTeamWindow = new TheTeamWindow(_user, true);
+
+                theTeamWindow.Show();
+            }
+
+            else if (_goingToTheDeveloperMode)
+            {
+                TheTeamWindow theTeamWindow = new TheTeamWindow(_userWhoWatches, true);
 
                 theTeamWindow.Show();
             }
@@ -402,20 +432,27 @@ namespace MarvelGuide.GUI
 
 
 
-        private void ShowTheTeamButton_Initialized(object sender, EventArgs e)
-        {
-            if (!_personalPage)
-            {
-                ShowTheTeamButton.Visibility = Visibility.Hidden;
-            }
-        }
-
         private void ProfileTitleTextBlock_Initialized(object sender, EventArgs e)
         {
-            if (!_personalPage)
+            if (_editingPage)
             {
-                ProfileTitleTextBlock.Text += " " + _user.GenitiveName();
+                if (_user.Id == -1)
+                {
+                    ProfileTitleTextBlock.Text = addingNewUserTitle;
+                }
+                else
+                {
+                    ProfileTitleTextBlock.Text = editingUserTitle + _user.GenitiveName();
+                }
             }
+            else if (!_personalPage)
+            {
+                ProfileTitleTextBlock.Text = watchingForeignPageTitle + _user.GenitiveName();
+            }
+            else
+            {
+                ProfileTitleTextBlock.Text = personalPageTitle;
+            }            
         }
 
         private void ExitProfileButton_Initialized(object sender, EventArgs e)
@@ -433,7 +470,11 @@ namespace MarvelGuide.GUI
 
         private void ExitProfileButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!_personalPage)
+            if (_editingPage)
+            {
+                _goingToTheDeveloperMode = true;
+            }
+            else if (!_personalPage)
             {
                 _goingToTheTeamWindow = true;
             }
@@ -441,24 +482,126 @@ namespace MarvelGuide.GUI
             Close();
         }
 
+        
 
+        private void UploadAvatarButton_Initialized(object sender, EventArgs e)
+        {
+            if (!_editingPage)
+            {
+                UploadAvatarButton = UIElementsMethods.HidingUIElement(UploadAvatarButton) as Button;
+            }
+        }
+
+        private void ShowTheTeamButton_Initialized(object sender, EventArgs e)
+        {
+            if (!_personalPage)
+            {
+                ShowTheTeamButton = UIElementsMethods.HidingUIElement(ShowTheTeamButton) as Button;
+            }
+        }
 
         private void DeveloperModeButton_Initialized(object sender, EventArgs e)
         {
             if (!_user.SuperDeveloper || !_personalPage)
             {
-                DeveloperModeButton.Visibility = Visibility.Hidden;
-                DeveloperModeButton.Height = 0;
-                DeveloperModeButton.Margin = new Thickness(0);
+                DeveloperModeButton = UIElementsMethods.HidingUIElement(DeveloperModeButton) as Button;
+            }
+        }
+        
+        private void SaveDataButton_Initialized(object sender, EventArgs e)
+        {
+            if (!_editingPage)
+            {
+                SaveDataButton = UIElementsMethods.HidingUIElement(SaveDataButton) as Button;
             }
         }
 
+
+
+
+        private void UploadAvatarButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Извините, этого функционала еще нет!", "Ошибка!");
+        }
+
+        private void ShowTheTeamButton_Click(object sender, RoutedEventArgs e)
+        {
+            _goingToTheTeamWindow = true;
+
+            Close();
+        }
 
         private void DeveloperModeButton_Click(object sender, RoutedEventArgs e)
         {
             _goingToTheDeveloperMode = true;
 
             Close();
-        }        
+        }
+
+        private void SaveDataButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Извините, сотрудников пока нельзя сохранить!", "Ошибка!");
+        }
+
+
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if ( _editingPage && WindowState == WindowState.Maximized)
+            {
+                SaveDataButton.Margin = new Thickness(0, 35, 0, 120);
+            }
+            else if (_editingPage && WindowState == WindowState.Normal)
+            {
+                SaveDataButton.Margin = new Thickness(0, 35, 0, 85);
+            }
+        }
+
+
+
+        private void ManagersRoleGrid_Initialized(object sender, EventArgs e)
+        {
+            ManagersRoleGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void EditorsRoleGrid_Initialized(object sender, EventArgs e)
+        {
+            EditorsRoleGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void AgentsRoleGrid_Initialized(object sender, EventArgs e)
+        {
+            AgentsRoleGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void ManagerCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            ManagersRoleGrid.Visibility = Visibility.Visible;
+        }
+
+        private void ManagerCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ManagersRoleGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void EditorCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            EditorsRoleGrid.Visibility = Visibility.Visible;
+        }
+
+        private void EditorCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            EditorsRoleGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void AgentChecBox_Checked(object sender, RoutedEventArgs e)
+        {
+            AgentsRoleGrid.Visibility = Visibility.Visible;
+        }
+
+        private void AgentChecBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            AgentsRoleGrid.Visibility = Visibility.Collapsed;
+        }
     }
 }

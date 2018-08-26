@@ -124,9 +124,9 @@ namespace MarvelGuide.GUI
             {
                 MessageBox.Show("Введенной пары логина и пароля не найдено в базе. Попробуйте еще раз либо обратитесь к разработчикам!", "Ошибка!");
 
-                LoginTextBox.Text = defaultLogin;
+                LoginTextBox.Text = "";
                 PasswordTextBox.Text = defaultPassword;
-                LoginTextBox.Foreground = Brushes.Gray;
+                LoginTextBox.Foreground = Brushes.Black;
                 PasswordTextBox.Foreground = Brushes.Gray;
 
                 LoginTextBox.Focus();

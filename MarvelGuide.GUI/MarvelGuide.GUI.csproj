@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\UIElementsMethods.cs" />
     <Compile Include="TheTeamWindow.xaml.cs">
       <DependentUpon>TheTeamWindow.xaml</DependentUpon>
     </Compile>

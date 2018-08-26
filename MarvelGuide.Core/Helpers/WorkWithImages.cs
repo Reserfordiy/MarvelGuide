@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MarvelGuide.Core.SpecialMethods
+namespace MarvelGuide.Core.Helpers
 {
     public static class WorkWithImages
     {

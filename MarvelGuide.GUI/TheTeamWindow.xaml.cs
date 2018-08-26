@@ -1,7 +1,7 @@
 ﻿using MarvelGuide.Core;
 using MarvelGuide.Core.Intefraces;
 using MarvelGuide.Core.Models;
-using MarvelGuide.Core.SpecialMethods;
+using MarvelGuide.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +49,7 @@ namespace MarvelGuide.GUI
         List<User> _unsortedTeam;
 
         bool _goingBackToProfile = true;
+        bool _goingToEditPage = false;
 
         User _visitedUser = null;
 
@@ -123,6 +124,12 @@ namespace MarvelGuide.GUI
             if (_goingBackToProfile)
             {
                 ProfileWindow profileWindow = new ProfileWindow(_user);
+
+                profileWindow.Show();
+            }
+            else if (_goingToEditPage)
+            {
+                ProfileWindow profileWindow = new ProfileWindow(_visitedUser, _user, true);
 
                 profileWindow.Show();
             }
@@ -241,12 +248,12 @@ namespace MarvelGuide.GUI
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
+            Button ReadButton = sender as Button;
+
+            User visitedUser = ReadButton.DataContext as User;
+
             if (!_lookingInTheDeveloperMode)
             {
-                Button ReadButton = sender as Button;
-
-                User visitedUser = ReadButton.DataContext as User;
-
                 if (visitedUser == _user)
                 {
                     Close();
@@ -262,7 +269,19 @@ namespace MarvelGuide.GUI
             }
             else
             {
-                MessageBox.Show("Извините, этого функционала еще нет.", "Ошибка!");
+                if (visitedUser.Id != -1)
+                {
+                    MessageBox.Show("Извините, этого функционала еще нет.", "Ошибка!");
+                }
+                else
+                {
+                    _visitedUser = visitedUser;
+
+                    _goingBackToProfile = false;
+                    _goingToEditPage = true;
+
+                    Close();
+                }
             }
         }
 
