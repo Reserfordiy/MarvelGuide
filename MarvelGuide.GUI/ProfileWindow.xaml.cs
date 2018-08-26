@@ -85,16 +85,16 @@ namespace MarvelGuide.GUI
         private const string editingUserTitle = "Изменение профиля ";
 
 
-        private const string defaultName = "Иван";
-        private const string defaultSurname = "Иванов";
-        private const string defaultLogin = "ivani";
-        private const string defaultPassword = "123456";
-        private const string defaultManagerRole = "Менеджер по кадрам";
-        private const string defaultEditorsRubric = "Старс";
-        private const string defaultEditorsFrequency = "3";
-        private const string defaultAgentsNumber = "14";
-        private const string defaultAgentsFirstWords = "Здравствуйте!";
-        private const string defaultAgentsLastWords = "С любовью";
+        private const string defaultName = "Пример: Иван";
+        private const string defaultSurname = "Пример: Иванов";
+        private const string defaultLogin = "Пример: ivani";
+        private const string defaultPassword = "Пример: 123456";
+        private const string defaultManagerRole = "Пример: Менеджер по кадрам";
+        private const string defaultEditorsRubric = "Пример: Старс";
+        private const string defaultEditorsFrequency = "Пример: 3";
+        private const string defaultAgentsNumber = "Пример: 14";
+        private const string defaultAgentsFirstWords = "Пример: Здравствуйте!";
+        private const string defaultAgentsLastWords = "Пример: С любовью";
 
         private const string defaultImageSource = "default.jpg";
 
@@ -126,7 +126,6 @@ namespace MarvelGuide.GUI
 
             InitializeComponent();
 
-            FormingPersonalData();
             CheckingWhetherWeEditPage();
         }
 
@@ -166,6 +165,67 @@ namespace MarvelGuide.GUI
             PersonalDataListBox.ItemsSource = _personalData;
         }
 
+        private void FormingTheEdittingData()
+        {
+            if (_user.Id != -1)
+            {
+
+                NameTextBox.Text = _user.Name;
+                NameTextBox.Foreground = Brushes.Black;
+
+                SurnameTextBox.Text = _user.Surname;
+                SurnameTextBox.Foreground = Brushes.Black;
+
+                if (_user.Male) { MaleRadioButton.IsChecked = true; }
+                else { FemaleRadioButton.IsChecked = true; }
+
+                LoginTextBox.Text = _user.Login;
+                LoginTextBox.Foreground = Brushes.Black;
+
+                PasswordTextBox.Text = _user.Password;
+                PasswordTextBox.Foreground = Brushes.Black;
+
+                RepeatPasswordTextBox.Text = _user.Password;
+                RepeatPasswordTextBox.Foreground = Brushes.Black;
+
+                if (_user.Creator) { CreatorCheckBox.IsChecked = true; }
+                if (_user.SuperAdmin) { SuperAdminCheckBox.IsChecked = true; }
+                if (_user.AdminEditor) { AdminEditorCheckBox.IsChecked = true; }
+                if (_user.AdminAgent) { AdminAgentCheckBox.IsChecked = true; }
+                if (_user.Manager)
+                {
+                    ManagerCheckBox.IsChecked = true;
+
+                    ManagersRoleTextBox.Text = _user.ManagersRole;
+                    ManagersRoleTextBox.Foreground = Brushes.Black;
+                }
+                if (_user.Editor)
+                {
+                    EditorCheckBox.IsChecked = true;
+
+                    EditorsRubricTextBox.Text = _user.EditorsRubric;
+                    EditorsRubricTextBox.Foreground = Brushes.Black;
+
+                    EditorsFrequencyTextBox.Text = _user.EditorsFrequency.ToString();
+                    EditorsFrequencyTextBox.Foreground = Brushes.Black;
+                }
+                if (_user.Agent)
+                {
+                    AgentChecBox.IsChecked = true;
+
+                    AgentsNumberTextBox.Text = _user.AgentsNumber.ToString();
+                    AgentsNumberTextBox.Foreground = Brushes.Black;
+
+                    AgentsFirstWordsTextBox.Text = _user.AgentsFirstWords;
+                    AgentsFirstWordsTextBox.Foreground = Brushes.Black;
+
+                    AgentsLastWordsTextBox.Text = _user.AgentsLastWords;
+                    AgentsLastWordsTextBox.Foreground = Brushes.Black;
+                }
+                if (_user.Moderator) { ModeratorcheckBox.IsChecked = true; }
+            }
+        }
+
         private void CheckingWhetherWeEditPage()
         {
             if (!_editingPage)
@@ -183,6 +243,8 @@ namespace MarvelGuide.GUI
 
                 NormalModeGrid.Visibility = Visibility.Hidden;
                 NormalModeGrid.Height = 0;
+
+                FormingTheEdittingData();
             }
         }
 
@@ -572,17 +634,17 @@ namespace MarvelGuide.GUI
 
         private void ManagersRoleGrid_Initialized(object sender, EventArgs e)
         {
-            ManagersRoleGrid.Visibility = Visibility.Collapsed;
+            if (!_user.Manager) { ManagersRoleGrid.Visibility = Visibility.Collapsed; }
         }
 
         private void EditorsRoleGrid_Initialized(object sender, EventArgs e)
         {
-            EditorsRoleGrid.Visibility = Visibility.Collapsed;
+            if (!_user.Editor) { EditorsRoleGrid.Visibility = Visibility.Collapsed; }
         }
 
         private void AgentsRoleGrid_Initialized(object sender, EventArgs e)
         {
-            AgentsRoleGrid.Visibility = Visibility.Collapsed;
+            if (!_user.Agent) { AgentsRoleGrid.Visibility = Visibility.Collapsed; }
         }
 
         private void ManagerCheckBox_Checked(object sender, RoutedEventArgs e)

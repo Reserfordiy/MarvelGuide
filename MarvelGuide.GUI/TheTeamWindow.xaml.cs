@@ -269,19 +269,12 @@ namespace MarvelGuide.GUI
             }
             else
             {
-                if (visitedUser.Id != -1)
-                {
-                    MessageBox.Show("Извините, этого функционала еще нет.", "Ошибка!");
-                }
-                else
-                {
-                    _visitedUser = visitedUser;
+                _visitedUser = visitedUser;
 
-                    _goingBackToProfile = false;
-                    _goingToEditPage = true;
+                _goingBackToProfile = false;
+                _goingToEditPage = true;
 
-                    Close();
-                }
+                Close();                
             }
         }
 
