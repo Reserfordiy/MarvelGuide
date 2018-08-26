@@ -85,6 +85,17 @@ namespace MarvelGuide.GUI
         private const string editingUserTitle = "Изменение профиля ";
 
 
+        private const string defaultName = "Иван";
+        private const string defaultSurname = "Иванов";
+        private const string defaultLogin = "ivani";
+        private const string defaultPassword = "123456";
+        private const string defaultManagerRole = "Менеджер по кадрам";
+        private const string defaultEditorsRubric = "Старс";
+        private const string defaultEditorsFrequency = "3";
+        private const string defaultAgentsNumber = "14";
+        private const string defaultAgentsFirstWords = "Здравствуйте!";
+        private const string defaultAgentsLastWords = "С любовью";
+
         private const string defaultImageSource = "default.jpg";
 
 
@@ -602,6 +613,206 @@ namespace MarvelGuide.GUI
         private void AgentChecBox_Unchecked(object sender, RoutedEventArgs e)
         {
             AgentsRoleGrid.Visibility = Visibility.Collapsed;
+        }
+
+
+
+        private void NameTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (NameTextBox.Text == defaultName)
+            {
+                NameTextBox.Text = "";
+                NameTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void NameTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (NameTextBox.Text == "")
+            {
+                NameTextBox.Text = defaultName;
+                NameTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void SurnameTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (SurnameTextBox.Text == defaultSurname)
+            {
+                SurnameTextBox.Text = "";
+                SurnameTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void SurnameTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (SurnameTextBox.Text == "")
+            {
+                SurnameTextBox.Text = defaultSurname;
+                SurnameTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void LoginTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (LoginTextBox.Text == defaultLogin)
+            {
+                LoginTextBox.Text = "";
+                LoginTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void LoginTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (LoginTextBox.Text == "")
+            {
+                LoginTextBox.Text = defaultLogin;
+                LoginTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void PasswordTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordTextBox.Text == defaultPassword)
+            {
+                PasswordTextBox.Text = "";
+                PasswordTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void PasswordTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordTextBox.Text == "")
+            {
+                PasswordTextBox.Text = defaultPassword;
+                PasswordTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void RepeatPasswordTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (RepeatPasswordTextBox.Text == defaultPassword)
+            {
+                RepeatPasswordTextBox.Text = "";
+                RepeatPasswordTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void RepeatPasswordTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (RepeatPasswordTextBox.Text == "")
+            {
+                RepeatPasswordTextBox.Text = defaultPassword;
+                RepeatPasswordTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void ManagersRoleTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (ManagersRoleTextBox.Text == defaultManagerRole)
+            {
+                ManagersRoleTextBox.Text = "";
+                ManagersRoleTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void ManagersRoleTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (ManagersRoleTextBox.Text == "")
+            {
+                ManagersRoleTextBox.Text = defaultManagerRole;
+                ManagersRoleTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void EditorsRubricTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (EditorsRubricTextBox.Text == defaultEditorsRubric)
+            {
+                EditorsRubricTextBox.Text = "";
+                EditorsRubricTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void EditorsRubricTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (EditorsRubricTextBox.Text == "")
+            {
+                EditorsRubricTextBox.Text = defaultEditorsRubric;
+                EditorsRubricTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void EditorsFrequencyTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (EditorsFrequencyTextBox.Text == defaultEditorsFrequency)
+            {
+                EditorsFrequencyTextBox.Text = "";
+                EditorsFrequencyTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void EditorsFrequencyTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (EditorsFrequencyTextBox.Text == "")
+            {
+                EditorsFrequencyTextBox.Text = defaultEditorsFrequency;
+                EditorsFrequencyTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void AgentsNumberTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (AgentsNumberTextBox.Text == defaultAgentsNumber)
+            {
+                AgentsNumberTextBox.Text = "";
+                AgentsNumberTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void AgentsNumberTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (AgentsNumberTextBox.Text == "")
+            {
+                AgentsNumberTextBox.Text = defaultAgentsNumber;
+                AgentsNumberTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void AgentsFirstWordsTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (AgentsFirstWordsTextBox.Text == defaultAgentsFirstWords)
+            {
+                AgentsFirstWordsTextBox.Text = "";
+                AgentsFirstWordsTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void AgentsFirstWordsTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (AgentsFirstWordsTextBox.Text == "")
+            {
+                AgentsFirstWordsTextBox.Text = defaultAgentsFirstWords;
+                AgentsFirstWordsTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void AgentsLastWordsTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (AgentsLastWordsTextBox.Text == defaultAgentsLastWords)
+            {
+                AgentsLastWordsTextBox.Text = "";
+                AgentsLastWordsTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void AgentsLastWordsTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (AgentsLastWordsTextBox.Text == "")
+            {
+                AgentsLastWordsTextBox.Text = defaultAgentsLastWords;
+                AgentsLastWordsTextBox.Foreground = Brushes.Gray;
+            }
         }
     }
 }
