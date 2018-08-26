@@ -204,7 +204,6 @@
             </Grid>
 
             <Button Name="SaveDataButton" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18.5" Padding="11 7" Style="{DynamicResource AttentionButtonsStyle}" Initialized="SaveDataButton_Initialized" Click="SaveDataButton_Click" Margin="0 40 0 120">Сохранить данные</Button>
-            
         </Grid>
     </ScrollViewer>
 </Window>

@@ -613,10 +613,13 @@ namespace MarvelGuide.GUI
 
         private void SaveDataButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Извините, сотрудников пока нельзя сохранить!", "Ошибка!");
+            if (CheckingWhetherAllFieldsFilledCorrectly())
+            {
+                MessageBox.Show("Вы молодец! Вы заполнили все данные правильно. Но сохранять сотрудников пока все равно нельзя...", "Ошибка!");
+            }
         }
 
-
+        
 
         private void Window_StateChanged(object sender, EventArgs e)
         {
@@ -875,6 +878,198 @@ namespace MarvelGuide.GUI
                 AgentsLastWordsTextBox.Text = defaultAgentsLastWords;
                 AgentsLastWordsTextBox.Foreground = Brushes.Gray;
             }
+        }
+
+
+
+        private bool CheckingWhetherAllFieldsFilledCorrectly()
+        {
+            if (!CheckingIfAllValuesAreNotDefault())
+            {
+                return false;
+            }
+            if (!CheckingIfAllValuesAreValid())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+
+        private bool CheckingIfAllValuesAreNotDefault()
+        {
+            if (NameTextBox.Text == defaultName)
+            {
+                MessageBox.Show("Укажите имя сотрудника.", "Ошибка");
+
+                NameTextBox.Focus();
+
+                return false;
+            }
+            if (SurnameTextBox.Text == defaultSurname)
+            {
+                MessageBox.Show("Укажите фамилию сотрудника.", "Ошибка");
+
+                SurnameTextBox.Focus();
+
+                return false;
+            }
+            if (MaleRadioButton.IsChecked == false && FemaleRadioButton.IsChecked == false)
+            {
+                MessageBox.Show("Укажите пол сотрудника.", "Ошибка");
+
+                MaleRadioButton.Focus();
+
+                return false;
+            }
+            if (LoginTextBox.Text == defaultLogin)
+            {
+                MessageBox.Show("Укажите логин для сотрудника.", "Ошибка");
+
+                LoginTextBox.Focus();
+
+                return false;
+            }
+            if (PasswordTextBox.Text == defaultPassword || RepeatPasswordTextBox.Text == defaultPassword)
+            {
+                MessageBox.Show("Укажите пароль для сотрудника, а затем воспроизведите его.", "Ошибка");
+
+                PasswordTextBox.Text = "";
+                PasswordTextBox.Foreground = Brushes.Black;
+                RepeatPasswordTextBox.Text = defaultPassword;
+                RepeatPasswordTextBox.Foreground = Brushes.Gray;
+
+                PasswordTextBox.Focus();
+
+                return false;
+            }
+            if (CreatorCheckBox.IsChecked == false && SuperAdminCheckBox.IsChecked == false && AdminEditorCheckBox.IsChecked == false && AdminAgentCheckBox.IsChecked == false && ManagerCheckBox.IsChecked == false && EditorCheckBox.IsChecked == false && AgentChecBox.IsChecked == false && ModeratorcheckBox.IsChecked == false)
+            {
+                MessageBox.Show("Укажите хотя бы одну должность из списка для сотрудника.", "Ошибка");
+
+                EditorCheckBox.Focus();
+
+                return false;
+            }
+            if (ManagerCheckBox.IsChecked == true && ManagersRoleTextBox.Text == defaultManagerRole)
+            {
+                MessageBox.Show("Укажите расширенную менеджерскую должность сотрудника.", "Ошибка");
+
+                ManagersRoleTextBox.Focus();
+
+                return false;
+            }
+            if (EditorCheckBox.IsChecked == true && EditorsRubricTextBox.Text == defaultEditorsRubric)
+            {
+                MessageBox.Show("Укажите редакторскую рубрику сотрудника.", "Ошибка");
+
+                EditorsRubricTextBox.Focus();
+
+                return false;
+            }
+            if (EditorCheckBox.IsChecked == true && EditorsFrequencyTextBox.Text == defaultEditorsFrequency)
+            {
+                MessageBox.Show("Укажите частоту размещения постов для сотрудника.", "Ошибка");
+
+                EditorsFrequencyTextBox.Focus();
+
+                return false;
+            }
+            if (AgentChecBox.IsChecked == true && AgentsNumberTextBox.Text == defaultAgentsNumber)
+            {
+                MessageBox.Show("Укажите агентский номер сотрудника.", "Ошибка");
+
+                AgentsNumberTextBox.Focus();
+
+                return false;
+            }
+            if (AgentChecBox.IsChecked == true && AgentsFirstWordsTextBox.Text == defaultAgentsFirstWords)
+            {
+                MessageBox.Show("Укажите приветствие сотрудника (как агента Поддержки).", "Ошибка");
+
+                AgentsFirstWordsTextBox.Focus();
+
+                return false;
+            }
+            if (AgentChecBox.IsChecked == true && AgentsLastWordsTextBox.Text == defaultAgentsLastWords)
+            {
+                MessageBox.Show("Укажите подпись сотрудника (как агента Поддержки).", "Ошибка");
+
+                AgentsLastWordsTextBox.Focus();
+
+                return false;
+            }
+
+            return true;
+        }
+
+
+        private bool CheckingIfAllValuesAreValid()
+        {
+            if (LoginTextBox.Text.IndexOf(' ') != -1)
+            {
+                MessageBox.Show("Пробелы не допускаются в логине.", "Ошибка");
+
+                LoginTextBox.Text = "";
+                LoginTextBox.Focus();
+
+                return false;
+            }
+            if (!int.TryParse(PasswordTextBox.Text, out int result) || result < 100000 || result > 999999)
+            {
+                MessageBox.Show("Пароль обязательно должен быть шестизначным числом. Пожалуйста, измените пароль и воспроизведите его в поле ниже.", "Ошибка");
+
+                PasswordTextBox.Text = "";
+                RepeatPasswordTextBox.Text = defaultPassword;
+                RepeatPasswordTextBox.Foreground = Brushes.Gray;
+
+                PasswordTextBox.Focus();
+
+                return false;
+            }
+            if (PasswordTextBox.Text != RepeatPasswordTextBox.Text)
+            {
+                MessageBox.Show("Пароли не совпадают.", "Ошибка");
+
+                PasswordTextBox.Text = "";
+                RepeatPasswordTextBox.Text = defaultPassword;
+                RepeatPasswordTextBox.Foreground = Brushes.Gray;
+
+                PasswordTextBox.Focus();
+
+                return false;
+            }
+            if (EditorCheckBox.IsChecked == true && !int.TryParse(EditorsFrequencyTextBox.Text, out result))
+            {
+                MessageBox.Show("Частота размещения постов указана неправильно. Она должна выражаться целым числом. Например, если сотрудник размещает посты раз в 3 дня, следует в этом поле указывать число 3.", "Ошибка");
+
+                EditorsFrequencyTextBox.Text = "";
+                EditorsFrequencyTextBox.Focus();
+
+                return false;
+            }
+            if (AgentChecBox.IsChecked == true && (!int.TryParse(AgentsNumberTextBox.Text, out result) || result <= 0))
+            {
+                MessageBox.Show("Номер Агента Поддержки должен всегда быть целым числом, большим 0.", "Ошибка");
+
+                AgentsNumberTextBox.Text = "";
+                AgentsNumberTextBox.Focus();
+
+                return false;
+            }
+            if (!(_storage.Users.Items.FirstOrDefault(u => u.AgentsNumber.ToString() == AgentsNumberTextBox.Text) == null ||
+                _storage.Users.Items.FirstOrDefault(u => u.AgentsNumber.ToString() == AgentsNumberTextBox.Text) == _user))
+            {
+                MessageBox.Show("Вам нужен другой номер для Агента Поддержки, посколько указанный сейчас уже используется или использовался другим сотрудником.", "Ошибка");
+
+                AgentsNumberTextBox.Text = "";
+                AgentsNumberTextBox.Focus();
+
+                return false;
+            }
+
+            return true;
         }
     }
 }
