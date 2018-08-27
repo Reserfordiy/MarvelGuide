@@ -30,5 +30,14 @@ namespace MarvelGuide.Core.Helpers
                 return ending5;
             }
         }
+
+
+
+        public static bool TryParsingTheDate(string dateString)
+        {
+            return dateString.Length == 10 && dateString[2] == '.' && dateString[5] == '.' && 
+                int.TryParse(dateString.Substring(0, 2), out int result) && int.TryParse(dateString.Substring(3, 2), out result) && 
+                int.TryParse(dateString.Substring(6), out result) && DateTime.TryParse(dateString, out DateTime dateTime);
+        }
     }
 }

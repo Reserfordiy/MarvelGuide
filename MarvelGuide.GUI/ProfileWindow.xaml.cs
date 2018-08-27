@@ -89,6 +89,8 @@ namespace MarvelGuide.GUI
         private const string defaultSurname = "Пример: Иванов";
         private const string defaultLogin = "Пример: ivani";
         private const string defaultPassword = "Пример: 123456";
+        private const string defaultStartWorkingDate = "Пример: 18.08.2018";
+        private const string defaultEndWorkingDate = "Пример: 01.09.2018";
         private const string defaultManagerRole = "Пример: Менеджер по кадрам";
         private const string defaultEditorsRubric = "Пример: Старс";
         private const string defaultEditorsFrequency = "Пример: 3";
@@ -171,6 +173,7 @@ namespace MarvelGuide.GUI
         {
             if (_user.Id != -1)
             {
+                _picture = _user.Avatar;
 
                 NameTextBox.Text = _user.Name;
                 NameTextBox.Foreground = Brushes.Black;
@@ -189,6 +192,17 @@ namespace MarvelGuide.GUI
 
                 RepeatPasswordTextBox.Text = _user.Password;
                 RepeatPasswordTextBox.Foreground = Brushes.Black;
+
+                if (!_user.WorkingNow)
+                {
+                    StillWorkingCheckBox.IsChecked = false;
+
+                    EndWorkingDateTextBox.Text = _user.LostTheJob.ToString("d");
+                    EndWorkingDateTextBox.Foreground = Brushes.Black;
+                }
+
+                StartWorkingDateTextBox.Text = _user.GotAJob.ToString("d");
+                StartWorkingDateTextBox.Foreground = Brushes.Black;
 
                 if (_user.Creator) { CreatorCheckBox.IsChecked = true; }
                 if (_user.SuperAdmin) { SuperAdminCheckBox.IsChecked = true; }
@@ -658,6 +672,17 @@ namespace MarvelGuide.GUI
             _user.Login = LoginTextBox.Text;
             _user.Password = PasswordTextBox.Text;
 
+            _user.GotAJob = DateTime.Parse(StartWorkingDateTextBox.Text);
+            if (StillWorkingCheckBox.IsChecked == true)
+            {
+                _user.WorkingNow = true;
+            }
+            else
+            {
+                _user.WorkingNow = false;
+                _user.LostTheJob = DateTime.Parse(EndWorkingDateTextBox.Text);
+            }
+
             if (CreatorCheckBox.IsChecked == true) { _user.Creator = true; }
             else { _user.Creator = false; }
             if (SuperAdminCheckBox.IsChecked == true) { _user.SuperAdmin = true; }
@@ -740,6 +765,17 @@ namespace MarvelGuide.GUI
         }
 
 
+        private void EndWorkingDateTextBox_Initialized(object sender, EventArgs e)
+        {
+            if (_user.Id == -1 || _user.WorkingNow) { EndWorkingDateTextBox.Visibility = Visibility.Collapsed; }
+        }
+
+        private void EndWorkingDateTextBlock_Initialized(object sender, EventArgs e)
+        {
+            if (_user.Id == -1 || _user.WorkingNow) { EndWorkingDateTextBlock.Visibility = Visibility.Collapsed; }
+        }
+
+
 
         private void ManagerCheckBox_Checked(object sender, RoutedEventArgs e)
         {
@@ -769,6 +805,22 @@ namespace MarvelGuide.GUI
         private void AgentChecBox_Unchecked(object sender, RoutedEventArgs e)
         {
             AgentsRoleGrid.Visibility = Visibility.Collapsed;
+        }
+        
+
+        private void StillWorkingCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (EndWorkingDateTextBlock != null && EndWorkingDateTextBox != null)
+            {
+                EndWorkingDateTextBlock.Visibility = Visibility.Collapsed;
+                EndWorkingDateTextBox.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void StillWorkingCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            EndWorkingDateTextBox.Visibility = Visibility.Visible;
+            EndWorkingDateTextBlock.Visibility = Visibility.Visible;
         }
 
 
@@ -860,6 +912,42 @@ namespace MarvelGuide.GUI
             {
                 RepeatPasswordTextBox.Text = defaultPassword;
                 RepeatPasswordTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void StartWorkingDateTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (StartWorkingDateTextBox.Text == defaultStartWorkingDate)
+            {
+                StartWorkingDateTextBox.Text = "";
+                StartWorkingDateTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void StartWorkingDateTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (StartWorkingDateTextBox.Text == "")
+            {
+                StartWorkingDateTextBox.Text = defaultStartWorkingDate;
+                StartWorkingDateTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void EndWorkingDateTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (EndWorkingDateTextBox.Text == defaultEndWorkingDate)
+            {
+                EndWorkingDateTextBox.Text = "";
+                EndWorkingDateTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void EndWorkingDateTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (EndWorkingDateTextBox.Text == "")
+            {
+                EndWorkingDateTextBox.Text = defaultEndWorkingDate;
+                EndWorkingDateTextBox.Foreground = Brushes.Gray;
             }
         }
 
@@ -1035,6 +1123,22 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
+            if (StartWorkingDateTextBox.Text == defaultStartWorkingDate)
+            {
+                MessageBox.Show("Укажите дату, когда сотрудник приступил к исполнению своих обязанностей.", "Ошибка");
+
+                StartWorkingDateTextBox.Focus();
+
+                return false;
+            }
+            if (StillWorkingCheckBox.IsChecked == false && EndWorkingDateTextBox.Text == defaultEndWorkingDate)
+            {
+                MessageBox.Show("Укажите дату, когда сотрудник покинул свою должность.", "Ошибка");
+
+                EndWorkingDateTextBox.Focus();
+
+                return false;
+            }
             if (CreatorCheckBox.IsChecked == false && SuperAdminCheckBox.IsChecked == false && AdminEditorCheckBox.IsChecked == false && AdminAgentCheckBox.IsChecked == false && ManagerCheckBox.IsChecked == false && EditorCheckBox.IsChecked == false && AgentChecBox.IsChecked == false && ModeratorcheckBox.IsChecked == false)
             {
                 MessageBox.Show("Укажите хотя бы одну должность из списка для сотрудника.", "Ошибка");
@@ -1119,7 +1223,7 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (!int.TryParse(PasswordTextBox.Text, out result) || result < 100000 || result > 999999)
+            if (PasswordTextBox.Text.Length != 6 && PasswordTextBox.Text.Length != 2 || !int.TryParse(PasswordTextBox.Text, out result))
             {
                 MessageBox.Show("Пароль обязательно должен быть шестизначным числом. Пожалуйста, измените пароль и воспроизведите его в поле ниже.", "Ошибка");
 
@@ -1140,6 +1244,24 @@ namespace MarvelGuide.GUI
                 RepeatPasswordTextBox.Foreground = Brushes.Gray;
 
                 PasswordTextBox.Focus();
+
+                return false;
+            }
+            if (!HelpingMethods.TryParsingTheDate(StartWorkingDateTextBox.Text))
+            {
+                MessageBox.Show("Дата в полях должна задаваться в формате ДД.ММ.ГГГГ — например: 09.05.1999 . Оформите дату, когда работник приступил к своим обязанностям, корректно.", "Ошибка");
+
+                StartWorkingDateTextBox.Text = "";
+                StartWorkingDateTextBox.Focus();
+
+                return false;
+            }
+            if (StillWorkingCheckBox.IsChecked == false && !HelpingMethods.TryParsingTheDate(EndWorkingDateTextBox.Text))
+            {
+                MessageBox.Show("Дата в полях должна задаваться в формате ДД.ММ.ГГГГ — например: 09.05.1999 . Оформите дату, когда работник ушел со своей должности, корректно.", "Ошибка");
+
+                EndWorkingDateTextBox.Text = "";
+                EndWorkingDateTextBox.Focus();
 
                 return false;
             }
@@ -1215,6 +1337,6 @@ namespace MarvelGuide.GUI
         private void AdminAgentCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
 
-        }
+        }       
     }
 }

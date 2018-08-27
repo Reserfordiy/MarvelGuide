@@ -21,7 +21,7 @@ namespace MarvelGuide.Core.Models
         public bool WorkingNow { get; set; }
 
         public DateTime GotAJob { get; set; }
-        public DateTime? LeftTheJob { get; set; }
+        public DateTime LostTheJob { get; set; }
 
         public bool SuperDeveloper { get; set; }
         public bool HighDeveloper { get; set; }
