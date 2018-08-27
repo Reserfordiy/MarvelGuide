@@ -29,6 +29,13 @@ namespace MarvelGuide.GUI
         private const string login = "Логин в системе";
         private const string name = "Ф.И. сотрудника";
         private const string job = "Должность";
+        private const string isWorking = "Работает в настоящее время";
+
+        private const string yes = "да";
+        private const string no = "нет";
+
+        private const string firstDateOfWork = "Дата начала работы";
+        private const string lastDateOfWork = "Дата завершения работы";
 
         private const string securityManagerRole = "Менеджер по безопасности";
 
@@ -160,6 +167,9 @@ namespace MarvelGuide.GUI
                 name + adding + _user.Surname + " " + _user.Name,
                 job + adding + _user.Job()
             };
+
+            if (_user.WorkingNow) { _personalData.Add(isWorking + adding + yes); }
+            else { _personalData.Add(isWorking + adding + no); }
 
             if (_user.Manager) { _amountOfRegularJobs++; }
             if (_user.Editor) { _amountOfRegularJobs++; }
@@ -356,6 +366,15 @@ namespace MarvelGuide.GUI
                 if (_user.Editor) { EditorsDetails(); }
                 if (_user.Agent) { AgentsDetails(); }
                 if (_user.Moderator) { ModeratorsDetails(); }
+
+                _personalData.Add(firstDateOfWork + adding + _user.GotAJob.ToString("d"));
+                _additionalData++;
+
+                if (!_user.WorkingNow)
+                {
+                    _personalData.Add(lastDateOfWork + adding + _user.LostTheJob.ToString("d"));
+                    _additionalData++;
+                }
 
                 ShowDetailsButton.Content = hideDetailsButton;
             }
