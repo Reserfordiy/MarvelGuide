@@ -72,7 +72,7 @@ namespace MarvelGuide.Core.Helpers
         {
             OpenFileDialog uploadingImageDialog = new OpenFileDialog
             {
-                Title = "Выберете изображение",
+                Title = "Выберите изображение",
                 Filter = "Все поддерживаемые форматы|*.jpg;*.jpeg;*.png|" + "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" + "PNG (*.png)|*.png"
             };
 
