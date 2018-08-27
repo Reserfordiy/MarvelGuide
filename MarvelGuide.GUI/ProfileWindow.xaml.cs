@@ -104,6 +104,8 @@ namespace MarvelGuide.GUI
         User _user;
         User _userWhoWatches;
 
+        Picture _picture;
+
         List<string> _personalData;
 
         int _amountOfRegularJobs;
@@ -594,7 +596,17 @@ namespace MarvelGuide.GUI
 
         private void UploadAvatarButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Извините, этого функционала еще нет!", "Ошибка!");
+            try
+            {
+                WorkWithImages imageUploadingProcess = new WorkWithImages();
+
+                imageUploadingProcess.UploadImageAndSave();
+
+                _picture = imageUploadingProcess.Picture;
+
+                AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(_picture.ImageSource, "../MarvelGuide.Core/Avatars")));
+            }
+            catch { }
         }
 
         private void ShowTheTeamButton_Click(object sender, RoutedEventArgs e)
@@ -692,6 +704,8 @@ namespace MarvelGuide.GUI
             }
             if (ModeratorcheckBox.IsChecked == true) { _user.Moderator = true; }
             else { _user.Moderator = false; }
+
+            _user.Avatar = _picture;
         }
 
 
