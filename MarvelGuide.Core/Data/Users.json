@@ -1,10 +1,5 @@
 [
   {
-    "Avatar": {
-      "Id": 10,
-      "ImageSource": "romanov.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 7,
     "Name": "Максим",
     "Surname": "Романов",
@@ -29,14 +24,14 @@
     "EditorsFrequency": 0,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
-    "AgentsLastWords": null
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 10,
+      "ImageSource": "romanov.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 12,
-      "ImageSource": "sanochkin.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 8,
     "Name": "Юрий",
     "Surname": "Саночкин",
@@ -61,14 +56,14 @@
     "EditorsFrequency": 0,
     "AgentsNumber": 1,
     "AgentsFirstWords": "Добрый день(утро, вечер)!",
-    "AgentsLastWords": "С уважением и вниманием"
+    "AgentsLastWords": "С уважением и вниманием",
+    "Avatar": {
+      "Id": 12,
+      "ImageSource": "sanochkin.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 8,
-      "ImageSource": "napartovich.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 9,
     "Name": "Илья",
     "Surname": "Напартович",
@@ -93,14 +88,14 @@
     "EditorsFrequency": 0,
     "AgentsNumber": 2,
     "AgentsFirstWords": "Приветствую!",
-    "AgentsLastWords": "Чудесного лета"
+    "AgentsLastWords": "Чудесного лета",
+    "Avatar": {
+      "Id": 8,
+      "ImageSource": "napartovich.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 21,
-      "ImageSource": "kurteneva.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 10,
     "Name": "Ангелина",
     "Surname": "Куртенева",
@@ -125,14 +120,14 @@
     "EditorsFrequency": 0,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
-    "AgentsLastWords": null
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 21,
+      "ImageSource": "kurteneva.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 5,
-      "ImageSource": "grigorieva.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 11,
     "Name": "Ольга",
     "Surname": "Григорьева",
@@ -157,14 +152,14 @@
     "EditorsFrequency": 0,
     "AgentsNumber": 19,
     "AgentsFirstWords": "Приветствую!",
-    "AgentsLastWords": "Всегда на связи"
+    "AgentsLastWords": "Всегда на связи",
+    "Avatar": {
+      "Id": 5,
+      "ImageSource": "grigorieva.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 13,
-      "ImageSource": "sharvadze.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 12,
     "Name": "Елена",
     "Surname": "Шарвадзе",
@@ -189,14 +184,14 @@
     "EditorsFrequency": 0,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
-    "AgentsLastWords": null
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 13,
+      "ImageSource": "sharvadze.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 6,
-      "ImageSource": "malygina.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 13,
     "Name": "Екатерина",
     "Surname": "Малыгина",
@@ -221,14 +216,14 @@
     "EditorsFrequency": 0,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
-    "AgentsLastWords": null
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 6,
+      "ImageSource": "malygina.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 7,
-      "ImageSource": "matveeva.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 14,
     "Name": "Екатерина",
     "Surname": "Матвеева",
@@ -253,14 +248,14 @@
     "EditorsFrequency": 5,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
-    "AgentsLastWords": null
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 7,
+      "ImageSource": "matveeva.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 15,
-      "ImageSource": "stepanov.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 15,
     "Name": "Владимир",
     "Surname": "Степанов",
@@ -285,14 +280,14 @@
     "EditorsFrequency": 2,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
-    "AgentsLastWords": null
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 15,
+      "ImageSource": "stepanov.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 14,
-      "ImageSource": "soloveychik.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 16,
     "Name": "Алиса",
     "Surname": "Соловейчик",
@@ -317,14 +312,14 @@
     "EditorsFrequency": 2,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
-    "AgentsLastWords": null
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 14,
+      "ImageSource": "soloveychik.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 18,
-      "ImageSource": "ziminovskiy.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 17,
     "Name": "Георгий",
     "Surname": "Зиминовский",
@@ -349,14 +344,14 @@
     "EditorsFrequency": 3,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
-    "AgentsLastWords": null
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 18,
+      "ImageSource": "ziminovskiy.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 20,
-      "ImageSource": "mahanova.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 19,
     "Name": "Наталья",
     "Surname": "Маханова",
@@ -381,14 +376,14 @@
     "EditorsFrequency": 5,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
-    "AgentsLastWords": null
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 20,
+      "ImageSource": "mahanova.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 11,
-      "ImageSource": "sanadze.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 20,
     "Name": "Георгий",
     "Surname": "Санадзе",
@@ -413,14 +408,14 @@
     "EditorsFrequency": 7,
     "AgentsNumber": 80,
     "AgentsFirstWords": "Приветствую!",
-    "AgentsLastWords": "Искренне Ваш"
+    "AgentsLastWords": "Искренне Ваш",
+    "Avatar": {
+      "Id": 11,
+      "ImageSource": "sanadze.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 9,
-      "ImageSource": "pischalova.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 21,
     "Name": "Валерия",
     "Surname": "Пищалова",
@@ -445,14 +440,14 @@
     "EditorsFrequency": 4,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
-    "AgentsLastWords": null
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 9,
+      "ImageSource": "pischalova.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 17,
-      "ImageSource": "zavileyskaya.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 22,
     "Name": "Екатерина",
     "Surname": "Завилейская",
@@ -477,14 +472,14 @@
     "EditorsFrequency": 3,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
-    "AgentsLastWords": null
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 17,
+      "ImageSource": "zavileyskaya.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 4,
-      "ImageSource": "golubev.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 23,
     "Name": "Игорь",
     "Surname": "Голубев",
@@ -509,14 +504,14 @@
     "EditorsFrequency": 0,
     "AgentsNumber": 6,
     "AgentsFirstWords": "Здравствуйте!",
-    "AgentsLastWords": "Добра"
+    "AgentsLastWords": "Добра",
+    "Avatar": {
+      "Id": 4,
+      "ImageSource": "golubev.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 3,
-      "ImageSource": "garin.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 24,
     "Name": "Роман",
     "Surname": "Гарин",
@@ -541,14 +536,14 @@
     "EditorsFrequency": 0,
     "AgentsNumber": 11,
     "AgentsFirstWords": "Добрый день(утро, вечер)!",
-    "AgentsLastWords": "Тёплого и знойного лета"
+    "AgentsLastWords": "Тёплого и знойного лета",
+    "Avatar": {
+      "Id": 3,
+      "ImageSource": "garin.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 22,
-      "ImageSource": "lyange.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 25,
     "Name": "Александра",
     "Surname": "Лянге",
@@ -573,14 +568,14 @@
     "EditorsFrequency": 0,
     "AgentsNumber": 10,
     "AgentsFirstWords": "Здравствуйте!",
-    "AgentsLastWords": "Удачи и хорошего настроения"
+    "AgentsLastWords": "Удачи и хорошего настроения",
+    "Avatar": {
+      "Id": 22,
+      "ImageSource": "lyange.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
-    "Avatar": {
-      "Id": 23,
-      "ImageSource": "shenkova.jpg",
-      "IsBorderRequired": true
-    },
     "Id": 26,
     "Name": "Анастасия",
     "Surname": "Шенькова",
@@ -605,6 +600,11 @@
     "EditorsFrequency": 1,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
-    "AgentsLastWords": null
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 23,
+      "ImageSource": "shenkova.jpg",
+      "IsBorderRequired": true
+    }
   }
 ]

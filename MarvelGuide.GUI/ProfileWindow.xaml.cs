@@ -615,11 +615,84 @@ namespace MarvelGuide.GUI
         {
             if (CheckingWhetherAllFieldsFilledCorrectly())
             {
-                MessageBox.Show("Вы молодец! Вы заполнили все данные правильно. Но сохранять сотрудников пока все равно нельзя...", "Ошибка!");
+                FixingDataAboutUser();
+
+                _storage.Users.Save();
+
+                _goingToTheDeveloperMode = true;
+
+                Close();
             }
         }
 
-        
+
+        private void FixingDataAboutUser()
+        {
+            if (_user.Id == -1)
+            {
+                int id = _storage.Users.Items.Max(u => u.Id);
+
+                _user.Id = id + 1;
+            }
+
+            _user.Name = NameTextBox.Text;
+            _user.Surname = SurnameTextBox.Text;
+            
+            if (MaleRadioButton.IsChecked == true) { _user.Male = true; }
+            else { _user.Male = false; }
+
+            _user.Login = LoginTextBox.Text;
+            _user.Password = PasswordTextBox.Text;
+
+            if (CreatorCheckBox.IsChecked == true) { _user.Creator = true; }
+            else { _user.Creator = false; }
+            if (SuperAdminCheckBox.IsChecked == true) { _user.SuperAdmin = true; }
+            else { _user.SuperAdmin = false; }
+            if (AdminEditorCheckBox.IsChecked == true) { _user.AdminEditor = true; }
+            else { _user.AdminEditor = false; }
+            if (AdminAgentCheckBox.IsChecked == true) { _user.AdminAgent = true; }
+            else { _user.AdminAgent = false; }
+            if (ManagerCheckBox.IsChecked == true)
+            {
+                _user.Manager = true;
+                _user.ManagersRole = ManagersRoleTextBox.Text;
+            }
+            else
+            {
+                _user.Manager = false;
+                _user.ManagersRole = null;
+            }
+            if (EditorCheckBox.IsChecked == true)
+            {
+                _user.Editor = true;
+                _user.EditorsRubric = EditorsRubricTextBox.Text;
+                _user.EditorsFrequency = int.Parse(EditorsFrequencyTextBox.Text);
+            }
+            else
+            {
+                _user.Editor = false;
+                _user.EditorsRubric = null;
+                _user.EditorsFrequency = 0;
+            }
+            if (AgentChecBox.IsChecked == true)
+            {
+                _user.Agent = true;
+                _user.AgentsNumber = int.Parse(AgentsNumberTextBox.Text);
+                _user.AgentsFirstWords = AgentsFirstWordsTextBox.Text;
+                _user.AgentsLastWords = AgentsLastWordsTextBox.Text;
+            }
+            else
+            {
+                _user.Agent = false;
+                _user.AgentsNumber = 0;
+                _user.AgentsFirstWords = null;
+                _user.AgentsLastWords = null;
+            }
+            if (ModeratorcheckBox.IsChecked == true) { _user.Moderator = true; }
+            else { _user.Moderator = false; }
+        }
+
+
 
         private void Window_StateChanged(object sender, EventArgs e)
         {
@@ -649,6 +722,8 @@ namespace MarvelGuide.GUI
         {
             if (!_user.Agent) { AgentsRoleGrid.Visibility = Visibility.Collapsed; }
         }
+
+
 
         private void ManagerCheckBox_Checked(object sender, RoutedEventArgs e)
         {
@@ -1070,6 +1145,48 @@ namespace MarvelGuide.GUI
             }
 
             return true;
+        }
+
+
+
+        private void CreatorCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CreatorCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SuperAdminCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SuperAdminCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AdminEditorCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AdminEditorCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AdminAgentCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AdminAgentCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

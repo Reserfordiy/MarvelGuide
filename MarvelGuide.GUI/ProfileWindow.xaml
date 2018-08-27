@@ -117,10 +117,10 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <CheckBox Name="CreatorCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="0">Создатель</CheckBox>
-                            <CheckBox Name="SuperAdminCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="1">Главный администратор</CheckBox>
-                            <CheckBox Name="AdminEditorCheckBox"  Margin="10 3.5" FontSize="14"  Grid.Row="2">Исполнительный администратор</CheckBox>
-                            <CheckBox Name="AdminAgentCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="3">Директор Поддержки</CheckBox>
+                            <CheckBox Name="CreatorCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="0" Checked="CreatorCheckBox_Checked" Unchecked="CreatorCheckBox_Unchecked">Создатель</CheckBox>
+                            <CheckBox Name="SuperAdminCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="1" Checked="SuperAdminCheckBox_Checked" Unchecked="SuperAdminCheckBox_Unchecked">Главный администратор</CheckBox>
+                            <CheckBox Name="AdminEditorCheckBox"  Margin="10 3.5" FontSize="14"  Grid.Row="2" Checked="AdminEditorCheckBox_Checked" Unchecked="AdminEditorCheckBox_Unchecked">Исполнительный администратор</CheckBox>
+                            <CheckBox Name="AdminAgentCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="3" Checked="AdminAgentCheckBox_Checked" Unchecked="AdminAgentCheckBox_Unchecked">Директор Поддержки</CheckBox>
                             <CheckBox Name="ManagerCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="4" Checked="ManagerCheckBox_Checked" Unchecked="ManagerCheckBox_Unchecked">Менеджер</CheckBox>
                             <CheckBox Name="EditorCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="5" Checked="EditorCheckBox_Checked" Unchecked="EditorCheckBox_Unchecked">Редактор</CheckBox>
                             <CheckBox Name="AgentChecBox" Margin="10 3.5" FontSize="14" Grid.Row="6" Checked="AgentChecBox_Checked" Unchecked="AgentChecBox_Unchecked">Агент</CheckBox>
