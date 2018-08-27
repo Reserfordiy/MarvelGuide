@@ -1084,6 +1084,8 @@ namespace MarvelGuide.GUI
 
         private bool CheckingIfAllValuesAreValid()
         {
+            int result;
+
             if (LoginTextBox.Text.IndexOf(' ') != -1)
             {
                 MessageBox.Show("Пробелы не допускаются в логине.", "Ошибка");
@@ -1093,7 +1095,17 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (!int.TryParse(PasswordTextBox.Text, out int result) || result < 100000 || result > 999999)
+            if (!(_storage.Users.Items.FirstOrDefault(u => u.Login == LoginTextBox.Text) == null ||
+                _storage.Users.Items.FirstOrDefault(u => u.Login == LoginTextBox.Text) == _user))
+            {
+                MessageBox.Show("Этот логин уже используется другим сотрудником, придумайте другой.", "Ошибка");
+
+                LoginTextBox.Text = "";
+                LoginTextBox.Focus();
+
+                return false;
+            }
+            if (!int.TryParse(PasswordTextBox.Text, out result) || result < 100000 || result > 999999)
             {
                 MessageBox.Show("Пароль обязательно должен быть шестизначным числом. Пожалуйста, измените пароль и воспроизведите его в поле ниже.", "Ошибка");
 
