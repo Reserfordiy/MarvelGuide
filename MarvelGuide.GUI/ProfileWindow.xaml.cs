@@ -630,6 +630,8 @@ namespace MarvelGuide.GUI
         {
             if (_user.Id == -1)
             {
+                _storage.Users.Add(_user);
+
                 int id = _storage.Users.Items.Max(u => u.Id);
 
                 _user.Id = id + 1;

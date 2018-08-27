@@ -18,11 +18,22 @@ namespace MarvelGuide.Core.Models
         public string Login { get; set; }
         public string Password { get; set; }
 
+        public bool WorkingNow { get; set; }
+
+        public DateTime GotAJob { get; set; }
+        public DateTime? LeftTheJob { get; set; }
+
         public bool SuperDeveloper { get; set; }
-        public bool DeveloperManager { get; set; }
-        public bool DeveloperAgent { get; set; }
-        public bool DeveloperEditor { get; set; }
-        public bool DeveloperModerator { get; set; }
+        public bool HighDeveloper { get; set; }
+        public bool MediumDeveloper { get; set; }
+        public bool LightDeveloperCreator { get; set; }
+        public bool LightDeveloperSuperAdmin { get; set; }
+        public bool LightDeveloperAdminEditor { get; set; }
+        public bool LightDeveloperAdminAgent { get; set; }
+        public bool LightDeveloperManager { get; set; }
+        public bool LightDeveloperAgent { get; set; }
+        public bool LightDeveloperEditor { get; set; }
+        public bool LightDeveloperModerator { get; set; }
 
         public bool Creator { get; set; }
         public bool SuperAdmin { get; set; }
@@ -98,6 +109,10 @@ namespace MarvelGuide.Core.Models
                 else if(genitiveName[genitiveName.Length - 1] == 'я')
                 {
                     genitiveName = genitiveName.Substring(0, genitiveName.Length - 1) + 'и';
+                }
+                else if (genitiveName[genitiveName.Length - 1] == 'и')
+                {
+                    
                 }
                 else
                 {
