@@ -132,7 +132,7 @@ namespace MarvelGuide.GUI
         bool _personalPage = true;
         bool _editingPage = false;
 
-        bool _programSwitch = false;
+        bool _programSwitch = true;
 
 
 
@@ -160,6 +160,8 @@ namespace MarvelGuide.GUI
             InitializeComponent();           
 
             CheckingWhetherWeEditPage();
+
+            _programSwitch = false;
         }
 
         public ProfileWindow(User user, User userWhoWatches) : this (user, userWhoWatches, false) { }
@@ -801,17 +803,32 @@ namespace MarvelGuide.GUI
             if (IsDeveloperCheckBox.IsChecked == true)
             {
                 if (HighDeveloperRadioButton.IsChecked == true) { _user.HighDeveloper = true; }
-                else if (MediumDeveloperRadioButton.IsChecked == true) { _user.MediumDeveloper = true; }
                 else
                 {
-                    if (CreatorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperCreator = true; }
-                    if (SuperAdminDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperSuperAdmin = true; }
-                    if (AdminEditoDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAdminEditor = true; }
-                    if (AdminAgentDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAdminAgent = true; }
-                    if (ManagerDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperManager = true; }
-                    if (EditorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperEditor = true; }
-                    if (AgentDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAgent = true; }
-                    if (ModeratorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperModerator = true; }
+                    _user.SuperDeveloper = false;
+                    _user.HighDeveloper = false;
+                    if (MediumDeveloperRadioButton.IsChecked == true) { _user.MediumDeveloper = true; }
+                    else
+                    {
+                        _user.MediumDeveloper = false;
+
+                        if (CreatorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperCreator = true; }
+                        else { _user.LightDeveloperCreator = false; }
+                        if (SuperAdminDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperSuperAdmin = true; }
+                        else { _user.LightDeveloperSuperAdmin = false; }
+                        if (AdminEditoDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAdminEditor = true; }
+                        else { _user.LightDeveloperAdminEditor = false; }
+                        if (AdminAgentDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAdminAgent = true; }
+                        else { _user.LightDeveloperAdminAgent = false; }
+                        if (ManagerDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperManager = true; }
+                        else { _user.LightDeveloperManager = false; }
+                        if (EditorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperEditor = true; }
+                        else { _user.LightDeveloperEditor = false; }
+                        if (AgentDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAgent = true; }
+                        else { _user.LightDeveloperAgent = false; }
+                        if (ModeratorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperModerator = true; }
+                        else { _user.LightDeveloperModerator = false; }
+                    }
                 }
             }
 
@@ -875,7 +892,11 @@ namespace MarvelGuide.GUI
 
         private void DeveloperCheckBoxGrid_Initialized(object sender, EventArgs e)
         {
-            if (LightDeveloperRadioButton.IsChecked != true) { DeveloperCheckBoxGrid.Visibility = Visibility.Collapsed; }
+            if (!(_user.LightDeveloperAdminAgent || _user.LightDeveloperAdminEditor || _user.LightDeveloperAgent 
+                || _user.LightDeveloperCreator || _user.LightDeveloperEditor || _user.LightDeveloperManager || _user.LightDeveloperModerator || _user.LightDeveloperSuperAdmin))
+            {
+                DeveloperCheckBoxGrid.Visibility = Visibility.Collapsed;
+            }
         }
 
 
@@ -924,7 +945,7 @@ namespace MarvelGuide.GUI
 
         private void LightDeveloperRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (_user != _userWhoWatches)
+            if (_user != _userWhoWatches && !_userWhoWatches.MediumDeveloper)
             {
                 DeveloperCheckBoxGrid.Visibility = Visibility.Visible;
             }
@@ -932,7 +953,19 @@ namespace MarvelGuide.GUI
 
         private void LightDeveloperRadioButton_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (_user != _userWhoWatches)
+            if (_userWhoWatches.MediumDeveloper && !_programSwitch)
+            {
+                _programSwitch = true;
+
+                MediumDeveloperRadioButton.IsChecked = false;
+                HighDeveloperRadioButton.IsChecked = false;
+                LightDeveloperRadioButton.IsChecked = true;
+
+                MessageBox.Show("У Вас недостаточно прав для совершения данного действия. По всем вопросам можно обратиться к разработчикам приложения.", "Ошибка");
+
+                _programSwitch = false;
+            }
+            else
             {
                 DeveloperCheckBoxGrid.Visibility = Visibility.Collapsed;
             }
@@ -940,7 +973,7 @@ namespace MarvelGuide.GUI
 
         private void MediumDeveloperRadioButton_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (_user == _userWhoWatches && !_programSwitch)
+            if (_userWhoWatches.MediumDeveloper && !_programSwitch)
             {
                 _programSwitch = true;
 
@@ -948,7 +981,19 @@ namespace MarvelGuide.GUI
                 HighDeveloperRadioButton.IsChecked = false;
                 MediumDeveloperRadioButton.IsChecked = true;
 
-                MessageBox.Show("Вы не можете сами менять собственные настройки разработчика.", "Ошибка");
+                MessageBox.Show("У Вас недостаточно прав для совершения данного действия. По всем вопросам можно обратиться к разработчикам приложения.", "Ошибка");
+
+                _programSwitch = false;
+            }
+            else if (_user == _userWhoWatches && !_programSwitch)
+            {
+                _programSwitch = true;
+
+                LightDeveloperRadioButton.IsChecked = false;
+                HighDeveloperRadioButton.IsChecked = false;
+                MediumDeveloperRadioButton.IsChecked = true;
+
+                MessageBox.Show("Вы не можете сами изменять собственные настройки разработчика.", "Ошибка");
 
                 _programSwitch = false;
             }
@@ -956,7 +1001,7 @@ namespace MarvelGuide.GUI
 
         private void HighDeveloperRadioButton_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (_user == _userWhoWatches && !_programSwitch)
+            if (_userWhoWatches.MediumDeveloper && !_programSwitch)
             {
                 _programSwitch = true;
 
@@ -964,7 +1009,52 @@ namespace MarvelGuide.GUI
                 MediumDeveloperRadioButton.IsChecked = false;
                 HighDeveloperRadioButton.IsChecked = true;
 
-                MessageBox.Show("Вы не можете сами менять собственные настройки разработчика.", "Ошибка");
+                MessageBox.Show("У Вас недостаточно прав для совершения данного действия. По всем вопросам можно обратиться к разработчикам приложения.", "Ошибка");
+
+                _programSwitch = false;
+            }
+            else if (_user == _userWhoWatches && !_programSwitch)
+            {
+                _programSwitch = true;
+
+                LightDeveloperRadioButton.IsChecked = false;
+                MediumDeveloperRadioButton.IsChecked = false;
+                HighDeveloperRadioButton.IsChecked = true;
+
+                MessageBox.Show("Вы не можете сами изменять собственные настройки разработчика.", "Ошибка");
+
+                _programSwitch = false;
+            }
+        }
+
+
+        private void DeveloperCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!_programSwitch && _userWhoWatches.MediumDeveloper)
+            {
+                _programSwitch = true;
+
+                CheckBox DeveloperCheckBox = sender as CheckBox;
+
+                DeveloperCheckBox.IsChecked = false;
+
+                MessageBox.Show("У Вас недостаточно прав для совершения данного действия. По всем вопросам можно обратиться к разработчикам приложения.", "Ошибка");
+
+                _programSwitch = false;
+            }
+        }
+
+        private void DeveloperCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!_programSwitch && _userWhoWatches.MediumDeveloper)
+            {
+                _programSwitch = true;
+
+                CheckBox DeveloperCheckBox = sender as CheckBox;
+
+                DeveloperCheckBox.IsChecked = true;
+
+                MessageBox.Show("У Вас недостаточно прав для совершения данного действия. По всем вопросам можно обратиться к разработчикам приложения.", "Ошибка");
 
                 _programSwitch = false;
             }
@@ -988,20 +1078,43 @@ namespace MarvelGuide.GUI
 
         private void IsDeveloperCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            DevelopersLevelGrid.Visibility = Visibility.Visible;
+            if (!_userWhoWatches.MediumDeveloper)
+            {
+                DevelopersLevelGrid.Visibility = Visibility.Visible;
+            }
+            else if (!_programSwitch)
+            {
+                _programSwitch = true;
+
+                IsDeveloperCheckBox.IsChecked = false;
+
+                MessageBox.Show("У Вас недостаточно прав для совершения данного действия. По всем вопросам можно обратиться к разработчикам приложения.", "Ошибка");
+
+                _programSwitch = false;
+            }
         }
 
         private void IsDeveloperCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (_user != _userWhoWatches)
+            if (_userWhoWatches.MediumDeveloper && !_programSwitch)
             {
-                DevelopersLevelGrid.Visibility = Visibility.Collapsed;
+                _programSwitch = true;
+
+                IsDeveloperCheckBox.IsChecked = true;
+
+                MessageBox.Show("У Вас недостаточно прав для совершения данного действия. По всем вопросам можно обратиться к разработчикам приложения.", "Ошибка");
+
+                _programSwitch = false;
             }
-            else
+            else if (_user == _userWhoWatches)
             {
                 IsDeveloperCheckBox.IsChecked = true;
 
-                MessageBox.Show("Вы не можете сами менять собственные настройки разработчика.", "Ошибка");
+                MessageBox.Show("Вы не можете сами изменять собственные настройки разработчика.", "Ошибка");
+            }
+            else
+            {
+                DevelopersLevelGrid.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -1535,6 +1648,6 @@ namespace MarvelGuide.GUI
         private void AdminAgentCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
 
-        }
+        }        
     }
 }

@@ -107,20 +107,20 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
 
-                                        <CheckBox Name="CreatorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="0" >Создатель</CheckBox>
-                                        <CheckBox Name="SuperAdminDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="1" >
+                                        <CheckBox Name="CreatorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="0" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Создатель</CheckBox>
+                                        <CheckBox Name="SuperAdminDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="1" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">
                                             <TextBlock TextWrapping="Wrap">Главный администратор</TextBlock>
                                         </CheckBox>
-                                        <CheckBox Name="AdminEditoDeveloperCheckBox"  Margin="10 3.5" FontSize="14"  Grid.Row="2" >
+                                        <CheckBox Name="AdminEditoDeveloperCheckBox"  Margin="10 3.5" FontSize="14"  Grid.Row="2" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">
                                             <TextBlock TextWrapping="Wrap">Исполнительный администратор</TextBlock>
                                         </CheckBox>
-                                        <CheckBox Name="AdminAgentDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="3" >
+                                        <CheckBox Name="AdminAgentDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="3" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">
                                             <TextBlock TextWrapping="Wrap">Директор Поддержки</TextBlock>
                                         </CheckBox>
-                                        <CheckBox Name="ManagerDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="4" >Менеджеры</CheckBox>
-                                        <CheckBox Name="EditorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="5" >Редакторы</CheckBox>
-                                        <CheckBox Name="AgentDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="6" >Агенты</CheckBox>
-                                        <CheckBox Name="ModeratorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="7">Модераторы</CheckBox>
+                                        <CheckBox Name="ManagerDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="4" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Менеджеры</CheckBox>
+                                        <CheckBox Name="EditorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="5" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Редакторы</CheckBox>
+                                        <CheckBox Name="AgentDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="6" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Агенты</CheckBox>
+                                        <CheckBox Name="ModeratorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="7" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Модераторы</CheckBox>
                                     </Grid>
                                 </Grid>
                             </Grid>
