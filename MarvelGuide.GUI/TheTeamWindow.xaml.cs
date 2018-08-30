@@ -47,6 +47,8 @@ namespace MarvelGuide.GUI
 
         List<User> _theTeam;
         List<User> _unsortedTeam;
+        List<User> _leftPeople;
+        List<User> _unsortedLeftPeople;
 
         bool _goingBackToProfile = true;
         bool _goingToEditPage = false;
@@ -62,13 +64,16 @@ namespace MarvelGuide.GUI
             _lookingInTheDeveloperMode = lookingInTheDeveloperMode;
 
             _theTeam = new List<User>();
-            _unsortedTeam = _storage.Users.Items.ToList();
+            _leftPeople = new List<User>();
+            _unsortedTeam = _storage.Users.Items.Where(u => u.WorkingNow).ToList();
+            _unsortedLeftPeople = _storage.Users.Items.Where(u => !u.WorkingNow).ToList();
             
             InitializeComponent();
 
             FormingTheTeam();
 
             TheTeamListBox.ItemsSource = _theTeam;
+            LeftPeopleListBox.ItemsSource = _leftPeople;
         }
 
         public TheTeamWindow(User user) : this (user, false) { }
@@ -77,20 +82,35 @@ namespace MarvelGuide.GUI
 
         private void SwitchingTheMembers(Func<User, bool> condition)
         {
-            var usersForRemoving = new List<User>();
+            var usersForRemovingFromUnsortedTeam = new List<User>();
+            var usersForRemovingFromUnsortedLeftPeople = new List<User>();
 
             foreach (var user in _unsortedTeam)
             {
                 if (condition(user))
                 {
-                    usersForRemoving.Add(user);
+                    usersForRemovingFromUnsortedTeam.Add(user);
                     _theTeam.Add(user);
                 }
             }
 
-            foreach (var user in usersForRemoving)
+            foreach (var user in usersForRemovingFromUnsortedTeam)
             {
                 _unsortedTeam.Remove(user);
+            }
+
+            foreach (var user in _unsortedLeftPeople)
+            {
+                if (condition(user))
+                {
+                    usersForRemovingFromUnsortedLeftPeople.Add(user);
+                    _leftPeople.Add(user);
+                }
+            }
+
+            foreach (var user in usersForRemovingFromUnsortedLeftPeople)
+            {
+                _unsortedLeftPeople.Remove(user);
             }
         }
 
@@ -290,6 +310,20 @@ namespace MarvelGuide.GUI
             else
             {
                 TitleTextBlock.Text = normalTitle;
+            }
+        }
+
+
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                LeftPeopleListBox.Margin = new Thickness(75, 10, 75, 82);
+            }
+            else if (WindowState == WindowState.Normal)
+            {
+                LeftPeopleListBox.Margin = new Thickness(75, 10, 75, 50);
             }
         }
     }
