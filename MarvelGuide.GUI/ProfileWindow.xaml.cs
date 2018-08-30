@@ -427,33 +427,33 @@ namespace MarvelGuide.GUI
         
         private void CreatorsDetails()
         {
-            _personalData.Add(creatorsEmployeesFirst + adding + _storage.Users.Items.Count().ToString() + employees + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count()));
+            _personalData.Add((creatorsEmployeesFirst + adding + _storage.Users.Items.Count(u => u.WorkingNow && u != _user)).ToString() + employees + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.WorkingNow)));
             _personalData.Add(creatorsEmployeesSecond);
-            _personalData.Add(creatorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager).ToString());
-            _personalData.Add(creatorsEmployeeEditors + adding + _storage.Users.Items.Count(u => u.Editor).ToString());
-            _personalData.Add(creatorsEmployeeAgents + adding + _storage.Users.Items.Count(u => u.Agent).ToString());
-            _personalData.Add(creatorsEmployeeModerators + adding + _storage.Users.Items.Count(u => u.Moderator).ToString());
+            _personalData.Add(creatorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow).ToString());
+            _personalData.Add(creatorsEmployeeEditors + adding + _storage.Users.Items.Count(u => u.Editor && u.WorkingNow).ToString());
+            _personalData.Add(creatorsEmployeeAgents + adding + _storage.Users.Items.Count(u => u.Agent && u.WorkingNow).ToString());
+            _personalData.Add(creatorsEmployeeModerators + adding + _storage.Users.Items.Count(u => u.Moderator && u.WorkingNow).ToString());
 
             _additionalData += 6;
         }
 
         private void SuperAdminsDetails()
         {
-            _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Manager).ToString() + employeeManagers + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.Manager)));
+            _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow).ToString() + employeeManagers + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.Manager && u.WorkingNow)));
 
             _additionalData++;
         }
 
         private void AdminEditorDetails()
         {
-            _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Editor).ToString() + employeeEditors + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.Editor)));
+            _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Editor && u.WorkingNow).ToString() + employeeEditors + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.Editor && u.WorkingNow)));
 
             _additionalData++;
         }
 
         private void AdminAgentDetails()
         {
-            _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Agent).ToString() + employeeAgents + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.Agent)));
+            _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Agent && u.WorkingNow).ToString() + employeeAgents + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.Agent && u.WorkingNow)));
 
             _additionalData++;
         }
@@ -468,11 +468,11 @@ namespace MarvelGuide.GUI
             {
                 if (_amountOfRegularJobs == 1)
                 {
-                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Surname);
+                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin && u.WorkingNow).Surname);
                 }
                 else
                 {
-                    _personalData.Add(employer + employerForManager + adding + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin).Surname);
+                    _personalData.Add(employer + employerForManager + adding + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin && u.WorkingNow).Surname);
                 }
 
                 _additionalData++;
@@ -480,7 +480,7 @@ namespace MarvelGuide.GUI
 
             if (_user.ManagersRole.IndexOf(securityManagerRole) != -1)
             {
-                _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Moderator).ToString() + employeeModerators + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.Moderator)));
+                _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Moderator && u.WorkingNow).ToString() + employeeModerators + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.Moderator && u.WorkingNow)));
 
                 _additionalData++;
             }
@@ -505,11 +505,11 @@ namespace MarvelGuide.GUI
             {
                 if (_amountOfRegularJobs == 1)
                 {
-                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Surname);
+                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor && u.WorkingNow).Surname);
                 }
                 else
                 {
-                    _personalData.Add(employer + employerForEditor + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor).Surname);
+                    _personalData.Add(employer + employerForEditor + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor && u.WorkingNow).Surname);
                 }
 
                 _additionalData++;
@@ -528,11 +528,11 @@ namespace MarvelGuide.GUI
             {
                 if (_amountOfRegularJobs == 1)
                 {
-                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Surname);
+                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent && u.WorkingNow).Surname);
                 }
                 else
                 {
-                    _personalData.Add(employer + employerForAgent + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent).Surname);
+                    _personalData.Add(employer + employerForAgent + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent && u.WorkingNow).Surname);
                 }
 
                 _additionalData++;
@@ -541,7 +541,7 @@ namespace MarvelGuide.GUI
 
         private void ModeratorsDetails()
         {
-            User securityManager = _storage.Users.Items.FirstOrDefault(u => u.Manager && u.ManagersRole.IndexOf(securityManagerRole) != -1);
+            User securityManager = _storage.Users.Items.FirstOrDefault(u => u.Manager && u.ManagersRole.IndexOf(securityManagerRole) != -1 && u.WorkingNow);
 
             if (securityManager != null && !_user.Creator && !_user.SuperAdmin && !_user.AdminAgent && !_user.AdminEditor)
             {
