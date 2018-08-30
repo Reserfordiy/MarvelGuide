@@ -945,7 +945,7 @@ namespace MarvelGuide.GUI
 
         private void LightDeveloperRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (_user != _userWhoWatches && !_userWhoWatches.MediumDeveloper)
+            if (_user != _userWhoWatches && !_userWhoWatches.MediumDeveloper && !_user.SuperDeveloper)
             {
                 DeveloperCheckBoxGrid.Visibility = Visibility.Visible;
             }
@@ -1022,6 +1022,18 @@ namespace MarvelGuide.GUI
                 HighDeveloperRadioButton.IsChecked = true;
 
                 MessageBox.Show("Вы не можете сами изменять собственные настройки разработчика.", "Ошибка");
+
+                _programSwitch = false;
+            }
+            else if (_user.SuperDeveloper)
+            {
+                _programSwitch = true;
+
+                LightDeveloperRadioButton.IsChecked = false;
+                MediumDeveloperRadioButton.IsChecked = false;
+                HighDeveloperRadioButton.IsChecked = true;
+
+                MessageBox.Show("Отредактировать настройки разработчика для этого сотрудника нельзя.", "Ошибка");
 
                 _programSwitch = false;
             }
@@ -1111,6 +1123,12 @@ namespace MarvelGuide.GUI
                 IsDeveloperCheckBox.IsChecked = true;
 
                 MessageBox.Show("Вы не можете сами изменять собственные настройки разработчика.", "Ошибка");
+            }
+            else if (_user.SuperDeveloper && !_programSwitch)
+            {
+                IsDeveloperCheckBox.IsChecked = true;
+
+                MessageBox.Show("Отредактировать настройки разработчика для этого сотрудника нельзя.", "Ошибка");
             }
             else
             {
