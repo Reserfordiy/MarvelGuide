@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
-        Title="Обучающий гайд" Height="2580" MinHeight="470" Width="870" MinWidth="700" MaxWidth="1050" FontFamily="Verdana" Closing="Window_Closing" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" SizeChanged="Window_SizeChanged">
+        Title="Обучающий гайд" Height="580" MinHeight="470" Width="870" MinWidth="700" MaxWidth="1050" FontFamily="Verdana" Closing="Window_Closing" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" SizeChanged="Window_SizeChanged">
     <ScrollViewer>
         <Grid Background="#FFEAF6FB">
             <Grid.RowDefinitions>
@@ -88,10 +88,10 @@
                                     <RadioButton Name="LightDeveloperRadioButton" Grid.Row="0" Margin="4.5 4.5 4.5 6" FontSize="14" Checked="LightDeveloperRadioButton_Checked" Unchecked="LightDeveloperRadioButton_Unchecked">
                                         <TextBlock TextWrapping="Wrap">Базовый: можно просматривать расширенную информацию о некоторых категориях сотрудников (установите каких именно)</TextBlock>
                                     </RadioButton>
-                                    <RadioButton Name="MediumDeveloperRadioButton" Grid.Row="2" Margin="4.5 4.5 4.5 6" FontSize="14">
+                                    <RadioButton Name="MediumDeveloperRadioButton" Grid.Row="2" Margin="4.5 4.5 4.5 6" FontSize="14" Unchecked="MediumDeveloperRadioButton_Unchecked">
                                         <TextBlock TextWrapping="Wrap">Средний: можно просматривать всю информацию обо всех сотрудниках и редактировать бо́льшую её часть</TextBlock>
                                     </RadioButton>
-                                    <RadioButton Name="HighDeveloperRadioButton" Grid.Row="3" Margin="4.5 4.5 4.5 6" FontSize="14">
+                                    <RadioButton Name="HighDeveloperRadioButton" Grid.Row="3" Margin="4.5 4.5 4.5 6" FontSize="14" Unchecked="HighDeveloperRadioButton_Unchecked">
                                         <TextBlock TextWrapping="Wrap">Высокий: можно просматривать и редактировать всю информацию о сотрудниках, а также назначать их разработчиками</TextBlock>
                                     </RadioButton>
 
@@ -107,7 +107,7 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
 
-                                        <CheckBox Name="CreatorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="0">Создатель</CheckBox>
+                                        <CheckBox Name="CreatorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="0" >Создатель</CheckBox>
                                         <CheckBox Name="SuperAdminDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="1" >
                                             <TextBlock TextWrapping="Wrap">Главный администратор</TextBlock>
                                         </CheckBox>

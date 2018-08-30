@@ -90,6 +90,7 @@ namespace MarvelGuide.GUI
         private const string watchingForeignPageTitle = "Профиль ";
         private const string addingNewUserTitle = "Добавление нового сотрудника";
         private const string editingUserTitle = "Изменение профиля ";
+        private const string editingYourProfileTitle = "Изменение Вашего профиля";
 
 
         private const string defaultName = "Пример: Иван";
@@ -130,6 +131,8 @@ namespace MarvelGuide.GUI
 
         bool _personalPage = true;
         bool _editingPage = false;
+
+        bool _programSwitch = false;
 
 
 
@@ -573,6 +576,10 @@ namespace MarvelGuide.GUI
                 {
                     ProfileTitleTextBlock.Text = addingNewUserTitle;
                 }
+                else if (_user == _userWhoWatches)
+                {
+                    ProfileTitleTextBlock.Text = editingYourProfileTitle;
+                }
                 else
                 {
                     ProfileTitleTextBlock.Text = editingUserTitle + _user.GenitiveName();
@@ -635,7 +642,7 @@ namespace MarvelGuide.GUI
 
         private void DeveloperModeButton_Initialized(object sender, EventArgs e)
         {
-            if (!_user.SuperDeveloper || !_personalPage)
+            if (!(_user.SuperDeveloper || _user.HighDeveloper || _user.MediumDeveloper) || !_personalPage)
             {
                 DeveloperModeButton.Visibility = Visibility.Collapsed;
             }
@@ -917,12 +924,50 @@ namespace MarvelGuide.GUI
 
         private void LightDeveloperRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            DeveloperCheckBoxGrid.Visibility = Visibility.Visible;
+            if (_user != _userWhoWatches)
+            {
+                DeveloperCheckBoxGrid.Visibility = Visibility.Visible;
+            }
         }
 
         private void LightDeveloperRadioButton_Unchecked(object sender, RoutedEventArgs e)
         {
-            DeveloperCheckBoxGrid.Visibility = Visibility.Collapsed;
+            if (_user != _userWhoWatches)
+            {
+                DeveloperCheckBoxGrid.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void MediumDeveloperRadioButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (_user == _userWhoWatches && !_programSwitch)
+            {
+                _programSwitch = true;
+
+                LightDeveloperRadioButton.IsChecked = false;
+                HighDeveloperRadioButton.IsChecked = false;
+                MediumDeveloperRadioButton.IsChecked = true;
+
+                MessageBox.Show("Вы не можете сами менять собственные настройки разработчика.", "Ошибка");
+
+                _programSwitch = false;
+            }
+        }
+
+        private void HighDeveloperRadioButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (_user == _userWhoWatches && !_programSwitch)
+            {
+                _programSwitch = true;
+
+                LightDeveloperRadioButton.IsChecked = false;
+                MediumDeveloperRadioButton.IsChecked = false;
+                HighDeveloperRadioButton.IsChecked = true;
+
+                MessageBox.Show("Вы не можете сами менять собственные настройки разработчика.", "Ошибка");
+
+                _programSwitch = false;
+            }
         }
 
 
@@ -948,7 +993,16 @@ namespace MarvelGuide.GUI
 
         private void IsDeveloperCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            DevelopersLevelGrid.Visibility = Visibility.Collapsed;
+            if (_user != _userWhoWatches)
+            {
+                DevelopersLevelGrid.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                IsDeveloperCheckBox.IsChecked = true;
+
+                MessageBox.Show("Вы не можете сами менять собственные настройки разработчика.", "Ошибка");
+            }
         }
 
 
@@ -1481,6 +1535,6 @@ namespace MarvelGuide.GUI
         private void AdminAgentCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
 
-        }        
+        }
     }
 }

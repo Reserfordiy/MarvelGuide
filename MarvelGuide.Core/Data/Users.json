@@ -51,7 +51,7 @@
     "GotAJob": "2015-09-01T00:00:00",
     "LostTheJob": "2018-08-23T00:00:00",
     "SuperDeveloper": true,
-    "HighDeveloper": false,
+    "HighDeveloper": true,
     "MediumDeveloper": false,
     "LightDeveloperCreator": false,
     "LightDeveloperSuperAdmin": false,
