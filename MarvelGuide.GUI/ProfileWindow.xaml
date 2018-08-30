@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
-        Title="Обучающий гайд" Height="580" MinHeight="470" Width="870" MinWidth="700" MaxWidth="1050" FontFamily="Verdana" Closing="Window_Closing" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged">
+        Title="Обучающий гайд" Height="2580" MinHeight="470" Width="870" MinWidth="700" MaxWidth="1050" FontFamily="Verdana" Closing="Window_Closing" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" SizeChanged="Window_SizeChanged">
     <ScrollViewer>
         <Grid Background="#FFEAF6FB">
             <Grid.RowDefinitions>
@@ -28,8 +28,6 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
@@ -39,10 +37,95 @@
                         </Border>
                     </DockPanel>
 
-                    <Button Name="UploadAvatarButton" Grid.Row="1" HorizontalAlignment="Center" Padding="6 4" FontSize="14.5" Margin="80 6.5 40 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="UploadAvatarButton_Click" Initialized="UploadAvatarButton_Initialized">Загрузить изображение</Button>
+                    <Grid Width="200" HorizontalAlignment="Center" Margin="60 0 20 0" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                    <Button Name="DeveloperModeButton" Grid.Row="2" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="80 12 40 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="DeveloperModeButton_Click" Initialized="DeveloperModeButton_Initialized">Режим разработчика</Button>
-                    <Button Name="ShowTheTeamButton" Grid.Row="3" Width="187" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="80 12 40 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="ShowTheTeamButton_Click" Initialized="ShowTheTeamButton_Initialized">Посмотреть команду</Button>
+                        <Button Name="UploadAvatarButton" Grid.Row="0" HorizontalAlignment="Center" Padding="6 4" FontSize="14.5" Margin="0 6.5 0 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="UploadAvatarButton_Click" Initialized="UploadAvatarButton_Initialized">Загрузить изображение</Button>
+
+                        <Button Name="DeveloperModeButton" Grid.Row="1" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="0 12 0 3" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="DeveloperModeButton_Click" Initialized="DeveloperModeButton_Initialized">Режим разработчика</Button>
+                        <Button Name="ShowTheTeamButton" Grid.Row="2" Width="187" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="0 12 0 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="ShowTheTeamButton_Click" Initialized="ShowTheTeamButton_Initialized">Посмотреть команду</Button>
+
+                        <Grid Grid.Row="3" Margin="3.8 0 0 0">
+                            <Grid Name="DeveloperModePropertiesGrid"  Margin="-23 40 -40 0" Initialized="DeveloperModePropertiesGrid_Initialized">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                
+                                <TextBlock Grid.Row="0" HorizontalAlignment="Left" FontSize="19.5" Margin="0 0 0 14.5" FontFamily="Calibri" TextWrapping="Wrap">Настройте права разработчика для сотрудника:</TextBlock>
+
+                                <CheckBox Grid.Row="1" Name="IsDeveloperCheckBox" FontSize="14" Margin="4.5 0 0 10" Checked="IsDeveloperCheckBox_Checked" Unchecked="IsDeveloperCheckBox_Unchecked">
+                                    <TextBlock TextWrapping="Wrap">Является разработчиком</TextBlock>
+                                </CheckBox>                                
+                           </Grid>                            
+                        </Grid>
+
+                        <Grid Grid.Row="4" Margin="3.8 0 0 0">
+                            <Grid Name="DevelopersLevelGrid" Margin="-23 0 -40 0" Initialized="DevelopersLevelGrid_Initialized">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" FontSize="19.5" FontFamily="calibri" Margin="0 18 0 8">Уровень доступа:</TextBlock>
+
+                                <Grid Name="RadioButtonGrid" Grid.Row="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <RadioButton Name="LightDeveloperRadioButton" Grid.Row="0" Margin="4.5 4.5 4.5 6" FontSize="14" Checked="LightDeveloperRadioButton_Checked" Unchecked="LightDeveloperRadioButton_Unchecked">
+                                        <TextBlock TextWrapping="Wrap">Базовый: можно просматривать расширенную информацию о некоторых категориях сотрудников (установите каких именно)</TextBlock>
+                                    </RadioButton>
+                                    <RadioButton Name="MediumDeveloperRadioButton" Grid.Row="2" Margin="4.5 4.5 4.5 6" FontSize="14">
+                                        <TextBlock TextWrapping="Wrap">Средний: можно просматривать всю информацию обо всех сотрудниках и редактировать бо́льшую её часть</TextBlock>
+                                    </RadioButton>
+                                    <RadioButton Name="HighDeveloperRadioButton" Grid.Row="3" Margin="4.5 4.5 4.5 6" FontSize="14">
+                                        <TextBlock TextWrapping="Wrap">Высокий: можно просматривать и редактировать всю информацию о сотрудниках, а также назначать их разработчиками</TextBlock>
+                                    </RadioButton>
+
+                                    <Grid Name="DeveloperCheckBoxGrid" Grid.Row="1" Margin="13.5 0 0 10" Initialized="DeveloperCheckBoxGrid_Initialized">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <CheckBox Name="CreatorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="0">Создатель</CheckBox>
+                                        <CheckBox Name="SuperAdminDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="1" >
+                                            <TextBlock TextWrapping="Wrap">Главный администратор</TextBlock>
+                                        </CheckBox>
+                                        <CheckBox Name="AdminEditoDeveloperCheckBox"  Margin="10 3.5" FontSize="14"  Grid.Row="2" >
+                                            <TextBlock TextWrapping="Wrap">Исполнительный администратор</TextBlock>
+                                        </CheckBox>
+                                        <CheckBox Name="AdminAgentDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="3" >
+                                            <TextBlock TextWrapping="Wrap">Директор Поддержки</TextBlock>
+                                        </CheckBox>
+                                        <CheckBox Name="ManagerDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="4" >Менеджеры</CheckBox>
+                                        <CheckBox Name="EditorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="5" >Редакторы</CheckBox>
+                                        <CheckBox Name="AgentDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="6" >Агенты</CheckBox>
+                                        <CheckBox Name="ModeratorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="7">Модераторы</CheckBox>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </Grid>
 
                 <Grid Grid.Column="1" Margin="-20 35 60 0">

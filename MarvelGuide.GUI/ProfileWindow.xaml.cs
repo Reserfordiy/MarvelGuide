@@ -108,6 +108,10 @@ namespace MarvelGuide.GUI
         private const string defaultImageSource = "default.jpg";
 
 
+        private const double leftAmplitude = 23;
+        private const double rightAmplitude = 40;
+
+
         IStorage _storage;
 
         User _user;
@@ -150,7 +154,7 @@ namespace MarvelGuide.GUI
 
             _storage = Factory.Instance.GetStorage();
 
-            InitializeComponent();
+            InitializeComponent();           
 
             CheckingWhetherWeEditPage();
         }
@@ -249,6 +253,27 @@ namespace MarvelGuide.GUI
                     AgentsLastWordsTextBox.Foreground = Brushes.Black;
                 }
                 if (_user.Moderator) { ModeratorcheckBox.IsChecked = true; }
+
+                if (_user.IsDeveloper())
+                {
+                    IsDeveloperCheckBox.IsChecked = true;
+
+                    if (_user.HighDeveloper || _user.SuperDeveloper) { HighDeveloperRadioButton.IsChecked = true; }
+                    else if (_user.MediumDeveloper) { MediumDeveloperRadioButton.IsChecked = true; }
+                    else
+                    {
+                        LightDeveloperRadioButton.IsChecked = true;
+
+                        if (_user.LightDeveloperCreator) { CreatorDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperSuperAdmin) { SuperAdminDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperAdminEditor) { AdminEditoDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperAdminAgent) { AdminAgentDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperManager) { ManagerDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperEditor) { EditorDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperAgent) { AgentDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperModerator) { ModeratorDeveloperCheckBox.IsChecked = true; }
+                    }
+                }
             }
         }
 
@@ -596,7 +621,7 @@ namespace MarvelGuide.GUI
         {
             if (!_editingPage)
             {
-                UploadAvatarButton = UIElementsMethods.HidingUIElement(UploadAvatarButton) as Button;
+                UploadAvatarButton.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -604,7 +629,7 @@ namespace MarvelGuide.GUI
         {
             if (!_personalPage)
             {
-                ShowTheTeamButton = UIElementsMethods.HidingUIElement(ShowTheTeamButton) as Button;
+                ShowTheTeamButton.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -612,7 +637,7 @@ namespace MarvelGuide.GUI
         {
             if (!_user.SuperDeveloper || !_personalPage)
             {
-                DeveloperModeButton = UIElementsMethods.HidingUIElement(DeveloperModeButton) as Button;
+                DeveloperModeButton.Visibility = Visibility.Collapsed;
             }
         }
         
@@ -620,10 +645,27 @@ namespace MarvelGuide.GUI
         {
             if (!_editingPage)
             {
-                SaveDataButton = UIElementsMethods.HidingUIElement(SaveDataButton) as Button;
+                SaveDataButton.Visibility = Visibility.Collapsed;
             }
         }
 
+        private void DeveloperModePropertiesGrid_Initialized(object sender, EventArgs e)
+        {
+            if (!_editingPage)
+            {
+                DeveloperModePropertiesGrid.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void DevelopersLevelGrid_Initialized(object sender, EventArgs e)
+        {
+            if (!_editingPage || !(_user.SuperDeveloper || _user.HighDeveloper || _user.MediumDeveloper || _user.LightDeveloperAdminAgent || 
+                _user.LightDeveloperAdminEditor || _user.LightDeveloperAgent || _user.LightDeveloperCreator || _user.LightDeveloperEditor ||
+                _user.LightDeveloperManager || _user.LightDeveloperModerator || _user.LightDeveloperSuperAdmin))
+            {
+                DevelopersLevelGrid.Visibility = Visibility.Collapsed;
+            }
+        }
 
 
 
@@ -749,6 +791,23 @@ namespace MarvelGuide.GUI
             if (ModeratorcheckBox.IsChecked == true) { _user.Moderator = true; }
             else { _user.Moderator = false; }
 
+            if (IsDeveloperCheckBox.IsChecked == true)
+            {
+                if (HighDeveloperRadioButton.IsChecked == true) { _user.HighDeveloper = true; }
+                else if (MediumDeveloperRadioButton.IsChecked == true) { _user.MediumDeveloper = true; }
+                else
+                {
+                    if (CreatorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperCreator = true; }
+                    if (SuperAdminDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperSuperAdmin = true; }
+                    if (AdminEditoDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAdminEditor = true; }
+                    if (AdminAgentDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAdminAgent = true; }
+                    if (ManagerDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperManager = true; }
+                    if (EditorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperEditor = true; }
+                    if (AgentDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAgent = true; }
+                    if (ModeratorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperModerator = true; }
+                }
+            }
+
             _user.Avatar = _picture;
         }
 
@@ -759,11 +818,34 @@ namespace MarvelGuide.GUI
             if ( _editingPage && WindowState == WindowState.Maximized)
             {
                 SaveDataButton.Margin = new Thickness(0, 35, 0, 120);
+
+                DeveloperModePropertiesGrid.Margin = new Thickness(-1*leftAmplitude, 40, -1*rightAmplitude, 0);
+                DevelopersLevelGrid.Margin = new Thickness(-1 * leftAmplitude, 0, -1 * rightAmplitude, 0);
             }
             else if (_editingPage && WindowState == WindowState.Normal)
             {
                 SaveDataButton.Margin = new Thickness(0, 35, 0, 85);
+
+                ChangingTheSizeOfDevelopersGrids();
             }
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (_editingPage && WindowState != WindowState.Maximized)
+            {
+                ChangingTheSizeOfDevelopersGrids();
+            }
+        }
+
+        private void ChangingTheSizeOfDevelopersGrids()
+        {
+            double amplitude = MaxWidth - MinWidth;
+            double currentDifference = Width - MinWidth;
+            double ratio = currentDifference / amplitude;
+
+            DeveloperModePropertiesGrid.Margin = new Thickness(-1 * leftAmplitude * ratio, 40, -1 * rightAmplitude * ratio, 0);
+            DevelopersLevelGrid.Margin = new Thickness(-1 * leftAmplitude * ratio, 0, -1 * rightAmplitude * ratio, 0);
         }
 
 
@@ -781,6 +863,12 @@ namespace MarvelGuide.GUI
         private void AgentsRoleGrid_Initialized(object sender, EventArgs e)
         {
             if (!_user.Agent) { AgentsRoleGrid.Visibility = Visibility.Collapsed; }
+        }
+
+
+        private void DeveloperCheckBoxGrid_Initialized(object sender, EventArgs e)
+        {
+            if (LightDeveloperRadioButton.IsChecked != true) { DeveloperCheckBoxGrid.Visibility = Visibility.Collapsed; }
         }
 
 
@@ -825,7 +913,18 @@ namespace MarvelGuide.GUI
         {
             AgentsRoleGrid.Visibility = Visibility.Collapsed;
         }
-        
+
+
+        private void LightDeveloperRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            DeveloperCheckBoxGrid.Visibility = Visibility.Visible;
+        }
+
+        private void LightDeveloperRadioButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            DeveloperCheckBoxGrid.Visibility = Visibility.Collapsed;
+        }
+
 
         private void StillWorkingCheckBox_Checked(object sender, RoutedEventArgs e)
         {
@@ -840,6 +939,16 @@ namespace MarvelGuide.GUI
         {
             EndWorkingDateTextBox.Visibility = Visibility.Visible;
             EndWorkingDateTextBlock.Visibility = Visibility.Visible;
+        }
+
+        private void IsDeveloperCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            DevelopersLevelGrid.Visibility = Visibility.Visible;
+        }
+
+        private void IsDeveloperCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            DevelopersLevelGrid.Visibility = Visibility.Collapsed;
         }
 
 
@@ -1214,6 +1323,22 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
+            if (IsDeveloperCheckBox.IsChecked == true && LightDeveloperRadioButton.IsChecked == false && MediumDeveloperRadioButton.IsChecked == false && HighDeveloperRadioButton.IsChecked == false)
+            {
+                MessageBox.Show("Выберите для сотрудника уровень доступа разработчика из предложенных вариантов. За подробностями по каждому из уровней доступа обращайтесь к разработчикам приложения.", "Ошибка");
+
+                MediumDeveloperRadioButton.Focus();
+
+                return false;
+            }
+            if (IsDeveloperCheckBox.IsChecked == true && LightDeveloperRadioButton.IsChecked == true && CreatorDeveloperCheckBox.IsChecked == false && SuperAdminDeveloperCheckBox.IsChecked == false && AdminEditoDeveloperCheckBox.IsChecked == false && AdminAgentDeveloperCheckBox.IsChecked == false && ManagerDeveloperCheckBox.IsChecked == false && EditorDeveloperCheckBox.IsChecked == false && AgentDeveloperCheckBox.IsChecked == false && ModeratorDeveloperCheckBox.IsChecked == false)
+            {
+                MessageBox.Show("Выберите те категории управленческих должностей для сотрудника, расширенная информация по которым будет ему доступна как разработчику с базовым уровнем.", "Ошибка");
+
+                EditorDeveloperCheckBox.Focus();
+
+                return false;
+            }
 
             return true;
         }
@@ -1351,11 +1476,11 @@ namespace MarvelGuide.GUI
         private void AdminAgentCheckBox_Checked(object sender, RoutedEventArgs e)
         {
 
-        }
+        }        
 
         private void AdminAgentCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
 
-        }       
+        }        
     }
 }

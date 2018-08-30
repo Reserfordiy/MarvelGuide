@@ -140,5 +140,13 @@ namespace MarvelGuide.Core.Models
 
             return genitiveName;
         }
+
+
+
+        public bool IsDeveloper()
+        {
+            return SuperDeveloper || HighDeveloper || MediumDeveloper || LightDeveloperCreator || LightDeveloperSuperAdmin || LightDeveloperAdminEditor
+                || LightDeveloperAdminAgent || LightDeveloperManager || LightDeveloperEditor || LightDeveloperAgent || LightDeveloperModerator;
+        }
     }
 }
