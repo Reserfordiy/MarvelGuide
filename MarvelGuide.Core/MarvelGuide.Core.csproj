@@ -86,6 +86,7 @@
       <DependentUpon>201808251729127_DevelopersFieldsAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\EditorsPublication.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\User.cs" />

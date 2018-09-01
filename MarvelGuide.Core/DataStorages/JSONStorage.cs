@@ -54,5 +54,17 @@ namespace MarvelGuide.Core.DataStorages
                 return _users;
             }
         }
+
+
+
+        public void ChangingUsersModels()
+        {
+            foreach (var user in Users.Items)
+            {
+                user.NullingRubrics();
+            }
+
+            Users.Save();
+        }
     }
 }

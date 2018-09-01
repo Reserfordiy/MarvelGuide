@@ -34,6 +34,8 @@ namespace MarvelGuide.GUI
         {
             _storage = Factory.Instance.GetStorage();
 
+            //_storage.ChangingUsersModels();
+
             InitializeComponent();
         }
 

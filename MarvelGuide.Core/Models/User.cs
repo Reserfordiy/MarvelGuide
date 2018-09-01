@@ -46,8 +46,7 @@ namespace MarvelGuide.Core.Models
         
         public string ManagersRole { get; set; }
 
-        public string EditorsRubric { get; set; }
-        public int EditorsFrequency { get; set; }
+        public List<EditorsPublication> EditorsRubrics { get; set; }
 
         public int AgentsNumber { get; set; }
         public string AgentsFirstWords { get; set; }
@@ -147,6 +146,26 @@ namespace MarvelGuide.Core.Models
         {
             return SuperDeveloper || HighDeveloper || MediumDeveloper || LightDeveloperCreator || LightDeveloperSuperAdmin || LightDeveloperAdminEditor
                 || LightDeveloperAdminAgent || LightDeveloperManager || LightDeveloperEditor || LightDeveloperAgent || LightDeveloperModerator;
+        }
+
+
+
+        public void NullingRubrics()
+        {
+            List<EditorsPublication> publicationsForRemoving = new List<EditorsPublication>();
+
+            foreach (var publication in EditorsRubrics)
+            {
+                if (publication.Rubric == null || publication.Frequency == 0)
+                {
+                    publicationsForRemoving.Add(publication);
+                }
+            }
+
+            foreach (var publication in publicationsForRemoving)
+            {
+                EditorsRubrics.Remove(publication);
+            }
         }
     }
 }

@@ -47,6 +47,13 @@ namespace MarvelGuide.Core.DataStorages
         public IRepository<User> Users => _users;
 
 
+
+        public void ChangingUsersModels()
+        {
+            throw new NotImplementedException();
+        }
+
+
         //public void SaveDocumentsToJson()
         //{
         //    using (var sw = new StreamWriter("../../../MarvelGuide.Core/Data/Documents.json"))

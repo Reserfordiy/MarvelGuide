@@ -238,10 +238,10 @@ namespace MarvelGuide.GUI
                 {
                     EditorCheckBox.IsChecked = true;
 
-                    EditorsRubricTextBox.Text = _user.EditorsRubric;
+                    EditorsRubricTextBox.Text = _user.EditorsRubrics[0].Rubric;
                     EditorsRubricTextBox.Foreground = Brushes.Black;
 
-                    EditorsFrequencyTextBox.Text = _user.EditorsFrequency.ToString();
+                    EditorsFrequencyTextBox.Text = _user.EditorsRubrics[0].Frequency.ToString();
                     EditorsFrequencyTextBox.Foreground = Brushes.Black;
                 }
                 if (_user.Agent)
@@ -488,15 +488,15 @@ namespace MarvelGuide.GUI
 
         private void EditorsDetails()
         {
-            _personalData.Add(editorsRubric + adding + _user.EditorsRubric);
+            _personalData.Add(editorsRubric + adding + _user.EditorsRubrics[0].Rubric);
 
-            if (_user.EditorsFrequency > 1)
+            if (_user.EditorsRubrics[0].Frequency > 1)
             {
-                _personalData.Add(editorsFrequencyFractionStart + _user.EditorsFrequency.ToString() + editorsFrequencyFractionEnd);
+                _personalData.Add(editorsFrequencyFractionStart + _user.EditorsRubrics[0].Frequency.ToString() + editorsFrequencyFractionEnd);
             }
             else
             {
-                _personalData.Add(editorsFrequencyIntegerStart + _user.EditorsFrequency.ToString() + editorsFrequencyInteger1End);
+                _personalData.Add(editorsFrequencyIntegerStart + _user.EditorsRubrics[0].Frequency.ToString() + editorsFrequencyInteger1End);
             }
 
             _additionalData += 2;
@@ -774,14 +774,14 @@ namespace MarvelGuide.GUI
             if (EditorCheckBox.IsChecked == true)
             {
                 _user.Editor = true;
-                _user.EditorsRubric = EditorsRubricTextBox.Text;
-                _user.EditorsFrequency = int.Parse(EditorsFrequencyTextBox.Text);
+                _user.EditorsRubrics[0].Rubric = EditorsRubricTextBox.Text;
+                _user.EditorsRubrics[0].Frequency = int.Parse(EditorsFrequencyTextBox.Text);
             }
             else
             {
                 _user.Editor = false;
-                _user.EditorsRubric = null;
-                _user.EditorsFrequency = 0;
+                _user.EditorsRubrics[0].Rubric = null;
+                _user.EditorsRubrics[0].Frequency = 0;
             }
             if (AgentChecBox.IsChecked == true)
             {
