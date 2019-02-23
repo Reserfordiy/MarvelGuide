@@ -489,18 +489,22 @@ namespace MarvelGuide.GUI
 
         private void EditorsDetails()
         {
-            _personalData.Add(editorsRubric + adding + _user.EditorsRubrics[0].Rubric);
-
-            if (_user.EditorsRubrics[0].Frequency > 1)
+            foreach (var publication in _user.EditorsRubrics)
             {
-                _personalData.Add(editorsFrequencyFractionStart + _user.EditorsRubrics[0].Frequency.ToString() + editorsFrequencyFractionEnd);
-            }
-            else
-            {
-                _personalData.Add(editorsFrequencyIntegerStart + _user.EditorsRubrics[0].Frequency.ToString() + editorsFrequencyInteger1End);
+                _personalData.Add(editorsRubric + adding + publication.Rubric);
+
+                if (publication.Frequency > 1)
+                {
+                    _personalData.Add(editorsFrequencyFractionStart + publication.Frequency.ToString() + editorsFrequencyFractionEnd);
+                }
+                else
+                {
+                    _personalData.Add(editorsFrequencyIntegerStart + publication.Frequency.ToString() + editorsFrequencyInteger1End);
+                }
+
+                _additionalData += 2;
             }
 
-            _additionalData += 2;
 
             if (!_user.Creator && !_user.SuperAdmin && !_user.AdminAgent && !_user.AdminEditor)
             {
