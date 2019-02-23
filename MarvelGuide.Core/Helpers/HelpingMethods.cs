@@ -39,5 +39,28 @@ namespace MarvelGuide.Core.Helpers
                 int.TryParse(dateString.Substring(0, 2), out int result) && int.TryParse(dateString.Substring(3, 2), out result) && 
                 int.TryParse(dateString.Substring(6), out result) && DateTime.TryParse(dateString, out DateTime dateTime);
         }
+
+
+
+        public static bool AreThereSameStringElementsInTheCollection<T> (IEnumerable<T> collection, Func<T, string> rootFunction, out string element)
+        {
+            element = null;
+
+            foreach (var obj in collection)
+            {
+                string str = rootFunction(obj);
+
+                int number = collection.Count(item => rootFunction(item) == str);
+
+                if (number != 1)
+                {
+                    element = str;
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

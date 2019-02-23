@@ -30,8 +30,6 @@
     "Moderator": false,
     "ManagersRole": null,
     "EditorsRubrics": [],
-    "EditorsRubric": null,
-    "EditorsFrequency": 0,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -72,8 +70,6 @@
     "Moderator": false,
     "ManagersRole": null,
     "EditorsRubrics": [],
-    "EditorsRubric": null,
-    "EditorsFrequency": 0,
     "AgentsNumber": 1,
     "AgentsFirstWords": "Добрый день(утро, вечер)!",
     "AgentsLastWords": "С уважением и вниманием",
@@ -114,8 +110,6 @@
     "Moderator": false,
     "ManagersRole": null,
     "EditorsRubrics": [],
-    "EditorsRubric": null,
-    "EditorsFrequency": 0,
     "AgentsNumber": 2,
     "AgentsFirstWords": "Приветствую!",
     "AgentsLastWords": "Чудесного лета",
@@ -156,8 +150,6 @@
     "Moderator": false,
     "ManagersRole": "Менеджер по безопасности; Менеджер по контенту; Менеджер по хронике",
     "EditorsRubrics": [],
-    "EditorsRubric": null,
-    "EditorsFrequency": 0,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -201,10 +193,12 @@
       {
         "Rubric": "Фильмарты",
         "Frequency": 2
+      },
+      {
+        "Rubric": "",
+        "Frequency": 5
       }
     ],
-    "EditorsRubric": "Фильмарты",
-    "EditorsFrequency": 2,
     "AgentsNumber": 19,
     "AgentsFirstWords": "Приветствую!",
     "AgentsLastWords": "Всегда на связи",
@@ -250,8 +244,6 @@
         "Frequency": 2
       }
     ],
-    "EditorsRubric": "Старс",
-    "EditorsFrequency": 2,
     "AgentsNumber": 16,
     "AgentsFirstWords": "Приветствую!",
     "AgentsLastWords": "С пожеланиями удачи и прекрасного настроения",
@@ -292,8 +284,6 @@
     "Moderator": false,
     "ManagersRole": "Менеджер по кадрам",
     "EditorsRubrics": [],
-    "EditorsRubric": null,
-    "EditorsFrequency": 0,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -335,12 +325,14 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Досье; Старс",
+        "Rubric": "Досье",
+        "Frequency": 5
+      },
+      {
+        "Rubric": "Старс",
         "Frequency": 5
       }
     ],
-    "EditorsRubric": "Досье; Старс",
-    "EditorsFrequency": 5,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -386,8 +378,6 @@
         "Frequency": 2
       }
     ],
-    "EditorsRubric": "Сцены",
-    "EditorsFrequency": 2,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -433,8 +423,6 @@
         "Frequency": 2
       }
     ],
-    "EditorsRubric": "Фильмарты",
-    "EditorsFrequency": 2,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -480,8 +468,6 @@
         "Frequency": 3
       }
     ],
-    "EditorsRubric": "Юмор",
-    "EditorsFrequency": 3,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -527,8 +513,6 @@
         "Frequency": 7
       }
     ],
-    "EditorsRubric": "Хистори",
-    "EditorsFrequency": 7,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -574,8 +558,6 @@
         "Frequency": 7
       }
     ],
-    "EditorsRubric": "Сцены",
-    "EditorsFrequency": 7,
     "AgentsNumber": 80,
     "AgentsFirstWords": "Приветствую!",
     "AgentsLastWords": "Искренне Ваш",
@@ -621,8 +603,6 @@
         "Frequency": 4
       }
     ],
-    "EditorsRubric": "Досье",
-    "EditorsFrequency": 4,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -668,8 +648,6 @@
         "Frequency": 3
       }
     ],
-    "EditorsRubric": "Сцены",
-    "EditorsFrequency": 3,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -710,8 +688,6 @@
     "Moderator": false,
     "ManagersRole": null,
     "EditorsRubrics": [],
-    "EditorsRubric": null,
-    "EditorsFrequency": 0,
     "AgentsNumber": 6,
     "AgentsFirstWords": "Здравствуйте!",
     "AgentsLastWords": "Добра",
@@ -752,8 +728,6 @@
     "Moderator": false,
     "ManagersRole": null,
     "EditorsRubrics": [],
-    "EditorsRubric": null,
-    "EditorsFrequency": 0,
     "AgentsNumber": 11,
     "AgentsFirstWords": "Добрый день(утро, вечер)!",
     "AgentsLastWords": "Тёплого и знойного лета",
@@ -794,8 +768,6 @@
     "Moderator": false,
     "ManagersRole": null,
     "EditorsRubrics": [],
-    "EditorsRubric": null,
-    "EditorsFrequency": 0,
     "AgentsNumber": 10,
     "AgentsFirstWords": "Здравствуйте!",
     "AgentsLastWords": "Удачи и хорошего настроения",
@@ -841,8 +813,6 @@
         "Frequency": 1
       }
     ],
-    "EditorsRubric": "Старс",
-    "EditorsFrequency": 1,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -888,8 +858,6 @@
         "Frequency": 3
       }
     ],
-    "EditorsRubric": "Хистори",
-    "EditorsFrequency": 3,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -935,8 +903,6 @@
         "Frequency": 2
       }
     ],
-    "EditorsRubric": "Хистори",
-    "EditorsFrequency": 2,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -982,8 +948,6 @@
         "Frequency": 2
       }
     ],
-    "EditorsRubric": "Юмор",
-    "EditorsFrequency": 2,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -1029,8 +993,6 @@
         "Frequency": 2
       }
     ],
-    "EditorsRubric": "Хистори",
-    "EditorsFrequency": 2,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -1076,8 +1038,6 @@
         "Frequency": 3
       }
     ],
-    "EditorsRubric": "Сцены",
-    "EditorsFrequency": 3,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -1123,8 +1083,6 @@
         "Frequency": 2
       }
     ],
-    "EditorsRubric": "Арты",
-    "EditorsFrequency": 2,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -1170,8 +1128,6 @@
         "Frequency": 2
       }
     ],
-    "EditorsRubric": "Арты",
-    "EditorsFrequency": 2,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -1217,8 +1173,6 @@
         "Frequency": 3
       }
     ],
-    "EditorsRubric": "Старс",
-    "EditorsFrequency": 3,
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,

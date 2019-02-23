@@ -121,6 +121,7 @@ namespace MarvelGuide.GUI
         Picture _picture;
 
         List<string> _personalData;
+        List<EditorsPublication> _publications;
 
         int _amountOfRegularJobs;
 
@@ -190,6 +191,8 @@ namespace MarvelGuide.GUI
 
         private void FormingTheEdittingData()
         {
+            _publications = new List<EditorsPublication>();
+
             if (_user.Id != -1)
             {
                 _picture = _user.Avatar;
@@ -238,11 +241,9 @@ namespace MarvelGuide.GUI
                 {
                     EditorCheckBox.IsChecked = true;
 
-                    EditorsRubricTextBox.Text = _user.EditorsRubrics[0].Rubric;
-                    EditorsRubricTextBox.Foreground = Brushes.Black;
+                    _publications = _user.EditorsRubrics;
 
-                    EditorsFrequencyTextBox.Text = _user.EditorsRubrics[0].Frequency.ToString();
-                    EditorsFrequencyTextBox.Foreground = Brushes.Black;
+                    EditorsInformationListBox.ItemsSource = _publications;
                 }
                 if (_user.Agent)
                 {
@@ -774,14 +775,12 @@ namespace MarvelGuide.GUI
             if (EditorCheckBox.IsChecked == true)
             {
                 _user.Editor = true;
-                _user.EditorsRubrics[0].Rubric = EditorsRubricTextBox.Text;
-                _user.EditorsRubrics[0].Frequency = int.Parse(EditorsFrequencyTextBox.Text);
+                _user.EditorsRubrics = _publications;
             }
             else
             {
                 _user.Editor = false;
-                _user.EditorsRubrics[0].Rubric = null;
-                _user.EditorsRubrics[0].Frequency = 0;
+                _user.EditorsRubrics = new List<EditorsPublication>();
             }
             if (AgentChecBox.IsChecked == true)
             {
@@ -900,6 +899,43 @@ namespace MarvelGuide.GUI
         }
 
 
+        private void EditorsRubricTextBox_Initialized(object sender, EventArgs e)
+        {
+            TextBox EditorsRubricTextBox = sender as TextBox;
+
+            EditorsPublication publication = EditorsRubricTextBox.DataContext as EditorsPublication;
+
+            if (publication.Rubric != "")
+            {
+                EditorsRubricTextBox.Text = publication.Rubric;
+                EditorsRubricTextBox.Foreground = Brushes.Black;
+            }
+            else
+            {
+                EditorsRubricTextBox.Text = defaultEditorsRubric;
+                EditorsRubricTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void EditorsFrequencyTextBox_Initialized(object sender, EventArgs e)
+        {
+            TextBox EditorsFrequencyTextBox = sender as TextBox;
+
+            EditorsPublication publication = EditorsFrequencyTextBox.DataContext as EditorsPublication;
+
+            if (publication.Frequency != -1)
+            {
+                EditorsFrequencyTextBox.Text = publication.Frequency.ToString();
+                EditorsFrequencyTextBox.Foreground = Brushes.Black;
+            }
+            else
+            {
+                EditorsFrequencyTextBox.Text = defaultEditorsFrequency;
+                EditorsFrequencyTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+
         private void EndWorkingDateTextBox_Initialized(object sender, EventArgs e)
         {
             if (_user.Id == -1 || _user.WorkingNow) { EndWorkingDateTextBox.Visibility = Visibility.Collapsed; }
@@ -908,6 +944,20 @@ namespace MarvelGuide.GUI
         private void EndWorkingDateTextBlock_Initialized(object sender, EventArgs e)
         {
             if (_user.Id == -1 || _user.WorkingNow) { EndWorkingDateTextBlock.Visibility = Visibility.Collapsed; }
+        }
+
+
+
+        private void AddRubricButton_Click(object sender, RoutedEventArgs e)
+        {
+            _publications.Add(new EditorsPublication()
+            {
+                Frequency = -1,
+                Rubric = ""
+            });
+
+            EditorsInformationListBox.ItemsSource = null;
+            EditorsInformationListBox.ItemsSource = _publications;
         }
 
 
@@ -1284,6 +1334,8 @@ namespace MarvelGuide.GUI
 
         private void EditorsRubricTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
+            TextBox EditorsRubricTextBox = sender as TextBox;
+
             if (EditorsRubricTextBox.Text == defaultEditorsRubric)
             {
                 EditorsRubricTextBox.Text = "";
@@ -1293,15 +1345,23 @@ namespace MarvelGuide.GUI
 
         private void EditorsRubricTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
+            TextBox EditorsRubricTextBox = sender as TextBox;
+
+            EditorsPublication publication = EditorsRubricTextBox.DataContext as EditorsPublication;
+
+            publication.Rubric = EditorsRubricTextBox.Text;
+
             if (EditorsRubricTextBox.Text == "")
             {
                 EditorsRubricTextBox.Text = defaultEditorsRubric;
                 EditorsRubricTextBox.Foreground = Brushes.Gray;
-            }
+            }            
         }
 
         private void EditorsFrequencyTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
+            TextBox EditorsFrequencyTextBox = sender as TextBox;
+
             if (EditorsFrequencyTextBox.Text == defaultEditorsFrequency)
             {
                 EditorsFrequencyTextBox.Text = "";
@@ -1311,6 +1371,19 @@ namespace MarvelGuide.GUI
 
         private void EditorsFrequencyTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
+            TextBox EditorsFrequencyTextBox = sender as TextBox;
+
+            EditorsPublication publication = EditorsFrequencyTextBox.DataContext as EditorsPublication;
+
+            int frequency = -1;
+
+            if (int.TryParse(EditorsFrequencyTextBox.Text, out int r))
+            {
+                frequency = int.Parse(EditorsFrequencyTextBox.Text);
+            }
+
+            publication.Frequency = frequency;
+
             if (EditorsFrequencyTextBox.Text == "")
             {
                 EditorsFrequencyTextBox.Text = defaultEditorsFrequency;
@@ -1468,20 +1541,10 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (EditorCheckBox.IsChecked == true && EditorsRubricTextBox.Text == defaultEditorsRubric)
+            if (EditorCheckBox.IsChecked == true && 
+                (UIElementsMethods.FindTextOrNonNeutralsInTextBoxesOfTheTemplatedListBox(EditorsInformationListBox, 1, 0, defaultEditorsRubric, true, "Название рубрики — обязательный аттрибут. Заполните все поля либо удалите ненужные рубрики.") ||
+                UIElementsMethods.FindTextOrNonNeutralsInTextBoxesOfTheTemplatedListBox(EditorsInformationListBox, 1, 1, defaultEditorsFrequency, true, "Для каждой рубрики должна быть указана её частота размещения. Заполните все недостающие поля либо удалите ненужные рубрики.")))
             {
-                MessageBox.Show("Укажите редакторскую рубрику сотрудника.", "Ошибка");
-
-                EditorsRubricTextBox.Focus();
-
-                return false;
-            }
-            if (EditorCheckBox.IsChecked == true && EditorsFrequencyTextBox.Text == defaultEditorsFrequency)
-            {
-                MessageBox.Show("Укажите частоту размещения постов для сотрудника.", "Ошибка");
-
-                EditorsFrequencyTextBox.Focus();
-
                 return false;
             }
             if (AgentChecBox.IsChecked == true && AgentsNumberTextBox.Text == defaultAgentsNumber)
@@ -1594,14 +1657,32 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (EditorCheckBox.IsChecked == true && !int.TryParse(EditorsFrequencyTextBox.Text, out result))
-            {
-                MessageBox.Show("Частота размещения постов указана неправильно. Она должна выражаться целым числом. Например, если сотрудник размещает посты раз в 3 дня, следует в этом поле указывать число 3.", "Ошибка");
+            if (EditorCheckBox.IsChecked == true)
+            { 
+                if (_publications.Count() == 0)
+                {
+                    MessageBox.Show("Если сотрудник — редактор, то у него должна быть хотя бы одна рубрика.", "Ошибка!");
 
-                EditorsFrequencyTextBox.Text = "";
-                EditorsFrequencyTextBox.Focus();
+                    return false;
+                }
+                if (HelpingMethods.AreThereSameStringElementsInTheCollection<EditorsPublication>(_publications, obj => obj.Rubric.ToUpperInvariant(), out string element))
+                {
+                    UIElementsMethods.FindTextOrNonNeutralsInTextBoxesOfTheTemplatedListBox(EditorsInformationListBox, 1, 0, element, true, "По крайней мере две рубрики имеют одинаковое название. Поменяйте одно из них либо удалите ненужную рубрику.");
 
-                return false;
+                    return false;
+                }
+                if (UIElementsMethods.FindTextOrNansInTextBoxesOfTheTemplatedListBox(EditorsInformationListBox, 1, 1, "Частота рубрики — это положительное число, обозначающее количество дней, которое даётся редактору для создания одного поста. Измените все невалидные значения."))
+                {
+                    return false;
+                }
+                if (!UIElementsMethods.CheckingSpecialIntegerConditions(EditorsInformationListBox, 1, 1, list => list.Count(num => num <= 5) >= 1))
+                {
+                    MessageBox.Show("У каждого редактора хотя бы по одной из рубрик частота должна быть не меньше 5. Исправьте частоты таким образом, чтобы данное условие выполнялось.", "Ошибка!");
+
+                    UIElementsMethods.GetUIElementChildByNumberFromTemplatedListBox(EditorsInformationListBox, 0, 1, 1).Focus();
+
+                    return false;
+                }
             }
             if (AgentChecBox.IsChecked == true && (!int.TryParse(AgentsNumberTextBox.Text, out result) || result <= 0))
             {
