@@ -60,7 +60,7 @@ namespace MarvelGuide.Core.Models
         {
             const string splitting = "; ";
 
-            const string creator = "Создатель";
+            const string creator = "Владелец";
             const string superAdmin = "Главный администратор";
             const string adminEditor = "Исполнительный администратор";
             const string adminAgent = "Директор Поддержки";

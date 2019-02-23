@@ -15,7 +15,7 @@
 
             <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="0 20 30 0" Click="BackButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Вернуться назад</Button>
 
-            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="21" Margin="45 60 0 10">Доступные документы:</TextBlock>
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="21" Margin="45 60 0 10">Документы в публичном доступе:</TextBlock>
 
             <ListBox Name="AllDocumentsListBox" Margin="30 10 30 40" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="1" Style="{DynamicResource TransparentListBox}">
                 <ListBox.ItemTemplate>
