@@ -65,8 +65,14 @@ namespace MarvelGuide.GUI
 
             _theTeam = new List<User>();
             _leftPeople = new List<User>();
-            _unsortedTeam = _storage.Users.Items.Where(u => u.WorkingNow).ToList();
-            _unsortedLeftPeople = _storage.Users.Items.Where(u => !u.WorkingNow).ToList();
+            _unsortedTeam = _storage.Users.Items
+                .Where(u => u.WorkingNow)
+                .OrderBy(u => u.GotAJob)
+                .ThenBy(u => u.Name).ToList();
+            _unsortedLeftPeople = _storage.Users.Items
+                .Where(u => !u.WorkingNow)
+                .OrderByDescending(u => u.LostTheJob)
+                .ThenBy(u => u.Name).ToList();
             
             InitializeComponent();
 
