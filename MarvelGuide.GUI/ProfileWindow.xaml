@@ -107,7 +107,7 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
 
-                                        <CheckBox Name="CreatorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="0" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Создатель</CheckBox>
+                                        <CheckBox Name="CreatorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="0" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Владелец</CheckBox>
                                         <CheckBox Name="SuperAdminDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="1" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">
                                             <TextBlock TextWrapping="Wrap">Главный администратор</TextBlock>
                                         </CheckBox>
@@ -217,7 +217,7 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <CheckBox Name="CreatorCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="0" Checked="CreatorCheckBox_Checked" Unchecked="CreatorCheckBox_Unchecked">Создатель</CheckBox>
+                            <CheckBox Name="CreatorCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="0" Checked="CreatorCheckBox_Checked" Unchecked="CreatorCheckBox_Unchecked">Владелец</CheckBox>
                             <CheckBox Name="SuperAdminCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="1" Checked="SuperAdminCheckBox_Checked" Unchecked="SuperAdminCheckBox_Unchecked">Главный администратор</CheckBox>
                             <CheckBox Name="AdminEditorCheckBox"  Margin="10 3.5" FontSize="14"  Grid.Row="2" Checked="AdminEditorCheckBox_Checked" Unchecked="AdminEditorCheckBox_Unchecked">Исполнительный администратор</CheckBox>
                             <CheckBox Name="AdminAgentCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="3" Checked="AdminAgentCheckBox_Checked" Unchecked="AdminAgentCheckBox_Unchecked">Директор Поддержки</CheckBox>
