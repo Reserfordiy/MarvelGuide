@@ -1444,7 +1444,11 @@
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
-    "Avatar": null
+    "Avatar": {
+      "Id": 0,
+      "ImageSource": "evdokimov_ar.jpg",
+      "IsBorderRequired": true
+    }
   },
   {
     "Id": 41,
