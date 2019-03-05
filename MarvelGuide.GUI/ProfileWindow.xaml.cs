@@ -113,6 +113,9 @@ namespace MarvelGuide.GUI
         private const double rightAmplitude = 40;
 
 
+        private const int minimalEditorsFrequency = 5;
+
+
         IStorage _storage;
 
         User _user;
@@ -241,7 +244,7 @@ namespace MarvelGuide.GUI
                 {
                     EditorCheckBox.IsChecked = true;
 
-                    _publications = _user.EditorsRubrics;
+                    _publications = _user.EditorsRubrics.Select(publication => new EditorsPublication { Rubric = publication.Rubric, Frequency = publication.Frequency }).ToList();
 
                     EditorsInformationListBox.ItemsSource = _publications;
                 }
@@ -779,7 +782,7 @@ namespace MarvelGuide.GUI
             if (EditorCheckBox.IsChecked == true)
             {
                 _user.Editor = true;
-                _user.EditorsRubrics = _publications;
+                FixingEditorsData();
             }
             else
             {
@@ -836,6 +839,29 @@ namespace MarvelGuide.GUI
             }
 
             _user.Avatar = _picture;
+        }
+
+
+        private void FixingEditorsData()
+        {
+            var editorsPublications = new List<EditorsPublication>();
+
+            for (int i = 0; i < EditorsInformationListBox.Items.Count; i++)
+            {
+                var EditorsRubricTextBox = UIElementsMethods.GetUIElementChildByNumberFromTemplatedListBox(EditorsInformationListBox, i, 1, 0) as TextBox;
+                var EditorsFrequencyTextBox = UIElementsMethods.GetUIElementChildByNumberFromTemplatedListBox(EditorsInformationListBox, i, 1, 1) as TextBox;
+
+                var rubric = EditorsRubricTextBox.Text;
+                var frequency = int.Parse(EditorsFrequencyTextBox.Text);
+
+                editorsPublications.Add(new EditorsPublication
+                {
+                    Rubric = rubric,
+                    Frequency = frequency
+                });
+            }
+
+            _user.EditorsRubrics = editorsPublications;
         }
 
 
@@ -1679,13 +1705,14 @@ namespace MarvelGuide.GUI
                 {
                     return false;
                 }
-                if (!UIElementsMethods.CheckingSpecialIntegerConditions(EditorsInformationListBox, 1, 1, list => list.Count(num => num <= 5) >= 1))
+                if (!UIElementsMethods.CheckingSpecialIntegerConditions(EditorsInformationListBox, 1, 1, list => list.Count(num => num <= minimalEditorsFrequency) >= 1))
                 {
-                    MessageBox.Show("У каждого редактора хотя бы по одной из рубрик частота должна быть не меньше 5. Исправьте частоты таким образом, чтобы данное условие выполнялось.", "Ошибка!");
+                    if (MessageBox.Show($"В соответствии с действующими правилами, у каждого редактора хотя бы по одной из рубрик частота должна быть не меньше {minimalEditorsFrequency.ToString()}. Вы всё равно желаете продолжить?", "Предупреждение", MessageBoxButton.YesNoCancel) != MessageBoxResult.Yes)
+                    {
+                        UIElementsMethods.GetUIElementChildByNumberFromTemplatedListBox(EditorsInformationListBox, 0, 1, 1).Focus();
 
-                    UIElementsMethods.GetUIElementChildByNumberFromTemplatedListBox(EditorsInformationListBox, 0, 1, 1).Focus();
-
-                    return false;
+                        return false;
+                    }                    
                 }
             }
             if (AgentChecBox.IsChecked == true && (!int.TryParse(AgentsNumberTextBox.Text, out result) || result <= 0))
