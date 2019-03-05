@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MarvelGuide.GUI.Helpers;
 
 namespace MarvelGuide.GUI
 {
@@ -54,13 +55,16 @@ namespace MarvelGuide.GUI
         bool _goingToEditPage = false;
 
         User _visitedUser = null;
+        User _focusingUser = null;
 
 
-        public TheTeamWindow(User user, bool lookingInTheDeveloperMode)
+        public TheTeamWindow(User user, User focusingUser, bool lookingInTheDeveloperMode)
         {
             _storage = Factory.Instance.GetStorage();
 
             _user = user;
+            _focusingUser = focusingUser;
+
             _lookingInTheDeveloperMode = lookingInTheDeveloperMode;
 
             _theTeam = new List<User>();
@@ -80,9 +84,13 @@ namespace MarvelGuide.GUI
 
             TheTeamListBox.ItemsSource = _theTeam;
             LeftPeopleListBox.ItemsSource = _leftPeople;
+
+            FocusUser();
         }
 
-        public TheTeamWindow(User user) : this (user, false) { }
+        public TheTeamWindow(User user) : this (user, null, false) { }
+        public TheTeamWindow(User user, User focusingUser) : this (user, focusingUser, false) { }
+        public TheTeamWindow(User user, bool lookingInTheDeveloperMode) : this (user, null, lookingInTheDeveloperMode) { }
 
 
 
@@ -136,7 +144,44 @@ namespace MarvelGuide.GUI
             SwitchingTheMembers(u => u.Agent);
             SwitchingTheMembers(u => u.Moderator);
         }
-        
+
+
+
+        private void FocusUser()
+        {
+            if (FocusAppropriateUser(TheTeamListBox) == false)
+            {
+                FocusAppropriateUser(LeftPeopleListBox);
+            }
+        }
+
+        private bool FocusAppropriateUser(ListBox UserListBox)
+        {
+            if (_focusingUser != null)
+            {
+                UserListBox.UpdateLayout();
+
+                for (int i = 0; i < UserListBox.Items.Count; i++)
+                {
+                    if (UserListBox.Items[i] as User == _focusingUser)
+                    {
+                        if ( i + 2 < UserListBox.Items.Count)
+                        {
+                            UserListBox.ScrollIntoView(UserListBox.Items[i + 2]);
+                        }
+                        else
+                        {
+                            UserListBox.ScrollIntoView(UserListBox.Items[UserListBox.Items.Count - 1]);
+                        }
+                         
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
 
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -236,7 +281,7 @@ namespace MarvelGuide.GUI
                     AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(noneImageSource, "../MarvelGuide.Core/Avatars")));
                 }
                 catch { }
-            }
+            }            
         }
 
 
@@ -331,6 +376,6 @@ namespace MarvelGuide.GUI
             {
                 LeftPeopleListBox.Margin = new Thickness(75, 10, 75, 50);
             }
-        }
+        }        
     }
 }

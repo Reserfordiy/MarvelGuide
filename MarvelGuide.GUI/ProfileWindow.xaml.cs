@@ -339,16 +339,32 @@ namespace MarvelGuide.GUI
                 }
             }
 
-            else if (_goingToTheDeveloperMode && _personalPage)
-            {
-                TheTeamWindow theTeamWindow = new TheTeamWindow(_user, true);
-
-                theTeamWindow.Show();
-            }
-
             else if (_goingToTheDeveloperMode)
             {
-                TheTeamWindow theTeamWindow = new TheTeamWindow(_userWhoWatches, true);
+                TheTeamWindow theTeamWindow = null;
+
+                if (_editingPage)
+                {
+                    if (_personalPage)
+                    {
+                        theTeamWindow = new TheTeamWindow(_user, _user, true);
+                    }
+                    else
+                    {
+                        theTeamWindow = new TheTeamWindow(_userWhoWatches, _user, true);
+                    }
+                }
+                else
+                {
+                    if (_personalPage)
+                    {
+                        theTeamWindow = new TheTeamWindow(_user, true);
+                    }
+                    else
+                    {
+                        theTeamWindow = new TheTeamWindow(_userWhoWatches, true);
+                    }
+                }
 
                 theTeamWindow.Show();
             }
@@ -363,7 +379,7 @@ namespace MarvelGuide.GUI
                 }
                 else
                 {
-                    TheTeamWindow theTeamWindow = new TheTeamWindow(_userWhoWatches);
+                    TheTeamWindow theTeamWindow = new TheTeamWindow(_userWhoWatches, _user);
 
                     theTeamWindow.Show();
                 }                
