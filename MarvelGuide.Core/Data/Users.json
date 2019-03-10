@@ -197,7 +197,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Арты",
-        "Frequency": 4
+        "Frequency": 5
       }
     ],
     "AgentsNumber": 0,
@@ -241,8 +241,8 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Старс",
-        "Frequency": 2
+        "Rubric": "Моменты",
+        "Frequency": 5
       }
     ],
     "AgentsNumber": 16,
@@ -376,7 +376,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Сцены",
-        "Frequency": 2
+        "Frequency": 7
       }
     ],
     "AgentsNumber": 0,
@@ -421,7 +421,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Фильмарты",
-        "Frequency": 2
+        "Frequency": 14
       }
     ],
     "AgentsNumber": 0,
@@ -466,7 +466,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Юмор",
-        "Frequency": 3
+        "Frequency": 5
       }
     ],
     "AgentsNumber": 0,
@@ -511,7 +511,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Хистори",
-        "Frequency": 5
+        "Frequency": 7
       }
     ],
     "AgentsNumber": 0,
@@ -646,7 +646,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Сцены",
-        "Frequency": 3
+        "Frequency": 5
       }
     ],
     "AgentsNumber": 0,
@@ -811,7 +811,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Старс",
-        "Frequency": 1
+        "Frequency": 7
       }
     ],
     "AgentsNumber": 0,
@@ -901,7 +901,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Хистори",
-        "Frequency": 2
+        "Frequency": 7
       }
     ],
     "AgentsNumber": 0,
@@ -946,7 +946,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Юмор",
-        "Frequency": 2
+        "Frequency": 7
       }
     ],
     "AgentsNumber": 0,
@@ -1129,8 +1129,8 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Арты",
-        "Frequency": 2
+        "Rubric": "ОСТ",
+        "Frequency": 4
       }
     ],
     "AgentsNumber": 0,
@@ -1228,6 +1228,10 @@
       },
       {
         "Rubric": "Хистори",
+        "Frequency": 7
+      },
+      {
+        "Rubric": "Факты",
         "Frequency": 7
       }
     ],
@@ -1476,16 +1480,11 @@
     "AdminEditor": false,
     "AdminAgent": false,
     "Manager": false,
-    "Editor": true,
+    "Editor": false,
     "Agent": false,
     "Moderator": true,
     "ManagersRole": null,
-    "EditorsRubrics": [
-      {
-        "Rubric": "Хистори",
-        "Frequency": 5
-      }
-    ],
+    "EditorsRubrics": [],
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -1619,6 +1618,10 @@
       {
         "Rubric": "Сцены",
         "Frequency": 2
+      },
+      {
+        "Rubric": "Хистори",
+        "Frequency": 7
       }
     ],
     "AgentsNumber": 0,
@@ -1793,7 +1796,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Старс",
-        "Frequency": 5
+        "Frequency": 7
       }
     ],
     "AgentsNumber": 0,
@@ -1883,7 +1886,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Хистори",
-        "Frequency": 5
+        "Frequency": 7
       }
     ],
     "AgentsNumber": 0,
