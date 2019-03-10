@@ -40,6 +40,9 @@ namespace MarvelGuide.GUI
         private const string developerTitle = "Отредактируйте данные о сотрудниках";
 
 
+        private const int amountForTheCollapsibleListOfPeople = 4;
+
+
         IStorage _storage;
 
         User _user;
@@ -54,11 +57,13 @@ namespace MarvelGuide.GUI
         bool _goingBackToProfile = true;
         bool _goingToEditPage = false;
 
+        bool _fullVersionShouldBeShown = false;
+
         User _visitedUser = null;
         User _focusingUser = null;
 
 
-        public TheTeamWindow(User user, User focusingUser, bool lookingInTheDeveloperMode)
+        public TheTeamWindow(User user, User focusingUser, bool lookingInTheDeveloperMode, bool fullVersionShouldBeShown)
         {
             _storage = Factory.Instance.GetStorage();
 
@@ -66,6 +71,7 @@ namespace MarvelGuide.GUI
             _focusingUser = focusingUser;
 
             _lookingInTheDeveloperMode = lookingInTheDeveloperMode;
+            _fullVersionShouldBeShown = fullVersionShouldBeShown;
 
             _theTeam = new List<User>();
             _leftPeople = new List<User>();
@@ -77,20 +83,38 @@ namespace MarvelGuide.GUI
                 .Where(u => !u.WorkingNow)
                 .OrderByDescending(u => u.LostTheJob)
                 .ThenBy(u => u.Name).ToList();
-            
+
             InitializeComponent();
 
             FormingTheTeam();
 
-            TheTeamListBox.ItemsSource = _theTeam;
-            LeftPeopleListBox.ItemsSource = _leftPeople;
+            ShowingEmployers();
 
             FocusUser();
+
+            Window_StateChanged();
         }
 
-        public TheTeamWindow(User user) : this (user, null, false) { }
-        public TheTeamWindow(User user, User focusingUser) : this (user, focusingUser, false) { }
-        public TheTeamWindow(User user, bool lookingInTheDeveloperMode) : this (user, null, lookingInTheDeveloperMode) { }
+        public TheTeamWindow(User user, bool fullVersionShouldBeShown) : this (user, null, false, fullVersionShouldBeShown) { }
+        public TheTeamWindow(User user, User focusingUser, bool fullVersionShouldBeShown) : this (user, focusingUser, false, fullVersionShouldBeShown) { }
+        public TheTeamWindow(User user, bool lookingInTheDeveloperMode, bool fullVersionShouldBeShown) : this (user, null, lookingInTheDeveloperMode, fullVersionShouldBeShown) { }
+
+
+
+        private void ShowingEmployers()
+        {
+            TheTeamListBox.ItemsSource = _theTeam;
+
+            if (_fullVersionShouldBeShown)
+            {
+                LeftPeopleListBox.ItemsSource = _leftPeople;
+                ShowDetailsButton.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                LeftPeopleListBox.ItemsSource = _leftPeople.Take(amountForTheCollapsibleListOfPeople);
+            }
+        }
 
 
 
@@ -200,13 +224,13 @@ namespace MarvelGuide.GUI
             }
             else if (_goingToEditPage)
             {
-                ProfileWindow profileWindow = new ProfileWindow(_visitedUser, _user, true);
+                ProfileWindow profileWindow = new ProfileWindow(_visitedUser, _user, true, _fullVersionShouldBeShown);
 
                 profileWindow.Show();
             }
             else
             {
-                ProfileWindow profileWindow = new ProfileWindow(_visitedUser, _user);
+                ProfileWindow profileWindow = new ProfileWindow(_visitedUser, _user, _fullVersionShouldBeShown);
 
                 profileWindow.Show();
             }
@@ -368,14 +392,41 @@ namespace MarvelGuide.GUI
 
         private void Window_StateChanged(object sender, EventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
+            if (_fullVersionShouldBeShown)
             {
-                LeftPeopleListBox.Margin = new Thickness(75, 10, 75, 82);
+                if (WindowState == WindowState.Maximized)
+                {
+                    LeftPeopleListBox.Margin = new Thickness(75, 10, 75, -60);
+                }
+                else if (WindowState == WindowState.Normal)
+                {
+                    LeftPeopleListBox.Margin = new Thickness(75, 10, 75, -77);
+                }
             }
-            else if (WindowState == WindowState.Normal)
+            else
             {
-                LeftPeopleListBox.Margin = new Thickness(75, 10, 75, 50);
+                if (WindowState == WindowState.Maximized)
+                {
+                    LeftPeopleListBox.Margin = new Thickness(75, 10, 75, 0);
+                    ShowDetailsButton.Margin = new Thickness(80, 0, 125, 90);
+                }
+                else if (WindowState == WindowState.Normal)
+                {
+                    LeftPeopleListBox.Margin = new Thickness(75, 10, 75, 0);
+                    ShowDetailsButton.Margin = new Thickness(80, 0, 125, 58);
+                }
             }
-        }        
+        }
+
+        private void Window_StateChanged() { Window_StateChanged(null, null); }
+
+
+
+        private void ShowDetailsButton_Click(object sender, RoutedEventArgs e)
+        {
+            _fullVersionShouldBeShown = true;
+            ShowingEmployers();
+            Window_StateChanged();
+        }
     }
 }

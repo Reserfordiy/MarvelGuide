@@ -12,6 +12,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
 
@@ -51,7 +52,7 @@
 
             <TextBlock Grid.Row="2"  HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="22.5" Margin="90 0 0 10" Initialized="TitleTextBlock_Initialized">Когда-то с нами работали:</TextBlock>
 
-            <ListBox Name="LeftPeopleListBox" Margin="75 10 75 85" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="3" Style="{DynamicResource TransparentListBox}">
+            <ListBox Name="LeftPeopleListBox" Margin="75 10 75 0" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="3" Style="{DynamicResource TransparentListBox}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0 0 0 -32">
@@ -80,6 +81,9 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+
+            <Button Name="ShowDetailsButton" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16.5" Padding="10.5 6.5" Margin="80 0 125 85" Style="{DynamicResource AttentionButtonsStyle}" Click="ShowDetailsButton_Click">Показать список полностью...</Button>
+
         </Grid>
     </ScrollViewer>
 </Window>

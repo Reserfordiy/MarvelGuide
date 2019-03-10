@@ -136,6 +136,8 @@ namespace MarvelGuide.GUI
         bool _personalPage = true;
         bool _editingPage = false;
 
+        bool _fullVersionOfTheTeamWasShown = false;
+
         bool _programSwitch = true;
 
 
@@ -151,12 +153,14 @@ namespace MarvelGuide.GUI
             CheckingWhetherWeEditPage();
         }
 
-        public ProfileWindow(User user, User userWhoWatches, bool editingPage)
+        public ProfileWindow(User user, User userWhoWatches, bool editingPage, bool fullVersionOfTheTeamWasShown)
         {
             _personalPage = false;
 
             _user = user;
             _userWhoWatches = userWhoWatches;
+
+            _fullVersionOfTheTeamWasShown = fullVersionOfTheTeamWasShown;
             _editingPage = editingPage;
 
             _storage = Factory.Instance.GetStorage();
@@ -168,7 +172,7 @@ namespace MarvelGuide.GUI
             _programSwitch = false;
         }
 
-        public ProfileWindow(User user, User userWhoWatches) : this (user, userWhoWatches, false) { }
+        public ProfileWindow(User user, User userWhoWatches, bool fullVersionOfTheTeamWasShown) : this (user, userWhoWatches, false, fullVersionOfTheTeamWasShown) { }
 
 
 
@@ -347,22 +351,22 @@ namespace MarvelGuide.GUI
                 {
                     if (_personalPage)
                     {
-                        theTeamWindow = new TheTeamWindow(_user, _user, true);
+                        theTeamWindow = new TheTeamWindow(_user, _user, true, true);
                     }
                     else
                     {
-                        theTeamWindow = new TheTeamWindow(_userWhoWatches, _user, true);
+                        theTeamWindow = new TheTeamWindow(_userWhoWatches, _user, true, true);
                     }
                 }
                 else
                 {
                     if (_personalPage)
                     {
-                        theTeamWindow = new TheTeamWindow(_user, true);
+                        theTeamWindow = new TheTeamWindow(_user, true, true);
                     }
                     else
                     {
-                        theTeamWindow = new TheTeamWindow(_userWhoWatches, true);
+                        theTeamWindow = new TheTeamWindow(_userWhoWatches, true, true);
                     }
                 }
 
@@ -373,13 +377,13 @@ namespace MarvelGuide.GUI
             {
                 if (_personalPage)
                 {
-                    TheTeamWindow theTeamWindow = new TheTeamWindow(_user);
+                    TheTeamWindow theTeamWindow = new TheTeamWindow(_user, false);
 
                     theTeamWindow.Show();
                 }
                 else
                 {
-                    TheTeamWindow theTeamWindow = new TheTeamWindow(_userWhoWatches, _user);
+                    TheTeamWindow theTeamWindow = new TheTeamWindow(_userWhoWatches, _user, _fullVersionOfTheTeamWasShown);
 
                     theTeamWindow.Show();
                 }                
