@@ -235,6 +235,7 @@ namespace MarvelGuide.GUI
 
                 if (_user.Creator) { CreatorCheckBox.IsChecked = true; }
                 if (_user.SuperAdmin) { SuperAdminCheckBox.IsChecked = true; }
+                if (_user.AdminManager) { AdminManagerCheckBox.IsChecked = true; }
                 if (_user.AdminEditor) { AdminEditorCheckBox.IsChecked = true; }
                 if (_user.AdminAgent) { AdminAgentCheckBox.IsChecked = true; }
                 if (_user.Manager)
@@ -279,6 +280,7 @@ namespace MarvelGuide.GUI
 
                         if (_user.LightDeveloperCreator) { CreatorDeveloperCheckBox.IsChecked = true; }
                         if (_user.LightDeveloperSuperAdmin) { SuperAdminDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperAdminManager) { AdminManagerDeveloperCheckBox.IsChecked = true; }
                         if (_user.LightDeveloperAdminEditor) { AdminEditoDeveloperCheckBox.IsChecked = true; }
                         if (_user.LightDeveloperAdminAgent) { AdminAgentDeveloperCheckBox.IsChecked = true; }
                         if (_user.LightDeveloperManager) { ManagerDeveloperCheckBox.IsChecked = true; }
@@ -414,6 +416,7 @@ namespace MarvelGuide.GUI
 
                 if (_user.Creator) { CreatorsDetails(); }
                 if (_user.SuperAdmin) { SuperAdminsDetails(); }
+                if (_user.AdminManager) { AdminManagerDetails(); }
                 if (_user.AdminEditor) { AdminEditorDetails(); }
                 if (_user.AdminAgent) { AdminAgentDetails(); }
                 if (_user.Manager) { ManagersDetails(); }
@@ -451,17 +454,26 @@ namespace MarvelGuide.GUI
         
         private void CreatorsDetails()
         {
-            _personalData.Add((creatorsEmployeesFirst + adding + _storage.Users.Items.Count(u => u.WorkingNow && u != _user)).ToString() + employees + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.WorkingNow)));
+            var numberOfEmployees = _storage.Users.Items.Count(u => u.WorkingNow && !u.Creator);
+
+            _personalData.Add(creatorsEmployeesFirst + adding + numberOfEmployees.ToString() + employees + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfEmployees));
             _personalData.Add(creatorsEmployeesSecond);
-            _personalData.Add(creatorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow).ToString());
-            _personalData.Add(creatorsEmployeeEditors + adding + _storage.Users.Items.Count(u => u.Editor && u.WorkingNow).ToString());
-            _personalData.Add(creatorsEmployeeAgents + adding + _storage.Users.Items.Count(u => u.Agent && u.WorkingNow).ToString());
-            _personalData.Add(creatorsEmployeeModerators + adding + _storage.Users.Items.Count(u => u.Moderator && u.WorkingNow).ToString());
+            _personalData.Add(creatorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow && !u.Creator).ToString());
+            _personalData.Add(creatorsEmployeeEditors + adding + _storage.Users.Items.Count(u => u.Editor && u.WorkingNow && !u.Creator).ToString());
+            _personalData.Add(creatorsEmployeeAgents + adding + _storage.Users.Items.Count(u => u.Agent && u.WorkingNow && !u.Creator).ToString());
+            _personalData.Add(creatorsEmployeeModerators + adding + _storage.Users.Items.Count(u => u.Moderator && u.WorkingNow && !u.Creator).ToString());
 
             _additionalData += 6;
         }
 
         private void SuperAdminsDetails()
+        {
+            _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Editor && u.WorkingNow).ToString() + employeeEditors + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.Editor && u.WorkingNow)));
+
+            _additionalData++;
+        }
+
+        private void AdminManagerDetails()
         {
             _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow).ToString() + employeeManagers + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.Manager && u.WorkingNow)));
 
@@ -488,15 +500,15 @@ namespace MarvelGuide.GUI
 
             _additionalData++;
 
-            if (!_user.Creator && !_user.SuperAdmin && !_user.AdminAgent && !_user.AdminEditor)
+            if (!_user.Creator && !_user.SuperAdmin && !_user.AdminManager && !_user.AdminAgent && !_user.AdminEditor)
             {
                 if (_amountOfRegularJobs == 1)
                 {
-                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin && u.WorkingNow).Surname);
+                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminManager && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminManager && u.WorkingNow).Surname);
                 }
                 else
                 {
-                    _personalData.Add(employer + employerForManager + adding + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin && u.WorkingNow).Surname);
+                    _personalData.Add(employer + employerForManager + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminManager && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminManager && u.WorkingNow).Surname);
                 }
 
                 _additionalData++;
@@ -529,15 +541,18 @@ namespace MarvelGuide.GUI
             }
 
 
-            if (!_user.Creator && !_user.SuperAdmin && !_user.AdminAgent && !_user.AdminEditor)
+            if (!_user.Creator && !_user.SuperAdmin && !_user.AdminManager && !_user.AdminAgent && !_user.AdminEditor)
             {
+                var adminEditor = _storage.Users.Items.FirstOrDefault(u => u.AdminEditor && u.WorkingNow);
+                var superAdmin = _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin && u.WorkingNow);
+
                 if (_amountOfRegularJobs == 1)
                 {
-                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor && u.WorkingNow).Surname);
+                    _personalData.Add(employer + adding + adminEditor.Name + " " + adminEditor.Surname + ", " + superAdmin.Name + " " + superAdmin.Surname);
                 }
                 else
                 {
-                    _personalData.Add(employer + employerForEditor + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminEditor && u.WorkingNow).Surname);
+                    _personalData.Add(employer + employerForEditor + adding + adminEditor.Name + " " + adminEditor.Surname + ", " + superAdmin.Name + " " + superAdmin.Surname);
                 }
 
                 _additionalData++;
@@ -552,7 +567,7 @@ namespace MarvelGuide.GUI
 
             _additionalData += 3;
 
-            if (!_user.Creator && !_user.SuperAdmin && !_user.AdminAgent && !_user.AdminEditor)
+            if (!_user.Creator && !_user.SuperAdmin && !_user.AdminManager && !_user.AdminAgent && !_user.AdminEditor)
             {
                 if (_amountOfRegularJobs == 1)
                 {
@@ -571,7 +586,7 @@ namespace MarvelGuide.GUI
         {
             User securityManager = _storage.Users.Items.FirstOrDefault(u => u.Manager && u.ManagersRole.IndexOf(securityManagerRole) != -1 && u.WorkingNow);
 
-            if (securityManager != null && !_user.Creator && !_user.SuperAdmin && !_user.AdminAgent && !_user.AdminEditor)
+            if (securityManager != null && !_user.Creator && !_user.SuperAdmin && !_user.AdminManager && !_user.AdminAgent && !_user.AdminEditor)
             {
                 if (_amountOfRegularJobs == 1)
                 {
@@ -697,8 +712,8 @@ namespace MarvelGuide.GUI
         private void DevelopersLevelGrid_Initialized(object sender, EventArgs e)
         {
             if (!_editingPage || !(_user.SuperDeveloper || _user.HighDeveloper || _user.MediumDeveloper || _user.LightDeveloperAdminAgent || 
-                _user.LightDeveloperAdminEditor || _user.LightDeveloperAgent || _user.LightDeveloperCreator || _user.LightDeveloperEditor ||
-                _user.LightDeveloperManager || _user.LightDeveloperModerator || _user.LightDeveloperSuperAdmin))
+                _user.LightDeveloperAdminManager || _user.LightDeveloperAdminEditor || _user.LightDeveloperAgent || _user.LightDeveloperCreator || 
+                _user.LightDeveloperEditor || _user.LightDeveloperManager || _user.LightDeveloperModerator || _user.LightDeveloperSuperAdmin))
             {
                 DevelopersLevelGrid.Visibility = Visibility.Collapsed;
             }
@@ -785,6 +800,8 @@ namespace MarvelGuide.GUI
             else { _user.Creator = false; }
             if (SuperAdminCheckBox.IsChecked == true) { _user.SuperAdmin = true; }
             else { _user.SuperAdmin = false; }
+            if (AdminManagerCheckBox.IsChecked == true) { _user.AdminManager = true; }
+            else { _user.AdminManager = false; }
             if (AdminEditorCheckBox.IsChecked == true) { _user.AdminEditor = true; }
             else { _user.AdminEditor = false; }
             if (AdminAgentCheckBox.IsChecked == true) { _user.AdminAgent = true; }
@@ -842,6 +859,8 @@ namespace MarvelGuide.GUI
                         else { _user.LightDeveloperCreator = false; }
                         if (SuperAdminDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperSuperAdmin = true; }
                         else { _user.LightDeveloperSuperAdmin = false; }
+                        if (AdminManagerDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAdminManager = true; }
+                        else { _user.LightDeveloperAdminManager = false; }
                         if (AdminEditoDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAdminEditor = true; }
                         else { _user.LightDeveloperAdminEditor = false; }
                         if (AdminAgentDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAdminAgent = true; }
@@ -941,7 +960,7 @@ namespace MarvelGuide.GUI
 
         private void DeveloperCheckBoxGrid_Initialized(object sender, EventArgs e)
         {
-            if (!(_user.LightDeveloperAdminAgent || _user.LightDeveloperAdminEditor || _user.LightDeveloperAgent 
+            if (!(_user.LightDeveloperAdminAgent || _user.LightDeveloperAdminManager || _user.LightDeveloperAdminEditor || _user.LightDeveloperAgent 
                 || _user.LightDeveloperCreator || _user.LightDeveloperEditor || _user.LightDeveloperManager || _user.LightDeveloperModerator || _user.LightDeveloperSuperAdmin))
             {
                 DeveloperCheckBoxGrid.Visibility = Visibility.Collapsed;
@@ -1575,7 +1594,7 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (CreatorCheckBox.IsChecked == false && SuperAdminCheckBox.IsChecked == false && AdminEditorCheckBox.IsChecked == false && AdminAgentCheckBox.IsChecked == false && ManagerCheckBox.IsChecked == false && EditorCheckBox.IsChecked == false && AgentChecBox.IsChecked == false && ModeratorcheckBox.IsChecked == false)
+            if (CreatorCheckBox.IsChecked == false && SuperAdminCheckBox.IsChecked == false && AdminManagerCheckBox.IsChecked == false && AdminEditorCheckBox.IsChecked == false && AdminAgentCheckBox.IsChecked == false && ManagerCheckBox.IsChecked == false && EditorCheckBox.IsChecked == false && AgentChecBox.IsChecked == false && ModeratorcheckBox.IsChecked == false)
             {
                 MessageBox.Show("Укажите хотя бы одну должность из списка для сотрудника.", "Ошибка");
 
@@ -1629,7 +1648,7 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (IsDeveloperCheckBox.IsChecked == true && LightDeveloperRadioButton.IsChecked == true && CreatorDeveloperCheckBox.IsChecked == false && SuperAdminDeveloperCheckBox.IsChecked == false && AdminEditoDeveloperCheckBox.IsChecked == false && AdminAgentDeveloperCheckBox.IsChecked == false && ManagerDeveloperCheckBox.IsChecked == false && EditorDeveloperCheckBox.IsChecked == false && AgentDeveloperCheckBox.IsChecked == false && ModeratorDeveloperCheckBox.IsChecked == false)
+            if (IsDeveloperCheckBox.IsChecked == true && LightDeveloperRadioButton.IsChecked == true && CreatorDeveloperCheckBox.IsChecked == false && SuperAdminDeveloperCheckBox.IsChecked == false && AdminManagerCheckBox.IsChecked == false && AdminEditoDeveloperCheckBox.IsChecked == false && AdminAgentDeveloperCheckBox.IsChecked == false && ManagerDeveloperCheckBox.IsChecked == false && EditorDeveloperCheckBox.IsChecked == false && AgentDeveloperCheckBox.IsChecked == false && ModeratorDeveloperCheckBox.IsChecked == false)
             {
                 MessageBox.Show("Выберите те категории управленческих должностей для сотрудника, расширенная информация по которым будет ему доступна как разработчику с базовым уровнем.", "Ошибка");
 
@@ -1780,6 +1799,16 @@ namespace MarvelGuide.GUI
 
         }
 
+        private void AdminManagerCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AdminManagerCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void AdminEditorCheckBox_Checked(object sender, RoutedEventArgs e)
         {
 
@@ -1798,6 +1827,6 @@ namespace MarvelGuide.GUI
         private void AdminAgentCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
 
-        }        
+        }
     }
 }

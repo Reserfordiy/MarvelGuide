@@ -28,6 +28,7 @@ namespace MarvelGuide.Core.Models
         public bool MediumDeveloper { get; set; }
         public bool LightDeveloperCreator { get; set; }
         public bool LightDeveloperSuperAdmin { get; set; }
+        public bool LightDeveloperAdminManager { get; set; }
         public bool LightDeveloperAdminEditor { get; set; }
         public bool LightDeveloperAdminAgent { get; set; }
         public bool LightDeveloperManager { get; set; }
@@ -37,6 +38,7 @@ namespace MarvelGuide.Core.Models
 
         public bool Creator { get; set; }
         public bool SuperAdmin { get; set; }
+        public bool AdminManager { get; set; }
         public bool AdminEditor { get; set; }
         public bool AdminAgent { get; set; }
         public bool Manager { get; set; }        
@@ -62,17 +64,19 @@ namespace MarvelGuide.Core.Models
 
             const string creator = "Владелец";
             const string superAdmin = "Главный администратор";
-            const string adminEditor = "Исполнительный администратор";
-            const string adminAgent = "Директор Поддержки";
+            const string adminManager = "Руководитель аппаратного офиса";
+            const string adminEditor = "Руководитель редакции";
+            const string adminAgent = "Руководитель поддержки";
             const string manager = "Менеджер";
             const string editor = "Редактор";
-            const string agent = "Агент Поддержки";
+            const string agent = "Агент поддержки";
             const string moderator = "Модератор";
 
             string job = "";
 
             if (Creator) { job += splitting + creator; }
             if (SuperAdmin) { job += splitting + superAdmin; }
+            if (AdminManager) { job += splitting + adminManager; }
             if (AdminEditor) { job += splitting + adminEditor; }
             if (AdminAgent) { job += splitting + adminAgent; }
             if (Manager) { job += splitting + manager; }
@@ -144,8 +148,8 @@ namespace MarvelGuide.Core.Models
 
         public bool IsDeveloper()
         {
-            return SuperDeveloper || HighDeveloper || MediumDeveloper || LightDeveloperCreator || LightDeveloperSuperAdmin || LightDeveloperAdminEditor
-                || LightDeveloperAdminAgent || LightDeveloperManager || LightDeveloperEditor || LightDeveloperAgent || LightDeveloperModerator;
+            return SuperDeveloper || HighDeveloper || MediumDeveloper || LightDeveloperCreator || LightDeveloperSuperAdmin || LightDeveloperAdminManager ||
+                LightDeveloperAdminEditor || LightDeveloperAdminAgent || LightDeveloperManager || LightDeveloperEditor || LightDeveloperAgent || LightDeveloperModerator;
         }
 
 

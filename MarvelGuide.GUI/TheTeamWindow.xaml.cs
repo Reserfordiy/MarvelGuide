@@ -161,6 +161,7 @@ namespace MarvelGuide.GUI
 
             SwitchingTheMembers(u => u.Creator);
             SwitchingTheMembers(u => u.SuperAdmin);
+            SwitchingTheMembers(u => u.AdminManager);
             SwitchingTheMembers(u => u.AdminEditor);
             SwitchingTheMembers(u => u.AdminAgent);
             SwitchingTheMembers(u => u.Manager);
