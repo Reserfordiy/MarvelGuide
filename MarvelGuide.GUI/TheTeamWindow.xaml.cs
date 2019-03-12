@@ -24,6 +24,7 @@ namespace MarvelGuide.GUI
     /// </summary>
     public partial class TheTeamWindow : Window
     {
+        private const string creator = "Владелец";
         private const string manager = "Менеджер";
 
         private const string defaultImageSource = "default.jpg";
@@ -265,6 +266,10 @@ namespace MarvelGuide.GUI
             {
                 string job = user.Job();
 
+                if (job.IndexOf(creator) != -1)
+                {
+                    job = job.Substring(0, job.IndexOf(creator)) + user.OwnersRole + job.Substring(job.IndexOf(creator) + creator.Length);
+                }
                 if (job.IndexOf(manager) != -1)
                 {
                     job = job.Substring(0, job.IndexOf(manager)) + user.ManagersRole + job.Substring(job.IndexOf(manager) + manager.Length);

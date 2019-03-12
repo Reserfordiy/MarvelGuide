@@ -66,6 +66,7 @@ namespace MarvelGuide.GUI
         private const string employeeModerators = " модератор";
 
         private const string managerJob = "Менеджерская должность";
+        private const string ownersJob = "Полная должность владельца";
 
         private const string editorsRubric = "Редакторская рубрика";
         private const string editorsFrequencyFractionStart = "Частота размещения постов:  1/";
@@ -99,6 +100,7 @@ namespace MarvelGuide.GUI
         private const string defaultPassword = "Пример: 123456";
         private const string defaultStartWorkingDate = "Пример: 18.08.2018";
         private const string defaultEndWorkingDate = "Пример: 01.09.2018";
+        private const string defaultOwnersRole = "Пример: Генеральный директор";
         private const string defaultManagerRole = "Пример: Менеджер по кадрам";
         private const string defaultEditorsRubric = "Пример: Старс";
         private const string defaultEditorsFrequency = "Пример: 3";
@@ -233,7 +235,13 @@ namespace MarvelGuide.GUI
                 StartWorkingDateTextBox.Text = _user.GotAJob.ToString("d");
                 StartWorkingDateTextBox.Foreground = Brushes.Black;
 
-                if (_user.Creator) { CreatorCheckBox.IsChecked = true; }
+                if (_user.Creator)
+                {
+                    CreatorCheckBox.IsChecked = true;
+
+                    OwnersRoleTextBox.Text = _user.OwnersRole;
+                    OwnersRoleTextBox.Foreground = Brushes.Black;
+                }
                 if (_user.SuperAdmin) { SuperAdminCheckBox.IsChecked = true; }
                 if (_user.AdminManager) { AdminManagerCheckBox.IsChecked = true; }
                 if (_user.AdminEditor) { AdminEditorCheckBox.IsChecked = true; }
@@ -455,6 +463,10 @@ namespace MarvelGuide.GUI
         private void CreatorsDetails()
         {
             var numberOfEmployees = _storage.Users.Items.Count(u => u.WorkingNow && !u.Creator);
+
+            _personalData.Add(ownersJob + adding + _user.OwnersRole);
+
+            _additionalData++;
 
             _personalData.Add(creatorsEmployeesFirst + adding + numberOfEmployees.ToString() + employees + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfEmployees));
             _personalData.Add(creatorsEmployeesSecond);
@@ -796,8 +808,16 @@ namespace MarvelGuide.GUI
                 _user.LostTheJob = DateTime.Parse(EndWorkingDateTextBox.Text);
             }
 
-            if (CreatorCheckBox.IsChecked == true) { _user.Creator = true; }
-            else { _user.Creator = false; }
+            if (CreatorCheckBox.IsChecked == true)
+            {
+                _user.Creator = true;
+                _user.OwnersRole = OwnersRoleTextBox.Text;
+            }
+            else
+            {
+                _user.Creator = false;
+                _user.OwnersRole = null;
+            }
             if (SuperAdminCheckBox.IsChecked == true) { _user.SuperAdmin = true; }
             else { _user.SuperAdmin = false; }
             if (AdminManagerCheckBox.IsChecked == true) { _user.AdminManager = true; }
@@ -941,6 +961,10 @@ namespace MarvelGuide.GUI
         }
 
 
+        private void OwnersRoleGrid_Initialized(object sender, EventArgs e)
+        {
+            if (!_user.Creator) { OwnersRoleGrid.Visibility = Visibility.Collapsed; }
+        }
 
         private void ManagersRoleGrid_Initialized(object sender, EventArgs e)
         {
@@ -1030,6 +1054,16 @@ namespace MarvelGuide.GUI
         }
 
 
+
+        private void CreatorCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            OwnersRoleGrid.Visibility = Visibility.Visible;
+        }
+
+        private void CreatorCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            OwnersRoleGrid.Visibility = Visibility.Collapsed;
+        }
 
         private void ManagerCheckBox_Checked(object sender, RoutedEventArgs e)
         {
@@ -1383,6 +1417,24 @@ namespace MarvelGuide.GUI
             }
         }
 
+        private void OwnersRoleTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (OwnersRoleTextBox.Text == defaultOwnersRole)
+            {
+                OwnersRoleTextBox.Text = "";
+                OwnersRoleTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void OwnersRoleTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (OwnersRoleTextBox.Text == "")
+            {
+                OwnersRoleTextBox.Text = defaultOwnersRole;
+                OwnersRoleTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
         private void ManagersRoleTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (ManagersRoleTextBox.Text == defaultManagerRole)
@@ -1602,6 +1654,14 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
+            if (CreatorCheckBox.IsChecked == true && OwnersRoleTextBox.Text == defaultOwnersRole)
+            {
+                MessageBox.Show("Укажите полную должность владельца.", "Ошибка");
+
+                OwnersRoleTextBox.Focus();
+
+                return false;
+            }
             if (ManagerCheckBox.IsChecked == true && ManagersRoleTextBox.Text == defaultManagerRole)
             {
                 MessageBox.Show("Укажите расширенную менеджерскую должность сотрудника.", "Ошибка");
@@ -1779,16 +1839,7 @@ namespace MarvelGuide.GUI
 
 
 
-        private void CreatorCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CreatorCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        
         private void SuperAdminCheckBox_Checked(object sender, RoutedEventArgs e)
         {
 

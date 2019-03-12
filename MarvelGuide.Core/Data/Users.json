@@ -30,6 +30,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -77,6 +78,7 @@
     "Editor": false,
     "Agent": true,
     "Moderator": false,
+    "OwnersRole": "Генеральный директор",
     "ManagersRole": null,
     "EditorsRubrics": [],
     "AgentsNumber": 1,
@@ -119,6 +121,7 @@
     "Editor": false,
     "Agent": true,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [],
     "AgentsNumber": 2,
@@ -161,6 +164,7 @@
     "Editor": false,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [],
     "AgentsNumber": 0,
@@ -203,6 +207,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": "Менеджер по кадрам",
     "EditorsRubrics": [
       {
@@ -250,6 +255,7 @@
     "Editor": true,
     "Agent": true,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -297,6 +303,7 @@
     "Editor": false,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": "Менеджер по кадрам",
     "EditorsRubrics": [],
     "AgentsNumber": 0,
@@ -339,6 +346,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -390,6 +398,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -437,6 +446,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -484,6 +494,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": true,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -531,6 +542,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -578,6 +590,7 @@
     "Editor": true,
     "Agent": true,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -625,6 +638,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -672,6 +686,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -719,6 +734,7 @@
     "Editor": false,
     "Agent": true,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [],
     "AgentsNumber": 6,
@@ -761,6 +777,7 @@
     "Editor": false,
     "Agent": true,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [],
     "AgentsNumber": 11,
@@ -803,6 +820,7 @@
     "Editor": false,
     "Agent": true,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [],
     "AgentsNumber": 10,
@@ -845,6 +863,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -892,6 +911,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -939,6 +959,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -986,6 +1007,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -1033,6 +1055,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -1080,6 +1103,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -1127,6 +1151,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -1178,6 +1203,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -1225,6 +1251,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -1272,6 +1299,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": "Менеджер по безопасности",
     "EditorsRubrics": [
       {
@@ -1331,6 +1359,7 @@
     "Editor": false,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": "Менеджер по рекламе",
     "EditorsRubrics": [],
     "AgentsNumber": 0,
@@ -1373,6 +1402,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -1404,7 +1434,7 @@
     "MediumDeveloper": false,
     "LightDeveloperCreator": true,
     "LightDeveloperSuperAdmin": true,
-    "LightDeveloperAdminManager": false,
+    "LightDeveloperAdminManager": true,
     "LightDeveloperAdminEditor": true,
     "LightDeveloperAdminAgent": true,
     "LightDeveloperManager": true,
@@ -1420,6 +1450,7 @@
     "Editor": false,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": "Директор по стратегическому развитию",
     "ManagersRole": null,
     "EditorsRubrics": [],
     "AgentsNumber": 0,
@@ -1462,6 +1493,7 @@
     "Editor": false,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": "Коммерческий директор",
     "ManagersRole": null,
     "EditorsRubrics": [],
     "AgentsNumber": 0,
@@ -1504,6 +1536,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -1551,6 +1584,7 @@
     "Editor": false,
     "Agent": false,
     "Moderator": true,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [],
     "AgentsNumber": 0,
@@ -1593,11 +1627,16 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
         "Rubric": "Фильмарты",
         "Frequency": 2
+      },
+      {
+        "Rubric": "ОСТ",
+        "Frequency": 5
       }
     ],
     "AgentsNumber": 0,
@@ -1640,6 +1679,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -1687,6 +1727,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -1738,6 +1779,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -1785,6 +1827,7 @@
     "Editor": false,
     "Agent": true,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [],
     "AgentsNumber": 21,
@@ -1827,6 +1870,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -1874,6 +1918,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -1921,6 +1966,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": "Креативный менеджер",
     "EditorsRubrics": [
       {
@@ -1968,6 +2014,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -2015,6 +2062,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -2062,6 +2110,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -2109,6 +2158,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {
@@ -2156,6 +2206,7 @@
     "Editor": true,
     "Agent": false,
     "Moderator": false,
+    "OwnersRole": null,
     "ManagersRole": null,
     "EditorsRubrics": [
       {

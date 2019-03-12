@@ -46,6 +46,7 @@ namespace MarvelGuide.Core.Models
         public bool Agent { get; set; }
         public bool Moderator { get; set; }
         
+        public string OwnersRole { get; set; }
         public string ManagersRole { get; set; }
 
         public List<EditorsPublication> EditorsRubrics { get; set; }
