@@ -261,6 +261,16 @@ namespace MarvelGuide.GUI
 
                     EditorsInformationListBox.ItemsSource = _publications;
                 }
+                else
+                {
+                    _publications.Add(new EditorsPublication()
+                    {
+                        Frequency = -1,
+                        Rubric = ""
+                    });
+
+                    EditorsInformationListBox.ItemsSource = _publications;
+                }
                 if (_user.Agent)
                 {
                     AgentChecBox.IsChecked = true;
@@ -1048,6 +1058,19 @@ namespace MarvelGuide.GUI
                 Frequency = -1,
                 Rubric = ""
             });
+
+            EditorsInformationListBox.ItemsSource = null;
+            EditorsInformationListBox.ItemsSource = _publications;
+        }
+
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            var DeleteButton = sender as Button;
+
+            var publication = DeleteButton.DataContext as EditorsPublication;
+
+            _publications.Remove(publication);
 
             EditorsInformationListBox.ItemsSource = null;
             EditorsInformationListBox.ItemsSource = _publications;
@@ -1879,5 +1902,7 @@ namespace MarvelGuide.GUI
         {
 
         }
+
+        
     }
 }

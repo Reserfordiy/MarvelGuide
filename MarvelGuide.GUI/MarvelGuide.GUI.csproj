@@ -146,7 +146,7 @@
     <Resource Include="Images\document_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\ЮраСаночкин1.jpg" />
+    <Resource Include="Images\delete_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

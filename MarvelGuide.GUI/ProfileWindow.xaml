@@ -278,6 +278,11 @@
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
 
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
                                             <TextBlock Grid.Row="0" FontSize="14" Margin="5.8 1.55 0 5" TextWrapping="Wrap">Название рубрики. Частота размещения (раз во сколько дней должен публиковаться пост):</TextBlock>
 
                                             <Grid Margin="4.3 0 143 3.5" Grid.Row="1">
@@ -289,6 +294,10 @@
                                                 <TextBox Name="EditorsRubricTextBox" Grid.Column="0" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="0 0 -10 0" Foreground="Gray" Initialized="EditorsRubricTextBox_Initialized" GotFocus="EditorsRubricTextBox_GotFocus" LostFocus="EditorsRubricTextBox_LostFocus">Пример: Старс</TextBox>
                                                 <TextBox Name="EditorsFrequencyTextBox" Grid.Column="1" FontSize="16" Margin="30 0 0 0" FontFamily="calibri" Padding="4 2" Foreground="Gray" Initialized="EditorsFrequencyTextBox_Initialized" GotFocus="EditorsFrequencyTextBox_GotFocus" LostFocus="EditorsFrequencyTextBox_LostFocus">Пример: 3</TextBox>
                                             </Grid>
+
+                                            <Button Name="DeleteButton" Margin="5 -5 0 0" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Right" Height="Auto" Width="Auto" Click="DeleteButton_Click" Style="{DynamicResource SmallDeleteButtonStyle}">
+                                                <Image Source="Images/delete_icon.png" Height="18" Width="18"></Image>
+                                            </Button>
                                         </Grid>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
