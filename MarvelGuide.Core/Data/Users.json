@@ -279,9 +279,9 @@
     "Male": false,
     "Login": "ekaterinamal",
     "Password": "987765",
-    "WorkingNow": true,
+    "WorkingNow": false,
     "GotAJob": "2015-09-06T00:00:00",
-    "LostTheJob": "0001-01-01T00:00:00",
+    "LostTheJob": "2019-03-13T00:00:00",
     "SuperDeveloper": false,
     "HighDeveloper": false,
     "MediumDeveloper": false,
@@ -1317,6 +1317,10 @@
       {
         "Rubric": "Факты",
         "Frequency": 7
+      },
+      {
+        "Rubric": "Обои",
+        "Frequency": 5
       }
     ],
     "AgentsNumber": 0,
