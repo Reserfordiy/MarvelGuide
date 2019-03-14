@@ -1320,7 +1320,7 @@
       },
       {
         "Rubric": "Обои",
-        "Frequency": 5
+        "Frequency": 3
       }
     ],
     "AgentsNumber": 0,
@@ -1636,10 +1636,14 @@
     "EditorsRubrics": [
       {
         "Rubric": "Фильмарты",
-        "Frequency": 2
+        "Frequency": 3
       },
       {
         "Rubric": "ОСТ",
+        "Frequency": 5
+      },
+      {
+        "Rubric": "Видео",
         "Frequency": 5
       }
     ],
