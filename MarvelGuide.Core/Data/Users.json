@@ -1311,10 +1311,6 @@
         "Frequency": 7
       },
       {
-        "Rubric": "Хистори",
-        "Frequency": 7
-      },
-      {
         "Rubric": "Факты",
         "Frequency": 7
       },
@@ -2194,9 +2190,9 @@
     "Male": true,
     "Login": "maximp",
     "Password": "730818",
-    "WorkingNow": true,
+    "WorkingNow": false,
     "GotAJob": "2019-02-28T00:00:00",
-    "LostTheJob": "0001-01-01T00:00:00",
+    "LostTheJob": "2019-03-18T00:00:00",
     "SuperDeveloper": false,
     "HighDeveloper": false,
     "MediumDeveloper": false,
@@ -2272,6 +2268,10 @@
       {
         "Rubric": "Юмор",
         "Frequency": 2
+      },
+      {
+        "Rubric": "ОСТ",
+        "Frequency": 4
       }
     ],
     "AgentsNumber": 35,
