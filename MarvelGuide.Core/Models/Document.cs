@@ -15,6 +15,10 @@ namespace MarvelGuide.Core.Models
 
         public string Text { get; set; }
 
-        public virtual Picture Picture { get; set; }        
+        public bool IsPublic { get; set; }
+
+        public DateTime CreationDate { get; set; }
+
+        public int PreviousVersionId { get; set; }       
     }
 }

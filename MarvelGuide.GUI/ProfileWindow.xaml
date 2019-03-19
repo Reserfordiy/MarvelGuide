@@ -49,10 +49,11 @@
 
                         <Button Name="UploadAvatarButton" Grid.Row="0" HorizontalAlignment="Center" Padding="6 4" FontSize="14.5" Margin="0 6.5 0 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="UploadAvatarButton_Click" Initialized="UploadAvatarButton_Initialized">Загрузить изображение</Button>
 
-                        <Button Name="DeveloperModeButton" Grid.Row="2" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="0 12 0 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="DeveloperModeButton_Click" Initialized="DeveloperModeButton_Initialized">Режим разработчика</Button>
                         <Button Name="ShowTheTeamButton" Grid.Row="1" Width="187" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="0 12 0 3" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="ShowTheTeamButton_Click" Initialized="ShowTheTeamButton_Initialized">Посмотреть команду</Button>
+                        <Button Name="DeveloperModeButton" Grid.Row="2" Width="187" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="0 12 0 3" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="DeveloperModeButton_Click" Initialized="DeveloperModeButton_Initialized">Ред. сотрудников</Button>
+                        <Button Name="EditDocumentsButton" Grid.Row="3" Width="187" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="0 12 0 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="EditDocumentsButton_Click" Initialized="EditDocumentsButton_Initialized">Ред. документы</Button>
 
-                        <Grid Grid.Row="3" Margin="3.8 0 0 0">
+                        <Grid Grid.Row="4" Margin="3.8 0 0 0">
                             <Grid Name="DeveloperModePropertiesGrid"  Margin="-23 40 -40 0" Initialized="DeveloperModePropertiesGrid_Initialized">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -68,7 +69,7 @@
                            </Grid>                            
                         </Grid>
 
-                        <Grid Grid.Row="4" Margin="3.8 0 0 0">
+                        <Grid Grid.Row="5" Margin="3.8 0 0 0">
                             <Grid Name="DevelopersLevelGrid" Margin="-23 0 -40 0" Initialized="DevelopersLevelGrid_Initialized">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>

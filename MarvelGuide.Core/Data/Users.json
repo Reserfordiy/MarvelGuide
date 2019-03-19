@@ -773,12 +773,12 @@
     "AdminManager": false,
     "AdminEditor": false,
     "AdminAgent": false,
-    "Manager": true,
+    "Manager": false,
     "Editor": false,
     "Agent": true,
     "Moderator": false,
     "OwnersRole": null,
-    "ManagersRole": "Менеджер по кадрам",
+    "ManagersRole": null,
     "EditorsRubrics": [],
     "AgentsNumber": 11,
     "AgentsFirstWords": "Добрый день(утро, вечер)!",
@@ -1300,7 +1300,7 @@
     "Agent": false,
     "Moderator": false,
     "OwnersRole": null,
-    "ManagersRole": "Менеджер по безопасности; Менеджер по кадрам",
+    "ManagersRole": "Менеджер по безопасности",
     "EditorsRubrics": [
       {
         "Rubric": "Сцены",

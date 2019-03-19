@@ -1,0 +1,51 @@
+﻿<Window x:Class="MarvelGuide.GUI.EditDocumentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MarvelGuide.GUI"
+        mc:Ignorable="d"
+        Title="Обучающий гайд" Height="755" MinHeight="655" Width="870" MinWidth="730" MaxWidth="1050" FontFamily="Verdana" SizeChanged="Window_SizeChanged" StateChanged="Window_StateChanged" Closing="Window_Closing">
+    <ScrollViewer>
+        <Grid Background="#FFEAF6FB">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="0 20 30 0" Style="{DynamicResource AttentionButtonsStyle}" Click="BackButton_Click">Вернуться назад</Button>
+
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Calibri" FontSize="27" Margin="0 25 0 5">Изменение документа</TextBlock>
+
+            <TextBlock Grid.Row="1" FontSize="20" FontFamily="Calibri" Margin="45 25 45 10">Название документа:</TextBlock>
+            <TextBox Name="NameTextBox" Grid.Row="2" Width="340" HorizontalAlignment="Left" FontSize="18" FontFamily="Calibri" Padding="6 3" Margin="41 0 150 15" Foreground="Gray" GotFocus="NameTextBox_GotFocus" LostFocus="NameTextBox_LostFocus">Пример: Инструкции для агентов</TextBox>
+
+            <TextBlock Grid.Row="3" FontSize="20" FontFamily="Calibri" Margin="45 10 45 10">Доступность:</TextBlock>
+
+            <Grid Grid.Row="4" Margin="42 0 0 18">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <RadioButton Name="PublicDocumentRadioButton" FontSize="14.5" Margin="0 0 15 3.75">
+                    <TextBlock Margin="0 -2 0 0">Публичный документ</TextBlock>
+                </RadioButton>
+                <RadioButton Name="HiddenDocumentRadioButton" Grid.Row="1" FontSize="14.5" Margin="0 3.75 15 0">
+                    <TextBlock Margin="0 -2 0 0">Скрытый документ</TextBlock>
+                </RadioButton>
+            </Grid>
+
+            <TextBlock Grid.Row="5" FontSize="20" FontFamily="Calibri" Margin="45 10 45 10">Текст документа:</TextBlock>
+            <TextBox Name="ContentTextBox" Grid.Row="6" FontSize="18" FontFamily="Calibri" Padding="6 6 12 20" Margin="41 0 41 0" Foreground="Gray" TextWrapping="Wrap" GotFocus="ContentTextBox_GotFocus" LostFocus="ContentTextBox_LostFocus" AcceptsReturn="True">Пример: Все сотрудники должны выполнять правила. Если правила выполняться не будут, зачем тогда они вообще нужны?</TextBox>
+
+            <Button Name="SaveDataButton" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18.5" Padding="11 7" Style="{DynamicResource AttentionButtonsStyle}" Margin="0 55 0 100" Click="SaveDataButton_Click">Сохранить изменения</Button>
+        </Grid>
+    </ScrollViewer>
+</Window>

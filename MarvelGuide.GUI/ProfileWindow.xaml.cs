@@ -134,8 +134,10 @@ namespace MarvelGuide.GUI
 
         int _additionalData = 0;
         bool _detailsShown = false;
+
         bool _goingToTheTeamWindow = false;
         bool _goingToTheDeveloperMode = false;
+        bool _goingToEditDocuments = false;
 
         bool _personalPage = true;
         bool _editingPage = false;
@@ -349,7 +351,14 @@ namespace MarvelGuide.GUI
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!_goingToTheTeamWindow && !_goingToTheDeveloperMode)
+            if (_goingToEditDocuments)
+            {
+                AllDocumentsWindow allDocumentsWindow = new AllDocumentsWindow(_user);
+
+                allDocumentsWindow.Show();
+            }
+
+            else if (!_goingToTheTeamWindow && !_goingToTheDeveloperMode)
             {
                 if (_personalPage)
                 {
@@ -797,7 +806,15 @@ namespace MarvelGuide.GUI
                 DeveloperModeButton.Visibility = Visibility.Collapsed;
             }
         }
-        
+
+        private void EditDocumentsButton_Initialized(object sender, EventArgs e)
+        {
+            if (!(_user.SuperDeveloper || _user.HighDeveloper || _user.MediumDeveloper) || !_personalPage)
+            {
+                EditDocumentsButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
         private void SaveDataButton_Initialized(object sender, EventArgs e)
         {
             if (!_editingPage)
@@ -851,6 +868,13 @@ namespace MarvelGuide.GUI
         private void DeveloperModeButton_Click(object sender, RoutedEventArgs e)
         {
             _goingToTheDeveloperMode = true;
+
+            Close();
+        }
+
+        private void EditDocumentsButton_Click(object sender, RoutedEventArgs e)
+        {
+            _goingToEditDocuments = true;
 
             Close();
         }
@@ -1946,7 +1970,7 @@ namespace MarvelGuide.GUI
             { 
                 if (_publications.Count() == 0)
                 {
-                    MessageBox.Show("Если сотрудник — редактор, то у него должна быть хотя бы одна рубрика.", "Ошибка!");
+                    MessageBox.Show("Если сотрудник — редактор, то у него должна быть хотя бы одна рубрика.", "Ошибка");
 
                     return false;
                 }
@@ -1991,6 +2015,6 @@ namespace MarvelGuide.GUI
             }
 
             return true;
-        }
+        }        
     }
 }

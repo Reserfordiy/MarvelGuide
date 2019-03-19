@@ -5,23 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
-        Title="Обучающий гайд" Height="480" MinHeight="460" Width="580" MinWidth="550" MaxWidth="635" FontFamily="Verdana">
+        Title="Обучающий гайд" Height="540" MinHeight="510" Width="610" MinWidth="580" MaxWidth="665" FontFamily="Verdana" Closing="Window_Closing">
     <ScrollViewer>
         <Grid Background="#FFEAF6FB">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="0 20 30 0" Click="BackButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Вернуться назад</Button>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="155" Padding="9 5" FontSize="14.5" Margin="0 20 30 0" Click="BackButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Вернуться назад</Button>
+                <Button Name="AddDocumentButton" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14.5" Padding="9 5" Style="{DynamicResource AttentionButtonsStyle}" Margin="0 11 30 0" Click="AddDocumentButton_Click">Создать документ</Button>
+            </Grid>
+            
+            <TextBlock Grid.Row="0" Name="PublicDocumentsTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="22.5" Margin="67 100 0 5">Документы в общем доступе:</TextBlock>
 
-            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="21" Margin="45 60 0 10">Документы в публичном доступе:</TextBlock>
-
-            <ListBox Name="AllDocumentsListBox" Margin="30 10 30 40" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="1" Style="{DynamicResource TransparentListBox}">
+            <ListBox Name="PublicDocumentsListBox" Margin="45 10 45 42" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="1" Style="{DynamicResource TransparentListBox}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
@@ -37,9 +48,42 @@
                                 </Border>
                             </DockPanel>
 
-                            <TextBlock Grid.Column="1" Name="DocumentNameTextBlock" FontFamily="Calibri" VerticalAlignment="Top" FontSize="18" Margin="10 10 30 10" Initialized="DocumentNameTextBlock_Initialized"></TextBlock>
+                            <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Name="DocumentNameTextBlock" FontFamily="Calibri" VerticalAlignment="Top" FontSize="19" Margin="10 10 30 10" Initialized="DocumentNameTextBlock_Initialized"></TextBlock>
 
-                            <Button Grid.Row="1" Grid.Column="1" Name="ReadButton" FontFamily="Verdana" Margin="10 2 30 10" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6 4" Click="ReadButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Читать</Button>
+                            <Button Grid.Row="1" Grid.Column="1" Name="ReadButton" FontFamily="Verdana" Margin="10 2 15 10" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6 4" Initialized="ReadButton_Initialized" Click="ReadButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Читать</Button>
+                            <Button Grid.Row="1" Grid.Column="2" Name="EditButton" FontFamily="Verdana" Margin="0 2 30 10" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6 4" Initialized="EditButton_Initialized" Click="EditButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Редактировать</Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <TextBlock Name="HiddenDocumentsTextBlock" Grid.Row ="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="22.5" Margin="67 0 0 5">Скрытые документы:</TextBlock>
+
+            <ListBox Grid.Row="3" Name="HiddenDocumentsListBox" Margin="45 10 45 45" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{DynamicResource TransparentListBox}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <DockPanel Grid.Column="0" Grid.RowSpan="2" Margin="0 10 10 10" VerticalAlignment="Top">
+                                <Border BorderThickness="0" BorderBrush="#FF715C4E">
+                                    <Image Name="DocumentImage" Width="64" Height="64" Source="Images/document_icon.png" HorizontalAlignment="Left"></Image>
+                                </Border>
+                            </DockPanel>
+
+                            <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Name="DocumentNameTextBlock" FontFamily="Calibri" VerticalAlignment="Top" FontSize="19" Margin="10 10 30 10" Initialized="DocumentNameTextBlock_Initialized"></TextBlock>
+
+                            <Button Grid.Row="1" Grid.Column="1" Name="ReadButton" FontFamily="Verdana" Margin="10 2 15 10" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6 4" Initialized="ReadButton_Initialized" Click="ReadButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Читать</Button>
+                            <Button Grid.Row="1" Grid.Column="2" Name="EditButton" FontFamily="Verdana" Margin="0 2 30 10" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="6 4" Initialized="EditButton_Initialized" Click="EditButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Редактировать</Button>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

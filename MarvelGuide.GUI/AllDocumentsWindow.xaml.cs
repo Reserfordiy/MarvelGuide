@@ -22,36 +22,75 @@ namespace MarvelGuide.GUI
     /// </summary>
     public partial class AllDocumentsWindow : Window
     {
+        private const string publicDocumentsLabel = "Публичные документы:";
+
+
+
         IStorage _storage;
 
 
-        public AllDocumentsWindow()
+        bool _lookingInTheDeveloperMode = false;
+
+        User _userWhoWatches = null;
+
+
+        bool _goingToRead = false;
+        bool _goingToEdit = false;
+
+        Document _documentForReadingOrEditing = null;
+
+
+
+        public AllDocumentsWindow(bool lookingInTheDeveloperMode, User userWhoWatches)
         {
             _storage = Factory.Instance.GetStorage();
 
+            _lookingInTheDeveloperMode = lookingInTheDeveloperMode;
+
+            _userWhoWatches = userWhoWatches;
+
             InitializeComponent();
 
+            CheckingWhetherWeAreInDeveloperMode();
+
             PublishingTheDocuments();
+        }
+
+        public AllDocumentsWindow() : this(false, null) { }
+        public AllDocumentsWindow(User userWhowatches) : this(true, userWhowatches) { }
+
+
+
+        private void CheckingWhetherWeAreInDeveloperMode()
+        {
+            if (_lookingInTheDeveloperMode)
+            {
+                PublicDocumentsTextBlock.Text = publicDocumentsLabel;
+
+                WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                PublicDocumentsListBox.Margin = HiddenDocumentsListBox.Margin;
+                PublicDocumentsTextBlock.Margin = new Thickness(PublicDocumentsTextBlock.Margin.Left, PublicDocumentsTextBlock.Margin.Top - 30, PublicDocumentsTextBlock.Margin.Right, PublicDocumentsTextBlock.Margin.Bottom);
+
+                HiddenDocumentsTextBlock.Visibility = Visibility.Collapsed;
+                HiddenDocumentsListBox.Visibility = Visibility.Collapsed;
+                AddDocumentButton.Visibility = Visibility.Collapsed;
+            }                
         }
 
 
         private void PublishingTheDocuments()
         {
-            AllDocumentsListBox.ItemsSource = _storage.Documents.Items;
+            PublicDocumentsListBox.ItemsSource = _storage.Documents.Items.Where(doc => doc.IsPublic).OrderBy(doc => doc.Name);
+            HiddenDocumentsListBox.ItemsSource = _storage.Documents.Items.Where(doc => !doc.IsPublic).OrderBy(doc => doc.Name);
         }
-
-
-
-
 
 
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-
-            mainWindow.Show();
-
             Close();
         }
 
@@ -72,11 +111,96 @@ namespace MarvelGuide.GUI
         {
             Button ReadButton = sender as Button;
 
-            Document document = ReadButton.DataContext as Document;
+            _documentForReadingOrEditing = ReadButton.DataContext as Document;
 
-            DocumentWindow documentWindow = new DocumentWindow(document);
+            _goingToRead = true;
 
-            documentWindow.Show();
+            Close();
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button EditButton = sender as Button;
+
+            _documentForReadingOrEditing = EditButton.DataContext as Document;
+
+            _goingToEdit = true;
+
+            Close();
+        }
+
+
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (_goingToRead)
+            {
+                if (_lookingInTheDeveloperMode)
+                {
+                    DocumentWindow documentWindow = new DocumentWindow(_documentForReadingOrEditing, _userWhoWatches);
+
+                    documentWindow.Show();
+                }
+                else
+                {
+                    DocumentWindow documentWindow = new DocumentWindow(_documentForReadingOrEditing);
+
+                    documentWindow.Show();
+                }
+            }
+            else if (_goingToEdit)
+            {
+                EditDocumentWindow editDocumentWindow = new EditDocumentWindow(_documentForReadingOrEditing, _userWhoWatches);
+
+                editDocumentWindow.Show();
+               
+            }
+            else
+            {
+                if (_lookingInTheDeveloperMode)
+                {
+                    ProfileWindow profileWindow = new ProfileWindow(_userWhoWatches);
+
+                    profileWindow.Show();
+                }
+                else
+                {
+                    MainWindow mainWindow = new MainWindow();
+
+                    mainWindow.Show();
+                }
+            }
+        }
+
+
+
+        private void ReadButton_Initialized(object sender, EventArgs e)
+        {
+            Button ReadButton = sender as Button;
+            
+            if (!_lookingInTheDeveloperMode)
+            {
+                ReadButton.Padding = new Thickness(ReadButton.Padding.Left + 2, ReadButton.Padding.Top, ReadButton.Padding.Right + 2, ReadButton.Padding.Bottom);
+            }
+        }
+
+        private void EditButton_Initialized(object sender, EventArgs e)
+        {
+            Button EditButton = sender as Button;
+
+            if (!_lookingInTheDeveloperMode)
+            {
+                EditButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
+
+
+        private void AddDocumentButton_Click(object sender, RoutedEventArgs e)
+        {
+            _documentForReadingOrEditing = new Document { Id = -1 };
+
+            _goingToEdit = true;
 
             Close();
         }

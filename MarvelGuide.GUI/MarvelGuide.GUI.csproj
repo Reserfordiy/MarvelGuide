@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EditDocumentWindow.xaml.cs">
+      <DependentUpon>EditDocumentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\UIElementsMethods.cs" />
     <Compile Include="TheTeamWindow.xaml.cs">
       <DependentUpon>TheTeamWindow.xaml</DependentUpon>
@@ -73,6 +76,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DocumentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditDocumentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -22,15 +22,31 @@ namespace MarvelGuide.GUI
     {
         Document _document;
 
-        public DocumentWindow(Document document)
+
+        bool _readingInTheDeveloperMode = false;
+
+        User _userWhoReads = null;
+
+        
+
+        public DocumentWindow(Document document, bool readingInTheDeveloperMode, User userWhoReads)
         {
             _document = document;
 
+            _readingInTheDeveloperMode = readingInTheDeveloperMode;
+
+            _userWhoReads = userWhoReads;
+
             InitializeComponent();
+
+            WindowState = WindowState.Maximized;
 
             DocumentNameTextBlock.Text = document.Name;
             DocumentContentTextBlock.Text = document.Text;
         }
+
+        public DocumentWindow(Document document) : this(document, false, null) { }
+        public DocumentWindow(Document document, User userWhoReads) : this(document, true, userWhoReads) { }
 
 
 
@@ -42,9 +58,18 @@ namespace MarvelGuide.GUI
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            AllDocumentsWindow allDocumentsWindow = new AllDocumentsWindow();
+            if (!_readingInTheDeveloperMode)
+            {
+                AllDocumentsWindow allDocumentsWindow = new AllDocumentsWindow();
 
-            allDocumentsWindow.Show();
+                allDocumentsWindow.Show();
+            }
+            else
+            {
+                AllDocumentsWindow allDocumentsWindow = new AllDocumentsWindow(_userWhoReads);
+
+                allDocumentsWindow.Show();
+            }
         }
     }
 }
