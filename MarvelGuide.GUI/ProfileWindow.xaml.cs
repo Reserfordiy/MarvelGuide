@@ -113,6 +113,9 @@ namespace MarvelGuide.GUI
         private const string defaultImageSource = "default.jpg";
 
 
+        private const string foundationStringDate = "12.05.2010";
+
+
         private const double leftAmplitude = 23;
         private const double rightAmplitude = 40;
 
@@ -1953,6 +1956,41 @@ namespace MarvelGuide.GUI
 
                 EndWorkingDateTextBox.Text = "";
                 EndWorkingDateTextBox.Focus();
+
+                return false;
+            }
+            if (DateTime.Parse(StartWorkingDateTextBox.Text) > DateTime.Now)
+            {
+                MessageBox.Show("Некорректная дата. Этот день еще не наступил.", "Ошибка");
+
+                StartWorkingDateTextBox.Text = "";
+                StartWorkingDateTextBox.Focus();
+
+                return false;
+            }
+            if (DateTime.Parse(StartWorkingDateTextBox.Text) < DateTime.Parse(foundationStringDate))
+            {
+                MessageBox.Show("Некорректная дата. В это время нашей компании еще не существовало.", "Ошибка");
+
+                StartWorkingDateTextBox.Text = "";
+                StartWorkingDateTextBox.Focus();
+
+                return false;
+            }
+            if (StillWorkingCheckBox.IsChecked == false && DateTime.Parse(EndWorkingDateTextBox.Text) > DateTime.Now)
+            {
+                MessageBox.Show("Некорректная дата. Этот день еще не наступил.", "Ошибка");
+
+                EndWorkingDateTextBox.Text = "";
+                EndWorkingDateTextBox.Focus();
+
+                return false;
+            }
+            if (StillWorkingCheckBox.IsChecked == false && DateTime.Parse(EndWorkingDateTextBox.Text) <= DateTime.Parse(StartWorkingDateTextBox.Text))
+            {
+                MessageBox.Show("Некорректные даты начала и окончания работы сотрудника. Вторая дата должна идти строго позднее первой.");
+
+                StartWorkingDateTextBox.Focus();
 
                 return false;
             }

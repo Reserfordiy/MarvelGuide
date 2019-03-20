@@ -27,6 +27,9 @@ namespace MarvelGuide.GUI
         private const string defaultDocumentText = "Пример: Все сотрудники должны выполнять правила. Если правила выполняться не будут, зачем тогда они вообще нужны?";
         private const string defaultDocumentDate = "Пример: 25.01.2018";
 
+        private const string foundationStringDate = "12.05.2010";
+
+
         IStorage _storage;
 
         Document _document;
@@ -230,6 +233,24 @@ namespace MarvelGuide.GUI
             if (!HelpingMethods.TryParsingTheDate(DateTextBox.Text))
             {
                 MessageBox.Show("Дата в полях должна задаваться в формате ДД.ММ.ГГГГ — например: 25.05.2017 . Оформите дату создания документа корректно либо воспользуйтесь кнопкой 'Сегодня', чтобы быстро указать сегодняшний день.", "Ошибка");
+
+                DateTextBox.Text = "";
+                DateTextBox.Focus();
+
+                return false;
+            }
+            if (DateTime.Parse(DateTextBox.Text) > DateTime.Now)
+            {
+                MessageBox.Show("Некорректная дата. Этот день еще не наступил.", "Ошибка");
+
+                DateTextBox.Text = "";
+                DateTextBox.Focus();
+
+                return false;
+            }
+            if (DateTime.Parse(DateTextBox.Text) < DateTime.Parse(foundationStringDate))
+            {
+                MessageBox.Show("Некорректная дата. В это время нашей компании еще не существовало.", "Ошибка");
 
                 DateTextBox.Text = "";
                 DateTextBox.Focus();
