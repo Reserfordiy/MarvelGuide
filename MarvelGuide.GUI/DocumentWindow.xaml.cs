@@ -20,6 +20,9 @@ namespace MarvelGuide.GUI
     /// </summary>
     public partial class DocumentWindow : Window
     {
+        private const string versionText = "Версия от ";
+
+
         Document _document;
 
 
@@ -43,6 +46,7 @@ namespace MarvelGuide.GUI
 
             DocumentNameTextBlock.Text = document.Name;
             DocumentContentTextBlock.Text = document.Text;
+            VersionDateTextBlock.Text = versionText + document.CreationDate.ToString("d");
         }
 
         public DocumentWindow(Document document) : this(document, false, null) { }

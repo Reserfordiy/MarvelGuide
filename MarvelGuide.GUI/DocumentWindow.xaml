@@ -10,14 +10,17 @@
         <Grid Background="#FFEAF6FB">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
             <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="0 20 30 0" Click="BackButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Вернуться назад</Button>
 
-            <TextBlock Grid.Row="0" Name="DocumentNameTextBlock" HorizontalAlignment="Center" Margin="50 70 50 10" FontFamily="calibri" FontSize="23">Название документа</TextBlock>
+            <TextBlock Grid.Row="0" Name="DocumentNameTextBlock" HorizontalAlignment="Center" Margin="50 70 50 5" FontFamily="calibri" FontSize="23">Название документа</TextBlock>
 
-            <TextBlock Grid.Row="1" Name="DocumentContentTextBlock" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30 10 30 80" FontFamily="calibri" FontSize="16">Здесь будет отображаться текст документа</TextBlock>
+            <TextBlock Grid.Row="1" Name="VersionDateTextBlock" HorizontalAlignment="Center" Margin="50 0 50 20" FontFamily="calibri" FontSize="18.5">Версия от 25.03.2019</TextBlock>
+            
+            <TextBlock Grid.Row="2" Name="DocumentContentTextBlock" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30 10 30 80" FontFamily="calibri" FontSize="16">Здесь будет отображаться текст документа</TextBlock>
         </Grid>
     </ScrollViewer>
 </Window>

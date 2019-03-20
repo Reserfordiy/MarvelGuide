@@ -15,6 +15,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -26,26 +28,42 @@
             <TextBlock Grid.Row="1" FontSize="20" FontFamily="Calibri" Margin="45 25 45 10">Название документа:</TextBlock>
             <TextBox Name="NameTextBox" Grid.Row="2" Width="340" HorizontalAlignment="Left" FontSize="18" FontFamily="Calibri" Padding="6 3" Margin="41 0 150 15" Foreground="Gray" GotFocus="NameTextBox_GotFocus" LostFocus="NameTextBox_LostFocus">Пример: Инструкции для агентов</TextBox>
 
-            <TextBlock Grid.Row="3" FontSize="20" FontFamily="Calibri" Margin="45 10 45 10">Доступность:</TextBlock>
+            <TextBlock Grid.Row="3" FontSize="20" FontFamily="Calibri" Margin="45 10 45 10">Дата создания:</TextBlock>
 
-            <Grid Grid.Row="4" Margin="42 0 0 18">
+            <Grid Grid.Row="4" Margin="41 0 41 13">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBox Grid.Column="0" Name="DateTextBox" Width="253" HorizontalAlignment="Left" FontSize="18" FontFamily="Calibri" Padding="6 3" Foreground="Gray" GotFocus="DateTextBox_GotFocus" LostFocus="DateTextBox_LostFocus">Пример: 25.01.2018</TextBox>
+                <Button Grid.Column="1" Name="TodayButton" Margin="15 0" FontSize="13" Padding="7.5 0" Height="30" Style="{DynamicResource AttentionButtonsStyle}" Click="TodayButton_Click">Сегодня</Button>
+            </Grid>
+
+            <TextBlock Grid.Row="5" FontSize="20" FontFamily="Calibri" Margin="45 10 45 10">Доступность:</TextBlock>
+
+            <Grid Grid.Row="6" Margin="42 0 0 18">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="28*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <RadioButton Name="PublicDocumentRadioButton" FontSize="14.5" Margin="0 0 15 3.75">
+                <RadioButton Name="PublicDocumentRadioButton" FontSize="14.5" Margin="0,0,15,4" Grid.ColumnSpan="2">
                     <TextBlock Margin="0 -2 0 0">Публичный документ</TextBlock>
                 </RadioButton>
-                <RadioButton Name="HiddenDocumentRadioButton" Grid.Row="1" FontSize="14.5" Margin="0 3.75 15 0">
+                <RadioButton Name="HiddenDocumentRadioButton" Grid.Row="1" FontSize="14.5" Margin="0,4,15,0" Grid.ColumnSpan="2">
                     <TextBlock Margin="0 -2 0 0">Скрытый документ</TextBlock>
                 </RadioButton>
             </Grid>
 
-            <TextBlock Grid.Row="5" FontSize="20" FontFamily="Calibri" Margin="45 10 45 10">Текст документа:</TextBlock>
-            <TextBox Name="ContentTextBox" Grid.Row="6" FontSize="18" FontFamily="Calibri" Padding="6 6 12 20" Margin="41 0 41 0" Foreground="Gray" TextWrapping="Wrap" GotFocus="ContentTextBox_GotFocus" LostFocus="ContentTextBox_LostFocus" AcceptsReturn="True">Пример: Все сотрудники должны выполнять правила. Если правила выполняться не будут, зачем тогда они вообще нужны?</TextBox>
+            <TextBlock Grid.Row="7" FontSize="20" FontFamily="Calibri" Margin="45 10 45 10">Текст документа:</TextBlock>
+            <TextBox Name="ContentTextBox" Grid.Row="8" FontSize="18" FontFamily="Calibri" Padding="6 6 12 20" Margin="41 0 41 0" Foreground="Gray" TextWrapping="Wrap" GotFocus="ContentTextBox_GotFocus" LostFocus="ContentTextBox_LostFocus" AcceptsReturn="True">Пример: Все сотрудники должны выполнять правила. Если правила выполняться не будут, зачем тогда они вообще нужны?</TextBox>
 
-            <Button Name="SaveDataButton" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18.5" Padding="11 7" Style="{DynamicResource AttentionButtonsStyle}" Margin="0 55 0 100" Click="SaveDataButton_Click">Сохранить изменения</Button>
+            <Button Name="SaveDataButton" Grid.Row="9" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18.5" Padding="11 7" Style="{DynamicResource AttentionButtonsStyle}" Margin="0 55 0 100" Click="SaveDataButton_Click">Сохранить изменения</Button>
         </Grid>
     </ScrollViewer>
 </Window>

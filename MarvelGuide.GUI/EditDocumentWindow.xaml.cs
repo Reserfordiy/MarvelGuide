@@ -1,4 +1,5 @@
 ﻿using MarvelGuide.Core;
+using MarvelGuide.Core.Helpers;
 using MarvelGuide.Core.Intefraces;
 using MarvelGuide.Core.Models;
 using System;
@@ -24,7 +25,7 @@ namespace MarvelGuide.GUI
     {
         private const string defaultDocumentName = "Пример: Инструкции для агентов";
         private const string defaultDocumentText = "Пример: Все сотрудники должны выполнять правила. Если правила выполняться не будут, зачем тогда они вообще нужны?";
-
+        private const string defaultDocumentDate = "Пример: 25.01.2018";
 
         IStorage _storage;
 
@@ -43,7 +44,9 @@ namespace MarvelGuide.GUI
             InitializeComponent();
 
             WindowState = WindowState.Maximized;
+
             NameTextBox.Width = MaxWidth / 3 + 50;
+            DateTextBox.Width = MaxWidth / 3 - 37;
 
             FormingTheEdittingData();
         }
@@ -55,6 +58,9 @@ namespace MarvelGuide.GUI
             {
                 NameTextBox.Text = _document.Name;
                 NameTextBox.Foreground = Brushes.Black;
+
+                DateTextBox.Text = _document.CreationDate.ToString("d");
+                DateTextBox.Foreground = Brushes.Black;
 
                 if (_document.IsPublic) { PublicDocumentRadioButton.IsChecked = true; }
                 else { HiddenDocumentRadioButton.IsChecked = true; }
@@ -99,6 +105,24 @@ namespace MarvelGuide.GUI
             }
         }
 
+        private void DateTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (DateTextBox.Text == defaultDocumentDate)
+            {
+                DateTextBox.Text = "";
+                DateTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void DateTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (DateTextBox.Text == "")
+            {
+                DateTextBox.Text = defaultDocumentDate;
+                DateTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
         private void ContentTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (ContentTextBox.Text == defaultDocumentText)
@@ -124,6 +148,7 @@ namespace MarvelGuide.GUI
             if (WindowState != WindowState.Maximized)
             {
                 NameTextBox.Width = Width / 3 + 50;
+                DateTextBox.Width = Width / 3 - 37;
             }
         }
 
@@ -132,12 +157,14 @@ namespace MarvelGuide.GUI
             if (WindowState == WindowState.Maximized)
             {
                 NameTextBox.Width = MaxWidth / 3 + 50;
+                DateTextBox.Width = MaxWidth / 3 - 37;
                 SaveDataButton.Margin = new Thickness(SaveDataButton.Margin.Left, SaveDataButton.Margin.Top, SaveDataButton.Margin.Right, 100);
 
             }
             else if (WindowState == WindowState.Normal)
             {
                 NameTextBox.Width = Width / 3 + 50;
+                DateTextBox.Width = Width / 3 - 37;
                 SaveDataButton.Margin = new Thickness(SaveDataButton.Margin.Left, SaveDataButton.Margin.Top, SaveDataButton.Margin.Right, 65);
             }
         }
@@ -167,6 +194,14 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
+            if (DateTextBox.Text == defaultDocumentDate)
+            {
+                MessageBox.Show("Укажите дату создания документа в формате ДД.ММ.ГГГГ либо нажмите на кнопку 'Cегодня', чтобы задать в качестве даты создания сегодняшний день.", "Ошибка");
+
+                DateTextBox.Focus();
+
+                return false;
+            }
             if (PublicDocumentRadioButton.IsChecked == false && HiddenDocumentRadioButton.IsChecked == false)
             {
                 MessageBox.Show("Укажите уровень доступности документа.", "Ошибка");
@@ -192,6 +227,15 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
+            if (!HelpingMethods.TryParsingTheDate(DateTextBox.Text))
+            {
+                MessageBox.Show("Дата в полях должна задаваться в формате ДД.ММ.ГГГГ — например: 25.05.2017 . Оформите дату создания документа корректно либо воспользуйтесь кнопкой 'Сегодня', чтобы быстро указать сегодняшний день.", "Ошибка");
+
+                DateTextBox.Text = "";
+                DateTextBox.Focus();
+
+                return false;
+            }
 
             return true;
         }
@@ -210,10 +254,20 @@ namespace MarvelGuide.GUI
 
             _document.Name = NameTextBox.Text;
 
+            _document.CreationDate = DateTime.Parse(DateTextBox.Text);
+
             if (PublicDocumentRadioButton.IsChecked == true) { _document.IsPublic = true; }
             else { _document.IsPublic = false; }
 
             _document.Text = ContentTextBox.Text;
+        }
+
+
+
+        private void TodayButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateTextBox.Text = DateTime.Now.ToString("d");
+            DateTextBox.Foreground = Brushes.Black;
         }
     }
 }
