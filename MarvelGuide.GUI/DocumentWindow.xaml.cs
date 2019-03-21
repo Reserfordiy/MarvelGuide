@@ -45,8 +45,8 @@ namespace MarvelGuide.GUI
             WindowState = WindowState.Maximized;
 
             DocumentNameTextBlock.Text = document.Name;
-            DocumentContentTextBlock.Text = document.Text;
-            VersionDateTextBlock.Text = versionText + document.CreationDate.ToString("d");
+            DocumentContentTextBlock.Text = document.Versions[-1].Text;
+            VersionDateTextBlock.Text = versionText + document.Versions[-1].Date.ToString("d");
         }
 
         public DocumentWindow(Document document) : this(document, false, null) { }

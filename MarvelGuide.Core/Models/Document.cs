@@ -13,12 +13,22 @@ namespace MarvelGuide.Core.Models
 
         public string Name { get; set; }
 
-        public string Text { get; set; }
-
         public bool IsPublic { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        public List<DocumentVersion> Versions { get; set; }
 
-        public int PreviousVersionId { get; set; }       
+
+
+        public void CreatingFirstVersion()
+        {
+            Versions = new List<DocumentVersion>
+            {
+                //new DocumentVersion
+                //{
+                //    Date = CreationDate,
+                //    Text = Text
+                //}
+            };
+        }
     }
 }

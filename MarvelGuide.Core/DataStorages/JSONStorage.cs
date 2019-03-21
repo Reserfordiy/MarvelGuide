@@ -66,5 +66,15 @@ namespace MarvelGuide.Core.DataStorages
 
             Users.Save();
         }
+
+        public void ChangingDocumentsModels()
+        {
+            //foreach (var document in Documents.Items)
+            //{
+            //    document.CreatingFirstVersion();
+            //}
+
+            Documents.Save();
+        }
     }
 }

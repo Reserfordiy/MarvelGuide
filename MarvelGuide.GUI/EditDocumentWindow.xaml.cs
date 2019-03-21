@@ -62,13 +62,13 @@ namespace MarvelGuide.GUI
                 NameTextBox.Text = _document.Name;
                 NameTextBox.Foreground = Brushes.Black;
 
-                DateTextBox.Text = _document.CreationDate.ToString("d");
+                DateTextBox.Text = _document.Versions[-1].Date.ToString("d");
                 DateTextBox.Foreground = Brushes.Black;
 
                 if (_document.IsPublic) { PublicDocumentRadioButton.IsChecked = true; }
                 else { HiddenDocumentRadioButton.IsChecked = true; }
 
-                ContentTextBox.Text = _document.Text;
+                ContentTextBox.Text = _document.Versions[-1].Text;
                 ContentTextBox.Foreground = Brushes.Black;
             }
         }
@@ -275,12 +275,12 @@ namespace MarvelGuide.GUI
 
             _document.Name = NameTextBox.Text;
 
-            _document.CreationDate = DateTime.Parse(DateTextBox.Text);
+            _document.Versions[-1].Date = DateTime.Parse(DateTextBox.Text);
 
             if (PublicDocumentRadioButton.IsChecked == true) { _document.IsPublic = true; }
             else { _document.IsPublic = false; }
 
-            _document.Text = ContentTextBox.Text;
+            _document.Versions[-1].Text = ContentTextBox.Text;
         }
 
 

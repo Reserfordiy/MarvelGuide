@@ -50,7 +50,11 @@ namespace MarvelGuide.Core.DataStorages
 
         public void ChangingUsersModels()
         {
-            throw new NotImplementedException();
+            
+        }
+        public void ChangingDocumentsModels()
+        {
+
         }
 
 
