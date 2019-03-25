@@ -27,13 +27,22 @@ namespace MarvelGuide.GUI
         private const string defaultDocumentText = "Пример: Все сотрудники должны выполнять правила. Если правила выполняться не будут, зачем тогда они вообще нужны?";
         private const string defaultDocumentDate = "Пример: 25.01.2018";
 
+        private const string basicVersion = "Исходная версия";
+        private const string regularVersion = "Версия от ";
+        private const string currentVersion = "  (тек.)";
+
         private const string foundationStringDate = "12.05.2010";
 
 
         IStorage _storage;
 
         Document _document;
-        User _user;        
+        User _user;
+
+
+        bool _showingVersion = false;
+
+        DocumentVersion _versionForShowing = null;
 
 
 
@@ -48,38 +57,64 @@ namespace MarvelGuide.GUI
 
             WindowState = WindowState.Maximized;
 
-            NameTextBox.Width = MaxWidth / 3 + 50;
-            DateTextBox.Width = MaxWidth / 3 - 37;
+            NameTextBox.Width = MaxWidth / 3 + 83;
+            DateTextBox.Width = MaxWidth / 3 - 4;
 
-            FormingTheEdittingData();
+            FormingTheContent();
         }
 
 
-        private void FormingTheEdittingData()
+        private void FormingTheContent()
         {
             if (_document.Id != -1)
             {
-                NameTextBox.Text = _document.Name;
-                NameTextBox.Foreground = Brushes.Black;
-
-                DateTextBox.Text = _document.Versions[-1].Date.ToString("d");
-                DateTextBox.Foreground = Brushes.Black;
-
-                if (_document.IsPublic) { PublicDocumentRadioButton.IsChecked = true; }
-                else { HiddenDocumentRadioButton.IsChecked = true; }
-
-                ContentTextBox.Text = _document.Versions[-1].Text;
-                ContentTextBox.Foreground = Brushes.Black;
+                FormingTheEdittingData();
             }
+            else
+            {
+                FormingEmptyFields();
+            }
+        }        
+
+        private void FormingTheEdittingData()
+        {            
+            NameTextBox.Text = _document.Name;
+            NameTextBox.Foreground = Brushes.Black;
+
+            DateTextBox.Text = _document.Versions[0].Date.ToString("d");
+            DateTextBox.Foreground = Brushes.Black;
+
+            if (_document.IsPublic) { PublicDocumentRadioButton.IsChecked = true; }
+            else { HiddenDocumentRadioButton.IsChecked = true; }
+
+            VersionsListBox.ItemsSource = _document.Versions;
+
+            ContentTextBox.Text = _document.Versions[_document.Versions.Count - 1].Text;
+            ContentTextBox.Foreground = Brushes.Black;            
+        }
+
+        private void FormingEmptyFields()
+        {
+            VersionsTextBlock.Visibility = Visibility.Collapsed;
+            VersionsListBox.Visibility = Visibility.Collapsed;
         }
 
 
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            AllDocumentsWindow allDocumentsWindow = new AllDocumentsWindow(_user);
+            if (_showingVersion)
+            {
+                DocumentWindow documentWindow = new DocumentWindow(_document, _versionForShowing, true, true, _user);
 
-            allDocumentsWindow.Show();
+                documentWindow.Show();
+            }
+            else
+            {
+                AllDocumentsWindow allDocumentsWindow = new AllDocumentsWindow(_user);
+
+                allDocumentsWindow.Show();
+            }
         }
 
 
@@ -150,8 +185,8 @@ namespace MarvelGuide.GUI
         {
             if (WindowState != WindowState.Maximized)
             {
-                NameTextBox.Width = Width / 3 + 50;
-                DateTextBox.Width = Width / 3 - 37;
+                NameTextBox.Width = Width / 3 + 83;
+                DateTextBox.Width = Width / 3 - 4;
             }
         }
 
@@ -159,15 +194,15 @@ namespace MarvelGuide.GUI
         {
             if (WindowState == WindowState.Maximized)
             {
-                NameTextBox.Width = MaxWidth / 3 + 50;
-                DateTextBox.Width = MaxWidth / 3 - 37;
+                NameTextBox.Width = MaxWidth / 3 + 83;
+                DateTextBox.Width = MaxWidth / 3 - 4;
                 SaveDataButton.Margin = new Thickness(SaveDataButton.Margin.Left, SaveDataButton.Margin.Top, SaveDataButton.Margin.Right, 100);
 
             }
             else if (WindowState == WindowState.Normal)
             {
-                NameTextBox.Width = Width / 3 + 50;
-                DateTextBox.Width = Width / 3 - 37;
+                NameTextBox.Width = Width / 3 + 83;
+                DateTextBox.Width = Width / 3 - 4;
                 SaveDataButton.Margin = new Thickness(SaveDataButton.Margin.Left, SaveDataButton.Margin.Top, SaveDataButton.Margin.Right, 65);
             }
         }
@@ -257,6 +292,15 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
+            if (_document.Id != -1 && _document.Versions.Count > 1 && DateTime.Parse(DateTextBox.Text) > _document.Versions[1].Date)
+            {
+                MessageBox.Show("Некорректная дата создания документа. К моменту наступления этого дня, в системе уже были зарегестрированы новые версии документа.", "Ошибка");
+
+                DateTextBox.Text = "";
+                DateTextBox.Focus();
+
+                return false;
+            }
 
             return true;
         }
@@ -266,21 +310,52 @@ namespace MarvelGuide.GUI
         {
             if (_document.Id == -1)
             {
-                _storage.Documents.Add(_document);
-
-                int id = _storage.Documents.Items.Max(doc => doc.Id);
-
-                _document.Id = id + 1;
+                SaveNewDocument();
             }
+            else
+            {
+                SaveEdittedDocument();
+            }
+        }
 
+        private void SaveEdittedDocument()
+        {
             _document.Name = NameTextBox.Text;
 
-            _document.Versions[-1].Date = DateTime.Parse(DateTextBox.Text);
+            _document.Versions[0].Date = DateTime.Parse(DateTextBox.Text);
 
             if (PublicDocumentRadioButton.IsChecked == true) { _document.IsPublic = true; }
             else { _document.IsPublic = false; }
 
-            _document.Versions[-1].Text = ContentTextBox.Text;
+            if (ContentTextBox.Text != _document.Versions[_document.Versions.Count - 1].Text)
+            {
+                _document.Versions.Add(new DocumentVersion
+                {
+                    Date = DateTime.Now,
+                    Text = ContentTextBox.Text
+                });
+            }
+        }
+
+        private void SaveNewDocument()
+        {
+            _storage.Documents.Add(_document);
+
+            _document.Id = _storage.Documents.Items.Max(doc => doc.Id) + 1;
+
+            _document.Name = NameTextBox.Text;
+
+            if (PublicDocumentRadioButton.IsChecked == true) { _document.IsPublic = true; }
+            else { _document.IsPublic = false; }
+
+            _document.Versions = new List<DocumentVersion>
+            {
+                new DocumentVersion
+                {
+                    Date = DateTime.Parse(DateTextBox.Text),
+                    Text = ContentTextBox.Text
+                }
+            };
         }
 
 
@@ -289,6 +364,98 @@ namespace MarvelGuide.GUI
         {
             DateTextBox.Text = DateTime.Now.ToString("d");
             DateTextBox.Foreground = Brushes.Black;
+        }
+
+
+
+        private void VersionNameTextBlock_Initialized(object sender, EventArgs e)
+        {
+            TextBlock VersionNameTextBlock = sender as TextBlock;
+
+            DocumentVersion version = VersionNameTextBlock.DataContext as DocumentVersion;
+
+            if (_document.Versions.IndexOf(version) == 0)
+            {
+                VersionNameTextBlock.Text = basicVersion;
+            }
+            else if (_document.Versions.IndexOf(version) == _document.Versions.Count - 1)
+            {
+                VersionNameTextBlock.Text = regularVersion + version.Date.ToString("d") + currentVersion;
+            }
+            else
+            {
+                VersionNameTextBlock.Text = regularVersion + version.Date.ToString("d");
+            }
+        }
+
+        
+
+        private void ShowVersionButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button ShowVersionButton = sender as Button;
+
+            DocumentVersion version = ShowVersionButton.DataContext as DocumentVersion;
+
+            _showingVersion = true;
+
+            _versionForShowing = version;
+
+            Close();
+        }
+
+
+        private void DeleteVersionButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button DeleteButton = sender as Button;
+
+            DocumentVersion version = DeleteButton.DataContext as DocumentVersion;
+
+            if (_document.Versions.Count == 1)
+            {
+                if (MessageBox.Show($"Данное действие удалит весь документ целиком. Восстановить его будет невозможно. Вы уверены, что хотите продолжить?", "Предупреждение", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+                {
+                    _storage.Documents.Remove(_document);
+
+                    _storage.Documents.Save();
+
+                    Close();
+                }
+            }
+            else if (_document.Versions.IndexOf(version) == 0)
+            {
+                if (MessageBox.Show($"Вы уверены, что хотите удалить исходную версию документа? Отменить это действие будет невозможно, и исходной версией будет назначена следующая за ней версия!", "Предупреждение", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+                {
+                    DeletingTheVersion(version);
+
+                    DateTextBox.Text = _document.Versions[0].Date.ToString("d");
+                }
+            }
+            else if (_document.Versions.IndexOf(version) == _document.Versions.Count - 1)
+            {
+                if (MessageBox.Show("Вы уверены, что хотите удалить текущую версию документа? Все изменения, внесенные в предпоследнюю версию, будут безвозвратно утрачены.", "Предупреждение", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+                {
+                    DeletingTheVersion(version);
+
+                    ContentTextBox.Text = _document.Versions[_document.Versions.Count - 1].Text;
+                }
+            }
+            else
+            {
+                if (MessageBox.Show($"Вы уверены, что хотите удалить версию от {version.Date.ToString("d")}? Отменить это действие будет невозможно!", "Предупреждение", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+                {
+                    DeletingTheVersion(version);
+                }
+            }
+        }
+
+        private void DeletingTheVersion(DocumentVersion version)
+        {
+            _document.Versions.Remove(version);
+
+            _storage.Documents.Save();
+
+            VersionsListBox.ItemsSource = null;
+            VersionsListBox.ItemsSource = _document.Versions;
         }
     }
 }

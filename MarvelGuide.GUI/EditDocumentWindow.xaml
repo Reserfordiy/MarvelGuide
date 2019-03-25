@@ -17,6 +17,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -25,12 +27,12 @@
 
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Calibri" FontSize="27" Margin="0 25 0 5">Изменение документа</TextBlock>
 
-            <TextBlock Grid.Row="1" FontSize="20" FontFamily="Calibri" Margin="45 25 45 10">Название документа:</TextBlock>
+            <TextBlock Grid.Row="1" FontSize="20" FontFamily="Calibri" Margin="45 25 45 10">Название:</TextBlock>
             <TextBox Name="NameTextBox" Grid.Row="2" Width="340" HorizontalAlignment="Left" FontSize="18" FontFamily="Calibri" Padding="6 3" Margin="41 0 150 15" Foreground="Gray" GotFocus="NameTextBox_GotFocus" LostFocus="NameTextBox_LostFocus">Пример: Инструкции для агентов</TextBox>
 
             <TextBlock Grid.Row="3" FontSize="20" FontFamily="Calibri" Margin="45 10 45 10">Дата создания:</TextBlock>
 
-            <Grid Grid.Row="4" Margin="41 0 41 13">
+            <Grid Grid.Row="4" Margin="41 0 41 15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -42,7 +44,7 @@
 
             <TextBlock Grid.Row="5" FontSize="20" FontFamily="Calibri" Margin="45 10 45 10">Доступность:</TextBlock>
 
-            <Grid Grid.Row="6" Margin="42 0 0 18">
+            <Grid Grid.Row="6" Margin="42 0 0 25">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="28*"/>
@@ -60,10 +62,31 @@
                 </RadioButton>
             </Grid>
 
-            <TextBlock Grid.Row="7" FontSize="20" FontFamily="Calibri" Margin="45 10 45 10">Текст документа:</TextBlock>
-            <TextBox Name="ContentTextBox" Grid.Row="8" FontSize="18" FontFamily="Calibri" Padding="6 6 12 20" Margin="41 0 41 0" Foreground="Gray" TextWrapping="Wrap" GotFocus="ContentTextBox_GotFocus" LostFocus="ContentTextBox_LostFocus" AcceptsReturn="True">Пример: Все сотрудники должны выполнять правила. Если правила выполняться не будут, зачем тогда они вообще нужны?</TextBox>
+            <TextBlock Name="VersionsTextBlock" Grid.Row="7" FontSize="20" FontFamily="Calibri" Margin="45 10 45 10">Версии документа:</TextBlock>
 
-            <Button Name="SaveDataButton" Grid.Row="9" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18.5" Padding="11 7" Style="{DynamicResource AttentionButtonsStyle}" Margin="0 55 0 100" Click="SaveDataButton_Click">Сохранить изменения</Button>
+            <ListBox Grid.Row="8" Name="VersionsListBox" Margin="41 0 41 25"  HorizontalAlignment="Left" Width="455" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{DynamicResource TransparentListBox}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Name="VersionNameTextBlock" FontSize="18" FontFamily="Calibri" Margin="3 14 0 14" Initialized="VersionNameTextBlock_Initialized">Версия от 21.03.2019 (тек.)</TextBlock>
+
+                            <Button Name="ShowVersionButton" Grid.Column="1" HorizontalAlignment="Right" Margin="0 0 20 0" FontSize="13" VerticalAlignment="Center" FontFamily="Verdana" Padding="8.5 6" Style="{DynamicResource AttentionButtonsStyle}" Click="ShowVersionButton_Click">Смотреть</Button>
+                            <Button Name="DeleteVersionButton" Grid.Column="2" HorizontalAlignment="Right" Margin="0 0 15 0" FontSize="13" VerticalAlignment="Center" FontFamily="Verdana" Padding="8.5 6" Style="{DynamicResource AttentionButtonsStyle}" Click="DeleteVersionButton_Click">Удалить</Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <TextBlock Grid.Row="9" FontSize="20" FontFamily="Calibri" Margin="45 10 45 10">Текст документа:</TextBlock>
+            <TextBox Name="ContentTextBox" Grid.Row="10" FontSize="18" FontFamily="Calibri" Padding="6 6 12 20" Margin="41 0 41 0" Foreground="Gray" TextWrapping="Wrap" GotFocus="ContentTextBox_GotFocus" LostFocus="ContentTextBox_LostFocus" AcceptsReturn="True">Пример: Все сотрудники должны выполнять правила. Если правила выполняться не будут, зачем тогда они вообще нужны?</TextBox>
+
+            <Button Name="SaveDataButton" Grid.Row="11" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18.5" Padding="11 7" Style="{DynamicResource AttentionButtonsStyle}" Margin="0 55 0 100" Click="SaveDataButton_Click">Сохранить изменения</Button>
         </Grid>
     </ScrollViewer>
 </Window>

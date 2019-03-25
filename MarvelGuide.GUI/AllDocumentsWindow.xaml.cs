@@ -85,11 +85,11 @@ namespace MarvelGuide.GUI
         {
             PublicDocumentsListBox.ItemsSource = _storage.Documents.Items
                 .Where(doc => doc.IsPublic)
-                .OrderByDescending(doc => doc.Versions[-1].Date)
+                .OrderByDescending(doc => doc.Versions[doc.Versions.Count - 1].Date)
                 .ThenBy(doc => doc.Name);
             HiddenDocumentsListBox.ItemsSource = _storage.Documents.Items
                 .Where(doc => !doc.IsPublic)
-                .OrderByDescending(doc => doc.Versions[-1].Date)
+                .OrderByDescending(doc => doc.Versions[doc.Versions.Count - 1].Date)
                 .ThenBy(doc => doc.Name);
         }
 

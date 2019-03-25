@@ -11,6 +11,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -18,9 +19,19 @@
 
             <TextBlock Grid.Row="0" Name="DocumentNameTextBlock" HorizontalAlignment="Center" Margin="50 70 50 5" FontFamily="calibri" FontSize="23">Название документа</TextBlock>
 
-            <TextBlock Grid.Row="1" Name="VersionDateTextBlock" HorizontalAlignment="Center" Margin="50 0 50 20" FontFamily="calibri" FontSize="18.5">Версия от 25.03.2019</TextBlock>
+            <TextBlock Grid.Row="1" Name="VersionDateTextBlock" HorizontalAlignment="Center" Margin="0 0 0 7" FontFamily="calibri" FontSize="18.5">Версия от 25.03.2019</TextBlock>
+
+            <Grid Name="VersionsButtonsGrid" Grid.Row="2" HorizontalAlignment="Center" Margin="0 0 0 25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Name="PreviousVersionButton" Grid.Column="0" Margin="5 0 5 0"  Padding="5 2" FontSize="12.5" Style="{DynamicResource AttentionButtonsStyle}" Click="PreviousVersionButton_Click">Предыдущая</Button>
+                <Button Name="NextVersionButton" Grid.Column="1" Margin="5 0 5 0"  Padding="5 2" FontSize="12.5" Style="{DynamicResource AttentionButtonsStyle}" Click="NextVersionButton_Click">Следующая</Button>
+            </Grid>
             
-            <TextBlock Grid.Row="2" Name="DocumentContentTextBlock" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30 10 30 80" FontFamily="calibri" FontSize="16">Здесь будет отображаться текст документа</TextBlock>
+            <TextBlock Grid.Row="3" Name="DocumentContentTextBlock" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30 10 30 80" FontFamily="calibri" FontSize="16">Здесь будет отображаться текст документа</TextBlock>
         </Grid>
     </ScrollViewer>
 </Window>
