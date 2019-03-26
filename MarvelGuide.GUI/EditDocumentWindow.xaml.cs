@@ -58,7 +58,8 @@ namespace MarvelGuide.GUI
             WindowState = WindowState.Maximized;
 
             NameTextBox.Width = MaxWidth / 3 + 83;
-            DateTextBox.Width = MaxWidth / 3 - 4;
+            if (_document.Id == -1) { DateTextBox.Width = MaxWidth / 3 - 4; }
+            else { DateTextBox.Width = MaxWidth / 3 + 83; }
 
             FormingTheContent();
         }
@@ -77,7 +78,9 @@ namespace MarvelGuide.GUI
         }        
 
         private void FormingTheEdittingData()
-        {            
+        {
+            TodayButton.Visibility = Visibility.Collapsed;
+
             NameTextBox.Text = _document.Name;
             NameTextBox.Foreground = Brushes.Black;
 
@@ -186,7 +189,8 @@ namespace MarvelGuide.GUI
             if (WindowState != WindowState.Maximized)
             {
                 NameTextBox.Width = Width / 3 + 83;
-                DateTextBox.Width = Width / 3 - 4;
+                if (_document.Id == -1) { DateTextBox.Width = Width / 3 - 4; }
+                else { DateTextBox.Width = Width / 3 + 83; }
             }
         }
 
@@ -195,14 +199,18 @@ namespace MarvelGuide.GUI
             if (WindowState == WindowState.Maximized)
             {
                 NameTextBox.Width = MaxWidth / 3 + 83;
-                DateTextBox.Width = MaxWidth / 3 - 4;
+                if (_document.Id == -1) { DateTextBox.Width = MaxWidth / 3 - 4; }
+                else { DateTextBox.Width = MaxWidth / 3 + 83; }
+
                 SaveDataButton.Margin = new Thickness(SaveDataButton.Margin.Left, SaveDataButton.Margin.Top, SaveDataButton.Margin.Right, 100);
 
             }
             else if (WindowState == WindowState.Normal)
             {
                 NameTextBox.Width = Width / 3 + 83;
-                DateTextBox.Width = Width / 3 - 4;
+                if (_document.Id == -1) { DateTextBox.Width = Width / 3 - 4; }
+                else { DateTextBox.Width = Width / 3 + 83; }
+
                 SaveDataButton.Margin = new Thickness(SaveDataButton.Margin.Left, SaveDataButton.Margin.Top, SaveDataButton.Margin.Right, 65);
             }
         }
