@@ -157,7 +157,7 @@ namespace MarvelGuide.GUI
 
         private void DateTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (DateTextBox.Text == "")
+            if (DateTextBox.Text == "" && !TodayButton.IsMouseOver)
             {
                 DateTextBox.Text = defaultDocumentDate;
                 DateTextBox.Foreground = Brushes.Gray;
@@ -240,7 +240,7 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (DateTextBox.Text == defaultDocumentDate)
+            if (DateTextBox.Text == defaultDocumentDate || DateTextBox.Text == "")
             {
                 MessageBox.Show("Укажите дату создания документа в формате ДД.ММ.ГГГГ либо нажмите на кнопку 'Cегодня', чтобы задать в качестве даты создания сегодняшний день.", "Ошибка");
 
