@@ -1743,6 +1743,8 @@ namespace MarvelGuide.GUI
 
         private bool CheckingWhetherAllFieldsFilledCorrectly()
         {
+            LoginTextBox.Text = LoginTextBox.Text.TrimEnd();
+
             if (!CheckingIfAllValuesAreNotDefault())
             {
                 return false;
