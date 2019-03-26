@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
-        Title="Обучающий гайд" Height="755" MinHeight="655" Width="870" MinWidth="730" MaxWidth="1050" FontFamily="Verdana" SizeChanged="Window_SizeChanged" StateChanged="Window_StateChanged" Closing="Window_Closing">
+        Title="Обучающий гайд" Height="755" MinHeight="655" Width="870" MinWidth="730" MaxWidth="1050" FontFamily="Verdana" SizeChanged="Window_SizeChanged" StateChanged="Window_StateChanged" Closing="Window_Closing" KeyDown="Window_KeyDown">
     <ScrollViewer>
         <Grid Background="#FFEAF6FB">
             <Grid.RowDefinitions>
@@ -38,7 +38,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 
-                <TextBox Grid.Column="0" Name="DateTextBox" Width="253" HorizontalAlignment="Left" FontSize="18" FontFamily="Calibri" Padding="6 3" Foreground="Gray" GotFocus="DateTextBox_GotFocus" LostFocus="DateTextBox_LostFocus">Пример: 25.01.2018</TextBox>
+                <TextBox Grid.Column="0" Name="DateTextBox" Width="253" HorizontalAlignment="Left" FontSize="18" FontFamily="Calibri" Padding="6 3" Foreground="Gray" GotFocus="DateTextBox_GotFocus" LostFocus="DateTextBox_LostFocus" KeyDown="DateTextBox_KeyDown">Пример: 25.01.2018</TextBox>
                 <Button Grid.Column="1" Name="TodayButton" Margin="15 0" FontSize="13" Padding="7.5 0" Height="30" Style="{DynamicResource AttentionButtonsStyle}" Click="TodayButton_Click">Сегодня</Button>
             </Grid>
 
@@ -54,10 +54,10 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <RadioButton Name="PublicDocumentRadioButton" FontSize="14.5" Margin="0,0,15,4" Grid.ColumnSpan="2">
+                <RadioButton Name="PublicDocumentRadioButton" FontSize="14.5" Margin="0,0,15,4" Grid.ColumnSpan="2" KeyDown="PublicDocumentRadioButton_KeyDown">
                     <TextBlock Margin="0 -2 0 0">Публичный документ</TextBlock>
                 </RadioButton>
-                <RadioButton Name="HiddenDocumentRadioButton" Grid.Row="1" FontSize="14.5" Margin="0,4,15,0" Grid.ColumnSpan="2">
+                <RadioButton Name="HiddenDocumentRadioButton" Grid.Row="1" FontSize="14.5" Margin="0,4,15,0" Grid.ColumnSpan="2" KeyDown="HiddenDocumentRadioButton_KeyDown">
                     <TextBlock Margin="0 -2 0 0">Скрытый документ</TextBlock>
                 </RadioButton>
             </Grid>

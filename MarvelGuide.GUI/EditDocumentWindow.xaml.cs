@@ -469,5 +469,62 @@ namespace MarvelGuide.GUI
             VersionsListBox.ItemsSource = null;
             VersionsListBox.ItemsSource = _document.Versions;
         }
+
+
+
+        private void DateTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                DateTextBox.Text = DateTime.Now.ToString("d");
+                DateTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void PublicDocumentRadioButton_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                PublicDocumentRadioButton.IsChecked = true;
+            }
+        }
+
+        private void HiddenDocumentRadioButton_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                HiddenDocumentRadioButton.IsChecked = true;
+            }
+        }
+
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Tab)
+            {
+                if (NameTextBox.IsFocused)
+                {
+                    DateTextBox.Focus();
+                }
+                else if (DateTextBox.IsFocused)
+                {
+                    PublicDocumentRadioButton.Focus();
+                }
+                else if (PublicDocumentRadioButton.IsFocused)
+                {
+                    HiddenDocumentRadioButton.Focus();
+                }
+                else if (HiddenDocumentRadioButton.IsFocused)
+                {
+                    ContentTextBox.Focus();
+                }
+                else
+                {
+                    NameTextBox.Focus();
+                }
+
+                e.Handled = true;
+            }
+        }
     }
 }
