@@ -15,20 +15,15 @@ namespace MarvelGuide.Core.Models
 
         public bool IsPublic { get; set; }
 
+        public DateTime CreationDate { get; set; }
+
         public List<DocumentVersion> Versions { get; set; }
 
 
 
-        public void CreatingFirstVersion()
+        public void UpdatingDocument()
         {
-            Versions = new List<DocumentVersion>
-            {
-                //new DocumentVersion
-                //{
-                //    Date = CreationDate,
-                //    Text = Text
-                //}
-            };
+
         }
     }
 }

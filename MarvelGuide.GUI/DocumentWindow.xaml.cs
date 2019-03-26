@@ -63,7 +63,9 @@ namespace MarvelGuide.GUI
         {
             DocumentNameTextBlock.Text = _document.Name;
             DocumentContentTextBlock.Text = _version.Text;
-            VersionDateTextBlock.Text = versionText + _version.Date.ToString("d");
+
+            if (_document.Versions.IndexOf(_version) == 0) { VersionDateTextBlock.Text = versionText + _document.CreationDate.ToString("d"); }
+            else { VersionDateTextBlock.Text = versionText + _version.Date.ToString("d"); }
 
             if (_document.Versions.Count == 1)
             {

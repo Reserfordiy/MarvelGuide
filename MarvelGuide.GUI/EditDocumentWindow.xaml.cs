@@ -84,7 +84,7 @@ namespace MarvelGuide.GUI
             NameTextBox.Text = _document.Name;
             NameTextBox.Foreground = Brushes.Black;
 
-            DateTextBox.Text = _document.Versions[0].Date.ToString("d");
+            DateTextBox.Text = _document.CreationDate.ToString("d");
             DateTextBox.Foreground = Brushes.Black;
 
             if (_document.IsPublic) { PublicDocumentRadioButton.IsChecked = true; }
@@ -300,9 +300,9 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (_document.Id != -1 && _document.Versions.Count > 1 && DateTime.Parse(DateTextBox.Text) > _document.Versions[1].Date)
+            if (_document.Id != -1 && DateTime.Parse(DateTextBox.Text) > _document.Versions[0].Date)
             {
-                MessageBox.Show("Некорректная дата создания документа. К моменту наступления этого дня, в системе уже были зарегестрированы новые версии документа.", "Ошибка");
+                MessageBox.Show("Некорректная дата создания документа. К моменту наступления этого дня, некоторые версии уже были зарегистрированы в системе.", "Ошибка");
 
                 DateTextBox.Text = "";
                 DateTextBox.Focus();
@@ -330,7 +330,7 @@ namespace MarvelGuide.GUI
         {
             _document.Name = NameTextBox.Text;
 
-            _document.Versions[0].Date = DateTime.Parse(DateTextBox.Text);
+            _document.CreationDate = DateTime.Parse(DateTextBox.Text);
 
             if (PublicDocumentRadioButton.IsChecked == true) { _document.IsPublic = true; }
             else { _document.IsPublic = false; }
@@ -353,6 +353,8 @@ namespace MarvelGuide.GUI
 
             _document.Name = NameTextBox.Text;
 
+            _document.CreationDate = DateTime.Parse(DateTextBox.Text);
+
             if (PublicDocumentRadioButton.IsChecked == true) { _document.IsPublic = true; }
             else { _document.IsPublic = false; }
 
@@ -360,7 +362,7 @@ namespace MarvelGuide.GUI
             {
                 new DocumentVersion
                 {
-                    Date = DateTime.Parse(DateTextBox.Text),
+                    Date = DateTime.Now,
                     Text = ContentTextBox.Text
                 }
             };

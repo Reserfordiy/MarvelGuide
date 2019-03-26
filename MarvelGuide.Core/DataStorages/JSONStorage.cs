@@ -69,10 +69,10 @@ namespace MarvelGuide.Core.DataStorages
 
         public void ChangingDocumentsModels()
         {
-            //foreach (var document in Documents.Items)
-            //{
-            //    document.CreatingFirstVersion();
-            //}
+            foreach (var document in Documents.Items)
+            {
+                document.UpdatingDocument();
+            }
 
             Documents.Save();
         }
