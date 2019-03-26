@@ -435,18 +435,20 @@ namespace MarvelGuide.GUI
             {
                 if (MessageBox.Show($"Вы уверены, что хотите удалить исходную версию документа? Отменить это действие будет невозможно, и исходной версией будет назначена следующая за ней версия!", "Предупреждение", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
                 {
-                    DeletingTheVersion(version);
+                    DateTextBox.Text = _document.Versions[1].Date.ToString("d");
 
-                    DateTextBox.Text = _document.Versions[0].Date.ToString("d");
+                    _document.CreationDate = DateTime.Parse(DateTextBox.Text);
+
+                    DeletingTheVersion(version);
                 }
             }
             else if (_document.Versions.IndexOf(version) == _document.Versions.Count - 1)
             {
                 if (MessageBox.Show("Вы уверены, что хотите удалить текущую версию документа? Все изменения, внесенные в предпоследнюю версию, будут безвозвратно утрачены.", "Предупреждение", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
                 {
-                    DeletingTheVersion(version);
+                    ContentTextBox.Text = _document.Versions[_document.Versions.Count - 2].Text;
 
-                    ContentTextBox.Text = _document.Versions[_document.Versions.Count - 1].Text;
+                    DeletingTheVersion(version);
                 }
             }
             else
