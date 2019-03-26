@@ -64,12 +64,10 @@ namespace MarvelGuide.GUI
 
         private void PasswordTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (PasswordTextBox.Text == defaultPassword)
-            {
-                PasswordTextBox.Text = "";
+            PasswordTextBox.Visibility = Visibility.Hidden;
+            MainPasswordBox.Visibility = Visibility.Visible;
 
-                PasswordTextBox.Foreground = Brushes.Black;
-            }
+            MainPasswordBox.Focus();
         }
 
         private void LoginTextBox_LostFocus(object sender, RoutedEventArgs e)
@@ -82,13 +80,12 @@ namespace MarvelGuide.GUI
             }
         }
 
-        private void PasswordTextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void MainPasswordBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (PasswordTextBox.Text == "")
+            if (MainPasswordBox.Password == "")
             {
-                PasswordTextBox.Text = defaultPassword;
-
-                PasswordTextBox.Foreground = Brushes.Gray;
+                PasswordTextBox.Visibility = Visibility.Visible;
+                MainPasswordBox.Visibility = Visibility.Hidden;
             }
         }
 
@@ -119,18 +116,21 @@ namespace MarvelGuide.GUI
         private void Authorization()
         {
             string login = LoginTextBox.Text.TrimEnd(new char[] { ' ' });
-            string password = PasswordTextBox.Text;
+            string password = MainPasswordBox.Password;
 
             var user = _storage.Users.Items.FirstOrDefault(u => u.Login == login && password == u.Password);
 
             if (user == null)
             {
-                MessageBox.Show("Введенной пары логина и пароля не найдено в базе. Попробуйте еще раз либо обратитесь к разработчикам!", "Ошибка!");
+                MessageBox.Show("Введенной пары логина и пароля не найдено в базе. Попробуйте еще раз либо обратитесь к разработчикам!", "Ошибка");
 
                 LoginTextBox.Text = "";
-                PasswordTextBox.Text = defaultPassword;
                 LoginTextBox.Foreground = Brushes.Black;
-                PasswordTextBox.Foreground = Brushes.Gray;
+
+                PasswordTextBox.Visibility = Visibility.Visible;
+                MainPasswordBox.Visibility = Visibility.Hidden;
+
+                MainPasswordBox.Password = "";
 
                 LoginTextBox.Focus();
             }
@@ -143,6 +143,6 @@ namespace MarvelGuide.GUI
 
                 Close();
             }
-        }       
+        }
     }
 }

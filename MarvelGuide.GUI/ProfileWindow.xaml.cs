@@ -225,11 +225,13 @@ namespace MarvelGuide.GUI
                 LoginTextBox.Text = _user.Login;
                 LoginTextBox.Foreground = Brushes.Black;
 
-                PasswordTextBox.Text = _user.Password;
-                PasswordTextBox.Foreground = Brushes.Black;
+                MainPasswordBox.Password = _user.Password;
+                MainPasswordBox.Visibility = Visibility.Visible;
+                PasswordTextBox.Visibility = Visibility.Hidden;
 
-                RepeatPasswordTextBox.Text = _user.Password;
-                RepeatPasswordTextBox.Foreground = Brushes.Black;
+                RepeatPasswordBox.Password = _user.Password;
+                RepeatPasswordBox.Visibility = Visibility.Visible;
+                RepeatPasswordTextBox.Visibility = Visibility.Hidden;
 
                 if (!_user.WorkingNow)
                 {
@@ -915,7 +917,7 @@ namespace MarvelGuide.GUI
             else { _user.Male = false; }
 
             _user.Login = LoginTextBox.Text;
-            _user.Password = PasswordTextBox.Text;
+            _user.Password = MainPasswordBox.Password;
 
             _user.GotAJob = DateTime.Parse(StartWorkingDateTextBox.Text);
             if (StillWorkingCheckBox.IsChecked == true)
@@ -1520,37 +1522,35 @@ namespace MarvelGuide.GUI
 
         private void PasswordTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (PasswordTextBox.Text == defaultPassword)
-            {
-                PasswordTextBox.Text = "";
-                PasswordTextBox.Foreground = Brushes.Black;
-            }
-        }
+            PasswordTextBox.Visibility = Visibility.Hidden;
+            MainPasswordBox.Visibility = Visibility.Visible;
 
-        private void PasswordTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (PasswordTextBox.Text == "")
-            {
-                PasswordTextBox.Text = defaultPassword;
-                PasswordTextBox.Foreground = Brushes.Gray;
-            }
+            MainPasswordBox.Focus();
         }
 
         private void RepeatPasswordTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (RepeatPasswordTextBox.Text == defaultPassword)
+            RepeatPasswordTextBox.Visibility = Visibility.Hidden;
+            RepeatPasswordBox.Visibility = Visibility.Visible;
+
+            RepeatPasswordBox.Focus();
+        }
+
+        private void MainPasswordBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (MainPasswordBox.Password == "")
             {
-                RepeatPasswordTextBox.Text = "";
-                RepeatPasswordTextBox.Foreground = Brushes.Black;
+                PasswordTextBox.Visibility = Visibility.Visible;
+                MainPasswordBox.Visibility = Visibility.Hidden;
             }
         }
 
-        private void RepeatPasswordTextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void RepeatPasswordBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (RepeatPasswordTextBox.Text == "")
+            if (RepeatPasswordBox.Password == "")
             {
-                RepeatPasswordTextBox.Text = defaultPassword;
-                RepeatPasswordTextBox.Foreground = Brushes.Gray;
+                RepeatPasswordTextBox.Visibility = Visibility.Visible;
+                RepeatPasswordBox.Visibility = Visibility.Hidden;
             }
         }
 
@@ -1790,16 +1790,20 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (PasswordTextBox.Text == defaultPassword || RepeatPasswordTextBox.Text == defaultPassword)
+            if (MainPasswordBox.Password == "" || RepeatPasswordBox.Password == "")
             {
                 MessageBox.Show("Укажите пароль для сотрудника, а затем воспроизведите его.", "Ошибка");
 
-                PasswordTextBox.Text = "";
-                PasswordTextBox.Foreground = Brushes.Black;
-                RepeatPasswordTextBox.Text = defaultPassword;
-                RepeatPasswordTextBox.Foreground = Brushes.Gray;
+                MainPasswordBox.Password = "";
+                RepeatPasswordBox.Password = "";
 
-                PasswordTextBox.Focus();
+                MainPasswordBox.Visibility = Visibility.Visible;
+                PasswordTextBox.Visibility = Visibility.Hidden;
+
+                RepeatPasswordBox.Visibility = Visibility.Hidden;
+                RepeatPasswordTextBox.Visibility = Visibility.Visible;
+
+                MainPasswordBox.Focus();
 
                 return false;
             }
@@ -1917,27 +1921,31 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (PasswordTextBox.Text.Length != 6 && PasswordTextBox.Text.Length != 2 || !int.TryParse(PasswordTextBox.Text, out result))
+            if (MainPasswordBox.Password.Length != 6 && MainPasswordBox.Password.Length != 2 || !int.TryParse(MainPasswordBox.Password, out result))
             {
                 MessageBox.Show("Пароль обязательно должен быть шестизначным числом. Пожалуйста, измените пароль и воспроизведите его в поле ниже.", "Ошибка");
 
-                PasswordTextBox.Text = "";
-                RepeatPasswordTextBox.Text = defaultPassword;
-                RepeatPasswordTextBox.Foreground = Brushes.Gray;
+                MainPasswordBox.Password = "";
+                RepeatPasswordBox.Password = "";
 
-                PasswordTextBox.Focus();
+                RepeatPasswordBox.Visibility = Visibility.Hidden;
+                RepeatPasswordTextBox.Visibility = Visibility.Visible;
+
+                MainPasswordBox.Focus();
 
                 return false;
             }
-            if (PasswordTextBox.Text != RepeatPasswordTextBox.Text)
+            if (MainPasswordBox.Password != RepeatPasswordBox.Password)
             {
                 MessageBox.Show("Пароли не совпадают.", "Ошибка");
 
-                PasswordTextBox.Text = "";
-                RepeatPasswordTextBox.Text = defaultPassword;
-                RepeatPasswordTextBox.Foreground = Brushes.Gray;
+                MainPasswordBox.Password = "";
+                RepeatPasswordBox.Password = "";
 
-                PasswordTextBox.Focus();
+                RepeatPasswordBox.Visibility = Visibility.Hidden;
+                RepeatPasswordTextBox.Visibility = Visibility.Visible;
+
+                MainPasswordBox.Focus();
 
                 return false;
             }
@@ -2053,6 +2061,6 @@ namespace MarvelGuide.GUI
             }
 
             return true;
-        }        
+        }
     }
 }
