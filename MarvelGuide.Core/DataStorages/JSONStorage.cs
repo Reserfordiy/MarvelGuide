@@ -61,7 +61,7 @@ namespace MarvelGuide.Core.DataStorages
         {
             foreach (var user in Users.Items)
             {
-                user.NullingRubrics();
+                user.UpdatingUser();
             }
 
             Users.Save();

@@ -933,7 +933,7 @@ namespace MarvelGuide.GUI
 
             if (PasswordTextBlock.Visibility == Visibility.Visible)
             {
-                _user.Password = MainPasswordBox.Password;
+                _user.Password = User.GetHash(MainPasswordBox.Password);
             }
 
             _user.GotAJob = DateTime.Parse(StartWorkingDateTextBox.Text);

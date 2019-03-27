@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -155,22 +156,19 @@ namespace MarvelGuide.Core.Models
 
 
 
-        public void NullingRubrics()
+        public void UpdatingUser()
         {
-            List<EditorsPublication> publicationsForRemoving = new List<EditorsPublication>();
+            Password = GetHash(Password);
+        }
 
-            foreach (var publication in EditorsRubrics)
-            {
-                if (publication.Rubric == null || publication.Frequency == 0)
-                {
-                    publicationsForRemoving.Add(publication);
-                }
-            }
 
-            foreach (var publication in publicationsForRemoving)
-            {
-                EditorsRubrics.Remove(publication);
-            }
+
+        public static string GetHash(string password)
+        {
+            var md5 = MD5.Create();
+            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(
+            password));
+            return Convert.ToBase64String(hash);
         }
     }
 }

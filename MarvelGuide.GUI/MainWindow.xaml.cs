@@ -116,7 +116,7 @@ namespace MarvelGuide.GUI
         private void Authorization()
         {
             string login = LoginTextBox.Text.TrimEnd(new char[] { ' ' });
-            string password = MainPasswordBox.Password;
+            string password = User.GetHash(MainPasswordBox.Password);
 
             var user = _storage.Users.Items.FirstOrDefault(u => u.Login == login && password == u.Password);
 
