@@ -2258,12 +2258,12 @@
     "AdminManager": false,
     "AdminEditor": false,
     "AdminAgent": false,
-    "Manager": false,
+    "Manager": true,
     "Editor": true,
     "Agent": false,
     "Moderator": false,
     "OwnersRole": null,
-    "ManagersRole": null,
+    "ManagersRole": "Менеджер по инновациям",
     "EditorsRubrics": [
       {
         "Rubric": "Юмор",
