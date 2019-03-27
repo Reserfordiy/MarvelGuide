@@ -210,7 +210,14 @@ namespace MarvelGuide.GUI
 
         private void FormingTheEdittingData()
         {
-            _publications = new List<EditorsPublication>();
+            _publications = new List<EditorsPublication>
+            {
+                new EditorsPublication()
+                {
+                    Frequency = -1,
+                    Rubric = ""
+                }
+            };
 
             if (_user.Id != -1)
             {
@@ -275,16 +282,6 @@ namespace MarvelGuide.GUI
 
                     EditorsInformationListBox.ItemsSource = _publications;
                 }
-                else
-                {
-                    _publications.Add(new EditorsPublication()
-                    {
-                        Frequency = -1,
-                        Rubric = ""
-                    });
-
-                    EditorsInformationListBox.ItemsSource = _publications;
-                }
                 if (_user.Agent)
                 {
                     AgentChecBox.IsChecked = true;
@@ -330,6 +327,8 @@ namespace MarvelGuide.GUI
 
                 PasswordButton.Visibility = Visibility.Collapsed;
             }
+
+            EditorsInformationListBox.ItemsSource = _publications;
         }
 
         private void CheckingWhetherWeEditPage()
