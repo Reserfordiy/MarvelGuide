@@ -89,6 +89,9 @@ namespace MarvelGuide.GUI
         private const string exitOwnProfile = "Выйти";
         private const string exitForeignProfile = "Назад";
 
+        private const string updatePassword = "Обновить пароль";
+        private const string oldPassword = "Старый пароль";
+
         private const string personalPageTitle = "Личный кабинет";
         private const string watchingForeignPageTitle = "Профиль ";
         private const string addingNewUserTitle = "Добавление нового сотрудника";
@@ -224,14 +227,16 @@ namespace MarvelGuide.GUI
 
                 LoginTextBox.Text = _user.Login;
                 LoginTextBox.Foreground = Brushes.Black;
+                
+                MainPasswordBox.Visibility = Visibility.Collapsed;
+                PasswordTextBox.Visibility = Visibility.Collapsed;
+                PasswordTextBlock.Visibility = Visibility.Collapsed;
 
-                MainPasswordBox.Password = _user.Password;
-                MainPasswordBox.Visibility = Visibility.Visible;
-                PasswordTextBox.Visibility = Visibility.Hidden;
+                RepeatPasswordBox.Visibility = Visibility.Collapsed;
+                RepeatPasswordTextBox.Visibility = Visibility.Collapsed;
+                RepeatPasswordTextBlock.Visibility = Visibility.Collapsed;
 
-                RepeatPasswordBox.Password = _user.Password;
-                RepeatPasswordBox.Visibility = Visibility.Visible;
-                RepeatPasswordTextBox.Visibility = Visibility.Hidden;
+                PasswordButton.Content = updatePassword;
 
                 if (!_user.WorkingNow)
                 {
@@ -316,6 +321,14 @@ namespace MarvelGuide.GUI
                         if (_user.LightDeveloperModerator) { ModeratorDeveloperCheckBox.IsChecked = true; }
                     }
                 }
+            }
+
+            else
+            {
+                RepeatPasswordTextBox.Margin = new Thickness(RepeatPasswordTextBox.Margin.Left, RepeatPasswordTextBox.Margin.Top, RepeatPasswordTextBox.Margin.Right, SexGrid.Margin.Bottom);
+                RepeatPasswordBox.Margin = RepeatPasswordTextBox.Margin;
+
+                PasswordButton.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -917,7 +930,11 @@ namespace MarvelGuide.GUI
             else { _user.Male = false; }
 
             _user.Login = LoginTextBox.Text;
-            _user.Password = MainPasswordBox.Password;
+
+            if (PasswordTextBlock.Visibility == Visibility.Visible)
+            {
+                _user.Password = MainPasswordBox.Password;
+            }
 
             _user.GotAJob = DateTime.Parse(StartWorkingDateTextBox.Text);
             if (StillWorkingCheckBox.IsChecked == true)
@@ -1153,7 +1170,11 @@ namespace MarvelGuide.GUI
 
         private void EndWorkingDateTextBox_Initialized(object sender, EventArgs e)
         {
-            if (_user.Id == -1 || _user.WorkingNow) { EndWorkingDateTextBox.Visibility = Visibility.Collapsed; }
+            if (_user.Id == -1 || _user.WorkingNow)
+            {
+                StartWorkingDateTextBox.Margin = EndWorkingDateTextBox.Margin;
+                EndWorkingDateTextBox.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void EndWorkingDateTextBlock_Initialized(object sender, EventArgs e)
@@ -1405,6 +1426,8 @@ namespace MarvelGuide.GUI
         {
             if (EndWorkingDateTextBlock != null && EndWorkingDateTextBox != null)
             {
+                StartWorkingDateTextBox.Margin = EndWorkingDateTextBox.Margin;
+
                 EndWorkingDateTextBlock.Visibility = Visibility.Collapsed;
                 EndWorkingDateTextBox.Visibility = Visibility.Collapsed;
             }
@@ -1412,6 +1435,8 @@ namespace MarvelGuide.GUI
 
         private void StillWorkingCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
+            StartWorkingDateTextBox.Margin = LoginTextBox.Margin;
+
             EndWorkingDateTextBox.Visibility = Visibility.Visible;
             EndWorkingDateTextBlock.Visibility = Visibility.Visible;
         }
@@ -1741,6 +1766,37 @@ namespace MarvelGuide.GUI
 
 
 
+        private void PasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (PasswordTextBlock.Visibility == Visibility.Collapsed)
+            {
+                PasswordTextBlock.Visibility = Visibility.Visible;
+                PasswordTextBox.Visibility = Visibility.Visible;
+                MainPasswordBox.Visibility = Visibility.Hidden;
+
+                RepeatPasswordTextBlock.Visibility = Visibility.Visible;
+                RepeatPasswordTextBox.Visibility = Visibility.Visible;
+                RepeatPasswordBox.Visibility = Visibility.Hidden;
+
+                PasswordButton.Content = oldPassword;
+            }
+
+            else
+            {
+                PasswordTextBlock.Visibility = Visibility.Collapsed;
+                PasswordTextBox.Visibility = Visibility.Collapsed;
+                MainPasswordBox.Visibility = Visibility.Collapsed;
+
+                RepeatPasswordTextBlock.Visibility = Visibility.Collapsed;
+                RepeatPasswordTextBox.Visibility = Visibility.Collapsed;
+                RepeatPasswordBox.Visibility = Visibility.Collapsed;
+
+                PasswordButton.Content = updatePassword;
+            }
+        }
+
+
+
         private bool CheckingWhetherAllFieldsFilledCorrectly()
         {
             LoginTextBox.Text = LoginTextBox.Text.TrimEnd();
@@ -1792,7 +1848,7 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (MainPasswordBox.Password == "" || RepeatPasswordBox.Password == "")
+            if (PasswordTextBlock.Visibility == Visibility.Visible && (MainPasswordBox.Password == "" || RepeatPasswordBox.Password == ""))
             {
                 MessageBox.Show("Укажите пароль для сотрудника, а затем воспроизведите его.", "Ошибка");
 
@@ -1923,7 +1979,7 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (MainPasswordBox.Password.Length != 6 && MainPasswordBox.Password.Length != 2 || !int.TryParse(MainPasswordBox.Password, out result))
+            if (PasswordTextBlock.Visibility == Visibility.Visible && (MainPasswordBox.Password.Length != 6 && MainPasswordBox.Password.Length != 2 || !int.TryParse(MainPasswordBox.Password, out result)))
             {
                 MessageBox.Show("Пароль обязательно должен быть шестизначным числом. Пожалуйста, измените пароль и воспроизведите его в поле ниже.", "Ошибка");
 
@@ -1937,7 +1993,7 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (MainPasswordBox.Password != RepeatPasswordBox.Password)
+            if (PasswordTextBlock.Visibility == Visibility.Visible && MainPasswordBox.Password != RepeatPasswordBox.Password)
             {
                 MessageBox.Show("Пароли не совпадают.", "Ошибка");
 

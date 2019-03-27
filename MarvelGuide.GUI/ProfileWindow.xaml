@@ -166,6 +166,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
@@ -178,7 +179,7 @@
                         <TextBox Name="SurnameTextBox" Grid.Row="4" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray" GotFocus="SurnameTextBox_GotFocus" LostFocus="SurnameTextBox_LostFocus">Пример: Иванов</TextBox>
 
                         <TextBlock Grid.Row="5" FontSize="14" Margin="11.5 5 0 5">Пол:</TextBlock>
-                        <Grid Grid.Row="6" Margin="10 0 0 10">
+                        <Grid Name="SexGrid" Grid.Row="6" Margin="10 0 0 11">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
@@ -193,27 +194,29 @@
                         <TextBlock Grid.Row="8" FontSize="14" Margin="11.5 5 0 5">Логин (рекомендуется на англ.):</TextBlock>
                         <TextBox Name="LoginTextBox" Grid.Row="9" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray" GotFocus="LoginTextBox_GotFocus" LostFocus="LoginTextBox_LostFocus">Пример: ivani</TextBox>
 
-                        <TextBlock Grid.Row="10" FontSize="14" Margin="11.5 5 0 5">Пароль (6 цифр):</TextBlock>
+                        <TextBlock Name="PasswordTextBlock" Grid.Row="10" FontSize="14" Margin="11.5 5 0 5">Пароль (6 цифр):</TextBlock>
                         <TextBox Name="PasswordTextBox" Grid.Row="11" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray" GotFocus="PasswordTextBox_GotFocus">Пример: 123456</TextBox>
                         <PasswordBox Name="MainPasswordBox" Grid.Row="11" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" LostFocus="MainPasswordBox_LostFocus" Visibility="Hidden"></PasswordBox>
 
-                        <TextBlock Grid.Row="12" FontSize="14" Margin="11.5 5 0 5">Подтвердите пароль:</TextBlock>
-                        <TextBox Name="RepeatPasswordTextBox" Grid.Row="13" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 10" Foreground="Gray" GotFocus="RepeatPasswordTextBox_GotFocus">Пример: 123456</TextBox>
-                        <PasswordBox Name="RepeatPasswordBox" Grid.Row="13" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 10" LostFocus="RepeatPasswordBox_LostFocus" Visibility="Hidden"></PasswordBox>
+                        <TextBlock Name="RepeatPasswordTextBlock" Grid.Row="12" FontSize="14" Margin="11.5 5 0 5">Подтвердите пароль:</TextBlock>
+                        <TextBox Name="RepeatPasswordTextBox" Grid.Row="13" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray" GotFocus="RepeatPasswordTextBox_GotFocus">Пример: 123456</TextBox>
+                        <PasswordBox Name="RepeatPasswordBox" Grid.Row="13" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" LostFocus="RepeatPasswordBox_LostFocus" Visibility="Hidden"></PasswordBox>
 
-                        <TextBlock Grid.Row="14" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="10.5 18 0 5">Оформите историю работы сотрудника:</TextBlock>
+                        <Button Name="PasswordButton" Grid.Row="14" HorizontalAlignment="Left" Padding="6.3 4.5" FontSize="13" Margin="10 8.5 150 13" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="PasswordButton_Click">Старый пароль</Button>
 
-                        <CheckBox Grid.Row="15" Name="StillWorkingCheckBox" Margin="20 3.5 20 6" FontSize="14" IsChecked="True" Checked="StillWorkingCheckBox_Checked" Unchecked="StillWorkingCheckBox_Unchecked">Сейчас сотрудник работает</CheckBox>
+                        <TextBlock Grid.Row="15" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="10.5 18 0 5">Оформите историю работы сотрудника:</TextBlock>
 
-                        <TextBlock Grid.Row="16" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap">Дата начала работы (ДД.ММ.ГГГГ):</TextBlock>
-                        <TextBox Name="StartWorkingDateTextBox" Grid.Row="17" FontSize="16" FontFamily="Calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray" GotFocus="StartWorkingDateTextBox_GotFocus" LostFocus="StartWorkingDateTextBox_LostFocus">Пример: 18.08.2018</TextBox>
+                        <CheckBox Grid.Row="16" Name="StillWorkingCheckBox" Margin="20 3.5 20 6" FontSize="14" IsChecked="True" Checked="StillWorkingCheckBox_Checked" Unchecked="StillWorkingCheckBox_Unchecked">Сейчас сотрудник работает</CheckBox>
 
-                        <TextBlock Name="EndWorkingDateTextBlock" Grid.Row="18" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap" Initialized="EndWorkingDateTextBlock_Initialized">Дата окончания работы (ДД.ММ.ГГГГ):</TextBlock>
-                        <TextBox Name="EndWorkingDateTextBox" Grid.Row="19" FontSize="16" FontFamily="Calibri" Padding="4 2" Margin="10 0 150 10" Foreground="Gray" Initialized="EndWorkingDateTextBox_Initialized" GotFocus="EndWorkingDateTextBox_GotFocus" LostFocus="EndWorkingDateTextBox_LostFocus">Пример: 01.09.2018</TextBox>
+                        <TextBlock Grid.Row="17" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap">Дата начала работы (ДД.ММ.ГГГГ):</TextBlock>
+                        <TextBox Name="StartWorkingDateTextBox" Grid.Row="18" FontSize="16" FontFamily="Calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray" GotFocus="StartWorkingDateTextBox_GotFocus" LostFocus="StartWorkingDateTextBox_LostFocus">Пример: 18.08.2018</TextBox>
+
+                        <TextBlock Name="EndWorkingDateTextBlock" Grid.Row="19" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap" Initialized="EndWorkingDateTextBlock_Initialized">Дата окончания работы (ДД.ММ.ГГГГ):</TextBlock>
+                        <TextBox Name="EndWorkingDateTextBox" Grid.Row="20" FontSize="16" FontFamily="Calibri" Padding="4 2" Margin="10 0 150 11" Foreground="Gray" Initialized="EndWorkingDateTextBox_Initialized" GotFocus="EndWorkingDateTextBox_GotFocus" LostFocus="EndWorkingDateTextBox_LostFocus">Пример: 01.09.2018</TextBox>
 
 
-                        <TextBlock Grid.Row="20" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="10.5 18 0 10">Отметьте все должности сотрудника:</TextBlock>
-                        <Grid Name="CheckBoxGrid" Grid.Row="21" Margin="10 0 0 10">
+                        <TextBlock Grid.Row="21" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="10.5 18 0 10">Отметьте все должности сотрудника:</TextBlock>
+                        <Grid Name="CheckBoxGrid" Grid.Row="22" Margin="10 0 0 11">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -237,7 +240,7 @@
                             <CheckBox Name="ModeratorcheckBox" Margin="10 3.5" FontSize="14" Grid.Row="8">Модератор</CheckBox>
                         </Grid>
 
-                        <Grid Name="OwnersRoleGrid" Grid.Row="22" Initialized="OwnersRoleGrid_Initialized">
+                        <Grid Name="OwnersRoleGrid" Grid.Row="23" Initialized="OwnersRoleGrid_Initialized">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -247,10 +250,10 @@
                             <TextBlock Grid.Row="0" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="11.2 18 0 3.5">Должность владельца:</TextBlock>
 
                             <TextBlock Grid.Row="1" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap">Полное название должности:</TextBlock>
-                            <TextBox Name="OwnersRoleTextBox" Grid.Row="2" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 10" Foreground="Gray" GotFocus="OwnersRoleTextBox_GotFocus" LostFocus="OwnersRoleTextBox_LostFocus">Пример: Генеральный директор</TextBox>
+                            <TextBox Name="OwnersRoleTextBox" Grid.Row="2" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 11" Foreground="Gray" GotFocus="OwnersRoleTextBox_GotFocus" LostFocus="OwnersRoleTextBox_LostFocus">Пример: Генеральный директор</TextBox>
                         </Grid>
                         
-                        <Grid Name="ManagersRoleGrid" Grid.Row="23" Initialized="ManagersRoleGrid_Initialized">
+                        <Grid Name="ManagersRoleGrid" Grid.Row="24" Initialized="ManagersRoleGrid_Initialized">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -260,10 +263,10 @@
                             <TextBlock Grid.Row="0" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="10.5 18 0 3.5">Менеджерская должность:</TextBlock>
 
                             <TextBlock Grid.Row="1" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap">Развёрнутое название должности (при наличии нескольких перечислять через ";"):</TextBlock>
-                            <TextBox Name="ManagersRoleTextBox" Grid.Row="2" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 10" Foreground="Gray" GotFocus="ManagersRoleTextBox_GotFocus" LostFocus="ManagersRoleTextBox_LostFocus">Пример: Менеджер по кадрам</TextBox>
+                            <TextBox Name="ManagersRoleTextBox" Grid.Row="2" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 11" Foreground="Gray" GotFocus="ManagersRoleTextBox_GotFocus" LostFocus="ManagersRoleTextBox_LostFocus">Пример: Менеджер по кадрам</TextBox>
                         </Grid>
 
-                        <Grid Name="EditorsRoleGrid" Grid.Row="24" Initialized="EditorsRoleGrid_Initialized">
+                        <Grid Name="EditorsRoleGrid" Grid.Row="25" Initialized="EditorsRoleGrid_Initialized">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -306,28 +309,10 @@
                                 </ListBox.ItemTemplate>
                             </ListBox>
 
-                            <Button Name="AddRubricButton" Grid.Row="2" HorizontalAlignment="Left" Padding="5.5 4.5" FontSize="13" Margin="11.5 8 150 14" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="AddRubricButton_Click">Добавить рубрику</Button>
+                            <Button Name="AddRubricButton" Grid.Row="2" HorizontalAlignment="Left" Padding="5.5 4.5" FontSize="13" Margin="11.5 8 150 13" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="AddRubricButton_Click">Добавить рубрику</Button>
                         </Grid>
 
-                        <!--<Grid Name="EditorsRoleGrid" Grid.Row="23" Initialized="EditorsRoleGrid_Initialized" Visibility="Hidden">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Grid.Row="0" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="10.5 18 0 3.5">Редакторская должность:</TextBlock>
-
-                            <TextBlock Grid.Row="1" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap">Название рубрики (на русском):</TextBlock>
-                            <TextBox Name="EditorsRubricTextBox" Grid.Row="2" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray" GotFocus="EditorsRubricTextBox_GotFocus" LostFocus="EditorsRubricTextBox_LostFocus">Пример: Старс</TextBox>
-
-                            <TextBlock Grid.Row="3" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap" >Частота размещения (раз во сколько дней должен публиковаться пост):</TextBlock>
-                            <TextBox Name="EditorsFrequencyTextBox" Grid.Row="4" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 10" Foreground="Gray" GotFocus="EditorsFrequencyTextBox_GotFocus" LostFocus="EditorsFrequencyTextBox_LostFocus">Пример: 3</TextBox>
-                        </Grid>-->
-
-                        <Grid Name="AgentsRoleGrid" Grid.Row="25" Initialized="AgentsRoleGrid_Initialized">
+                        <Grid Name="AgentsRoleGrid" Grid.Row="26" Initialized="AgentsRoleGrid_Initialized">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
@@ -347,7 +332,7 @@
                             <TextBox Name="AgentsFirstWordsTextBox" Grid.Row="4" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 3.5" Foreground="Gray" GotFocus="AgentsFirstWordsTextBox_GotFocus" LostFocus="AgentsFirstWordsTextBox_LostFocus">Пример: Здравствуйте!</TextBox>
 
                             <TextBlock Grid.Row="5" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap" >Подпись агента:</TextBlock>
-                            <TextBox Name="AgentsLastWordsTextBox" Grid.Row="6" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 10" Foreground="Gray" GotFocus="AgentsLastWordsTextBox_GotFocus" LostFocus="AgentsLastWordsTextBox_LostFocus">Пример: С любовью</TextBox>
+                            <TextBox Name="AgentsLastWordsTextBox" Grid.Row="6" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 11" Foreground="Gray" GotFocus="AgentsLastWordsTextBox_GotFocus" LostFocus="AgentsLastWordsTextBox_LostFocus">Пример: С любовью</TextBox>
                         </Grid>
                     </Grid>
 
