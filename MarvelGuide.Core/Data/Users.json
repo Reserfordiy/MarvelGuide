@@ -2260,7 +2260,7 @@
     "AdminAgent": false,
     "Manager": false,
     "Editor": true,
-    "Agent": true,
+    "Agent": false,
     "Moderator": false,
     "OwnersRole": null,
     "ManagersRole": null,
@@ -2274,9 +2274,9 @@
         "Frequency": 4
       }
     ],
-    "AgentsNumber": 35,
-    "AgentsFirstWords": "Добрый день(вечер, утро)!",
-    "AgentsLastWords": "С наилучшими пожеланиями",
+    "AgentsNumber": 0,
+    "AgentsFirstWords": null,
+    "AgentsLastWords": null,
     "Avatar": {
       "Id": 0,
       "ImageSource": "tergazaryan.jpg",
