@@ -1,4 +1,6 @@
-﻿using MarvelGuide.Core.Models;
+﻿using MarvelGuide.Core;
+using MarvelGuide.Core.Intefraces;
+using MarvelGuide.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,8 @@ namespace MarvelGuide.GUI
     {
         private const string versionText = "Версия от ";
 
+
+        IStorage _storage;
 
         Document _document;
         DocumentVersion _version;
@@ -47,6 +51,8 @@ namespace MarvelGuide.GUI
             _readingFromEditDocumentWindow = readingFromEditDocumentWindow;
 
             _userWhoReads = userWhoReads;
+
+            _storage = Factory.Instance.GetStorage();
 
             InitializeComponent();
 
@@ -79,6 +85,11 @@ namespace MarvelGuide.GUI
             else if (_document.Versions.IndexOf(_version) == _document.Versions.Count - 1)
             {
                 NextVersionButton.Visibility = Visibility.Collapsed;
+            }
+
+            if (!_readingFromEditDocumentWindow)
+            {
+                DeleteButton.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -133,6 +144,57 @@ namespace MarvelGuide.GUI
         {
             _goingToAnotherVersion = true;
             _followingVersion = _document.Versions[_document.Versions.IndexOf(_version) + 1];
+
+            Close();
+        }
+
+
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_document.Versions.Count == 1)
+            {
+                if (MessageBox.Show($"Данное действие удалит весь документ целиком. Восстановить его будет невозможно. Вы уверены, что хотите продолжить?", "Предупреждение", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+                {
+                    _storage.Documents.Remove(_document);
+
+                    _storage.Documents.Save();
+
+                    _readingFromEditDocumentWindow = false;
+
+                    Close();
+                }
+            }
+            else if (_document.Versions.IndexOf(_version) == 0)
+            {
+                if (MessageBox.Show($"Вы уверены, что хотите удалить исходную версию документа? Отменить это действие будет невозможно, и исходной версией будет назначена следующая за ней версия!", "Предупреждение", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+                {
+                    _document.CreationDate = DateTime.Parse(_document.Versions[1].Date.ToString("d"));
+
+                    DeletingTheVersion();
+                }
+            }
+            else if (_document.Versions.IndexOf(_version) == _document.Versions.Count - 1)
+            {
+                if (MessageBox.Show("Вы уверены, что хотите удалить последнюю версию документа? Все изменения, внесенные в предпоследнюю версию, будут безвозвратно утрачены.", "Предупреждение", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+                {
+                    DeletingTheVersion();
+                }
+            }
+            else
+            {
+                if (MessageBox.Show($"Вы уверены, что хотите удалить данную версию? Отменить это действие будет невозможно!", "Предупреждение", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+                {
+                    DeletingTheVersion();
+                }
+            }
+        }
+
+        private void DeletingTheVersion()
+        {
+            _document.Versions.Remove(_version);
+
+            _storage.Documents.Save();
 
             Close();
         }

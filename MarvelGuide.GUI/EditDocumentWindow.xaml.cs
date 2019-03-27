@@ -444,7 +444,7 @@ namespace MarvelGuide.GUI
             }
             else if (_document.Versions.IndexOf(version) == _document.Versions.Count - 1)
             {
-                if (MessageBox.Show("Вы уверены, что хотите удалить текущую версию документа? Все изменения, внесенные в предпоследнюю версию, будут безвозвратно утрачены.", "Предупреждение", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Вы уверены, что хотите удалить последнюю версию документа? Все изменения, внесенные в предпоследнюю версию, будут безвозвратно утрачены.", "Предупреждение", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
                 {
                     ContentTextBox.Text = _document.Versions[_document.Versions.Count - 2].Text;
 
