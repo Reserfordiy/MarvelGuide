@@ -1328,7 +1328,7 @@
     "AgentsLastWords": null,
     "Avatar": {
       "Id": 0,
-      "ImageSource": "evdokimov_al.jpg",
+      "ImageSource": "evdokimov_al_1.jpg",
       "IsBorderRequired": true
     }
   },
@@ -2366,6 +2366,54 @@
     "Avatar": {
       "Id": 0,
       "ImageSource": "seryodkin.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 58,
+    "Name": "Даниил",
+    "Surname": "Логачев",
+    "Male": true,
+    "Login": "daniill",
+    "Password": "9bp8wS1rm3TSOHc7d6FRMA==",
+    "WorkingNow": true,
+    "GotAJob": "2019-03-29T00:00:00",
+    "LostTheJob": "0001-01-01T00:00:00",
+    "SuperDeveloper": false,
+    "HighDeveloper": false,
+    "MediumDeveloper": false,
+    "LightDeveloperCreator": false,
+    "LightDeveloperSuperAdmin": false,
+    "LightDeveloperAdminManager": false,
+    "LightDeveloperAdminEditor": false,
+    "LightDeveloperAdminAgent": false,
+    "LightDeveloperManager": false,
+    "LightDeveloperAgent": false,
+    "LightDeveloperEditor": false,
+    "LightDeveloperModerator": false,
+    "Creator": false,
+    "SuperAdmin": false,
+    "AdminManager": false,
+    "AdminEditor": false,
+    "AdminAgent": false,
+    "Manager": false,
+    "Editor": true,
+    "Agent": false,
+    "Moderator": false,
+    "OwnersRole": null,
+    "ManagersRole": null,
+    "EditorsRubrics": [
+      {
+        "Rubric": "Старс",
+        "Frequency": 1
+      }
+    ],
+    "AgentsNumber": 0,
+    "AgentsFirstWords": null,
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 0,
+      "ImageSource": "logachev.jpg",
       "IsBorderRequired": true
     }
   }
