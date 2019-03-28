@@ -252,9 +252,15 @@ namespace MarvelGuide.GUI
                     EndWorkingDateTextBox.Text = _user.LostTheJob.ToString("d");
                     EndWorkingDateTextBox.Foreground = Brushes.Black;
                 }
+                else
+                {
+                    StartWorkingDateTextBox.Margin = new Thickness(StartWorkingDateTextBox.Margin.Left, StartWorkingDateTextBox.Margin.Top, StartWorkingDateTextBox.Margin.Right, 11);
+                }
 
                 StartWorkingDateTextBox.Text = _user.GotAJob.ToString("d");
                 StartWorkingDateTextBox.Foreground = Brushes.Black;
+
+                Today1Button.Visibility = Visibility.Collapsed;
 
                 if (_user.Creator)
                 {
@@ -326,6 +332,8 @@ namespace MarvelGuide.GUI
                 RepeatPasswordBox.Margin = RepeatPasswordTextBox.Margin;
 
                 PasswordButton.Visibility = Visibility.Collapsed;
+
+                Today1Button.Margin = new Thickness(Today1Button.Margin.Left, Today1Button.Margin.Top, Today1Button.Margin.Right, 13);
             }
 
             EditorsInformationListBox.ItemsSource = _publications;
@@ -1181,6 +1189,11 @@ namespace MarvelGuide.GUI
             if (_user.Id == -1 || _user.WorkingNow) { EndWorkingDateTextBlock.Visibility = Visibility.Collapsed; }
         }
 
+        private void Today2Button_Initialized(object sender, EventArgs e)
+        {
+            Today2Button.Visibility = Visibility.Collapsed;
+        }
+
 
 
         private void AddRubricButton_Click(object sender, RoutedEventArgs e)
@@ -1425,15 +1438,35 @@ namespace MarvelGuide.GUI
         {
             if (EndWorkingDateTextBlock != null && EndWorkingDateTextBox != null)
             {
-                StartWorkingDateTextBox.Margin = EndWorkingDateTextBox.Margin;
+                if (_user.Id == -1)
+                {
+                    Today1Button.Visibility = Visibility.Visible;
+                    Today1Button.Margin = new Thickness(Today1Button.Margin.Left, Today1Button.Margin.Top, Today1Button.Margin.Bottom, 13);
+                }
+                else
+                {
+                    StartWorkingDateTextBox.Margin = new Thickness(StartWorkingDateTextBox.Margin.Left, StartWorkingDateTextBox.Margin.Top, StartWorkingDateTextBox.Margin.Right, 11);
+                }
 
                 EndWorkingDateTextBlock.Visibility = Visibility.Collapsed;
                 EndWorkingDateTextBox.Visibility = Visibility.Collapsed;
+                Today2Button.Visibility = Visibility.Collapsed;
             }
         }
 
         private void StillWorkingCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
+            if (_user.Id == -1 || !_user.WorkingNow)
+            {
+                Today1Button.Visibility = Visibility.Collapsed;
+
+                EndWorkingDateTextBox.Margin = new Thickness(EndWorkingDateTextBox.Margin.Left, EndWorkingDateTextBox.Margin.Top, EndWorkingDateTextBox.Margin.Right, 11);
+            }
+            else if (_user.WorkingNow)
+            {
+                Today2Button.Visibility = Visibility.Visible;
+            }
+
             StartWorkingDateTextBox.Margin = LoginTextBox.Margin;
 
             EndWorkingDateTextBox.Visibility = Visibility.Visible;
@@ -1589,7 +1622,7 @@ namespace MarvelGuide.GUI
 
         private void StartWorkingDateTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (StartWorkingDateTextBox.Text == "")
+            if (StartWorkingDateTextBox.Text == "" && !Today1Button.IsMouseOver)
             {
                 StartWorkingDateTextBox.Text = defaultStartWorkingDate;
                 StartWorkingDateTextBox.Foreground = Brushes.Gray;
@@ -1607,7 +1640,7 @@ namespace MarvelGuide.GUI
 
         private void EndWorkingDateTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (EndWorkingDateTextBox.Text == "")
+            if (EndWorkingDateTextBox.Text == "" && !Today2Button.IsMouseOver)
             {
                 EndWorkingDateTextBox.Text = defaultEndWorkingDate;
                 EndWorkingDateTextBox.Foreground = Brushes.Gray;
@@ -1795,6 +1828,19 @@ namespace MarvelGuide.GUI
         }
 
 
+        private void Today1Button_Click(object sender, RoutedEventArgs e)
+        {
+            StartWorkingDateTextBox.Text = DateTime.Now.ToString("d");
+            StartWorkingDateTextBox.Foreground = Brushes.Black;
+        }
+
+        private void Today2Button_Click(object sender, RoutedEventArgs e)
+        {
+            EndWorkingDateTextBox.Text = DateTime.Now.ToString("d");
+            EndWorkingDateTextBox.Foreground = Brushes.Black;
+        }
+
+
 
         private bool CheckingWhetherAllFieldsFilledCorrectly()
         {
@@ -1864,7 +1910,7 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (StartWorkingDateTextBox.Text == defaultStartWorkingDate)
+            if (StartWorkingDateTextBox.Text == defaultStartWorkingDate || StartWorkingDateTextBox.Text == "")
             {
                 MessageBox.Show("Укажите дату, когда сотрудник приступил к исполнению своих обязанностей.", "Ошибка");
 
@@ -1872,7 +1918,7 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (StillWorkingCheckBox.IsChecked == false && EndWorkingDateTextBox.Text == defaultEndWorkingDate)
+            if (StillWorkingCheckBox.IsChecked == false && (EndWorkingDateTextBox.Text == defaultEndWorkingDate || EndWorkingDateTextBox.Text == ""))
             {
                 MessageBox.Show("Укажите дату, когда сотрудник покинул свою должность.", "Ошибка");
 
