@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
         Title="Обучающий гайд" Height="620" MinHeight="460" Width="620" MinWidth="590" MaxWidth="675" FontFamily="Verdana" Closing="Window_Closing" WindowState="Maximized" StateChanged="Window_StateChanged">
-    <ScrollViewer>
+    <ScrollViewer Name="Scroll">
         <Grid Background="#FFEAF6FB">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -20,7 +20,7 @@
 
             <TextBlock Name="TitleTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="22.5" Margin="90 60 0 10" Initialized="TitleTextBlock_Initialized">Наша команда:</TextBlock>
 
-            <ListBox Name="TheTeamListBox" Margin="75 10 75 27" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="1" Style="{DynamicResource TransparentListBox}">
+            <ListBox Name="TheTeamListBox" Margin="75 10 75 27" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="1" Style="{DynamicResource TransparentListBox}" PreviewMouseWheel="ListBox_PreviewMouseWheel">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0 0 0 -32">
@@ -52,7 +52,7 @@
 
             <TextBlock Grid.Row="2"  HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="22.5" Margin="90 0 0 10" Initialized="TitleTextBlock_Initialized">Когда-то с нами работали:</TextBlock>
 
-            <ListBox Name="LeftPeopleListBox" Margin="75 10 75 0" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="3" Style="{DynamicResource TransparentListBox}">
+            <ListBox Name="LeftPeopleListBox" Margin="75 10 75 0" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="3" Style="{DynamicResource TransparentListBox}" PreviewMouseWheel="ListBox_PreviewMouseWheel">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0 0 0 -32">

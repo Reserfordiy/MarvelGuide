@@ -526,5 +526,12 @@ namespace MarvelGuide.GUI
                 e.Handled = true;
             }
         }
+
+
+
+        private void ListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {            
+            Scroll.ScrollToVerticalOffset(Scroll.VerticalOffset - (double)e.Delta * 5 / 12);            
+        }
     }
 }

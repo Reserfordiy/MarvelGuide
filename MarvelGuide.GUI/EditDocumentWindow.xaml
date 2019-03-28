@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
         Title="Обучающий гайд" Height="755" MinHeight="655" Width="870" MinWidth="730" MaxWidth="1050" FontFamily="Verdana" SizeChanged="Window_SizeChanged" StateChanged="Window_StateChanged" Closing="Window_Closing" KeyDown="Window_KeyDown">
-    <ScrollViewer>
+    <ScrollViewer Name="Scroll">
         <Grid Background="#FFEAF6FB">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -64,7 +64,7 @@
 
             <TextBlock Name="VersionsTextBlock" Grid.Row="7" FontSize="20" FontFamily="Calibri" Margin="45 10 45 10">Версии документа:</TextBlock>
 
-            <ListBox Grid.Row="8" Name="VersionsListBox" Margin="41 0 41 25"  HorizontalAlignment="Left" Width="455" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{DynamicResource TransparentListBox}" >
+            <ListBox Grid.Row="8" Name="VersionsListBox" Margin="41 0 41 25"  HorizontalAlignment="Left" Width="455" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{DynamicResource TransparentListBox}" PreviewMouseWheel="ListBox_PreviewMouseWheel">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

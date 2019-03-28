@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
         Title="Обучающий гайд" Height="540" MinHeight="510" Width="610" MinWidth="580" MaxWidth="665" FontFamily="Verdana" Closing="Window_Closing">
-    <ScrollViewer>
+    <ScrollViewer Name="Scroll">
         <Grid Background="#FFEAF6FB">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -27,7 +27,7 @@
             
             <TextBlock Grid.Row="0" Name="PublicDocumentsTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="22.5" Margin="67 100 0 5">Документы в общем доступе:</TextBlock>
 
-            <ListBox Name="PublicDocumentsListBox" Margin="45 10 45 42" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="1" Style="{DynamicResource TransparentListBox}">
+            <ListBox Name="PublicDocumentsListBox" Margin="45 10 45 42" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="1" Style="{DynamicResource TransparentListBox}" PreviewMouseWheel="ListBox_PreviewMouseWheel">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -59,7 +59,7 @@
 
             <TextBlock Name="HiddenDocumentsTextBlock" Grid.Row ="2" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="22.5" Margin="67 0 0 5">Скрытые документы:</TextBlock>
 
-            <ListBox Grid.Row="3" Name="HiddenDocumentsListBox" Margin="45 10 45 45" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{DynamicResource TransparentListBox}">
+            <ListBox Grid.Row="3" Name="HiddenDocumentsListBox" Margin="45 10 45 45" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{DynamicResource TransparentListBox}" PreviewMouseWheel="ListBox_PreviewMouseWheel">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
