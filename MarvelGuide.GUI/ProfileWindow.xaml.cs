@@ -144,6 +144,7 @@ namespace MarvelGuide.GUI
         bool _goingToTheTeamWindow = false;
         bool _goingToTheDeveloperMode = false;
         bool _goingToEditDocuments = false;
+        bool _goingToEditRubrics = false;
 
         bool _personalPage = true;
         bool _editingPage = false;
@@ -376,7 +377,14 @@ namespace MarvelGuide.GUI
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (_goingToEditDocuments)
+            if (_goingToEditRubrics)
+            {
+                AllRubricsWindow allRubricsWindow = new AllRubricsWindow(_user);
+
+                allRubricsWindow.Show();
+            }
+
+            else if (_goingToEditDocuments)
             {
                 AllDocumentsWindow allDocumentsWindow = new AllDocumentsWindow(_user);
 
@@ -816,6 +824,7 @@ namespace MarvelGuide.GUI
             }
         }
 
+
         private void ShowTheTeamButton_Initialized(object sender, EventArgs e)
         {
             if (!_personalPage)
@@ -839,6 +848,15 @@ namespace MarvelGuide.GUI
                 EditDocumentsButton.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void EditRubricsButton_Initialized(object sender, EventArgs e)
+        {
+            if (!(_user.SuperDeveloper || _user.HighDeveloper || _user.MediumDeveloper) || !_personalPage)
+            {
+                EditRubricsButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
 
         private void SaveDataButton_Initialized(object sender, EventArgs e)
         {
@@ -874,7 +892,7 @@ namespace MarvelGuide.GUI
             {
                 WorkWithImages imageUploadingProcess = new WorkWithImages();
 
-                imageUploadingProcess.UploadImageAndSave();
+                imageUploadingProcess.UploadImageAndSave("../MarvelGuide.Core/Avatars");
 
                 _picture = imageUploadingProcess.Picture;
 
@@ -882,6 +900,7 @@ namespace MarvelGuide.GUI
             }
             catch { }
         }
+
 
         private void ShowTheTeamButton_Click(object sender, RoutedEventArgs e)
         {
@@ -903,6 +922,14 @@ namespace MarvelGuide.GUI
 
             Close();
         }
+
+        private void EditRubricsButton_Click(object sender, RoutedEventArgs e)
+        {
+            _goingToEditRubrics = true;
+
+            Close();
+        }
+
 
         private void SaveDataButton_Click(object sender, RoutedEventArgs e)
         {

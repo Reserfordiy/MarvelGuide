@@ -1,0 +1,178 @@
+[
+  {
+    "Id": 1,
+    "Name": "Арты",
+    "DocumentId": 7,
+    "KPI": {
+      "AmountOfPosts": 0,
+      "AverageLikes": 0.0,
+      "AverageLikesEfficiency": 0.0,
+      "AverageReposts": 0.0,
+      "AverageComments": 0.0
+    },
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "art(1).jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "art_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 2,
+    "Name": "Сцены",
+    "DocumentId": 10,
+    "KPI": {
+      "AmountOfPosts": 0,
+      "AverageLikes": 0.0,
+      "AverageLikesEfficiency": 0.0,
+      "AverageReposts": 0.0,
+      "AverageComments": 0.0
+    },
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "scenes.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "scenes_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 3,
+    "Name": "Хистори",
+    "DocumentId": 9,
+    "KPI": {
+      "AmountOfPosts": 0,
+      "AverageLikes": 0.0,
+      "AverageLikesEfficiency": 0.0,
+      "AverageReposts": 0.0,
+      "AverageComments": 0.0
+    },
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "history.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "history_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 4,
+    "Name": "Юмор",
+    "DocumentId": 8,
+    "KPI": {
+      "AmountOfPosts": 0,
+      "AverageLikes": 0.0,
+      "AverageLikesEfficiency": 0.0,
+      "AverageReposts": 0.0,
+      "AverageComments": 0.0
+    },
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "humour.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "humour_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 5,
+    "Name": "Фильмарты",
+    "DocumentId": 12,
+    "KPI": {
+      "AmountOfPosts": 0,
+      "AverageLikes": 0.0,
+      "AverageLikesEfficiency": 0.0,
+      "AverageReposts": 0.0,
+      "AverageComments": 0.0
+    },
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "filmart.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "filmart_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 6,
+    "Name": "Старс",
+    "DocumentId": 13,
+    "KPI": {
+      "AmountOfPosts": 0,
+      "AverageLikes": 0.0,
+      "AverageLikesEfficiency": 0.0,
+      "AverageReposts": 0.0,
+      "AverageComments": 0.0
+    },
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "stars.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "stars_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 7,
+    "Name": "Факты",
+    "DocumentId": 12,
+    "KPI": {
+      "AmountOfPosts": 0,
+      "AverageLikes": 0.0,
+      "AverageLikesEfficiency": 0.0,
+      "AverageReposts": 0.0,
+      "AverageComments": 0.0
+    },
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "facts.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "facts_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 8,
+    "Name": "Досье",
+    "DocumentId": 11,
+    "KPI": {
+      "AmountOfPosts": 0,
+      "AverageLikes": 0.0,
+      "AverageLikesEfficiency": 0.0,
+      "AverageReposts": 0.0,
+      "AverageComments": 0.0
+    },
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "dossier.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "dossier_d.jpg",
+      "IsBorderRequired": true
+    }
+  }
+]

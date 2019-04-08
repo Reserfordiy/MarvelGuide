@@ -14,6 +14,7 @@ namespace MarvelGuide.Core.DataStorages
     {
         IRepository<Document> _documents;
         IRepository<User> _users;
+        IRepository<Rubric> _rubrics;
 
         bool _loaded;
 
@@ -31,13 +32,14 @@ namespace MarvelGuide.Core.DataStorages
                 
                 using (_context = new Context())
                 {
-                    _documents = new DBRepository<Document>(_context.Roules.ToList());
+                    _documents = new DBRepository<Document>(_context.Documents.ToList());
                     _users = new DBRepository<User>(_context.Users.ToList());
+                    _rubrics = new DBRepository<Rubric>(_context.Rubrics.ToList());
 
                     _loaded = true;
 
                     //SaveDocumentsToJson();
-                    SaveUsersToJson();
+                    //SaveUsersToJson();
                 }                
 
                 return _documents;
@@ -45,6 +47,7 @@ namespace MarvelGuide.Core.DataStorages
         }
 
         public IRepository<User> Users => _users;
+        public IRepository<Rubric> Rubrics => _rubrics;
 
 
 
@@ -56,21 +59,26 @@ namespace MarvelGuide.Core.DataStorages
         {
 
         }
+        public void ChangingRubricsModels()
+        {
+
+        }
 
 
-        //public void SaveDocumentsToJson()
-        //{
-        //    using (var sw = new StreamWriter("../../../MarvelGuide.Core/Data/Documents.json"))
-        //    {
-        //        using (var jsonWriter = new JsonTextWriter(sw))
-        //        {
-        //            jsonWriter.Formatting = Formatting.Indented;
 
-        //            var serializer = new JsonSerializer();
-        //            serializer.Serialize(jsonWriter, _documents.Items);
-        //        }
-        //    }
-        //}
+        public void SaveDocumentsToJson()
+        {
+            using (var sw = new StreamWriter("../../../MarvelGuide.Core/Data/Documents.json"))
+            {
+                using (var jsonWriter = new JsonTextWriter(sw))
+                {
+                    jsonWriter.Formatting = Formatting.Indented;
+
+                    var serializer = new JsonSerializer();
+                    serializer.Serialize(jsonWriter, _documents.Items);
+                }
+            }
+        }
 
         public void SaveUsersToJson()
         {

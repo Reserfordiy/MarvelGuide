@@ -12,13 +12,16 @@ namespace MarvelGuide.Core.DataStorages
     {
         private const string documentsFilePath = "../../../MarvelGuide.Core/Data/Documents.json";
         private const string usersFilePath = "../../../MarvelGuide.Core/Data/Users.json";
+        private const string rubricsFilePath = "../../../MarvelGuide.Core/Data/Rubrics.json";
 
 
         IRepository<Document> _documents;
         IRepository<User> _users;
+        IRepository<Rubric> _rubrics;
 
         bool _documentsLoaded;
         bool _usersLoaded;
+        bool _rubricsLoaded;
 
 
         public IRepository<Document> Documents
@@ -55,6 +58,30 @@ namespace MarvelGuide.Core.DataStorages
             }
         }
 
+        public IRepository<Rubric> Rubrics
+        {
+            get
+            {
+                if (_rubricsLoaded)
+                {
+                    return _rubrics;
+                }
+
+                _rubricsLoaded = true;
+
+                _rubrics = new JSONRepository<Rubric>(rubricsFilePath);
+
+                foreach (var rubric in _rubrics.Items)
+                {
+                    Document document = Documents.Items.FirstOrDefault(doc => doc.Id == rubric.DocumentId);
+
+                    rubric.Document = document;
+                }
+
+                return _rubrics;
+            }
+        }
+
 
 
         public void ChangingUsersModels()
@@ -75,6 +102,16 @@ namespace MarvelGuide.Core.DataStorages
             }
 
             Documents.Save();
+        }
+
+        public void ChangingRubricsModels()
+        {
+            foreach (var rubric in Rubrics.Items)
+            {
+
+            }
+
+            Rubrics.Save();
         }
     }
 }

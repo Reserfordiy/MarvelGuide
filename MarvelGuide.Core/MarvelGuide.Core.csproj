@@ -59,7 +59,6 @@
     <Compile Include="DataStorages\JSONStorage.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="Intefraces\IRepository.cs" />
-    <Compile Include="Intefraces\IDocument.cs" />
     <Compile Include="Intefraces\IStorage.cs" />
     <Compile Include="Migrations\201808221650068_Initial.cs" />
     <Compile Include="Migrations\201808221650068_Initial.Designer.cs">
@@ -88,8 +87,10 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DocumentVersion.cs" />
     <Compile Include="Models\EditorsPublication.cs" />
+    <Compile Include="Models\KPI.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\Rubric.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\HelpingMethods.cs" />
@@ -98,6 +99,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Data\Documents.json" />
+    <None Include="Data\Rubrics.json" />
     <None Include="Data\Users.json" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -123,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Avatars\" />
+    <Folder Include="Rubrics\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

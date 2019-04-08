@@ -64,14 +64,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AllRubricsWindow.xaml.cs">
+      <DependentUpon>AllRubricsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditDocumentWindow.xaml.cs">
       <DependentUpon>EditDocumentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\UIElementsMethods.cs" />
+    <Compile Include="RubricWindow.xaml.cs">
+      <DependentUpon>RubricWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TheTeamWindow.xaml.cs">
       <DependentUpon>TheTeamWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AllDocumentsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AllRubricsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -102,6 +112,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ProfileWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RubricWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

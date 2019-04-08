@@ -11,8 +11,10 @@ namespace MarvelGuide.Core.Intefraces
     {
         IRepository<Document> Documents { get; }
         IRepository<User> Users { get; }
+        IRepository<Rubric> Rubrics { get; }
 
         void ChangingUsersModels();
         void ChangingDocumentsModels();
+        void ChangingRubricsModels();
     }
 }

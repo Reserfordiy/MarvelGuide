@@ -28,12 +28,12 @@ namespace MarvelGuide.Core.Helpers
 
 
 
-        public void UploadImageAndSave()
+        public void UploadImageAndSave(string folder)
         {
             if (UploadImage())
             {
                 string originDestinationPath = GetDestinationPath(
-                    _picture.ImageSource, "../MarvelGuide.Core/Avatars");
+                    _picture.ImageSource, folder);
 
                 try
                 {

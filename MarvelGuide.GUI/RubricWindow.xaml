@@ -1,0 +1,98 @@
+﻿<Window x:Class="MarvelGuide.GUI.RubricWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MarvelGuide.GUI"
+        mc:Ignorable="d"
+        Title="Обучающий гайд" Height="900" Width="1000" MaxWidth="1200" MinWidth="790" MinHeight="650" Closing="Window_Closing">
+    <ScrollViewer>
+        <Grid Background="#FFEAF6FB">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Height="400" Margin="0 0 0 15">
+                <Border BorderThickness="1.2" BorderBrush="#FF715C4E">
+                    <Image Name="PictureImage" HorizontalAlignment="Center" Stretch="UniformToFill" Initialized="PictureImage_Initialized"></Image>
+                </Border>
+
+                <TextBlock Name="RubricNameTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Foreground="White" FontFamily="Segoe Print" Initialized="RubricNameTextBlock_Initialized"></TextBlock>
+            </Grid>
+
+            <Button Name="BackButton" Grid.Row="1" HorizontalAlignment="Right" Width="160" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="0 20 50 0" Style="{DynamicResource AttentionButtonsStyle}" Click="BackButton_Click" FontFamily="Verdana">Вернуться назад</Button>
+
+            <Button Name="SwitchTheDesignButton" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="50 20 0 0" Style="{DynamicResource AttentionButtonsStyle}" Click="SwitchTheDesignButton_Click" FontFamily="Verdana">Переключить тему</Button>
+
+            <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Calibri" FontSize="27" Margin="0 15 0 5">Редактирование рубрики</TextBlock>
+
+            <Grid Grid.Row="3" Margin="50 12 50 40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="0 0 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" FontSize="20" FontFamily="Calibri" Margin="4 5 45 10">Название:</TextBlock>
+                    <TextBox Name="NameTextBox" Grid.Row="1" HorizontalAlignment="Stretch" FontSize="18" FontFamily="Calibri" Padding="6 3" Margin="0 0 130 15" Foreground="Gray" GotFocus="NameTextBox_GotFocus" LostFocus="NameTextBox_LostFocus" TextChanged="NameTextBox_TextChanged">Пример: Фильмарты</TextBox>
+                </Grid>
+
+                <Grid Grid.Column="1" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" FontSize="20" FontFamily="Calibri" Margin="9 5 0 3.5">Темы:</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" FontSize="14.5" Margin="10.2 5 0 5">Классическая</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="1" FontSize="14.5" Margin="10.2 5 0 5">Затемненная</TextBlock>
+
+                    <Grid Grid.Row="2" Grid.Column="0" Margin="8.5 5 25 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        
+                        <Border  Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Height="80" BorderThickness="1.2" BorderBrush="#FF715C4E">
+                            <Image Name="UploadPictureImage" HorizontalAlignment="Center" Stretch="UniformToFill" Initialized="UploadPictureImage_Initialized"></Image>
+                        </Border>
+
+                        <Button Name="UploadImageButton" Grid.Row="1" HorizontalAlignment="Center" Padding="9 3.5" FontSize="12" Margin="0 8.5 0 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="UploadImageButton_Click">Загрузить</Button>
+                    </Grid>
+                    
+                    <Grid Grid.Row="2" Grid.Column="1" Margin="8.5 5 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        
+                        <Border Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Height="80" BorderThickness="1.2" BorderBrush="#FF715C4E">
+                            <Image Name="UploadDarkPictureImage" HorizontalAlignment="Center" Stretch="UniformToFill" Initialized="UploadDarkPictureImage_Initialized"></Image>
+                        </Border>
+
+                        <Button Name="UploadDarkImageButton" Grid.Row="1" HorizontalAlignment="Center" Padding="9 3.5" FontSize="12" Margin="0 8.5 0 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="UploadDarkImageButton_Click">Загрузить</Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Button Name="SaveDataButton" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18.5" Padding="11 7" Style="{DynamicResource AttentionButtonsStyle}" Margin="0 10 0 70" Click="SaveDataButton_Click">Сохранить изменения</Button>
+
+        </Grid>
+    </ScrollViewer>
+</Window>

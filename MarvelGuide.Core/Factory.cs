@@ -16,9 +16,6 @@ namespace MarvelGuide.Core
         public static Factory Instance => _instance ?? (_instance = new Factory());
 
         private Factory() { }
-
-        
-        public Document GetDocument() => new Document();
         
 
         private IStorage _storage;

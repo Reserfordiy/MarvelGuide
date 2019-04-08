@@ -44,6 +44,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
@@ -51,9 +52,10 @@
 
                         <Button Name="ShowTheTeamButton" Grid.Row="1" Width="187" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="0 12 0 3" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="ShowTheTeamButton_Click" Initialized="ShowTheTeamButton_Initialized">Посмотреть команду</Button>
                         <Button Name="DeveloperModeButton" Grid.Row="2" Width="187" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="0 12 0 3" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="DeveloperModeButton_Click" Initialized="DeveloperModeButton_Initialized">Ред. сотрудников</Button>
-                        <Button Name="EditDocumentsButton" Grid.Row="3" Width="187" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="0 12 0 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="EditDocumentsButton_Click" Initialized="EditDocumentsButton_Initialized">Ред. документы</Button>
+                        <Button Name="EditDocumentsButton" Grid.Row="3" Width="187" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="0 12 0 3" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="EditDocumentsButton_Click" Initialized="EditDocumentsButton_Initialized">Ред. документы</Button>
+                        <Button Name="EditRubricsButton" Grid.Row="4" Width="187" HorizontalAlignment="Center" Padding="8.5 6.5" FontSize="15.5" Margin="0 12 0 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="EditRubricsButton_Click" Initialized="EditRubricsButton_Initialized">Ред. рубрики</Button>
 
-                        <Grid Grid.Row="4" Margin="3.8 0 0 0">
+                        <Grid Grid.Row="5" Margin="3.8 0 0 0">
                             <Grid Name="DeveloperModePropertiesGrid"  Margin="-23 40 -40 0" Initialized="DeveloperModePropertiesGrid_Initialized">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -69,7 +71,7 @@
                            </Grid>                            
                         </Grid>
 
-                        <Grid Grid.Row="5" Margin="3.8 0 0 0">
+                        <Grid Grid.Row="6" Margin="3.8 0 0 0">
                             <Grid Name="DevelopersLevelGrid" Margin="-23 0 -40 0" Initialized="DevelopersLevelGrid_Initialized">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
