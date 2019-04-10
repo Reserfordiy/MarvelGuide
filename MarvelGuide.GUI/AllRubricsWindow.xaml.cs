@@ -54,6 +54,8 @@ namespace MarvelGuide.GUI
             InitializeComponent();
 
             FormingTheRubricsListBoxSource();
+
+            WindowState = WindowState.Maximized;
         }
 
 
