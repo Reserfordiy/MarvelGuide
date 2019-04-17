@@ -2520,5 +2520,53 @@
       "ImageSource": "kadyrov.jpg",
       "IsBorderRequired": true
     }
+  },
+  {
+    "Id": 61,
+    "Name": "Максим",
+    "Surname": "Парамонов",
+    "Male": true,
+    "Login": "maximpa",
+    "Password": "OMP/FWuS3+YQeu8RhibMXw==",
+    "WorkingNow": true,
+    "GotAJob": "2019-04-17T00:00:00",
+    "LostTheJob": "0001-01-01T00:00:00",
+    "SuperDeveloper": false,
+    "HighDeveloper": false,
+    "MediumDeveloper": false,
+    "LightDeveloperCreator": false,
+    "LightDeveloperSuperAdmin": false,
+    "LightDeveloperAdminManager": false,
+    "LightDeveloperAdminEditor": false,
+    "LightDeveloperAdminAgent": false,
+    "LightDeveloperManager": false,
+    "LightDeveloperAgent": false,
+    "LightDeveloperEditor": false,
+    "LightDeveloperModerator": false,
+    "Creator": false,
+    "SuperAdmin": false,
+    "AdminManager": false,
+    "AdminEditor": false,
+    "AdminAgent": false,
+    "Manager": false,
+    "Editor": true,
+    "Agent": false,
+    "Moderator": false,
+    "OwnersRole": null,
+    "ManagersRole": null,
+    "EditorsRubrics": [
+      {
+        "Rubric": "Факты",
+        "Frequency": 1
+      }
+    ],
+    "AgentsNumber": 0,
+    "AgentsFirstWords": null,
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 0,
+      "ImageSource": "paramonov.jpg",
+      "IsBorderRequired": true
+    }
   }
 ]
