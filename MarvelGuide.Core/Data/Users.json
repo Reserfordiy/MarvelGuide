@@ -1643,12 +1643,12 @@
         "Frequency": 3
       },
       {
-        "Rubric": "ОСТ",
+        "Rubric": "Видео",
         "Frequency": 5
       },
       {
-        "Rubric": "Видео",
-        "Frequency": 5
+        "Rubric": "Рефлекшон",
+        "Frequency": 3
       }
     ],
     "AgentsNumber": 0,
@@ -1747,8 +1747,8 @@
         "Frequency": 2
       },
       {
-        "Rubric": "Хистори",
-        "Frequency": 7
+        "Rubric": "Опинион",
+        "Frequency": 3
       }
     ],
     "AgentsNumber": 0,
@@ -2661,11 +2661,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Факты",
-        "Frequency": 2
-      },
-      {
-        "Rubric": "Сцены",
+        "Rubric": "Гэллери",
         "Frequency": 2
       }
     ],
