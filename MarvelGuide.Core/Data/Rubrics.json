@@ -34,12 +34,12 @@
     },
     "Picture": {
       "Id": 0,
-      "ImageSource": "scenes.jpg",
+      "ImageSource": "scenes(1).jpg",
       "IsBorderRequired": true
     },
     "PictureDark": {
       "Id": 0,
-      "ImageSource": "scenes_d.jpg",
+      "ImageSource": "scenes_d(1).jpg",
       "IsBorderRequired": true
     }
   },
@@ -56,12 +56,12 @@
     },
     "Picture": {
       "Id": 0,
-      "ImageSource": "history.jpg",
+      "ImageSource": "history(2).jpg",
       "IsBorderRequired": true
     },
     "PictureDark": {
       "Id": 0,
-      "ImageSource": "history_d.jpg",
+      "ImageSource": "history_d(2).jpg",
       "IsBorderRequired": true
     }
   },
@@ -78,12 +78,12 @@
     },
     "Picture": {
       "Id": 0,
-      "ImageSource": "humour.jpg",
+      "ImageSource": "humour(2).jpg",
       "IsBorderRequired": true
     },
     "PictureDark": {
       "Id": 0,
-      "ImageSource": "humour_d.jpg",
+      "ImageSource": "humour_d(2).jpg",
       "IsBorderRequired": true
     }
   },
@@ -100,12 +100,12 @@
     },
     "Picture": {
       "Id": 0,
-      "ImageSource": "filmart.jpg",
+      "ImageSource": "filmart(3).jpg",
       "IsBorderRequired": true
     },
     "PictureDark": {
       "Id": 0,
-      "ImageSource": "filmart_d.jpg",
+      "ImageSource": "filmart_d(1).jpg",
       "IsBorderRequired": true
     }
   },
@@ -172,6 +172,166 @@
     "PictureDark": {
       "Id": 0,
       "ImageSource": "dossier_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 9,
+    "Name": "Фрагменты",
+    "DocumentId": 0,
+    "KPI": null,
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "fragments.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "fragments_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 10,
+    "Name": "Обои",
+    "DocumentId": 0,
+    "KPI": null,
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "screen.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "screen_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 11,
+    "Name": "ОСТ",
+    "DocumentId": 0,
+    "KPI": null,
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "ost.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "ost_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 12,
+    "Name": "Рефлекшон",
+    "DocumentId": 0,
+    "KPI": null,
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "reflection.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "reflection_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 13,
+    "Name": "Гэллери",
+    "DocumentId": 0,
+    "KPI": null,
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "gallery.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "gallery_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 14,
+    "Name": "Новости",
+    "DocumentId": 0,
+    "KPI": null,
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "news.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "news_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 15,
+    "Name": "Видео",
+    "DocumentId": 0,
+    "KPI": null,
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "video.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "video_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 16,
+    "Name": "Коллаж",
+    "DocumentId": 0,
+    "KPI": null,
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "collage.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "collage_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 17,
+    "Name": "Косплей",
+    "DocumentId": 0,
+    "KPI": null,
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "cosplay.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "cosplay_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 18,
+    "Name": "Опинион",
+    "DocumentId": 0,
+    "KPI": null,
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "opinion.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "opinion_d.jpg",
       "IsBorderRequired": true
     }
   }
