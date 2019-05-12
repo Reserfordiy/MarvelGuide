@@ -35,6 +35,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Новости",
+        "RubricClassID": 14,
         "Frequency": 1
       }
     ],
@@ -212,6 +213,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Арты",
+        "RubricClassID": 1,
         "Frequency": 5
       }
     ],
@@ -260,6 +262,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Моменты",
+        "RubricClassID": 19,
         "Frequency": 5
       }
     ],
@@ -351,10 +354,12 @@
     "EditorsRubrics": [
       {
         "Rubric": "Новости",
+        "RubricClassID": 14,
         "Frequency": 1
       },
       {
         "Rubric": "Досье",
+        "RubricClassID": 8,
         "Frequency": 8
       }
     ],
@@ -403,6 +408,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Сцены",
+        "RubricClassID": 2,
         "Frequency": 7
       }
     ],
@@ -451,6 +457,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Фильмарты",
+        "RubricClassID": 5,
         "Frequency": 14
       }
     ],
@@ -499,6 +506,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Юмор",
+        "RubricClassID": 4,
         "Frequency": 5
       }
     ],
@@ -547,6 +555,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Хистори",
+        "RubricClassID": 3,
         "Frequency": 7
       }
     ],
@@ -595,6 +604,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Сцены",
+        "RubricClassID": 2,
         "Frequency": 5
       }
     ],
@@ -643,6 +653,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Досье",
+        "RubricClassID": 8,
         "Frequency": 4
       }
     ],
@@ -691,6 +702,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Сцены",
+        "RubricClassID": 2,
         "Frequency": 5
       }
     ],
@@ -868,6 +880,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Старс",
+        "RubricClassID": 6,
         "Frequency": 7
       }
     ],
@@ -916,6 +929,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Хистори",
+        "RubricClassID": 3,
         "Frequency": 3
       }
     ],
@@ -964,6 +978,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Хистори",
+        "RubricClassID": 3,
         "Frequency": 7
       }
     ],
@@ -1012,6 +1027,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Юмор",
+        "RubricClassID": 4,
         "Frequency": 7
       }
     ],
@@ -1060,6 +1076,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Хистори",
+        "RubricClassID": 3,
         "Frequency": 2
       }
     ],
@@ -1108,6 +1125,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Сцены",
+        "RubricClassID": 2,
         "Frequency": 3
       }
     ],
@@ -1156,10 +1174,12 @@
     "EditorsRubrics": [
       {
         "Rubric": "Арты",
+        "RubricClassID": 1,
         "Frequency": 2
       },
       {
         "Rubric": "Сцены",
+        "RubricClassID": 2,
         "Frequency": 5
       }
     ],
@@ -1208,6 +1228,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "ОСТ",
+        "RubricClassID": 11,
         "Frequency": 4
       }
     ],
@@ -1256,6 +1277,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Старс",
+        "RubricClassID": 6,
         "Frequency": 3
       }
     ],
@@ -1304,26 +1326,32 @@
     "EditorsRubrics": [
       {
         "Rubric": "Сцены",
+        "RubricClassID": 2,
         "Frequency": 3
       },
       {
         "Rubric": "Фрагменты",
+        "RubricClassID": 9,
         "Frequency": 7
       },
       {
         "Rubric": "Факты",
+        "RubricClassID": 7,
         "Frequency": 7
       },
       {
         "Rubric": "Обои",
+        "RubricClassID": 10,
         "Frequency": 3
       },
       {
         "Rubric": "Новости",
+        "RubricClassID": 14,
         "Frequency": 1
       },
       {
         "Rubric": "Видео",
+        "RubricClassID": 15,
         "Frequency": 5
       }
     ],
@@ -1415,6 +1443,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Хистори",
+        "RubricClassID": 3,
         "Frequency": 5
       }
     ],
@@ -1549,6 +1578,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Юмор",
+        "RubricClassID": 4,
         "Frequency": 2
       }
     ],
@@ -1640,14 +1670,17 @@
     "EditorsRubrics": [
       {
         "Rubric": "Фильмарты",
+        "RubricClassID": 5,
         "Frequency": 3
       },
       {
         "Rubric": "Видео",
+        "RubricClassID": 15,
         "Frequency": 5
       },
       {
         "Rubric": "Рефлекшон",
+        "RubricClassID": 12,
         "Frequency": 3
       }
     ],
@@ -1696,6 +1729,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Юмор",
+        "RubricClassID": 4,
         "Frequency": 2
       }
     ],
@@ -1744,10 +1778,12 @@
     "EditorsRubrics": [
       {
         "Rubric": "Сцены",
+        "RubricClassID": 2,
         "Frequency": 2
       },
       {
         "Rubric": "Опинион",
+        "RubricClassID": 18,
         "Frequency": 3
       }
     ],
@@ -1796,6 +1832,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Юмор",
+        "RubricClassID": 4,
         "Frequency": 2
       }
     ],
@@ -1887,6 +1924,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Хистори",
+        "RubricClassID": 3,
         "Frequency": 4
       }
     ],
@@ -1935,6 +1973,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Старс",
+        "RubricClassID": 6,
         "Frequency": 7
       }
     ],
@@ -1983,6 +2022,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Юмор",
+        "RubricClassID": 4,
         "Frequency": 3
       }
     ],
@@ -2031,6 +2071,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Хистори",
+        "RubricClassID": 3,
         "Frequency": 7
       }
     ],
@@ -2079,6 +2120,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Хистори",
+        "RubricClassID": 3,
         "Frequency": 3
       }
     ],
@@ -2127,6 +2169,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Фильмарты",
+        "RubricClassID": 5,
         "Frequency": 4
       }
     ],
@@ -2175,6 +2218,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Юмор",
+        "RubricClassID": 4,
         "Frequency": 4
       }
     ],
@@ -2223,6 +2267,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Хистори",
+        "RubricClassID": 3,
         "Frequency": 1
       }
     ],
@@ -2271,10 +2316,12 @@
     "EditorsRubrics": [
       {
         "Rubric": "Юмор",
+        "RubricClassID": 4,
         "Frequency": 2
       },
       {
         "Rubric": "ОСТ",
+        "RubricClassID": 11,
         "Frequency": 4
       }
     ],
@@ -2366,6 +2413,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Новости",
+        "RubricClassID": 14,
         "Frequency": 1
       }
     ],
@@ -2414,10 +2462,12 @@
     "EditorsRubrics": [
       {
         "Rubric": "ОСТ",
+        "RubricClassID": 11,
         "Frequency": 2
       },
       {
         "Rubric": "Старс",
+        "RubricClassID": 6,
         "Frequency": 2
       }
     ],
@@ -2466,6 +2516,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Новости",
+        "RubricClassID": 14,
         "Frequency": 2
       }
     ],
@@ -2514,6 +2565,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Гэллери",
+        "RubricClassID": 13,
         "Frequency": 1
       }
     ],
@@ -2562,6 +2614,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Факты",
+        "RubricClassID": 7,
         "Frequency": 1
       }
     ],
@@ -2610,10 +2663,12 @@
     "EditorsRubrics": [
       {
         "Rubric": "ОСТ",
+        "RubricClassID": 11,
         "Frequency": 2
       },
       {
         "Rubric": "Арты",
+        "RubricClassID": 1,
         "Frequency": 2
       }
     ],
@@ -2662,6 +2717,7 @@
     "EditorsRubrics": [
       {
         "Rubric": "Гэллери",
+        "RubricClassID": 13,
         "Frequency": 2
       }
     ],

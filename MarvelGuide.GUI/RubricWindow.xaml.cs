@@ -54,8 +54,8 @@ namespace MarvelGuide.GUI
 
             if (_rubric.Id != -1)
             {
-                _picture = _rubric.Picture;
-                _pictureDark = _rubric.PictureDark;
+                _picture = _rubric.Picture ?? new Picture();
+                _pictureDark = _rubric.PictureDark ?? new Picture();
             }
             
             InitializeComponent();

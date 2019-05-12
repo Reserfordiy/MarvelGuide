@@ -63,7 +63,7 @@ namespace MarvelGuide.GUI
         {
             int i = 0;
 
-            foreach (var rubric in _storage.Rubrics.Items)
+            foreach (var rubric in _storage.Rubrics.Items.Where(rubr => rubr.Actual))
             {
                 if (i % 2 == 0) { _rubrics1.Add(rubric); }
                 else { _rubrics2.Add(rubric); }
@@ -142,7 +142,7 @@ namespace MarvelGuide.GUI
 
             Rubric rubric = PictureImage.DataContext as Rubric;
 
-            InitializingTheImageSource(rubric.PictureDark.ImageSource, defaultDarkImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);      
+            InitializingTheImageSource((rubric.PictureDark ?? new Picture()).ImageSource, defaultDarkImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);      
         }
 
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
@@ -152,7 +152,7 @@ namespace MarvelGuide.GUI
 
             Rubric rubric = Grid.DataContext as Rubric;
 
-            InitializingTheImageSource(rubric.Picture.ImageSource, defaultImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);
+            InitializingTheImageSource((rubric.Picture ?? new Picture()).ImageSource, defaultImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);
 
             Cursor = Cursors.Hand;
         }
@@ -164,7 +164,7 @@ namespace MarvelGuide.GUI
 
             Rubric rubric = Grid.DataContext as Rubric;
 
-            InitializingTheImageSource(rubric.PictureDark.ImageSource, defaultDarkImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);
+            InitializingTheImageSource((rubric.PictureDark ?? new Picture()).ImageSource, defaultDarkImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);
 
             Cursor = Cursors.Arrow;
         }

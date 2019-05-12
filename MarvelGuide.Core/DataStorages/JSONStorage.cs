@@ -54,6 +54,16 @@ namespace MarvelGuide.Core.DataStorages
 
                 _users = new JSONRepository<User>(usersFilePath);
 
+                foreach (var editor in _users.Items.Where(u => u.Editor))
+                {
+                    foreach (var editorsPublication in editor.EditorsRubrics)
+                    {
+                        Rubric rubric = Rubrics.Items.FirstOrDefault(rubr => rubr.Id == editorsPublication.RubricClassID);
+
+                        editorsPublication.RubricClass = rubric;
+                    }
+                }
+
                 return _users;
             }
         }

@@ -13,6 +13,8 @@ namespace MarvelGuide.Core.Models
 
         public string Name { get; set; }
 
+        public bool Actual { get; set; }
+
         [JsonIgnore]
         public Document Document { get; set; }
 
