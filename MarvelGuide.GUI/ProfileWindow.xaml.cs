@@ -107,7 +107,7 @@ namespace MarvelGuide.GUI
         private const string defaultEndWorkingDate = "Пример: 01.09.2018";
         private const string defaultOwnersRole = "Пример: Генеральный директор";
         private const string defaultManagerRole = "Пример: Менеджер по кадрам";
-        private const string defaultEditorsRubric = "Пример: Старс";
+        private const string defaultEditorsRubric = "Выберите рубрику";
         private const string defaultEditorsFrequency = "Пример: 3";
         private const string defaultAgentsNumber = "Пример: 14";
         private const string defaultAgentsFirstWords = "Пример: Здравствуйте!";
@@ -136,6 +136,8 @@ namespace MarvelGuide.GUI
         List<string> _personalData;
         List<EditorsPublication> _publications;
 
+        Rubric _unselectedRubric;
+
         int _amountOfRegularJobs;
 
         int _additionalData = 0;
@@ -152,6 +154,9 @@ namespace MarvelGuide.GUI
         bool _fullVersionOfTheTeamWasShown = false;
 
         bool _programSwitch = true;
+
+
+        ComboBox CapturedComboBox = null;
 
 
 
@@ -211,6 +216,12 @@ namespace MarvelGuide.GUI
 
         private void FormingTheEdittingData()
         {
+            _unselectedRubric = new Rubric
+            {
+                Id = -1,
+                Name = defaultEditorsRubric,
+            };
+
             _publications = new List<EditorsPublication>
             {
                 new EditorsPublication()
@@ -285,7 +296,7 @@ namespace MarvelGuide.GUI
                 {
                     EditorCheckBox.IsChecked = true;
 
-                    _publications = _user.EditorsRubrics.Select(publication => new EditorsPublication { Rubric = publication.Rubric, Frequency = publication.Frequency }).ToList();
+                    _publications = _user.EditorsRubrics.Select(publication => new EditorsPublication { Rubric = publication.Rubric, Frequency = publication.Frequency, RubricClass = publication.RubricClass, RubricClassID = publication.RubricClassID}).ToList();
 
                     EditorsInformationListBox.ItemsSource = _publications;
                 }
@@ -1080,15 +1091,16 @@ namespace MarvelGuide.GUI
 
             for (int i = 0; i < EditorsInformationListBox.Items.Count; i++)
             {
-                var EditorsRubricTextBox = UIElementsMethods.GetUIElementChildByNumberFromTemplatedListBox(EditorsInformationListBox, i, 1, 0) as TextBox;
+                var EditorsRubricComboBox = UIElementsMethods.GetUIElementChildByNumberFromTemplatedListBox(EditorsInformationListBox, i, 1, 0) as ComboBox;
                 var EditorsFrequencyTextBox = UIElementsMethods.GetUIElementChildByNumberFromTemplatedListBox(EditorsInformationListBox, i, 1, 1) as TextBox;
 
-                var rubric = EditorsRubricTextBox.Text;
+                var rubric = EditorsRubricComboBox.SelectedItem as Rubric;
                 var frequency = int.Parse(EditorsFrequencyTextBox.Text);
 
                 editorsPublications.Add(new EditorsPublication
                 {
-                    Rubric = rubric,
+                    RubricClass = rubric,
+                    RubricClassID = rubric.Id,
                     Frequency = frequency
                 });
             }
@@ -1165,22 +1177,31 @@ namespace MarvelGuide.GUI
         }
 
 
-        private void EditorsRubricTextBox_Initialized(object sender, EventArgs e)
+        private void EditorsRubricComboBox_Initialized(object sender, EventArgs e)
         {
-            TextBox EditorsRubricTextBox = sender as TextBox;
+            var startRubrics = (new List<Rubric> { _unselectedRubric });
+            var usedRubrics = _publications.Select(publ => publ.RubricClass);
 
-            EditorsPublication publication = EditorsRubricTextBox.DataContext as EditorsPublication;
+            ComboBox EditorsRubricComboBox = sender as ComboBox;
 
-            if (publication.Rubric != "")
+            EditorsPublication publication = EditorsRubricComboBox.DataContext as EditorsPublication;
+            
+            if (publication.RubricClass != null)
             {
-                EditorsRubricTextBox.Text = publication.Rubric;
-                EditorsRubricTextBox.Foreground = Brushes.Black;
+                startRubrics = startRubrics.Concat(new List<Rubric> { publication.RubricClass }).ToList();
             }
-            else
-            {
-                EditorsRubricTextBox.Text = defaultEditorsRubric;
-                EditorsRubricTextBox.Foreground = Brushes.Gray;
-            }
+
+            EditorsRubricComboBox.ItemsSource = startRubrics
+                .Concat(_storage.Rubrics.Items
+                    .Except(usedRubrics)
+                    .Where(rubr => rubr.Actual || !_user.WorkingNow)
+                    .OrderByDescending(rubr => rubr.Actual)
+                    .ThenBy(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.RubricClass == rubr) && u.WorkingNow))
+                    .ThenByDescending(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.RubricClass == rubr)))
+                    .ThenBy(rubr => rubr.Name));
+
+            if (publication.RubricClass == null) { EditorsRubricComboBox.SelectedIndex = 0; }
+            else { EditorsRubricComboBox.SelectedIndex = 1; }
         }
 
         private void EditorsFrequencyTextBox_Initialized(object sender, EventArgs e)
@@ -1710,32 +1731,6 @@ namespace MarvelGuide.GUI
             }
         }
 
-        private void EditorsRubricTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox EditorsRubricTextBox = sender as TextBox;
-
-            if (EditorsRubricTextBox.Text == defaultEditorsRubric)
-            {
-                EditorsRubricTextBox.Text = "";
-                EditorsRubricTextBox.Foreground = Brushes.Black;
-            }
-        }
-
-        private void EditorsRubricTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox EditorsRubricTextBox = sender as TextBox;
-
-            EditorsPublication publication = EditorsRubricTextBox.DataContext as EditorsPublication;
-
-            publication.Rubric = EditorsRubricTextBox.Text;
-
-            if (EditorsRubricTextBox.Text == "")
-            {
-                EditorsRubricTextBox.Text = defaultEditorsRubric;
-                EditorsRubricTextBox.Foreground = Brushes.Gray;
-            }            
-        }
-
         private void EditorsFrequencyTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox EditorsFrequencyTextBox = sender as TextBox;
@@ -1978,7 +1973,7 @@ namespace MarvelGuide.GUI
                 return false;
             }
             if (EditorCheckBox.IsChecked == true && 
-                (UIElementsMethods.FindTextOrNonNeutralsInTextBoxesOfTheTemplatedListBox(EditorsInformationListBox, 1, 0, defaultEditorsRubric, true, "Название рубрики — обязательный аттрибут. Заполните все поля либо удалите ненужные рубрики.") ||
+                (UIElementsMethods.CheckingWhetherComboBoxHasDefaultValueInTheTemplatedListBox(EditorsInformationListBox, 1, 0, defaultEditorsRubric, "Укажите все недостающие рубрики либо удалите ненужные.") ||
                 UIElementsMethods.FindTextOrNonNeutralsInTextBoxesOfTheTemplatedListBox(EditorsInformationListBox, 1, 1, defaultEditorsFrequency, true, "Для каждой рубрики должна быть указана её частота размещения. Заполните все недостающие поля либо удалите ненужные рубрики.")))
             {
                 return false;
@@ -2150,13 +2145,7 @@ namespace MarvelGuide.GUI
 
                     return false;
                 }
-                if (HelpingMethods.AreThereSameStringElementsInTheCollection<EditorsPublication>(_publications, obj => obj.Rubric.ToUpperInvariant(), out string element))
-                {
-                    UIElementsMethods.FindTextOrNonNeutralsInTextBoxesOfTheTemplatedListBox(EditorsInformationListBox, 1, 0, element, true, "По крайней мере две рубрики имеют одинаковое название. Поменяйте одно из них либо удалите ненужную рубрику.");
-
-                    return false;
-                }
-                if (UIElementsMethods.FindTextOrNansInTextBoxesOfTheTemplatedListBox(EditorsInformationListBox, 1, 1, "Частота рубрики — это положительное число, обозначающее количество дней, которое даётся редактору для создания одного поста. Измените все невалидные значения."))
+                if (UIElementsMethods.FindTextOrNonNeutralsInTextBoxesOfTheTemplatedListBox(EditorsInformationListBox, 1, 1, "Частота рубрики — это положительное число, обозначающее количество дней, которое даётся редактору для создания одного поста. Измените все невалидные значения."))
                 {
                     return false;
                 }
@@ -2197,7 +2186,52 @@ namespace MarvelGuide.GUI
 
         private void ListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            Scroll.ScrollToVerticalOffset(Scroll.VerticalOffset - (double)e.Delta * 5 / 12);
+            if (CapturedComboBox == null || CapturedComboBox.IsMouseDirectlyOver)
+            {
+                if (CapturedComboBox != null)
+                {
+                    CapturedComboBox.IsDropDownOpen = false;
+                }
+
+                Scroll.ScrollToVerticalOffset(Scroll.VerticalOffset - (double)e.Delta * 5 / 12);
+            }
+        }
+
+
+        private void EditorsRubricComboBox_DropDownOpened(object sender, EventArgs e)
+        {
+            CapturedComboBox = sender as ComboBox;
+        }
+
+        private void EditorsRubricComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            CapturedComboBox = null;
+        }
+
+
+        private void EditorsRubricComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.RemovedItems.Count == 1)
+            {
+                ComboBox EditorsRubricComboBox = sender as ComboBox;
+
+                EditorsPublication publication = EditorsRubricComboBox.DataContext as EditorsPublication;
+
+                var rubric = EditorsRubricComboBox.SelectedItem as Rubric;
+
+                publication.RubricClass = rubric;
+                publication.RubricClassID = rubric.Id;
+
+                if (rubric.Id == -1) { publication.RubricClass = null; }
+
+                EditorsInformationListBox.ItemsSource = null;
+                EditorsInformationListBox.ItemsSource = _publications;
+
+                if (!rubric.Actual && rubric.Id != -1)
+                {
+                    MessageBox.Show("Рубрика является неактивной, и на данный момент отсутствует", "Предупреждение");
+                }
+            }
         }
     }
 }
