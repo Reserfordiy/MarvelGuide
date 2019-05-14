@@ -30,7 +30,7 @@
 
             <TextBlock Name="TitleTextBlock" Grid.ColumnSpan="1" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Calibri" FontSize="22.5" Margin="0 60 148 10">Существующие рубрики:</TextBlock>
 
-            <ListBox Name="RubricsListBox1" Grid.Row="1" Margin="0 0 50 55" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{DynamicResource TransparentListBox}">
+            <ListBox Name="RubricsListBox1" Grid.Row="1" Margin="0 0 50 55" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{DynamicResource TransparentListBox}" PreviewMouseWheel="ListBox_PreviewMouseWheel">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="350" Height="200" Margin="0 30 0 15" MouseEnter="Grid_MouseEnter" MouseLeave="Grid_MouseLeave" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
@@ -44,7 +44,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
 
-            <ListBox Name="RubricsListBox2" Grid.Row="1" Grid.Column="1" Margin="50 0 0 55" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{DynamicResource TransparentListBox}">
+            <ListBox Name="RubricsListBox2" Grid.Row="1" Grid.Column="1" Margin="50 0 0 55" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{DynamicResource TransparentListBox}" PreviewMouseWheel="ListBox_PreviewMouseWheel">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="350" Height="200" Margin="0 30 0 15" MouseEnter="Grid_MouseEnter" MouseLeave="Grid_MouseLeave" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
