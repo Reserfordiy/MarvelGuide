@@ -34,8 +34,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Новости",
-        "RubricClassID": 14,
+        "RubricID": 14,
         "Frequency": 1
       }
     ],
@@ -212,8 +211,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Арты",
-        "RubricClassID": 1,
+        "RubricID": 1,
         "Frequency": 5
       }
     ],
@@ -261,8 +259,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Моменты",
-        "RubricClassID": 19,
+        "RubricID": 19,
         "Frequency": 5
       }
     ],
@@ -353,13 +350,11 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Новости",
-        "RubricClassID": 14,
+        "RubricID": 14,
         "Frequency": 1
       },
       {
-        "Rubric": "Досье",
-        "RubricClassID": 8,
+        "RubricID": 8,
         "Frequency": 8
       }
     ],
@@ -407,8 +402,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Сцены",
-        "RubricClassID": 2,
+        "RubricID": 2,
         "Frequency": 7
       }
     ],
@@ -456,8 +450,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Фильмарты",
-        "RubricClassID": 5,
+        "RubricID": 5,
         "Frequency": 14
       }
     ],
@@ -505,8 +498,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Юмор",
-        "RubricClassID": 4,
+        "RubricID": 4,
         "Frequency": 5
       }
     ],
@@ -554,8 +546,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Хистори",
-        "RubricClassID": 3,
+        "RubricID": 3,
         "Frequency": 7
       }
     ],
@@ -603,8 +594,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Сцены",
-        "RubricClassID": 2,
+        "RubricID": 2,
         "Frequency": 5
       }
     ],
@@ -652,8 +642,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Досье",
-        "RubricClassID": 8,
+        "RubricID": 8,
         "Frequency": 4
       }
     ],
@@ -701,8 +690,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Сцены",
-        "RubricClassID": 2,
+        "RubricID": 2,
         "Frequency": 5
       }
     ],
@@ -879,8 +867,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Старс",
-        "RubricClassID": 6,
+        "RubricID": 6,
         "Frequency": 7
       }
     ],
@@ -928,8 +915,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Хистори",
-        "RubricClassID": 3,
+        "RubricID": 3,
         "Frequency": 3
       }
     ],
@@ -977,8 +963,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Хистори",
-        "RubricClassID": 3,
+        "RubricID": 3,
         "Frequency": 7
       }
     ],
@@ -1026,8 +1011,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Юмор",
-        "RubricClassID": 4,
+        "RubricID": 4,
         "Frequency": 7
       }
     ],
@@ -1075,8 +1059,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Хистори",
-        "RubricClassID": 3,
+        "RubricID": 3,
         "Frequency": 2
       }
     ],
@@ -1124,8 +1107,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Сцены",
-        "RubricClassID": 2,
+        "RubricID": 2,
         "Frequency": 3
       }
     ],
@@ -1173,13 +1155,11 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Арты",
-        "RubricClassID": 1,
+        "RubricID": 1,
         "Frequency": 2
       },
       {
-        "Rubric": "Сцены",
-        "RubricClassID": 2,
+        "RubricID": 2,
         "Frequency": 5
       }
     ],
@@ -1227,8 +1207,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "ОСТ",
-        "RubricClassID": 11,
+        "RubricID": 11,
         "Frequency": 4
       }
     ],
@@ -1276,8 +1255,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Старс",
-        "RubricClassID": 6,
+        "RubricID": 6,
         "Frequency": 3
       }
     ],
@@ -1325,33 +1303,27 @@
     "ManagersRole": "Менеджер по безопасности",
     "EditorsRubrics": [
       {
-        "Rubric": "Сцены",
-        "RubricClassID": 2,
+        "RubricID": 2,
         "Frequency": 3
       },
       {
-        "Rubric": "Фрагменты",
-        "RubricClassID": 9,
+        "RubricID": 9,
         "Frequency": 7
       },
       {
-        "Rubric": "Факты",
-        "RubricClassID": 7,
+        "RubricID": 7,
         "Frequency": 7
       },
       {
-        "Rubric": "Обои",
-        "RubricClassID": 10,
+        "RubricID": 10,
         "Frequency": 3
       },
       {
-        "Rubric": "Новости",
-        "RubricClassID": 14,
+        "RubricID": 14,
         "Frequency": 1
       },
       {
-        "Rubric": "Видео",
-        "RubricClassID": 15,
+        "RubricID": 15,
         "Frequency": 5
       }
     ],
@@ -1442,8 +1414,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Хистори",
-        "RubricClassID": 3,
+        "RubricID": 3,
         "Frequency": 5
       }
     ],
@@ -1577,8 +1548,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Юмор",
-        "RubricClassID": 4,
+        "RubricID": 4,
         "Frequency": 2
       }
     ],
@@ -1669,18 +1639,15 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Фильмарты",
-        "RubricClassID": 5,
+        "RubricID": 5,
         "Frequency": 3
       },
       {
-        "Rubric": "Видео",
-        "RubricClassID": 15,
+        "RubricID": 15,
         "Frequency": 5
       },
       {
-        "Rubric": "Рефлекшон",
-        "RubricClassID": 12,
+        "RubricID": 12,
         "Frequency": 3
       }
     ],
@@ -1728,8 +1695,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Юмор",
-        "RubricClassID": 4,
+        "RubricID": 4,
         "Frequency": 2
       }
     ],
@@ -1777,13 +1743,11 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Сцены",
-        "RubricClassID": 2,
+        "RubricID": 2,
         "Frequency": 2
       },
       {
-        "Rubric": "Опинион",
-        "RubricClassID": 18,
+        "RubricID": 18,
         "Frequency": 3
       }
     ],
@@ -1831,8 +1795,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Юмор",
-        "RubricClassID": 4,
+        "RubricID": 4,
         "Frequency": 2
       }
     ],
@@ -1923,8 +1886,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Хистори",
-        "RubricClassID": 3,
+        "RubricID": 3,
         "Frequency": 4
       }
     ],
@@ -1972,8 +1934,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Старс",
-        "RubricClassID": 6,
+        "RubricID": 6,
         "Frequency": 7
       }
     ],
@@ -2021,8 +1982,7 @@
     "ManagersRole": "Креативный менеджер",
     "EditorsRubrics": [
       {
-        "Rubric": "Юмор",
-        "RubricClassID": 4,
+        "RubricID": 4,
         "Frequency": 3
       }
     ],
@@ -2070,8 +2030,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Хистори",
-        "RubricClassID": 3,
+        "RubricID": 3,
         "Frequency": 7
       }
     ],
@@ -2119,8 +2078,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Хистори",
-        "RubricClassID": 3,
+        "RubricID": 3,
         "Frequency": 3
       }
     ],
@@ -2168,8 +2126,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Фильмарты",
-        "RubricClassID": 5,
+        "RubricID": 5,
         "Frequency": 4
       }
     ],
@@ -2217,8 +2174,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Юмор",
-        "RubricClassID": 4,
+        "RubricID": 4,
         "Frequency": 4
       }
     ],
@@ -2266,8 +2222,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Хистори",
-        "RubricClassID": 3,
+        "RubricID": 3,
         "Frequency": 1
       }
     ],
@@ -2315,13 +2270,11 @@
     "ManagersRole": "Менеджер по инновациям",
     "EditorsRubrics": [
       {
-        "Rubric": "Юмор",
-        "RubricClassID": 4,
+        "RubricID": 4,
         "Frequency": 2
       },
       {
-        "Rubric": "ОСТ",
-        "RubricClassID": 11,
+        "RubricID": 11,
         "Frequency": 4
       }
     ],
@@ -2412,8 +2365,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Новости",
-        "RubricClassID": 14,
+        "RubricID": 14,
         "Frequency": 1
       }
     ],
@@ -2461,13 +2413,11 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "ОСТ",
-        "RubricClassID": 11,
+        "RubricID": 11,
         "Frequency": 2
       },
       {
-        "Rubric": "Старс",
-        "RubricClassID": 6,
+        "RubricID": 6,
         "Frequency": 2
       }
     ],
@@ -2515,8 +2465,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Новости",
-        "RubricClassID": 14,
+        "RubricID": 14,
         "Frequency": 2
       }
     ],
@@ -2564,8 +2513,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Гэллери",
-        "RubricClassID": 13,
+        "RubricID": 13,
         "Frequency": 1
       }
     ],
@@ -2613,8 +2561,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Факты",
-        "RubricClassID": 7,
+        "RubricID": 7,
         "Frequency": 1
       }
     ],
@@ -2662,13 +2609,11 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "ОСТ",
-        "RubricClassID": 11,
+        "RubricID": 11,
         "Frequency": 2
       },
       {
-        "Rubric": "Арты",
-        "RubricClassID": 1,
+        "RubricID": 1,
         "Frequency": 2
       }
     ],
@@ -2716,8 +2661,7 @@
     "ManagersRole": null,
     "EditorsRubrics": [
       {
-        "Rubric": "Гэллери",
-        "RubricClassID": 13,
+        "RubricID": 13,
         "Frequency": 2
       }
     ],

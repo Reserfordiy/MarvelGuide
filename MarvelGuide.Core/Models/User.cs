@@ -158,7 +158,7 @@ namespace MarvelGuide.Core.Models
 
         public void UpdatingUser()
         {
-            Password = GetHash(Password);
+
         }
 
 

@@ -9,12 +9,10 @@ namespace MarvelGuide.Core.Models
 {
     public class EditorsPublication
     {
-        public string Rubric { get; set; }
-
         [JsonIgnore]
-        public Rubric RubricClass { get; set; }
+        public Rubric Rubric { get; set; }
 
-        public int RubricClassID { get; set; }
+        public int RubricID { get; set; }
 
         public int Frequency { get; set; }
     }

@@ -58,9 +58,9 @@ namespace MarvelGuide.Core.DataStorages
                 {
                     foreach (var editorsPublication in editor.EditorsRubrics)
                     {
-                        Rubric rubric = Rubrics.Items.FirstOrDefault(rubr => rubr.Id == editorsPublication.RubricClassID);
+                        Rubric rubric = Rubrics.Items.FirstOrDefault(rubr => rubr.Id == editorsPublication.RubricID);
 
-                        editorsPublication.RubricClass = rubric;
+                        editorsPublication.Rubric = rubric;
                     }
                 }
 

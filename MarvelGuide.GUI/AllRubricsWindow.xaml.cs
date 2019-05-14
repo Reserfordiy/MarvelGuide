@@ -65,8 +65,8 @@ namespace MarvelGuide.GUI
 
             foreach (var rubric in _storage.Rubrics.Items
                 .Where(rubr => rubr.Actual)
-                .OrderByDescending(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.RubricClass == rubr) && u.WorkingNow))
-                .ThenByDescending(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.RubricClass == rubr)))
+                .OrderByDescending(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.Rubric == rubr) && u.WorkingNow))
+                .ThenByDescending(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.Rubric == rubr)))
                 .ThenBy(rubr => rubr.Name))
             {
                 if (i % 2 == 0) { _rubrics1.Add(rubric); }

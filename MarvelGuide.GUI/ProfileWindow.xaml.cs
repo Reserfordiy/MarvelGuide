@@ -227,7 +227,8 @@ namespace MarvelGuide.GUI
                 new EditorsPublication()
                 {
                     Frequency = -1,
-                    Rubric = ""
+                    Rubric = null,
+                    RubricID = -1
                 }
             };
 
@@ -296,7 +297,7 @@ namespace MarvelGuide.GUI
                 {
                     EditorCheckBox.IsChecked = true;
 
-                    _publications = _user.EditorsRubrics.Select(publication => new EditorsPublication { Rubric = publication.Rubric, Frequency = publication.Frequency, RubricClass = publication.RubricClass, RubricClassID = publication.RubricClassID}).ToList();
+                    _publications = _user.EditorsRubrics.Select(publication => new EditorsPublication { Rubric = publication.Rubric, RubricID = publication.RubricID, Frequency = publication.Frequency }).ToList();
 
                     EditorsInformationListBox.ItemsSource = _publications;
                 }
@@ -676,7 +677,7 @@ namespace MarvelGuide.GUI
         {
             foreach (var publication in _user.EditorsRubrics)
             {
-                _personalData.Add(editorsRubric + adding + publication.Rubric);
+                _personalData.Add(editorsRubric + adding + publication.Rubric.Name);
 
                 if (_user.WorkingNow)
                 {
@@ -1099,8 +1100,8 @@ namespace MarvelGuide.GUI
 
                 editorsPublications.Add(new EditorsPublication
                 {
-                    RubricClass = rubric,
-                    RubricClassID = rubric.Id,
+                    Rubric = rubric,
+                    RubricID = rubric.Id,
                     Frequency = frequency
                 });
             }
@@ -1180,15 +1181,15 @@ namespace MarvelGuide.GUI
         private void EditorsRubricComboBox_Initialized(object sender, EventArgs e)
         {
             var startRubrics = (new List<Rubric> { _unselectedRubric });
-            var usedRubrics = _publications.Select(publ => publ.RubricClass);
+            var usedRubrics = _publications.Select(publ => publ.Rubric);
 
             ComboBox EditorsRubricComboBox = sender as ComboBox;
 
             EditorsPublication publication = EditorsRubricComboBox.DataContext as EditorsPublication;
             
-            if (publication.RubricClass != null)
+            if (publication.Rubric != null)
             {
-                startRubrics = startRubrics.Concat(new List<Rubric> { publication.RubricClass }).ToList();
+                startRubrics = startRubrics.Concat(new List<Rubric> { publication.Rubric }).ToList();
             }
 
             EditorsRubricComboBox.ItemsSource = startRubrics
@@ -1196,11 +1197,11 @@ namespace MarvelGuide.GUI
                     .Except(usedRubrics)
                     .Where(rubr => rubr.Actual || !_user.WorkingNow)
                     .OrderByDescending(rubr => rubr.Actual)
-                    .ThenBy(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.RubricClass == rubr) && u.WorkingNow))
-                    .ThenByDescending(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.RubricClass == rubr)))
+                    .ThenBy(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.Rubric == rubr) && u.WorkingNow))
+                    .ThenByDescending(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.Rubric == rubr)))
                     .ThenBy(rubr => rubr.Name));
 
-            if (publication.RubricClass == null) { EditorsRubricComboBox.SelectedIndex = 0; }
+            if (publication.Rubric == null) { EditorsRubricComboBox.SelectedIndex = 0; }
             else { EditorsRubricComboBox.SelectedIndex = 1; }
         }
 
@@ -1249,7 +1250,8 @@ namespace MarvelGuide.GUI
             _publications.Add(new EditorsPublication()
             {
                 Frequency = -1,
-                Rubric = ""
+                Rubric = null,
+                RubricID = -1
             });
 
             EditorsInformationListBox.ItemsSource = null;
@@ -2219,10 +2221,10 @@ namespace MarvelGuide.GUI
 
                 var rubric = EditorsRubricComboBox.SelectedItem as Rubric;
 
-                publication.RubricClass = rubric;
-                publication.RubricClassID = rubric.Id;
+                publication.Rubric = rubric;
+                publication.RubricID = rubric.Id;
 
-                if (rubric.Id == -1) { publication.RubricClass = null; }
+                if (rubric.Id == -1) { publication.Rubric = null; }
 
                 EditorsInformationListBox.ItemsSource = null;
                 EditorsInformationListBox.ItemsSource = _publications;
