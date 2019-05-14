@@ -1825,14 +1825,31 @@ namespace MarvelGuide.GUI
         private void PasswordButton_Click(object sender, RoutedEventArgs e)
         {
             if (PasswordTextBlock.Visibility == Visibility.Collapsed)
-            {
+            { 
                 PasswordTextBlock.Visibility = Visibility.Visible;
-                PasswordTextBox.Visibility = Visibility.Visible;
-                MainPasswordBox.Visibility = Visibility.Hidden;
-
                 RepeatPasswordTextBlock.Visibility = Visibility.Visible;
-                RepeatPasswordTextBox.Visibility = Visibility.Visible;
-                RepeatPasswordBox.Visibility = Visibility.Hidden;
+
+                if (MainPasswordBox.Password == "")
+                {
+                    PasswordTextBox.Visibility = Visibility.Visible;
+                    MainPasswordBox.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    PasswordTextBox.Visibility = Visibility.Hidden;
+                    MainPasswordBox.Visibility = Visibility.Visible;
+                }                
+
+                if (RepeatPasswordBox.Password == "")
+                {
+                    RepeatPasswordTextBox.Visibility = Visibility.Visible;
+                    RepeatPasswordBox.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    RepeatPasswordTextBox.Visibility = Visibility.Hidden;
+                    RepeatPasswordBox.Visibility = Visibility.Visible;
+                }
 
                 PasswordButton.Content = oldPassword;
             }

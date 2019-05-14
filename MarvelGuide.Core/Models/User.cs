@@ -98,7 +98,7 @@ namespace MarvelGuide.Core.Models
 
         public string GenitiveName()
         {
-            if (Name == null || Name.Length <= 2)
+            if (Name == null || Name.Length <= 1)
             {
                 return Name;
             }
@@ -111,9 +111,13 @@ namespace MarvelGuide.Core.Models
                 {
                     genitiveName = genitiveName.Substring(0, genitiveName.Length - 1) + 'я';
                 }
-                else if(genitiveName[genitiveName.Length - 1] == 'я')
+                else if (genitiveName[genitiveName.Length - 1] == 'я')
                 {
                     genitiveName = genitiveName.Substring(0, genitiveName.Length - 1) + 'и';
+                }
+                else if (genitiveName[genitiveName.Length - 1] == 'а')
+                {
+                    genitiveName = genitiveName.Substring(0, genitiveName.Length - 1) + 'ы';
                 }
                 else if (genitiveName[genitiveName.Length - 1] == 'и')
                 {
