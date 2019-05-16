@@ -43,7 +43,7 @@ namespace MarvelGuide.GUI
         private const string developerTitle = "Отредактируйте данные о сотрудниках";
 
 
-        private const int amountForTheCollapsibleListOfPeople = 4;
+        private const int amountForTheCollapsibleListOfPeople = 5;
 
 
         IStorage _storage;
