@@ -2509,7 +2509,11 @@
     "EditorsRubrics": [
       {
         "RubricID": 13,
-        "Frequency": 1
+        "Frequency": 2
+      },
+      {
+        "RubricID": 11,
+        "Frequency": 2
       }
     ],
     "AgentsNumber": 0,
