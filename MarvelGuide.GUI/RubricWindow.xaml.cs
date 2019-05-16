@@ -48,7 +48,7 @@ namespace MarvelGuide.GUI
 
         bool _ifDarkThemeIsSwitchedOn = false;
 
-        bool _wereAnyImagesLoaded = false;
+        bool _newImagesWereUploaded = false;
 
 
 
@@ -90,13 +90,18 @@ namespace MarvelGuide.GUI
             {
                 if (_rubric.Id == -1)
                 {
-                    if (_wereAnyImagesLoaded)
+                    if (_newImagesWereUploaded)
                     {
                         if (MessageBox.Show("Все изменения будут потеряны. Вы уверены, что хотите выйти?", "Предупреждение", MessageBoxButton.YesNoCancel) != MessageBoxResult.Yes)
                         {
                             e.Cancel = true;
 
                             return;
+                        }
+                        else
+                        {
+                            try { DeleteImage(_picture.ImageSource); } catch { }
+                            try { DeleteImage(_pictureDark.ImageSource); } catch { }
                         }
                     }
                 }
@@ -220,7 +225,9 @@ namespace MarvelGuide.GUI
 
             if (picture != null)
             {
-                _wereAnyImagesLoaded = true;
+                _newImagesWereUploaded = true;
+
+                Picture pictureForDeleting = _picture;
 
                 _picture = picture;
 
@@ -228,6 +235,12 @@ namespace MarvelGuide.GUI
                 {
                     InitializingTheImageSource(_picture.ImageSource, defaultImageSource, imageFolder, PictureImage);
                 }
+
+                try
+                {
+                    DeleteImage(pictureForDeleting.ImageSource);
+                }
+                catch { }
             }            
         }
 
@@ -237,12 +250,22 @@ namespace MarvelGuide.GUI
 
             if (picture != null)
             {
+                _newImagesWereUploaded = true;
+
+                Picture pictureForDeleting = _pictureDark;
+
                 _pictureDark = picture;
 
                 if (_ifDarkThemeIsSwitchedOn)
                 {
                     InitializingTheImageSource(_pictureDark.ImageSource, defaultDarkImageSource, imageFolder, PictureImage);
                 }
+
+                try
+                {
+                    DeleteImage(pictureForDeleting.ImageSource);
+                }
+                catch { }
             }
         }
 
@@ -262,6 +285,13 @@ namespace MarvelGuide.GUI
                 return picture;
             }
             catch { return null; }
+        }
+
+        private void DeleteImage(string imageSource)
+        {
+            WorkWithImages deletingProcess = new WorkWithImages();
+
+            deletingProcess.DeleteImage(imageFolder, imageSource);
         }
 
 
