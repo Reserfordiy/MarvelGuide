@@ -7,13 +7,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace MarvelGuide.Core.Helpers
 {
     public class WorkWithImages
     {
-        string _fullImagePath;
+        string _originalImagePath;
 
         Picture _picture;
 
@@ -32,12 +33,12 @@ namespace MarvelGuide.Core.Helpers
         {
             if (UploadImage())
             {
-                string originDestinationPath = GetDestinationPath(
+                string basicDestinationPath = GetDestinationPath(
                     _picture.ImageSource, folder);
 
                 try
                 {
-                    File.Copy(_fullImagePath, originDestinationPath, false);
+                    File.Copy(_originalImagePath, basicDestinationPath, false);
                 }
 
                 catch
@@ -48,11 +49,11 @@ namespace MarvelGuide.Core.Helpers
 
                     while (true)
                     {
-                        destinationPath = AddingASubStringBeforeTypeFormat(originDestinationPath, "(" + i.ToString() + ")");
+                        destinationPath = AddingASubStringBeforeTypeFormat(basicDestinationPath, "(" + i.ToString() + ")");
 
                         try
                         {
-                            File.Copy(_fullImagePath, destinationPath, false);
+                            File.Copy(_originalImagePath, destinationPath, false);
 
                             _picture.ImageSource = AddingASubStringBeforeTypeFormat(_picture.ImageSource, "(" + i.ToString() + ")");
 
@@ -78,9 +79,9 @@ namespace MarvelGuide.Core.Helpers
 
             if (uploadingImageDialog.ShowDialog() == true)
             {
-                _fullImagePath = uploadingImageDialog.FileName;
+                _originalImagePath = uploadingImageDialog.FileName;
 
-                string[] partsOfFileName = _fullImagePath.Split('\\');
+                string[] partsOfFileName = _originalImagePath.Split('\\');
 
                 _picture.ImageSource = partsOfFileName[partsOfFileName.Length - 1];
 
@@ -110,6 +111,15 @@ namespace MarvelGuide.Core.Helpers
         }
 
 
+        public void DeleteImage(string folder, string imageSource)
+        {
+            string fullImagePath = GetDestinationPath(
+                    imageSource, folder);
+
+            File.Delete(fullImagePath);
+        }
+
+
 
         public static string GetDestinationPath(string fileName, string folderName)
         {
@@ -121,9 +131,9 @@ namespace MarvelGuide.Core.Helpers
                 appStartPath = new string(appStartPath.Take(lastIndex).ToArray());
             }
 
-            appStartPath = string.Format(appStartPath + "\\{0}\\" + fileName, folderName);
+            string destinationPath = string.Format(appStartPath + "\\{0}\\" + fileName, folderName);
 
-            return appStartPath;
+            return destinationPath;
         }
 
 

@@ -85,7 +85,7 @@
     "AgentsFirstWords": "Добрый день(утро, вечер)!",
     "AgentsLastWords": "С уважением и вниманием",
     "Avatar": {
-      "Id": 12,
+      "Id": 0,
       "ImageSource": "sanochkin.jpg",
       "IsBorderRequired": true
     }
@@ -2294,9 +2294,9 @@
     "Male": true,
     "Login": "kirilll",
     "Password": "KceutjvOX5m8++4HbJZFng==",
-    "WorkingNow": true,
+    "WorkingNow": false,
     "GotAJob": "2019-03-16T00:00:00",
-    "LostTheJob": "0001-01-01T00:00:00",
+    "LostTheJob": "2019-05-16T00:00:00",
     "SuperDeveloper": false,
     "HighDeveloper": false,
     "MediumDeveloper": false,

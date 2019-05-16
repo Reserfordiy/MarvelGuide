@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MarvelGuide.GUI.Helpers;
+using System.IO;
 
 namespace MarvelGuide.GUI
 {
@@ -115,6 +116,8 @@ namespace MarvelGuide.GUI
 
         private const string defaultImageSource = "default.jpg";
 
+        private const string imageFolder = "../MarvelGuide.Core/Avatars";
+
 
         private const string foundationStringDate = "12.05.2010";
 
@@ -151,7 +154,12 @@ namespace MarvelGuide.GUI
         bool _personalPage = true;
         bool _editingPage = false;
 
+        bool _savingCompleted = false;
+
         bool _fullVersionOfTheTeamWasShown = false;
+
+        bool _newImagesWereUploaded = false;
+        Picture _lastUploadedImage = null;
 
         bool _programSwitch = true;
 
@@ -413,6 +421,11 @@ namespace MarvelGuide.GUI
                 }
                 else
                 {
+                    if (_newImagesWereUploaded)
+                    {
+                        DeleteImage(_lastUploadedImage.ImageSource);
+                    }
+
                     ProfileWindow profileWindow = new ProfileWindow(_userWhoWatches);
 
                     profileWindow.Show();
@@ -425,14 +438,12 @@ namespace MarvelGuide.GUI
 
                 if (_editingPage)
                 {
-                    if (_personalPage)
+                    if (_newImagesWereUploaded && !_savingCompleted)
                     {
-                        theTeamWindow = new TheTeamWindow(_user, _user, true, true);
+                        DeleteImage(_lastUploadedImage.ImageSource);
                     }
-                    else
-                    {
-                        theTeamWindow = new TheTeamWindow(_userWhoWatches, _user, true, true);
-                    }
+
+                    theTeamWindow = new TheTeamWindow(_userWhoWatches, _user, true, true);
                 }
                 else
                 {
@@ -472,15 +483,15 @@ namespace MarvelGuide.GUI
         {
             try
             {
-                AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(_user.Avatar.ImageSource, "../MarvelGuide.Core/Avatars")));
+                AvatarImage.Source = UIElementsMethods.InitializingBitmapImage(_user.Avatar.ImageSource, imageFolder);
             }
             catch
             {
-                AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(defaultImageSource, "../MarvelGuide.Core/Avatars")));
+                AvatarImage.Source = UIElementsMethods.InitializingBitmapImage(defaultImageSource, imageFolder);
             }
         }
 
-
+        
 
         private void ShowDetailsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -904,13 +915,31 @@ namespace MarvelGuide.GUI
             {
                 WorkWithImages imageUploadingProcess = new WorkWithImages();
 
-                imageUploadingProcess.UploadImageAndSave("../MarvelGuide.Core/Avatars");
+                imageUploadingProcess.UploadImageAndSave(imageFolder);
 
                 _picture = imageUploadingProcess.Picture;
 
-                AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(_picture.ImageSource, "../MarvelGuide.Core/Avatars")));
+                AvatarImage.Source = UIElementsMethods.InitializingBitmapImage(_picture.ImageSource, imageFolder);
+
+                if (_newImagesWereUploaded)
+                {
+                    DeleteImage(_lastUploadedImage.ImageSource);
+                }
+                else
+                {
+                    _newImagesWereUploaded = true;
+                }
+
+                _lastUploadedImage = _picture;
             }
             catch { }
+        }
+
+        private void DeleteImage(string imageSource)
+        {
+            WorkWithImages deletingProcess = new WorkWithImages();
+
+            deletingProcess.DeleteImage(imageFolder, imageSource);
         }
 
 
@@ -1082,7 +1111,18 @@ namespace MarvelGuide.GUI
                 }
             }
 
-            _user.Avatar = _picture;
+            if (_newImagesWereUploaded)
+            {
+                try
+                {
+                    DeleteImage(_user.Avatar.ImageSource);
+                }
+                catch { }
+
+                _user.Avatar = _picture;
+            }
+
+            _savingCompleted = true;
         }
 
 

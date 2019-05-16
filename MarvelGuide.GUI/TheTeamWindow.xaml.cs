@@ -30,6 +30,8 @@ namespace MarvelGuide.GUI
         private const string defaultImageSource = "default.jpg";
         private const string noneImageSource = "none.jpg";
 
+        private const string imageFolder = "../MarvelGuide.Core/Avatars";
+
         private const string noneText = "none";
 
         private const string defaultButtonContent = "Открыть профиль";
@@ -293,13 +295,13 @@ namespace MarvelGuide.GUI
             {
                 try
                 {
-                    AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(user.Avatar.ImageSource, "../MarvelGuide.Core/Avatars")));
+                    AvatarImage.Source = UIElementsMethods.InitializingBitmapImage(user.Avatar.ImageSource, imageFolder);
                 }
                 catch
                 {
                     try
                     {
-                        AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(defaultImageSource, "../MarvelGuide.Core/Avatars")));
+                        AvatarImage.Source = UIElementsMethods.InitializingBitmapImage(defaultImageSource, imageFolder);
                     }
                     catch { }
                 }
@@ -308,7 +310,7 @@ namespace MarvelGuide.GUI
             {
                 try
                 {
-                    AvatarImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(noneImageSource, "../MarvelGuide.Core/Avatars")));
+                    AvatarImage.Source = UIElementsMethods.InitializingBitmapImage(noneImageSource, imageFolder);
                 }
                 catch { }
             }            

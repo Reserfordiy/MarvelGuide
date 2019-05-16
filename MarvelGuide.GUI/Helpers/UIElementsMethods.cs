@@ -1,11 +1,14 @@
-﻿using System;
+﻿using MarvelGuide.Core.Helpers;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace MarvelGuide.GUI.Helpers
 {
@@ -84,6 +87,23 @@ namespace MarvelGuide.GUI.Helpers
             }
 
             return specialCondition(list);
+        }
+
+
+
+        public static BitmapSource InitializingBitmapImage(string imageSource, string imageFolder)
+        {
+            BitmapImage bitmapImage = new BitmapImage();
+
+            using (var fileStream = new FileStream(WorkWithImages.GetDestinationPath(imageSource, imageFolder), FileMode.Open))
+            {
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = fileStream;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+            }
+
+            return bitmapImage;
         }
     }
 }
