@@ -2,6 +2,7 @@
 using MarvelGuide.Core.Helpers;
 using MarvelGuide.Core.Intefraces;
 using MarvelGuide.Core.Models;
+using MarvelGuide.GUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace MarvelGuide.GUI
         private const string defaultImageSource = "default.jpg";
         private const string defaultDarkImageSource = "default_d.jpg";
 
+        private const string imageFolder = "../MarvelGuide.Core/Rubrics";
+
         private const string defaultName = "Пример: Фильмарты";
 
 
@@ -41,7 +44,11 @@ namespace MarvelGuide.GUI
         Picture _pictureDark = new Picture();
 
 
+        bool _closingBySaveButton = false;
+
         bool _ifDarkThemeIsSwitchedOn = false;
+
+        bool _wereAnyImagesLoaded = false;
 
 
 
@@ -79,6 +86,38 @@ namespace MarvelGuide.GUI
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (!_closingBySaveButton)
+            {
+                if (_rubric.Id == -1)
+                {
+                    if (_wereAnyImagesLoaded)
+                    {
+                        if (MessageBox.Show("Все изменения будут потеряны. Вы уверены, что хотите выйти?", "Предупреждение", MessageBoxButton.YesNoCancel) != MessageBoxResult.Yes)
+                        {
+                            e.Cancel = true;
+
+                            return;
+                        }
+                    }
+                }
+
+                else
+                {
+                    if (CheckingImagedData())
+                    {
+                        FixingImagedDataAboutUser();
+
+                        _storage.Rubrics.Save();
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+
+                        return;
+                    }
+                }
+            }
+
             AllRubricsWindow allRubricsWindow = new AllRubricsWindow(_userWhoWatches);
 
             allRubricsWindow.Show();
@@ -102,7 +141,7 @@ namespace MarvelGuide.GUI
 
         private void PictureImage_Initialized(object sender, EventArgs e)
         {
-            InitializingTheImageSource(_picture.ImageSource, defaultImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);
+            InitializingTheImageSource(_picture.ImageSource, defaultImageSource, imageFolder, PictureImage);
         }
 
 
@@ -110,13 +149,13 @@ namespace MarvelGuide.GUI
         {
             if (_ifDarkThemeIsSwitchedOn)
             {
-                InitializingTheImageSource(_picture.ImageSource, defaultImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);
+                InitializingTheImageSource(_picture.ImageSource, defaultImageSource, imageFolder, PictureImage);
 
                 RubricNameTextBlock.Visibility = Visibility.Hidden;
             }
             else
             {
-                InitializingTheImageSource(_pictureDark.ImageSource, defaultDarkImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);
+                InitializingTheImageSource(_pictureDark.ImageSource, defaultDarkImageSource, imageFolder, PictureImage);
 
                 RubricNameTextBlock.Visibility = Visibility.Visible;
             }
@@ -129,13 +168,13 @@ namespace MarvelGuide.GUI
         {
             try
             {
-                Image.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(regularSource, folder)));
+                Image.Source = UIElementsMethods.InitializingBitmapImage(regularSource, folder);
             }
             catch
             {
                 try
                 {
-                    Image.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(defaultSource, folder)));
+                    Image.Source = UIElementsMethods.InitializingBitmapImage(defaultSource, folder);
                 }
                 catch { }
             }
@@ -165,12 +204,12 @@ namespace MarvelGuide.GUI
 
         private void UploadPictureImage_Initialized(object sender, EventArgs e)
         {
-            InitializingTheImageSource(_picture.ImageSource, defaultImageSource, "../MarvelGuide.Core/Rubrics", UploadPictureImage);
+            InitializingTheImageSource(_picture.ImageSource, defaultImageSource, imageFolder, UploadPictureImage);
         }
 
         private void UploadDarkPictureImage_Initialized(object sender, EventArgs e)
         {
-            InitializingTheImageSource(_pictureDark.ImageSource, defaultDarkImageSource, "../MarvelGuide.Core/Rubrics", UploadDarkPictureImage);
+            InitializingTheImageSource(_pictureDark.ImageSource, defaultDarkImageSource, imageFolder, UploadDarkPictureImage);
         }
 
 
@@ -181,11 +220,13 @@ namespace MarvelGuide.GUI
 
             if (picture != null)
             {
+                _wereAnyImagesLoaded = true;
+
                 _picture = picture;
 
                 if (!_ifDarkThemeIsSwitchedOn)
                 {
-                    InitializingTheImageSource(_picture.ImageSource, defaultImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);
+                    InitializingTheImageSource(_picture.ImageSource, defaultImageSource, imageFolder, PictureImage);
                 }
             }            
         }
@@ -200,7 +241,7 @@ namespace MarvelGuide.GUI
 
                 if (_ifDarkThemeIsSwitchedOn)
                 {
-                    InitializingTheImageSource(_pictureDark.ImageSource, defaultDarkImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);
+                    InitializingTheImageSource(_pictureDark.ImageSource, defaultDarkImageSource, imageFolder, PictureImage);
                 }
             }
         }
@@ -212,11 +253,11 @@ namespace MarvelGuide.GUI
             {
                 WorkWithImages imageUploadingProcess = new WorkWithImages();
 
-                imageUploadingProcess.UploadImageAndSave("../MarvelGuide.Core/Rubrics");
+                imageUploadingProcess.UploadImageAndSave(imageFolder);
 
                 Picture picture = imageUploadingProcess.Picture;
 
-                Image.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(picture.ImageSource, "../MarvelGuide.Core/Rubrics")));
+                Image.Source = UIElementsMethods.InitializingBitmapImage(picture.ImageSource, imageFolder);
 
                 return picture;
             }
@@ -241,17 +282,21 @@ namespace MarvelGuide.GUI
 
         private void SaveDataButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckingWhetherAllFieldsFilledCorrectly())
+            if (CheckingWhetherNonImagedInformationIsFilledCorrectly() && CheckingImagedData())
             {
-                FixingDataAboutUser();
+                FixingNonImagedDataAboutUser();
+                FixingImagedDataAboutUser();
 
                 _storage.Rubrics.Save();
+
+                _closingBySaveButton = true;
 
                 Close();
             }
         }
 
-        private void FixingDataAboutUser()
+
+        private void FixingNonImagedDataAboutUser()
         {
             if (_rubric.Id == -1)
             {
@@ -263,12 +308,16 @@ namespace MarvelGuide.GUI
             }
 
             _rubric.Name = NameTextBox.Text;
+        }
 
+        private void FixingImagedDataAboutUser()
+        {
             _rubric.Picture = _picture;
             _rubric.PictureDark = _pictureDark;
         }
 
-        private bool CheckingWhetherAllFieldsFilledCorrectly()
+
+        private bool CheckingWhetherNonImagedInformationIsFilledCorrectly()
         {
             if (NameTextBox.Text == defaultName)
             {
@@ -286,7 +335,13 @@ namespace MarvelGuide.GUI
                 NameTextBox.Focus();
 
                 return false;
-            }
+            }            
+
+            return true;
+        }
+
+        private bool CheckingImagedData()
+        {
             if (_picture.ImageSource == null && _pictureDark.ImageSource == null)
             {
                 if (MessageBox.Show("Изображения для рубрики не загружены. Вы уверены, что хотите продолжить?", "Предупреждение", MessageBoxButton.YesNoCancel) != MessageBoxResult.Yes)
@@ -296,15 +351,17 @@ namespace MarvelGuide.GUI
             }
             else if (_pictureDark.ImageSource == null)
             {
-                MessageBox.Show("В системе не может быть одинарных версий изображений. Загрузите затемненное изображение либо удалите основное.", "Ошибка");
-
-                return false;
+                if (MessageBox.Show("Затемненное изображение не загружено. Вы уверены, что хотите продолжить?", "Предупреждение", MessageBoxButton.YesNoCancel) != MessageBoxResult.Yes)
+                {
+                    return false;
+                }
             }
             else if (_picture.ImageSource == null)
             {
-                MessageBox.Show("В системе не может быть одинарных версий изображений. Загрузите основное изображение либо удалите затемненное.", "Ошибка");
-
-                return false;
+                if (MessageBox.Show("Осветленное изображение не загружено. Вы уверены, что хотите продолжить?", "Предупреждение", MessageBoxButton.YesNoCancel) != MessageBoxResult.Yes)
+                {
+                    return false;
+                }
             }
 
             return true;

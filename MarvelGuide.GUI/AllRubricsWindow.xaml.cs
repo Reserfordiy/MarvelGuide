@@ -2,6 +2,7 @@
 using MarvelGuide.Core.Helpers;
 using MarvelGuide.Core.Intefraces;
 using MarvelGuide.Core.Models;
+using MarvelGuide.GUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,8 @@ namespace MarvelGuide.GUI
     {
         private const string defaultImageSource = "default.jpg";
         private const string defaultDarkImageSource = "default_d.jpg";
+
+        private const string imageFolder = "../MarvelGuide.Core/Rubrics";
 
 
         IStorage _storage;
@@ -146,7 +149,7 @@ namespace MarvelGuide.GUI
 
             Rubric rubric = PictureImage.DataContext as Rubric;
 
-            InitializingTheImageSource((rubric.PictureDark ?? new Picture()).ImageSource, defaultDarkImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);      
+            InitializingTheImageSource((rubric.PictureDark ?? new Picture()).ImageSource, defaultDarkImageSource, imageFolder, PictureImage);      
         }
 
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
@@ -156,7 +159,7 @@ namespace MarvelGuide.GUI
 
             Rubric rubric = Grid.DataContext as Rubric;
 
-            InitializingTheImageSource((rubric.Picture ?? new Picture()).ImageSource, defaultImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);
+            InitializingTheImageSource((rubric.Picture ?? new Picture()).ImageSource, defaultImageSource, imageFolder, PictureImage);
 
             Cursor = Cursors.Hand;
         }
@@ -168,7 +171,7 @@ namespace MarvelGuide.GUI
 
             Rubric rubric = Grid.DataContext as Rubric;
 
-            InitializingTheImageSource((rubric.PictureDark ?? new Picture()).ImageSource, defaultDarkImageSource, "../MarvelGuide.Core/Rubrics", PictureImage);
+            InitializingTheImageSource((rubric.PictureDark ?? new Picture()).ImageSource, defaultDarkImageSource, imageFolder, PictureImage);
 
             Cursor = Cursors.Arrow;
         }
@@ -177,13 +180,13 @@ namespace MarvelGuide.GUI
         {
             try
             {
-                PictureImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(regularSource, folder)));
+                PictureImage.Source = UIElementsMethods.InitializingBitmapImage(regularSource, folder);
             }
             catch
             {
                 try
                 {
-                    PictureImage.Source = new BitmapImage(new Uri(WorkWithImages.GetDestinationPath(defaultSource, folder)));
+                    PictureImage.Source = UIElementsMethods.InitializingBitmapImage(defaultSource, folder);
                 }
                 catch { }
             }
