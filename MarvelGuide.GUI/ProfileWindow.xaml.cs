@@ -1235,7 +1235,7 @@ namespace MarvelGuide.GUI
             EditorsRubricComboBox.ItemsSource = startRubrics
                 .Concat(_storage.Rubrics.Items
                     .Except(usedRubrics)
-                    .Where(rubr => rubr.Actual || !_user.WorkingNow)
+                    .Where(rubr => rubr.Actual || StillWorkingCheckBox.IsChecked == false)
                     .OrderByDescending(rubr => rubr.Actual)
                     .ThenBy(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.Rubric == rubr) && u.WorkingNow))
                     .ThenByDescending(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.Rubric == rubr)))
@@ -1287,15 +1287,24 @@ namespace MarvelGuide.GUI
 
         private void AddRubricButton_Click(object sender, RoutedEventArgs e)
         {
-            _publications.Add(new EditorsPublication()
+            if (StillWorkingCheckBox.IsChecked == true && _publications.Count == _storage.Rubrics.Items.Where(rubr => rubr.Actual).Count() ||
+                StillWorkingCheckBox.IsChecked == false && _publications.Count == _storage.Rubrics.Items.Count())
             {
-                Frequency = -1,
-                Rubric = null,
-                RubricID = -1
-            });
+                MessageBox.Show("К сожалению, другие свободные рубрики в системе отсутствуют. Добавьте требуемую рубрику в систему через меню редактирования рубрик и повторите попытку.", "Ошибка");
+            }
 
-            EditorsInformationListBox.ItemsSource = null;
-            EditorsInformationListBox.ItemsSource = _publications;
+            else
+            {
+                _publications.Add(new EditorsPublication()
+                {
+                    Frequency = -1,
+                    Rubric = null,
+                    RubricID = -1
+                });
+
+                EditorsInformationListBox.ItemsSource = null;
+                EditorsInformationListBox.ItemsSource = _publications;
+            }
         }
 
 
