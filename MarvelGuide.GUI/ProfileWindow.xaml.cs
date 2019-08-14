@@ -227,7 +227,7 @@ namespace MarvelGuide.GUI
             _unselectedRubric = new Rubric
             {
                 Id = -1,
-                Name = defaultEditorsRubric,
+                Name = defaultEditorsRubric
             };
 
             _publications = new List<EditorsPublication>
@@ -1220,7 +1220,7 @@ namespace MarvelGuide.GUI
 
         private void EditorsRubricComboBox_Initialized(object sender, EventArgs e)
         {
-            var startRubrics = (new List<Rubric> { _unselectedRubric });
+            var startRubrics = new List<Rubric> { _unselectedRubric };
             var usedRubrics = _publications.Select(publ => publ.Rubric);
 
             ComboBox EditorsRubricComboBox = sender as ComboBox;

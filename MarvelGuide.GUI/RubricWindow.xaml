@@ -40,11 +40,18 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" FontSize="20" FontFamily="Calibri" Margin="4 5 45 10">Название:</TextBlock>
                     <TextBox Name="NameTextBox" Grid.Row="1" HorizontalAlignment="Stretch" FontSize="18" FontFamily="Calibri" Padding="6 3" Margin="0 0 130 15" Foreground="Gray" GotFocus="NameTextBox_GotFocus" LostFocus="NameTextBox_LostFocus" TextChanged="NameTextBox_TextChanged">Пример: Фильмарты</TextBox>
+
+                    <TextBlock Grid.Row="2" FontSize="20" FontFamily="Calibri" Margin="4 10 45 10">Документ для рубрики:</TextBlock>
+                    <ComboBox Name="DocumentComboBox" Grid.Row="3" HorizontalAlignment="Stretch" FontSize="18" FontFamily="Calibri" Padding="6 3" Margin="0 0 130 10" Initialized="DocumentComboBox_Initialized" DisplayMemberPath="Name"></ComboBox>
+
+                    <Button Name="AutoDocumentButton" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Style="{DynamicResource AttentionButtonsStyle}" FontFamily="Verdana">Подобрать автоматически</Button>
                 </Grid>
 
                 <Grid Grid.Column="1" HorizontalAlignment="Center">
@@ -73,7 +80,7 @@
                             <Image Name="UploadPictureImage" HorizontalAlignment="Center" Stretch="UniformToFill" Initialized="UploadPictureImage_Initialized"></Image>
                         </Border>
 
-                        <Button Name="UploadImageButton" Grid.Row="1" HorizontalAlignment="Center" Padding="9 3.5" FontSize="12" Margin="0 8.5 0 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="UploadImageButton_Click">Загрузить</Button>
+                        <Button Name="UploadImageButton" Grid.Row="1" HorizontalAlignment="Center" Padding="9 3.5" FontSize="12" Margin="0 8.5 0 0" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="UploadImageButton_Click" FontFamily="Verdana">Загрузить</Button>
                     </Grid>
                     
                     <Grid Grid.Row="2" Grid.Column="1" Margin="8.5 5 0 0">
@@ -91,7 +98,7 @@
                 </Grid>
             </Grid>
 
-            <Button Name="SaveDataButton" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18.5" Padding="11 7" Style="{DynamicResource AttentionButtonsStyle}" Margin="0 10 0 70" Click="SaveDataButton_Click">Сохранить изменения</Button>
+            <Button Name="SaveDataButton" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18.5" Padding="11 7" Style="{DynamicResource AttentionButtonsStyle}" Margin="0 10 0 70" Click="SaveDataButton_Click" FontFamily="Verdana">Сохранить изменения</Button>
 
         </Grid>
     </ScrollViewer>

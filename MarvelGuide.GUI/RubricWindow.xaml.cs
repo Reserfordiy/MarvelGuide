@@ -30,18 +30,19 @@ namespace MarvelGuide.GUI
         private const string imageFolder = "../MarvelGuide.Core/Rubrics";
 
         private const string defaultName = "Пример: Фильмарты";
+        private const string defaultDocument = "Выберите документ";
 
 
         IStorage _storage;
-
-
+        
         Rubric _rubric;
 
         User _userWhoWatches;
 
-
         Picture _picture = new Picture();
         Picture _pictureDark = new Picture();
+
+        Document _unselectedDocument;
 
 
         bool _closingBySaveButton = false;
@@ -64,7 +65,13 @@ namespace MarvelGuide.GUI
                 _picture = _rubric.Picture ?? new Picture();
                 _pictureDark = _rubric.PictureDark ?? new Picture();
             }
-            
+
+            _unselectedDocument = new Document
+            {
+                Id = -1,
+                Name = defaultDocument
+            };
+
             InitializeComponent();
 
             FormingTheEdittingData();
@@ -395,6 +402,26 @@ namespace MarvelGuide.GUI
             }
 
             return true;
+        }
+
+
+
+        private void DocumentComboBox_Initialized(object sender, EventArgs e)
+        {
+            var startDocuments = new List<Document> { _unselectedDocument };
+
+            if (_rubric.Document != null)
+            {
+                startDocuments = startDocuments.Concat(new List<Document> { _rubric.Document }).ToList();
+            }
+
+            DocumentComboBox.ItemsSource = startDocuments
+                .Concat(_storage.Documents.Items
+                    .Where(doc => doc.Id != _rubric.DocumentId)
+                    .OrderByDescending(doc => doc.Versions[doc.Versions.Count - 1].Date));
+
+            if (_rubric.Document == null) { DocumentComboBox.SelectedIndex = 0; }
+            else { DocumentComboBox.SelectedIndex = 1; }
         }
     }
 }
