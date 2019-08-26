@@ -15,6 +15,8 @@ namespace MarvelGuide.Core.Models
 
         public bool Actual { get; set; }
 
+        public bool SpecialProject { get; set; }
+
         [JsonIgnore]
         public Document Document { get; set; }
 

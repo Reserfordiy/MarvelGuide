@@ -27,34 +27,49 @@ namespace MarvelGuide.Core.Models
         public bool SuperDeveloper { get; set; }
         public bool HighDeveloper { get; set; }
         public bool MediumDeveloper { get; set; }
-        public bool LightDeveloperCreator { get; set; }
-        public bool LightDeveloperSuperAdmin { get; set; }
-        public bool LightDeveloperAdminManager { get; set; }
-        public bool LightDeveloperAdminEditor { get; set; }
-        public bool LightDeveloperAdminAgent { get; set; }
+        public bool LightDeveloperGeneralDirector { get; set; }
+        public bool LightDeveloperDirector { get; set; }
+        public bool LightDeveloperDeputyGeneralDirector { get; set; }
+        public bool LightDeveloperHeadOfManagers { get; set; }
+        public bool LightDeveloperHeadOfEditors { get; set; }
+        public bool LightDeveloperHeadOfAgents { get; set; }
+        public bool LightDeveloperHeadOfModerators { get; set; }
+        public bool LightDeveloperHeadOfSpecials { get; set; }
+        public bool LightDeveloperHeadOfTechnicians { get; set; }
         public bool LightDeveloperManager { get; set; }
-        public bool LightDeveloperAgent { get; set; }
         public bool LightDeveloperEditor { get; set; }
+        public bool LightDeveloperAgent { get; set; }
         public bool LightDeveloperModerator { get; set; }
+        public bool LightDeveloperSpecial { get; set; }
+        public bool LightDeveloperTechnician { get; set; }
 
-        public bool Creator { get; set; }
-        public bool SuperAdmin { get; set; }
-        public bool AdminManager { get; set; }
-        public bool AdminEditor { get; set; }
-        public bool AdminAgent { get; set; }
+        public bool GeneralDirector { get; set; }
+        public bool Director { get; set; }
+        public bool DeputyGeneralDirector { get; set; }
+        public bool HeadOfManagers { get; set; }
+        public bool HeadOfEditors { get; set; }
+        public bool HeadOfAgents { get; set; }
+        public bool HeadOfModerators { get; set; }
+        public bool HeadOfSpecials { get; set; }
+        public bool HeadOfTechnicians { get; set; }
         public bool Manager { get; set; }        
         public bool Editor { get; set; }
         public bool Agent { get; set; }
         public bool Moderator { get; set; }
-        
-        public string OwnersRole { get; set; }
-        public string ManagersRole { get; set; }
+        public bool Special { get; set; }
+        public bool Technician { get; set; }
+
+        public string DirectorsPosition { get; set; }
+
+        public string ManagersPosition { get; set; }
 
         public List<EditorsPublication> EditorsRubrics { get; set; }
 
         public int AgentsNumber { get; set; }
         public string AgentsFirstWords { get; set; }
         public string AgentsLastWords { get; set; }
+
+        public string SpecialsProject { get; set; }
 
         public virtual Picture Avatar { get; set; }
 
@@ -64,27 +79,39 @@ namespace MarvelGuide.Core.Models
         {
             const string splitting = "; ";
 
-            const string creator = "Владелец";
-            const string superAdmin = "Главный администратор";
-            const string adminManager = "Руководитель аппаратного офиса";
-            const string adminEditor = "Руководитель редакции";
-            const string adminAgent = "Руководитель поддержки";
+            const string generalDirector = "Генеральный директор";
+            const string director = "Директор";
+            const string deputyGeneralDirector = "Заместитель генерального директора";
+            const string headOfManagers = "Руководитель аппаратного офиса";
+            const string headOfEditors = "Руководитель отдела редакции";
+            const string headOfAgents = "Руководитель отдела поддержки";
+            const string headOfModerators = "Руководитель отдела безопасности";
+            const string headOfSpecials = "Руководитель отдела спецпроектов";
+            const string headOfTechnicians = "Руководитель технического отдела";
             const string manager = "Менеджер";
             const string editor = "Редактор";
             const string agent = "Агент поддержки";
             const string moderator = "Модератор";
+            const string special = "Спецредактор";
+            const string technician = "Техник";
 
             string job = "";
-
-            if (Creator) { job += splitting + creator; }
-            if (SuperAdmin) { job += splitting + superAdmin; }
-            if (AdminManager) { job += splitting + adminManager; }
-            if (AdminEditor) { job += splitting + adminEditor; }
-            if (AdminAgent) { job += splitting + adminAgent; }
+            
+            if (GeneralDirector) { job += splitting + generalDirector; }
+            if (Director) { job += splitting + director; }
+            if (DeputyGeneralDirector) { job += splitting + deputyGeneralDirector; }
+            if (HeadOfManagers) { job += splitting + headOfManagers; }
+            if (HeadOfEditors) { job += splitting + headOfEditors; }
+            if (HeadOfAgents) { job += splitting + headOfAgents; }
+            if (HeadOfModerators) { job += splitting + headOfModerators; }
+            if (HeadOfSpecials) { job += splitting + headOfSpecials; }
+            if (HeadOfTechnicians) { job += splitting + headOfTechnicians; }
             if (Manager) { job += splitting + manager; }
             if (Editor) { job += splitting + editor; }
             if (Agent) { job += splitting + agent; }
             if (Moderator) { job += splitting + moderator; }
+            if (Special) { job += splitting + special; }
+            if (Technician) { job += splitting + technician; }
 
             if (job.Length >= 1)
             {
@@ -152,10 +179,75 @@ namespace MarvelGuide.Core.Models
 
 
 
-        public bool IsDeveloper()
+        public bool IsLightDeveloper
         {
-            return SuperDeveloper || HighDeveloper || MediumDeveloper || LightDeveloperCreator || LightDeveloperSuperAdmin || LightDeveloperAdminManager ||
-                LightDeveloperAdminEditor || LightDeveloperAdminAgent || LightDeveloperManager || LightDeveloperEditor || LightDeveloperAgent || LightDeveloperModerator;
+            get
+            {
+                return LightDeveloperGeneralDirector ||
+                    LightDeveloperDirector ||
+                    LightDeveloperDeputyGeneralDirector ||
+                    LightDeveloperHeadOfManagers ||
+                    LightDeveloperHeadOfEditors ||
+                    LightDeveloperHeadOfAgents ||
+                    LightDeveloperHeadOfModerators ||
+                    LightDeveloperHeadOfSpecials ||
+                    LightDeveloperHeadOfTechnicians ||
+                    LightDeveloperManager ||
+                    LightDeveloperEditor ||
+                    LightDeveloperAgent ||
+                    LightDeveloperModerator ||
+                    LightDeveloperSpecial ||
+                    LightDeveloperTechnician;
+            }
+        }
+
+        public bool IsDeveloper
+        {
+            get
+            {
+                return SuperDeveloper ||
+                    HighDeveloper ||
+                    MediumDeveloper ||
+                    IsLightDeveloper;
+            }
+        }
+
+
+        public bool IsHead
+        {
+            get
+            {
+                return HeadOfAgents ||
+                    HeadOfEditors ||
+                    HeadOfManagers ||
+                    HeadOfModerators ||
+                    HeadOfSpecials ||
+                    HeadOfTechnicians;
+            } 
+        }
+
+
+
+        public void NotADeveloper()
+        {
+            SuperDeveloper = false;
+            HighDeveloper = false;
+            MediumDeveloper = false;
+            LightDeveloperGeneralDirector = false;
+            LightDeveloperDirector = false;
+            LightDeveloperDeputyGeneralDirector = false;
+            LightDeveloperHeadOfManagers = false;
+            LightDeveloperHeadOfEditors = false;
+            LightDeveloperHeadOfAgents = false;
+            LightDeveloperHeadOfModerators = false;
+            LightDeveloperHeadOfSpecials = false;
+            LightDeveloperHeadOfTechnicians = false;
+            LightDeveloperManager = false;
+            LightDeveloperEditor = false;
+            LightDeveloperAgent = false;
+            LightDeveloperModerator = false;
+            LightDeveloperSpecial = false;
+            LightDeveloperTechnician = false;
         }
 
 

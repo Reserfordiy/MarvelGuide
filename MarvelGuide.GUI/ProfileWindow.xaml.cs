@@ -38,38 +38,48 @@ namespace MarvelGuide.GUI
         private const string firstDateOfWork = "Дата начала работы";
         private const string lastDateOfWork = "Дата завершения работы";
 
-        private const string generalDirectorRole = "Генеральный директор";
-        private const string securityManagerRole = "Менеджер по безопасности";
+        private const string deputy = "Заместитель";
 
-        private const string creatorsEmployeesFirst = "Работают под подчинением";        
-        private const string creatorsEmployeesSecond = "Среди них:";
+        private const string directorsEmployeesFirst = "Работают под подчинением";        
+        private const string directorsEmployeesSecond = "Среди них:";
 
         private const string allEmployees = "Работают под руководством";
 
         private const string employer = "Непосредственный начальник";
-        private const string employerForManager = " (менеджерство)";
-        private const string employerForAgent = " (Поддержка)";
-        private const string employerForEditor = " (редакторство)";
-        private const string employerForModerator = " (модераторство)";
+        private const string employerForOneHead = " (руководство отделом)";
+        private const string employerForSeveralHeads = " (руководство отделами)";
+        private const string employerForManager = " (аппаратный офис)";
+        private const string employerForAgent = " (отдел поддержки)";
+        private const string employerForEditor = " (отдел редакции)";
+        private const string employerForModerator = " (отдел безопасности)";
+        private const string employerForSpecial = " (отдел спецпроектов)";
+        private const string employerForTechnician = " (технический отдел)";
 
-        private const string creatorsEmployeeManagers = "Менеджеров";
-        private const string creatorsEmployeeEditors = "Редакторов";
-        private const string creatorsEmployeeAgents = "Агентов Поддержки";
-        private const string creatorsEmployeeModerators = "Модераторов";
+        private const string directorsEmployeeManagers = "Менеджеров";
+        private const string directorsEmployeeEditors = "Редакторов";
+        private const string directorsEmployeeAgents = "Агентов поддержки";
+        private const string directorsEmployeeModerators = "Модераторов";
+        private const string directorsEmployeeSpecials = "Спецредакторов";
+        //private const string directorsEmployeeTechnician = "Техников";
 
         private const string ending1 = "";
         private const string ending234 = "а";
         private const string ending5 = "ов";
 
         private const string employees = " сотрудник";
-        private const string employeeAdmins = " администратор";
+        private const string employeeHeads1 = " руководитель отдела";
+        private const string employeeHeads2 = " руководителя отделов";
+        private const string employeeHeads5 = " руководителей отделов";
         private const string employeeManagers = " менеджер";
         private const string employeeEditors = " редактор";
         private const string employeeAgents = " агент";
         private const string employeeModerators = " модератор";
+        private const string employeeSpecials = " спецредактор";
+        private const string employeeTechnicians = " техник";
 
-        private const string managerJob = "Менеджерская должность";
-        private const string ownersJob = "Полная должность владельца";
+        private const string directorsJob = "Полная должность директора";
+
+        private const string managersJob = "Менеджерская должность";        
 
         private const string editorsRubric = "Редакторская рубрика";
         private const string editorsFrequencyFractionStart = "Частота размещения постов:  1/";
@@ -82,6 +92,8 @@ namespace MarvelGuide.GUI
         private const string agentsNumber = "Агентский номер";
         private const string agentsFirstWords = "Приветствие агента";
         private const string agentsLastWords = "Подпись агента";
+
+        private const string specialsProject = "Спецпроект";
 
 
         private const string showDetailsButton = "Показать подробности";
@@ -106,13 +118,14 @@ namespace MarvelGuide.GUI
         private const string defaultPassword = "Пример: 123456";
         private const string defaultStartWorkingDate = "Пример: 18.08.2018";
         private const string defaultEndWorkingDate = "Пример: 01.09.2018";
-        private const string defaultOwnersRole = "Пример: Генеральный директор";
-        private const string defaultManagerRole = "Пример: Менеджер по кадрам";
+        private const string defaultDirectorsPosition = "Пример: Генеральный директор";
+        private const string defaultManagersPosition = "Пример: Менеджер по кадрам";
         private const string defaultEditorsRubric = "Выберите рубрику";
         private const string defaultEditorsFrequency = "Пример: 3";
         private const string defaultAgentsNumber = "Пример: 14";
         private const string defaultAgentsFirstWords = "Пример: Здравствуйте!";
         private const string defaultAgentsLastWords = "Пример: С любовью";
+        private const string defaultSpecialsProject = "Пример: Дайджест новостей";
 
         private const string defaultImageSource = "default.jpg";
 
@@ -142,6 +155,7 @@ namespace MarvelGuide.GUI
         Rubric _unselectedRubric;
 
         int _amountOfRegularJobs;
+        int _amountOfHeadJobs;
 
         int _additionalData = 0;
         bool _detailsShown = false;
@@ -214,10 +228,19 @@ namespace MarvelGuide.GUI
             if (_user.WorkingNow) { _personalData.Add(isWorking + adding + yes); }
             else { _personalData.Add(isWorking + adding + no); }
 
+            if (_user.HeadOfManagers) { _amountOfHeadJobs++; }
+            if (_user.HeadOfEditors) { _amountOfHeadJobs++; }
+            if (_user.HeadOfAgents) { _amountOfHeadJobs++; }
+            if (_user.HeadOfModerators) { _amountOfHeadJobs++; }
+            if (_user.HeadOfSpecials) { _amountOfHeadJobs++; }
+            if (_user.HeadOfTechnicians) { _amountOfHeadJobs++; }
+
             if (_user.Manager) { _amountOfRegularJobs++; }
             if (_user.Editor) { _amountOfRegularJobs++; }
             if (_user.Agent) { _amountOfRegularJobs++; }
             if (_user.Moderator) { _amountOfRegularJobs++; }
+            if (_user.Special) { _amountOfRegularJobs++; }
+            if (_user.Technician) { _amountOfRegularJobs++; }
 
             PersonalDataListBox.ItemsSource = _personalData;
         }
@@ -283,23 +306,27 @@ namespace MarvelGuide.GUI
 
                 Today1Button.Visibility = Visibility.Collapsed;
 
-                if (_user.Creator)
+                if (_user.GeneralDirector) { GeneralDirectorCheckBox.IsChecked = true; }
+                if (_user.Director)
                 {
-                    CreatorCheckBox.IsChecked = true;
+                    DirectorCheckBox.IsChecked = true;
 
-                    OwnersRoleTextBox.Text = _user.OwnersRole;
-                    OwnersRoleTextBox.Foreground = Brushes.Black;
+                    DirectorsPositionTextBox.Text = _user.DirectorsPosition;
+                    DirectorsPositionTextBox.Foreground = Brushes.Black;
                 }
-                if (_user.SuperAdmin) { SuperAdminCheckBox.IsChecked = true; }
-                if (_user.AdminManager) { AdminManagerCheckBox.IsChecked = true; }
-                if (_user.AdminEditor) { AdminEditorCheckBox.IsChecked = true; }
-                if (_user.AdminAgent) { AdminAgentCheckBox.IsChecked = true; }
+                if (_user.DeputyGeneralDirector) { DeputyGeneralDirectorCheckBox.IsChecked = true; }
+                if (_user.HeadOfManagers) { HeadOfManagersCheckBox.IsChecked = true; }
+                if (_user.HeadOfEditors) { HeadOfEditorsCheckBox.IsChecked = true; }
+                if (_user.HeadOfAgents) { HeadOfAgentsCheckBox.IsChecked = true; }
+                if (_user.HeadOfModerators) { HeadOfModeratorsCheckBox.IsChecked = true; }
+                if (_user.HeadOfSpecials) { HeadOfSpecialsCheckBox.IsChecked = true; }
+                if (_user.HeadOfTechnicians) { HeadOfTechniciansCheckBox.IsChecked = true; }
                 if (_user.Manager)
                 {
                     ManagerCheckBox.IsChecked = true;
 
-                    ManagersRoleTextBox.Text = _user.ManagersRole;
-                    ManagersRoleTextBox.Foreground = Brushes.Black;
+                    ManagersPositionTextBox.Text = _user.ManagersPosition;
+                    ManagersPositionTextBox.Foreground = Brushes.Black;
                 }
                 if (_user.Editor)
                 {
@@ -311,7 +338,7 @@ namespace MarvelGuide.GUI
                 }
                 if (_user.Agent)
                 {
-                    AgentChecBox.IsChecked = true;
+                    AgentCheckBox.IsChecked = true;
 
                     AgentsNumberTextBox.Text = _user.AgentsNumber.ToString();
                     AgentsNumberTextBox.Foreground = Brushes.Black;
@@ -322,9 +349,16 @@ namespace MarvelGuide.GUI
                     AgentsLastWordsTextBox.Text = _user.AgentsLastWords;
                     AgentsLastWordsTextBox.Foreground = Brushes.Black;
                 }
-                if (_user.Moderator) { ModeratorcheckBox.IsChecked = true; }
+                if (_user.Moderator) { ModeratorCheckBox.IsChecked = true; }
+                if (_user.Special)
+                {
+                    SpecialCheckBox.IsChecked = true;
 
-                if (_user.IsDeveloper())
+                    SpecialsProjectTextBox.Text = _user.SpecialsProject;
+                    SpecialsProjectTextBox.Foreground = Brushes.Black;
+                }
+
+                if (_user.IsDeveloper)
                 {
                     IsDeveloperCheckBox.IsChecked = true;
 
@@ -334,15 +368,20 @@ namespace MarvelGuide.GUI
                     {
                         LightDeveloperRadioButton.IsChecked = true;
 
-                        if (_user.LightDeveloperCreator) { CreatorDeveloperCheckBox.IsChecked = true; }
-                        if (_user.LightDeveloperSuperAdmin) { SuperAdminDeveloperCheckBox.IsChecked = true; }
-                        if (_user.LightDeveloperAdminManager) { AdminManagerDeveloperCheckBox.IsChecked = true; }
-                        if (_user.LightDeveloperAdminEditor) { AdminEditoDeveloperCheckBox.IsChecked = true; }
-                        if (_user.LightDeveloperAdminAgent) { AdminAgentDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperGeneralDirector) { GeneralDirectorDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperDirector) { DirectorDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperDeputyGeneralDirector) { DeputyGeneralDirectorDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperHeadOfManagers) { HeadOfManagersDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperHeadOfEditors) { HeadOfEditorsDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperHeadOfAgents) { HeadOfAgentsDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperHeadOfModerators) { HeadOfModeratorsDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperHeadOfSpecials) { HeadOfSpecialsDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperHeadOfTechnicians) { HeadOfTechniciansDeveloperCheckBox.IsChecked = true; }
                         if (_user.LightDeveloperManager) { ManagerDeveloperCheckBox.IsChecked = true; }
                         if (_user.LightDeveloperEditor) { EditorDeveloperCheckBox.IsChecked = true; }
                         if (_user.LightDeveloperAgent) { AgentDeveloperCheckBox.IsChecked = true; }
                         if (_user.LightDeveloperModerator) { ModeratorDeveloperCheckBox.IsChecked = true; }
+                        if (_user.LightDeveloperSpecial) { SpecialDeveloperCheckBox.IsChecked = true; }
                     }
                 }
             }
@@ -499,15 +538,21 @@ namespace MarvelGuide.GUI
             {
                 _detailsShown = true;
 
-                if (_user.Creator) { CreatorsDetails(); }
-                if (_user.SuperAdmin) { SuperAdminsDetails(); }
-                if (_user.AdminManager) { AdminManagerDetails(); }
-                if (_user.AdminEditor) { AdminEditorDetails(); }
-                if (_user.AdminAgent) { AdminAgentDetails(); }
+                if (_user.GeneralDirector) { GeneralDirectorsDetails(); }
+                if (_user.Director) { DirectorsDetails(); }
+                if (_user.DeputyGeneralDirector) { DeputyGeneralDirectorsDetails(); }
+                if (_user.IsHead) { HeadsEmloyerDetails(); }
+                if (_user.HeadOfManagers) { HeadOfManagersDetails(); }
+                if (_user.HeadOfEditors) { HeadOfEditorsDetails(); }
+                if (_user.HeadOfAgents) { HeadOfAgentsDetails(); }
+                if (_user.HeadOfModerators) { HeadOfModeratorsDetails(); }
+                if (_user.HeadOfSpecials) { HeadOfSpecialsDetails(); }
+                if (_user.HeadOfTechnicians) { HeadOfTechniciansDetails(); }
                 if (_user.Manager) { ManagersDetails(); }
                 if (_user.Editor) { EditorsDetails(); }
                 if (_user.Agent) { AgentsDetails(); }
                 if (_user.Moderator) { ModeratorsDetails(); }
+                if (_user.Special) { SpecialsDetails(); }
 
                 _personalData.Add(firstDateOfWork + adding + _user.GotAJob.ToString("d"));
                 _additionalData++;
@@ -537,74 +582,107 @@ namespace MarvelGuide.GUI
         }
 
 
-        private void CreatorsDetails()
+        private void GeneralDirectorsDetails()
         {
-            var numberOfEmployees = _storage.Users.Items.Count(u => u.WorkingNow && !u.Creator);
+            var numberOfEmployees = _storage.Users.Items.Count(u => u.WorkingNow && !u.Director && !u.GeneralDirector);
 
-            _personalData.Add(ownersJob + adding + _user.OwnersRole);
+            if (_user.WorkingNow)
+            {
+                User deputyGeneralDirector = _storage.Users.Items.FirstOrDefault(u => u.DeputyGeneralDirector) as User;
+
+                if (deputyGeneralDirector != null)
+                {
+                    _personalData.Add(deputy + adding + deputyGeneralDirector.Name + " " + deputyGeneralDirector.Surname);
+
+                    _additionalData++;
+                }
+
+                _personalData.Add(directorsEmployeesFirst + adding + numberOfEmployees.ToString() + employees + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfEmployees));
+                _personalData.Add(directorsEmployeesSecond);
+                _personalData.Add(directorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
+                _personalData.Add(directorsEmployeeEditors + adding + _storage.Users.Items.Count(u => u.Editor && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
+                _personalData.Add(directorsEmployeeAgents + adding + _storage.Users.Items.Count(u => u.Agent && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
+                _personalData.Add(directorsEmployeeModerators + adding + _storage.Users.Items.Count(u => u.Moderator && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
+                _personalData.Add(directorsEmployeeSpecials + adding + _storage.Users.Items.Count(u => u.Special && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
+
+                _additionalData += 7;
+            }
+        }
+
+        private void DirectorsDetails()
+        {
+            var numberOfEmployees = _storage.Users.Items.Count(u => u.WorkingNow && !u.Director && !u.GeneralDirector);
+
+            _personalData.Add(directorsJob + adding + _user.DirectorsPosition);
 
             _additionalData++;
 
             if (_user.WorkingNow)
             {
-                if (_user.OwnersRole.IndexOf(generalDirectorRole) != -1)
-                {
-                    var numberOfAdmins = _storage.Users.Items.Count(u => (u.SuperAdmin || u.AdminManager || u.AdminEditor || u.AdminAgent)
-                    && u.WorkingNow && !u.Creator);
+                _personalData.Add(directorsEmployeesFirst + adding + numberOfEmployees.ToString() + employees + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfEmployees));
+                _personalData.Add(directorsEmployeesSecond);
+                _personalData.Add(directorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
+                _personalData.Add(directorsEmployeeEditors + adding + _storage.Users.Items.Count(u => u.Editor && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
+                _personalData.Add(directorsEmployeeAgents + adding + _storage.Users.Items.Count(u => u.Agent && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
+                _personalData.Add(directorsEmployeeModerators + adding + _storage.Users.Items.Count(u => u.Moderator && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
+                _personalData.Add(directorsEmployeeSpecials + adding + _storage.Users.Items.Count(u => u.Special && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
 
-                    _personalData.Add(allEmployees + adding + numberOfAdmins.ToString() + employeeAdmins + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfAdmins));
-
-                    _additionalData++;
-                }
-
-                _personalData.Add(creatorsEmployeesFirst + adding + numberOfEmployees.ToString() + employees + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfEmployees));
-                _personalData.Add(creatorsEmployeesSecond);
-                _personalData.Add(creatorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow && !u.Creator).ToString());
-                _personalData.Add(creatorsEmployeeEditors + adding + _storage.Users.Items.Count(u => u.Editor && u.WorkingNow && !u.Creator).ToString());
-                _personalData.Add(creatorsEmployeeAgents + adding + _storage.Users.Items.Count(u => u.Agent && u.WorkingNow && !u.Creator).ToString());
-                _personalData.Add(creatorsEmployeeModerators + adding + _storage.Users.Items.Count(u => u.Moderator && u.WorkingNow && !u.Creator).ToString());
-
-                _additionalData += 6;
+                _additionalData += 7;
             }
         }
 
-        private void SuperAdminsDetails()
+        private void DeputyGeneralDirectorsDetails()
         {
             if (_user.WorkingNow)
             {
-                User generalDirector = _storage.Users.Items.FirstOrDefault(u => u.Creator && u.OwnersRole.IndexOf(generalDirectorRole) != -1 && u.WorkingNow);
+                User generalDirector = _storage.Users.Items.FirstOrDefault(u => u.GeneralDirector && u.WorkingNow);
 
-                if (generalDirector != null && !_user.Creator)
+                if (generalDirector != null)
                 {
                     _personalData.Add(employer + adding + generalDirector.Name + " " + generalDirector.Surname);
 
                     _additionalData++;
                 }
 
-                var numberOfAdminEditors = _storage.Users.Items.Count(u => u.AdminEditor && u.WorkingNow && !u.Creator && !u.SuperAdmin);
-                var numberOfEditors = _storage.Users.Items.Count(u => u.Editor && u.WorkingNow && !u.Creator && !u.SuperAdmin && !u.AdminEditor);
+                var numberOfHeads = _storage.Users.Items.Count(u => u.IsHead && u.WorkingNow && !u.Director && !u.GeneralDirector && !u.DeputyGeneralDirector);
 
-                _personalData.Add(allEmployees + adding + numberOfAdminEditors.ToString() + employeeAdmins + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfAdminEditors)
-                    + ", " + numberOfEditors.ToString() + employeeEditors + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfEditors));
+                _personalData.Add(allEmployees + adding + numberOfHeads.ToString() + HelpingMethods.ChoosingTheCorrespondingEnding(employeeHeads1, employeeHeads2, employeeHeads5, numberOfHeads));
 
                 _additionalData++;
             }
         }
 
-        private void AdminManagerDetails()
+        private void HeadsEmloyerDetails()
         {
-            if (_user.WorkingNow)
+            if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector)
             {
-                User generalDirector = _storage.Users.Items.FirstOrDefault(u => u.Creator && u.OwnersRole.IndexOf(generalDirectorRole) != -1 && u.WorkingNow);
+                User deputyGeneralDirector = _storage.Users.Items.FirstOrDefault(u => u.DeputyGeneralDirector && u.WorkingNow);
 
-                if (generalDirector != null && !_user.Creator)
+                if (deputyGeneralDirector != null)
                 {
-                    _personalData.Add(employer + adding + generalDirector.Name + " " + generalDirector.Surname);
+                    if (_amountOfRegularJobs == 0)
+                    {
+                        _personalData.Add(employer + adding + deputyGeneralDirector.Name + " " + deputyGeneralDirector.Surname);
+                    }
+                    else if (_amountOfHeadJobs == 1)
+                    {
+                        _personalData.Add(employer + employerForOneHead + adding + deputyGeneralDirector.Name + " " + deputyGeneralDirector.Surname);
+                    }
+                    else
+                    {
+                        _personalData.Add(employer + employerForSeveralHeads + adding + deputyGeneralDirector.Name + " " + deputyGeneralDirector.Surname);
+                    }
 
                     _additionalData++;
                 }
+            }
+        }
 
-                var numberOfManagers = _storage.Users.Items.Count(u => u.Manager && u.WorkingNow && !u.Creator && !u.AdminManager);
+        private void HeadOfManagersDetails()
+        {
+            if (_user.WorkingNow)
+            {
+                var numberOfManagers = _storage.Users.Items.Count(u => u.Manager && u.WorkingNow && !u.GeneralDirector && !u.Director && !u.DeputyGeneralDirector && !u.HeadOfManagers);
 
                 _personalData.Add(allEmployees + adding + numberOfManagers.ToString() + employeeManagers + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfManagers));
 
@@ -612,22 +690,11 @@ namespace MarvelGuide.GUI
             }
         }
 
-        private void AdminEditorDetails()
+        private void HeadOfEditorsDetails()
         {
             if (_user.WorkingNow)
             {
-                User generalDirector = _storage.Users.Items.FirstOrDefault(u => u.Creator && u.OwnersRole.IndexOf(generalDirectorRole) != -1 && u.WorkingNow);
-                User superAdmin = _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin && u.WorkingNow);
-
-                if (generalDirector != null && !_user.Creator)
-                {
-                    _personalData.Add(employer + adding + generalDirector.Name + " " + generalDirector.Surname +
-                        ", " + superAdmin.Name + " " + superAdmin.Surname);
-
-                    _additionalData++;
-                }
-
-                var numberOfEditors = _storage.Users.Items.Count(u => u.Editor && u.WorkingNow && !u.Creator && !u.SuperAdmin && !u.AdminEditor);
+                var numberOfEditors = _storage.Users.Items.Count(u => u.Editor && u.WorkingNow && !u.GeneralDirector && !u.Director && !u.DeputyGeneralDirector && !u.HeadOfEditors);
 
                 _personalData.Add(allEmployees + adding + numberOfEditors.ToString() + employeeEditors + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfEditors));
 
@@ -635,20 +702,11 @@ namespace MarvelGuide.GUI
             }
         }
 
-        private void AdminAgentDetails()
+        private void HeadOfAgentsDetails()
         {
             if (_user.WorkingNow)
             {
-                User generalDirector = _storage.Users.Items.FirstOrDefault(u => u.Creator && u.OwnersRole.IndexOf(generalDirectorRole) != -1 && u.WorkingNow);
-
-                if (generalDirector != null && !_user.Creator)
-                {
-                    _personalData.Add(employer + adding + generalDirector.Name + " " + generalDirector.Surname);
-
-                    _additionalData++;
-                }
-
-                var numberOfAgents = _storage.Users.Items.Count(u => u.Agent && u.WorkingNow && !u.Creator && !u.AdminAgent);
+                var numberOfAgents = _storage.Users.Items.Count(u => u.Agent && u.WorkingNow && !u.GeneralDirector && !u.Director && !u.DeputyGeneralDirector && !u.HeadOfAgents);
 
                 _personalData.Add(allEmployees + adding + numberOfAgents.ToString() + employeeAgents + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfAgents));
 
@@ -656,31 +714,58 @@ namespace MarvelGuide.GUI
             }
         }
 
-        private void ManagersDetails()
+        private void HeadOfModeratorsDetails()
         {
-            _personalData.Add(managerJob + adding + _user.ManagersRole);
-
-            _additionalData++;
-
-            if (!_user.Creator && !_user.SuperAdmin && !_user.AdminManager && !_user.AdminAgent && !_user.AdminEditor && _user.WorkingNow)
+            if (_user.WorkingNow)
             {
-                if (_amountOfRegularJobs == 1)
-                {
-                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminManager && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminManager && u.WorkingNow).Surname);
-                }
-                else
-                {
-                    _personalData.Add(employer + employerForManager + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminManager && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminManager && u.WorkingNow).Surname);
-                }
+                var numberOfModerators = _storage.Users.Items.Count(u => u.Moderator && u.WorkingNow && !u.GeneralDirector && !u.Director && !u.DeputyGeneralDirector && !u.HeadOfModerators);
+
+                _personalData.Add(allEmployees + adding + numberOfModerators.ToString() + employeeModerators + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfModerators));
 
                 _additionalData++;
             }
+        }
 
-            if (_user.ManagersRole.IndexOf(securityManagerRole) != -1 && _user.WorkingNow)
+        private void HeadOfSpecialsDetails()
+        {
+            if (_user.WorkingNow)
             {
-                _personalData.Add(allEmployees + adding + _storage.Users.Items.Count(u => u.Moderator && u.WorkingNow).ToString() + employeeModerators + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, _storage.Users.Items.Count(u => u.Moderator && u.WorkingNow)));
+                var numberOfSpecials = _storage.Users.Items.Count(u => u.Special && u.WorkingNow && !u.GeneralDirector && !u.Director && !u.DeputyGeneralDirector && !u.HeadOfSpecials);
+
+                _personalData.Add(allEmployees + adding + numberOfSpecials.ToString() + employeeSpecials + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfSpecials));
 
                 _additionalData++;
+            }
+        }
+
+        private void HeadOfTechniciansDetails()
+        {
+
+        }
+
+        private void ManagersDetails()
+        {
+            _personalData.Add(managersJob + adding + _user.ManagersPosition);
+
+            _additionalData++;
+
+            if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfManagers)
+            {
+                User headOfManagers = _storage.Users.Items.FirstOrDefault(u => u.HeadOfManagers && u.WorkingNow) as User;
+
+                if (headOfManagers != null)
+                {
+                    if (_amountOfRegularJobs + _amountOfHeadJobs == 1)
+                    {
+                        _personalData.Add(employer + adding + headOfManagers.Name + " " + headOfManagers.Surname);
+                    }
+                    else
+                    {
+                        _personalData.Add(employer + employerForManager + adding + headOfManagers.Name + " " + headOfManagers.Surname);
+                    }
+
+                    _additionalData++;
+                }                
             }
         }
 
@@ -707,22 +792,23 @@ namespace MarvelGuide.GUI
                 _additionalData++;
             }
 
-
-            if (!_user.Creator && !_user.SuperAdmin && !_user.AdminManager && !_user.AdminAgent && !_user.AdminEditor && _user.WorkingNow)
+            if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfEditors)
             {
-                var adminEditor = _storage.Users.Items.FirstOrDefault(u => u.AdminEditor && u.WorkingNow);
-                var superAdmin = _storage.Users.Items.FirstOrDefault(u => u.SuperAdmin && u.WorkingNow);
+                User headOfEditors = _storage.Users.Items.FirstOrDefault(u => u.HeadOfEditors && u.WorkingNow) as User;
 
-                if (_amountOfRegularJobs == 1)
+                if (headOfEditors != null)
                 {
-                    _personalData.Add(employer + adding + adminEditor.Name + " " + adminEditor.Surname + ", " + superAdmin.Name + " " + superAdmin.Surname);
-                }
-                else
-                {
-                    _personalData.Add(employer + employerForEditor + adding + adminEditor.Name + " " + adminEditor.Surname + ", " + superAdmin.Name + " " + superAdmin.Surname);
-                }
+                    if (_amountOfRegularJobs + _amountOfHeadJobs == 1)
+                    {
+                        _personalData.Add(employer + adding + headOfEditors.Name + " " + headOfEditors.Surname);
+                    }
+                    else
+                    {
+                        _personalData.Add(employer + employerForEditor + adding + headOfEditors.Name + " " + headOfEditors.Surname);
+                    }
 
-                _additionalData++;
+                    _additionalData++;
+                }
             }
         }
 
@@ -734,36 +820,67 @@ namespace MarvelGuide.GUI
 
             _additionalData += 3;
 
-            if (!_user.Creator && !_user.SuperAdmin && !_user.AdminManager && !_user.AdminAgent && !_user.AdminEditor && _user.WorkingNow)
+            if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfAgents)
             {
-                if (_amountOfRegularJobs == 1)
-                {
-                    _personalData.Add(employer + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent && u.WorkingNow).Surname);
-                }
-                else
-                {
-                    _personalData.Add(employer + employerForAgent + adding + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent && u.WorkingNow).Name + " " + _storage.Users.Items.FirstOrDefault(u => u.AdminAgent && u.WorkingNow).Surname);
-                }
+                User headOfAgents = _storage.Users.Items.FirstOrDefault(u => u.HeadOfAgents && u.WorkingNow) as User;
 
-                _additionalData++;
+                if (headOfAgents != null)
+                {
+                    if (_amountOfRegularJobs + _amountOfHeadJobs == 1)
+                    {
+                        _personalData.Add(employer + adding + headOfAgents.Name + " " + headOfAgents.Surname);
+                    }
+                    else
+                    {
+                        _personalData.Add(employer + employerForAgent + adding + headOfAgents.Name + " " + headOfAgents.Surname);
+                    }
+
+                    _additionalData++;
+                }
             }
         }
 
         private void ModeratorsDetails()
         {
-            if (_user.WorkingNow)
+            if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfModerators)
             {
-                User securityManager = _storage.Users.Items.FirstOrDefault(u => u.Manager && u.ManagersRole.IndexOf(securityManagerRole) != -1 && u.WorkingNow);
+                User headOfModerators = _storage.Users.Items.FirstOrDefault(u => u.HeadOfModerators && u.WorkingNow) as User;
 
-                if (securityManager != null && !_user.Creator && !_user.SuperAdmin && !_user.AdminManager && !_user.AdminAgent && !_user.AdminEditor)
+                if (headOfModerators != null)
                 {
-                    if (_amountOfRegularJobs == 1)
+                    if (_amountOfRegularJobs + _amountOfHeadJobs == 1)
                     {
-                        _personalData.Add(employer + adding + securityManager.Name + " " + securityManager.Surname);
+                        _personalData.Add(employer + adding + headOfModerators.Name + " " + headOfModerators.Surname);
                     }
                     else
                     {
-                        _personalData.Add(employer + employerForModerator + adding + securityManager.Name + " " + securityManager.Surname);
+                        _personalData.Add(employer + employerForModerator + adding + headOfModerators.Name + " " + headOfModerators.Surname);
+                    }
+
+                    _additionalData++;
+                }
+            }
+        }
+
+        private void SpecialsDetails()
+        {
+            _personalData.Add(specialsProject + adding + _user.SpecialsProject);
+
+            _additionalData++;
+
+            if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfSpecials)
+            {
+                User headOfSpecials = _storage.Users.Items.FirstOrDefault(u => u.HeadOfSpecials && u.WorkingNow) as User;
+
+                if (headOfSpecials != null)
+                {
+                    if (_amountOfRegularJobs + _amountOfHeadJobs == 1)
+                    {
+                        _personalData.Add(employer + adding + headOfSpecials.Name + " " + headOfSpecials.Surname);
+                    }
+                    else
+                    {
+                        _personalData.Add(employer + employerForSpecial + adding + headOfSpecials.Name + " " + headOfSpecials.Surname);
                     }
 
                     _additionalData++;
@@ -899,9 +1016,7 @@ namespace MarvelGuide.GUI
 
         private void DevelopersLevelGrid_Initialized(object sender, EventArgs e)
         {
-            if (!_editingPage || !(_user.SuperDeveloper || _user.HighDeveloper || _user.MediumDeveloper || _user.LightDeveloperAdminAgent || 
-                _user.LightDeveloperAdminManager || _user.LightDeveloperAdminEditor || _user.LightDeveloperAgent || _user.LightDeveloperCreator || 
-                _user.LightDeveloperEditor || _user.LightDeveloperManager || _user.LightDeveloperModerator || _user.LightDeveloperSuperAdmin))
+            if (!_editingPage || !_user.IsDeveloper)
             {
                 DevelopersLevelGrid.Visibility = Visibility.Collapsed;
             }
@@ -1022,33 +1137,41 @@ namespace MarvelGuide.GUI
                 _user.LostTheJob = DateTime.Parse(EndWorkingDateTextBox.Text);
             }
 
-            if (CreatorCheckBox.IsChecked == true)
+            if (GeneralDirectorCheckBox.IsChecked == true) { _user.GeneralDirector = true; }
+            else { _user.GeneralDirector = false; }
+            if (DirectorCheckBox.IsChecked == true)
             {
-                _user.Creator = true;
-                _user.OwnersRole = OwnersRoleTextBox.Text;
+                _user.Director = true;
+                _user.DirectorsPosition = DirectorsPositionTextBox.Text;
             }
             else
             {
-                _user.Creator = false;
-                _user.OwnersRole = null;
+                _user.Director = false;
+                _user.DirectorsPosition = null;
             }
-            if (SuperAdminCheckBox.IsChecked == true) { _user.SuperAdmin = true; }
-            else { _user.SuperAdmin = false; }
-            if (AdminManagerCheckBox.IsChecked == true) { _user.AdminManager = true; }
-            else { _user.AdminManager = false; }
-            if (AdminEditorCheckBox.IsChecked == true) { _user.AdminEditor = true; }
-            else { _user.AdminEditor = false; }
-            if (AdminAgentCheckBox.IsChecked == true) { _user.AdminAgent = true; }
-            else { _user.AdminAgent = false; }
+            if (DeputyGeneralDirectorCheckBox.IsChecked == true) { _user.DeputyGeneralDirector = true; }
+            else { _user.DeputyGeneralDirector = false; }
+            if (HeadOfManagersCheckBox.IsChecked == true) { _user.HeadOfManagers = true; }
+            else { _user.HeadOfManagers = false; }
+            if (HeadOfEditorsCheckBox.IsChecked == true) { _user.HeadOfEditors = true; }
+            else { _user.HeadOfEditors = false; }
+            if (HeadOfAgentsCheckBox.IsChecked == true) { _user.HeadOfAgents = true; }
+            else { _user.HeadOfAgents = false; }
+            if (HeadOfModeratorsCheckBox.IsChecked == true) { _user.HeadOfModerators = true; }
+            else { _user.HeadOfModerators = false; }
+            if (HeadOfSpecialsCheckBox.IsChecked == true) { _user.HeadOfSpecials = true; }
+            else { _user.HeadOfSpecials = false; }
+            if (HeadOfTechniciansCheckBox.IsChecked == true) { _user.HeadOfTechnicians = true; }
+            else { _user.HeadOfTechnicians = false; }
             if (ManagerCheckBox.IsChecked == true)
             {
                 _user.Manager = true;
-                _user.ManagersRole = ManagersRoleTextBox.Text;
+                _user.ManagersPosition = ManagersPositionTextBox.Text;
             }
             else
             {
                 _user.Manager = false;
-                _user.ManagersRole = null;
+                _user.ManagersPosition = null;
             }
             if (EditorCheckBox.IsChecked == true)
             {
@@ -1060,7 +1183,7 @@ namespace MarvelGuide.GUI
                 _user.Editor = false;
                 _user.EditorsRubrics = new List<EditorsPublication>();
             }
-            if (AgentChecBox.IsChecked == true)
+            if (AgentCheckBox.IsChecked == true)
             {
                 _user.Agent = true;
                 _user.AgentsNumber = int.Parse(AgentsNumberTextBox.Text);
@@ -1074,31 +1197,55 @@ namespace MarvelGuide.GUI
                 _user.AgentsFirstWords = null;
                 _user.AgentsLastWords = null;
             }
-            if (ModeratorcheckBox.IsChecked == true) { _user.Moderator = true; }
+            if (ModeratorCheckBox.IsChecked == true) { _user.Moderator = true; }
             else { _user.Moderator = false; }
-
-            if (IsDeveloperCheckBox.IsChecked == true)
+            if (SpecialCheckBox.IsChecked == true)
             {
-                if (HighDeveloperRadioButton.IsChecked == true) { _user.HighDeveloper = true; }
-                else
+                _user.Special = true;
+                _user.SpecialsProject = SpecialsProjectTextBox.Text;
+            }
+            else
+            {
+                _user.Special = false;
+                _user.SpecialsProject = null;
+            }
+
+            if (!_user.SuperDeveloper)
+            {
+                if (IsDeveloperCheckBox.IsChecked == true)
                 {
-                    _user.SuperDeveloper = false;
-                    _user.HighDeveloper = false;
-                    if (MediumDeveloperRadioButton.IsChecked == true) { _user.MediumDeveloper = true; }
+                    if (HighDeveloperRadioButton.IsChecked == true)
+                    {
+                        _user.NotADeveloper();
+                        _user.HighDeveloper = true;
+                    }
+                    else if (MediumDeveloperRadioButton.IsChecked == true)
+                    {
+                        _user.NotADeveloper();
+                        _user.MediumDeveloper = true;
+                    }
                     else
                     {
-                        _user.MediumDeveloper = false;
+                        _user.NotADeveloper();
 
-                        if (CreatorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperCreator = true; }
-                        else { _user.LightDeveloperCreator = false; }
-                        if (SuperAdminDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperSuperAdmin = true; }
-                        else { _user.LightDeveloperSuperAdmin = false; }
-                        if (AdminManagerDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAdminManager = true; }
-                        else { _user.LightDeveloperAdminManager = false; }
-                        if (AdminEditoDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAdminEditor = true; }
-                        else { _user.LightDeveloperAdminEditor = false; }
-                        if (AdminAgentDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperAdminAgent = true; }
-                        else { _user.LightDeveloperAdminAgent = false; }
+                        if (GeneralDirectorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperGeneralDirector = true; }
+                        else { _user.LightDeveloperGeneralDirector = false; }
+                        if (DirectorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperDirector = true; }
+                        else { _user.LightDeveloperDirector = false; }
+                        if (DeputyGeneralDirectorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperDeputyGeneralDirector = true; }
+                        else { _user.LightDeveloperDeputyGeneralDirector = false; }
+                        if (HeadOfManagersDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperHeadOfManagers = true; }
+                        else { _user.LightDeveloperHeadOfManagers = false; }
+                        if (HeadOfEditorsDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperHeadOfEditors = true; }
+                        else { _user.LightDeveloperHeadOfEditors = false; }
+                        if (HeadOfAgentsDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperHeadOfAgents = true; }
+                        else { _user.LightDeveloperHeadOfAgents = false; }
+                        if (HeadOfModeratorsDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperHeadOfModerators = true; }
+                        else { _user.LightDeveloperHeadOfModerators = false; }
+                        if (HeadOfSpecialsDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperHeadOfSpecials = true; }
+                        else { _user.LightDeveloperHeadOfSpecials = false; }
+                        if (HeadOfTechniciansDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperHeadOfTechnicians = true; }
+                        else { _user.LightDeveloperHeadOfTechnicians = false; }
                         if (ManagerDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperManager = true; }
                         else { _user.LightDeveloperManager = false; }
                         if (EditorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperEditor = true; }
@@ -1107,8 +1254,11 @@ namespace MarvelGuide.GUI
                         else { _user.LightDeveloperAgent = false; }
                         if (ModeratorDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperModerator = true; }
                         else { _user.LightDeveloperModerator = false; }
+                        if (SpecialDeveloperCheckBox.IsChecked == true) { _user.LightDeveloperSpecial = true; }
+                        else { _user.LightDeveloperSpecial = false; }
                     }
                 }
+                else { _user.NotADeveloper(); }
             }
 
             if (_newImagesWereUploaded)
@@ -1187,9 +1337,9 @@ namespace MarvelGuide.GUI
         }
 
 
-        private void OwnersRoleGrid_Initialized(object sender, EventArgs e)
+        private void DirectorsRoleGrid_Initialized(object sender, EventArgs e)
         {
-            if (!_user.Creator) { OwnersRoleGrid.Visibility = Visibility.Collapsed; }
+            if (!_user.Director) { DirectorsRoleGrid.Visibility = Visibility.Collapsed; }
         }
 
         private void ManagersRoleGrid_Initialized(object sender, EventArgs e)
@@ -1207,11 +1357,15 @@ namespace MarvelGuide.GUI
             if (!_user.Agent) { AgentsRoleGrid.Visibility = Visibility.Collapsed; }
         }
 
+        private void SpecialsRoleGrid_Initialized(object sender, EventArgs e)
+        {
+            if (!_user.Special) { SpecialsRoleGrid.Visibility = Visibility.Collapsed; }
+        }
+
 
         private void DeveloperCheckBoxGrid_Initialized(object sender, EventArgs e)
         {
-            if (!(_user.LightDeveloperAdminAgent || _user.LightDeveloperAdminManager || _user.LightDeveloperAdminEditor || _user.LightDeveloperAgent 
-                || _user.LightDeveloperCreator || _user.LightDeveloperEditor || _user.LightDeveloperManager || _user.LightDeveloperModerator || _user.LightDeveloperSuperAdmin))
+            if (!_user.IsLightDeveloper)
             {
                 DeveloperCheckBoxGrid.Visibility = Visibility.Collapsed;
             }
@@ -1322,54 +1476,14 @@ namespace MarvelGuide.GUI
 
 
 
-        private void CreatorCheckBox_Checked(object sender, RoutedEventArgs e)
+        private void DirectorCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            OwnersRoleGrid.Visibility = Visibility.Visible;
+            DirectorsRoleGrid.Visibility = Visibility.Visible;
         }
 
-        private void CreatorCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        private void DirectorCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            OwnersRoleGrid.Visibility = Visibility.Collapsed;
-        }
-
-        private void SuperAdminCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void SuperAdminCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AdminManagerCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AdminManagerCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AdminEditorCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AdminEditorCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AdminAgentCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AdminAgentCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
+            DirectorsRoleGrid.Visibility = Visibility.Collapsed;
         }
 
         private void ManagerCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -1392,14 +1506,24 @@ namespace MarvelGuide.GUI
             EditorsRoleGrid.Visibility = Visibility.Collapsed;
         }
 
-        private void AgentChecBox_Checked(object sender, RoutedEventArgs e)
+        private void AgentCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             AgentsRoleGrid.Visibility = Visibility.Visible;
         }
 
-        private void AgentChecBox_Unchecked(object sender, RoutedEventArgs e)
+        private void AgentCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             AgentsRoleGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void SpecialСheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            SpecialsRoleGrid.Visibility = Visibility.Visible;
+        }
+
+        private void SpecialСheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SpecialsRoleGrid.Visibility = Visibility.Collapsed;
         }
 
 
@@ -1442,18 +1566,6 @@ namespace MarvelGuide.GUI
                 MediumDeveloperRadioButton.IsChecked = true;
 
                 MessageBox.Show("У Вас недостаточно прав для совершения данного действия. По всем вопросам можно обратиться к разработчикам приложения.", "Ошибка");
-
-                _programSwitch = false;
-            }
-            else if (_user == _userWhoWatches && !_programSwitch)
-            {
-                _programSwitch = true;
-
-                LightDeveloperRadioButton.IsChecked = false;
-                HighDeveloperRadioButton.IsChecked = false;
-                MediumDeveloperRadioButton.IsChecked = true;
-
-                MessageBox.Show("Вы не можете сами изменять собственные настройки разработчика.", "Ошибка");
 
                 _programSwitch = false;
             }
@@ -1533,45 +1645,6 @@ namespace MarvelGuide.GUI
         }
 
 
-        private void StillWorkingCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            if (EndWorkingDateTextBlock != null && EndWorkingDateTextBox != null)
-            {
-                if (_user.Id == -1)
-                {
-                    Today1Button.Visibility = Visibility.Visible;
-                    Today1Button.Margin = new Thickness(Today1Button.Margin.Left, Today1Button.Margin.Top, Today1Button.Margin.Bottom, 13);
-                }
-                else
-                {
-                    StartWorkingDateTextBox.Margin = new Thickness(StartWorkingDateTextBox.Margin.Left, StartWorkingDateTextBox.Margin.Top, StartWorkingDateTextBox.Margin.Right, 11);
-                }
-
-                EndWorkingDateTextBlock.Visibility = Visibility.Collapsed;
-                EndWorkingDateTextBox.Visibility = Visibility.Collapsed;
-                Today2Button.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        private void StillWorkingCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (_user.Id == -1 || !_user.WorkingNow)
-            {
-                Today1Button.Visibility = Visibility.Collapsed;
-
-                EndWorkingDateTextBox.Margin = new Thickness(EndWorkingDateTextBox.Margin.Left, EndWorkingDateTextBox.Margin.Top, EndWorkingDateTextBox.Margin.Right, 11);
-            }
-            else if (_user.WorkingNow)
-            {
-                Today2Button.Visibility = Visibility.Visible;
-            }
-
-            StartWorkingDateTextBox.Margin = LoginTextBox.Margin;
-
-            EndWorkingDateTextBox.Visibility = Visibility.Visible;
-            EndWorkingDateTextBlock.Visibility = Visibility.Visible;
-        }
-
         private void IsDeveloperCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             if (!_userWhoWatches.MediumDeveloper)
@@ -1618,6 +1691,46 @@ namespace MarvelGuide.GUI
             {
                 DevelopersLevelGrid.Visibility = Visibility.Collapsed;
             }
+        }
+
+
+        private void StillWorkingCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (EndWorkingDateTextBlock != null && EndWorkingDateTextBox != null)
+            {
+                if (_user.Id == -1)
+                {
+                    Today1Button.Visibility = Visibility.Visible;
+                    Today1Button.Margin = new Thickness(Today1Button.Margin.Left, Today1Button.Margin.Top, Today1Button.Margin.Bottom, 13);
+                }
+                else
+                {
+                    StartWorkingDateTextBox.Margin = new Thickness(StartWorkingDateTextBox.Margin.Left, StartWorkingDateTextBox.Margin.Top, StartWorkingDateTextBox.Margin.Right, 11);
+                }
+
+                EndWorkingDateTextBlock.Visibility = Visibility.Collapsed;
+                EndWorkingDateTextBox.Visibility = Visibility.Collapsed;
+                Today2Button.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void StillWorkingCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (_user.Id == -1 || !_user.WorkingNow)
+            {
+                Today1Button.Visibility = Visibility.Collapsed;
+
+                EndWorkingDateTextBox.Margin = new Thickness(EndWorkingDateTextBox.Margin.Left, EndWorkingDateTextBox.Margin.Top, EndWorkingDateTextBox.Margin.Right, 11);
+            }
+            else if (_user.WorkingNow)
+            {
+                Today2Button.Visibility = Visibility.Visible;
+            }
+
+            StartWorkingDateTextBox.Margin = LoginTextBox.Margin;
+
+            EndWorkingDateTextBox.Visibility = Visibility.Visible;
+            EndWorkingDateTextBlock.Visibility = Visibility.Visible;
         }
 
 
@@ -1746,39 +1859,39 @@ namespace MarvelGuide.GUI
             }
         }
 
-        private void OwnersRoleTextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void DirectorsPositionTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (OwnersRoleTextBox.Text == defaultOwnersRole)
+            if (DirectorsPositionTextBox.Text == defaultDirectorsPosition)
             {
-                OwnersRoleTextBox.Text = "";
-                OwnersRoleTextBox.Foreground = Brushes.Black;
+                DirectorsPositionTextBox.Text = "";
+                DirectorsPositionTextBox.Foreground = Brushes.Black;
             }
         }
 
-        private void OwnersRoleTextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void DirectorsPositionTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (OwnersRoleTextBox.Text == "")
+            if (DirectorsPositionTextBox.Text == "")
             {
-                OwnersRoleTextBox.Text = defaultOwnersRole;
-                OwnersRoleTextBox.Foreground = Brushes.Gray;
+                DirectorsPositionTextBox.Text = defaultDirectorsPosition;
+                DirectorsPositionTextBox.Foreground = Brushes.Gray;
             }
         }
 
-        private void ManagersRoleTextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void ManagersPositionTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (ManagersRoleTextBox.Text == defaultManagerRole)
+            if (ManagersPositionTextBox.Text == defaultManagersPosition)
             {
-                ManagersRoleTextBox.Text = "";
-                ManagersRoleTextBox.Foreground = Brushes.Black;
+                ManagersPositionTextBox.Text = "";
+                ManagersPositionTextBox.Foreground = Brushes.Black;
             }
         }
 
-        private void ManagersRoleTextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void ManagersPositionTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (ManagersRoleTextBox.Text == "")
+            if (ManagersPositionTextBox.Text == "")
             {
-                ManagersRoleTextBox.Text = defaultManagerRole;
-                ManagersRoleTextBox.Foreground = Brushes.Gray;
+                ManagersPositionTextBox.Text = defaultManagersPosition;
+                ManagersPositionTextBox.Foreground = Brushes.Gray;
             }
         }
 
@@ -1866,6 +1979,24 @@ namespace MarvelGuide.GUI
             {
                 AgentsLastWordsTextBox.Text = defaultAgentsLastWords;
                 AgentsLastWordsTextBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void SpecialsProjectTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (SpecialsProjectTextBox.Text == defaultSpecialsProject)
+            {
+                SpecialsProjectTextBox.Text = "";
+                SpecialsProjectTextBox.Foreground = Brushes.Black;
+            }
+        }
+
+        private void SpecialsProjectTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (SpecialsProjectTextBox.Text == "")
+            {
+                SpecialsProjectTextBox.Text = defaultSpecialsProject;
+                SpecialsProjectTextBox.Foreground = Brushes.Black;
             }
         }
 
@@ -2016,27 +2147,31 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (CreatorCheckBox.IsChecked == false && SuperAdminCheckBox.IsChecked == false && AdminManagerCheckBox.IsChecked == false && AdminEditorCheckBox.IsChecked == false && AdminAgentCheckBox.IsChecked == false && ManagerCheckBox.IsChecked == false && EditorCheckBox.IsChecked == false && AgentChecBox.IsChecked == false && ModeratorcheckBox.IsChecked == false)
+            if (GeneralDirectorCheckBox.IsChecked == false && DirectorCheckBox.IsChecked == false && DeputyGeneralDirectorCheckBox.IsChecked == false && 
+                HeadOfManagersCheckBox.IsChecked == false && HeadOfEditorsCheckBox.IsChecked == false && HeadOfAgentsCheckBox.IsChecked == false && 
+                HeadOfModeratorsCheckBox.IsChecked == false && HeadOfSpecialsCheckBox.IsChecked == false && HeadOfTechniciansCheckBox.IsChecked == false &&
+                ManagerCheckBox.IsChecked == false && EditorCheckBox.IsChecked == false && AgentCheckBox.IsChecked == false && 
+                ModeratorCheckBox.IsChecked == false && SpecialCheckBox.IsChecked == false)
             {
-                MessageBox.Show("Укажите хотя бы одну должность из списка для сотрудника.", "Ошибка");
+                MessageBox.Show("Укажите хотя бы одну должность для сотрудника.", "Ошибка");
 
                 EditorCheckBox.Focus();
 
                 return false;
             }
-            if (CreatorCheckBox.IsChecked == true && OwnersRoleTextBox.Text == defaultOwnersRole)
+            if (DirectorCheckBox.IsChecked == true && DirectorsPositionTextBox.Text == defaultDirectorsPosition)
             {
-                MessageBox.Show("Укажите полную должность владельца.", "Ошибка");
+                MessageBox.Show("Укажите полную должность директора.", "Ошибка");
 
-                OwnersRoleTextBox.Focus();
+                DirectorsPositionTextBox.Focus();
 
                 return false;
             }
-            if (ManagerCheckBox.IsChecked == true && ManagersRoleTextBox.Text == defaultManagerRole)
+            if (ManagerCheckBox.IsChecked == true && ManagersPositionTextBox.Text == defaultManagersPosition)
             {
                 MessageBox.Show("Укажите расширенную менеджерскую должность сотрудника.", "Ошибка");
 
-                ManagersRoleTextBox.Focus();
+                ManagersPositionTextBox.Focus();
 
                 return false;
             }
@@ -2046,7 +2181,7 @@ namespace MarvelGuide.GUI
             {
                 return false;
             }
-            if (AgentChecBox.IsChecked == true && AgentsNumberTextBox.Text == defaultAgentsNumber)
+            if (AgentCheckBox.IsChecked == true && AgentsNumberTextBox.Text == defaultAgentsNumber)
             {
                 MessageBox.Show("Укажите агентский номер сотрудника.", "Ошибка");
 
@@ -2054,7 +2189,7 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (AgentChecBox.IsChecked == true && AgentsFirstWordsTextBox.Text == defaultAgentsFirstWords)
+            if (AgentCheckBox.IsChecked == true && AgentsFirstWordsTextBox.Text == defaultAgentsFirstWords)
             {
                 MessageBox.Show("Укажите приветствие сотрудника (как агента Поддержки).", "Ошибка");
 
@@ -2062,11 +2197,19 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (AgentChecBox.IsChecked == true && AgentsLastWordsTextBox.Text == defaultAgentsLastWords)
+            if (AgentCheckBox.IsChecked == true && AgentsLastWordsTextBox.Text == defaultAgentsLastWords)
             {
                 MessageBox.Show("Укажите подпись сотрудника (как агента Поддержки).", "Ошибка");
 
                 AgentsLastWordsTextBox.Focus();
+
+                return false;
+            }
+            if (SpecialCheckBox.IsChecked == true && SpecialsProjectTextBox.Text == defaultSpecialsProject)
+            {
+                MessageBox.Show("Укажите название спецпроекта сотрудника.", "Ошибка");
+
+                SpecialsProjectTextBox.Focus();
 
                 return false;
             }
@@ -2078,7 +2221,12 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (IsDeveloperCheckBox.IsChecked == true && LightDeveloperRadioButton.IsChecked == true && CreatorDeveloperCheckBox.IsChecked == false && SuperAdminDeveloperCheckBox.IsChecked == false && AdminManagerCheckBox.IsChecked == false && AdminEditoDeveloperCheckBox.IsChecked == false && AdminAgentDeveloperCheckBox.IsChecked == false && ManagerDeveloperCheckBox.IsChecked == false && EditorDeveloperCheckBox.IsChecked == false && AgentDeveloperCheckBox.IsChecked == false && ModeratorDeveloperCheckBox.IsChecked == false)
+            if (IsDeveloperCheckBox.IsChecked == true && LightDeveloperRadioButton.IsChecked == true && 
+                GeneralDirectorDeveloperCheckBox.IsChecked == false && DirectorDeveloperCheckBox.IsChecked == false && DeputyGeneralDirectorDeveloperCheckBox.IsChecked == false && 
+                HeadOfManagersDeveloperCheckBox.IsChecked == false && HeadOfEditorsDeveloperCheckBox.IsChecked == false && HeadOfAgentsDeveloperCheckBox.IsChecked == false && 
+                HeadOfModeratorsDeveloperCheckBox.IsChecked == false && HeadOfSpecialsDeveloperCheckBox.IsChecked == false && HeadOfTechniciansDeveloperCheckBox.IsChecked == false &&
+                ManagerDeveloperCheckBox.IsChecked == false && EditorDeveloperCheckBox.IsChecked == false && AgentDeveloperCheckBox.IsChecked == false && 
+                ModeratorDeveloperCheckBox.IsChecked == false && SpecialDeveloperCheckBox.IsChecked == false)
             {
                 MessageBox.Show("Выберите те категории управленческих должностей для сотрудника, расширенная информация по которым будет ему доступна как разработчику с базовым уровнем.", "Ошибка");
 
@@ -2195,13 +2343,13 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (CreatorCheckBox.IsChecked == true && 
-                _storage.Users.Items.Count(u => u != _user && u.WorkingNow && u.OwnersRole == OwnersRoleTextBox.Text) != 0)
+            if (DirectorCheckBox.IsChecked == true && 
+                _storage.Users.Items.Count(u => u != _user && u.WorkingNow && u.DirectorsPosition == DirectorsPositionTextBox.Text) != 0)
             {
-                MessageBox.Show("Указанная должность владельца уже занята другим владельцем. Пожалуйста, проверьте корректность названия должности.", "Ошибка");
+                MessageBox.Show("Указанная директорская должность уже занята другим директором. Пожалуйста, проверьте корректность названия должности.", "Ошибка");
 
-                OwnersRoleTextBox.Text = "";
-                OwnersRoleTextBox.Focus();
+                DirectorsPositionTextBox.Text = "";
+                DirectorsPositionTextBox.Focus();
 
                 return false;
             }
@@ -2227,7 +2375,7 @@ namespace MarvelGuide.GUI
                     }                    
                 }
             }
-            if (AgentChecBox.IsChecked == true && (!int.TryParse(AgentsNumberTextBox.Text, out result) || result <= 0))
+            if (AgentCheckBox.IsChecked == true && (!int.TryParse(AgentsNumberTextBox.Text, out result) || result <= 0))
             {
                 MessageBox.Show("Номер Агента Поддержки должен всегда быть целым числом, большим 0.", "Ошибка");
 
@@ -2236,7 +2384,7 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (AgentChecBox.IsChecked == true && !(_storage.Users.Items.FirstOrDefault(u => u.AgentsNumber.ToString() == AgentsNumberTextBox.Text) == null ||
+            if (AgentCheckBox.IsChecked == true && !(_storage.Users.Items.FirstOrDefault(u => u.AgentsNumber.ToString() == AgentsNumberTextBox.Text) == null ||
                 _storage.Users.Items.FirstOrDefault(u => u.AgentsNumber.ToString() == AgentsNumberTextBox.Text) == _user))
             {
                 MessageBox.Show("Вам нужен другой номер для Агента Поддержки, посколько указанный сейчас уже используется или использовался другим сотрудником.", "Ошибка");
@@ -2300,6 +2448,6 @@ namespace MarvelGuide.GUI
                     MessageBox.Show("Рубрика является неактивной, и на данный момент отсутствует", "Предупреждение");
                 }
             }
-        }
+        }        
     }
 }

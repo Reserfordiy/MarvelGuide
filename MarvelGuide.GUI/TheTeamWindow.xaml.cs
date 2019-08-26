@@ -24,7 +24,7 @@ namespace MarvelGuide.GUI
     /// </summary>
     public partial class TheTeamWindow : Window
     {
-        private const string creator = "Владелец";
+        private const string director = "Директор";
         private const string manager = "Менеджер";
 
         private const string defaultImageSource = "default.jpg";
@@ -162,15 +162,21 @@ namespace MarvelGuide.GUI
                 _theTeam.Add(new User { Id = -1 });
             }
 
-            SwitchingTheMembers(u => u.Creator);
-            SwitchingTheMembers(u => u.SuperAdmin);
-            SwitchingTheMembers(u => u.AdminManager);
-            SwitchingTheMembers(u => u.AdminEditor);
-            SwitchingTheMembers(u => u.AdminAgent);
+            SwitchingTheMembers(u => u.GeneralDirector);
+            SwitchingTheMembers(u => u.Director);
+            SwitchingTheMembers(u => u.DeputyGeneralDirector);
+            SwitchingTheMembers(u => u.HeadOfManagers);
+            SwitchingTheMembers(u => u.HeadOfEditors);
+            SwitchingTheMembers(u => u.HeadOfAgents);
+            SwitchingTheMembers(u => u.HeadOfModerators);
+            SwitchingTheMembers(u => u.HeadOfSpecials);
+            SwitchingTheMembers(u => u.HeadOfTechnicians);
             SwitchingTheMembers(u => u.Manager);
             SwitchingTheMembers(u => u.Editor);
             SwitchingTheMembers(u => u.Agent);
             SwitchingTheMembers(u => u.Moderator);
+            SwitchingTheMembers(u => u.Special);
+            SwitchingTheMembers(u => u.Technician);
         }
 
 
@@ -268,13 +274,13 @@ namespace MarvelGuide.GUI
             {
                 string job = user.Job();
 
-                if (job.IndexOf(creator) != -1)
+                if (job.IndexOf(director) != -1)
                 {
-                    job = job.Substring(0, job.IndexOf(creator)) + user.OwnersRole + job.Substring(job.IndexOf(creator) + creator.Length);
+                    job = job.Substring(0, job.IndexOf(director)) + user.DirectorsPosition + job.Substring(job.IndexOf(director) + director.Length);
                 }
                 if (job.IndexOf(manager) != -1)
                 {
-                    job = job.Substring(0, job.IndexOf(manager)) + user.ManagersRole + job.Substring(job.IndexOf(manager) + manager.Length);
+                    job = job.Substring(0, job.IndexOf(manager)) + user.ManagersPosition + job.Substring(job.IndexOf(manager) + manager.Length);
                 }
 
                 UserJobTextBlock.Text = job;
