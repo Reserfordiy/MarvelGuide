@@ -3,6 +3,7 @@
     "Id": 1,
     "Name": "Арты",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 7,
     "KPI": {
       "AmountOfPosts": 0,
@@ -26,6 +27,7 @@
     "Id": 2,
     "Name": "Сцены",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 10,
     "KPI": {
       "AmountOfPosts": 0,
@@ -49,6 +51,7 @@
     "Id": 3,
     "Name": "Хистори",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 9,
     "KPI": {
       "AmountOfPosts": 0,
@@ -72,6 +75,7 @@
     "Id": 4,
     "Name": "Юмор",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 8,
     "KPI": {
       "AmountOfPosts": 0,
@@ -95,6 +99,7 @@
     "Id": 5,
     "Name": "Фильмарты",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 12,
     "KPI": {
       "AmountOfPosts": 0,
@@ -118,6 +123,7 @@
     "Id": 6,
     "Name": "Старс",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 13,
     "KPI": {
       "AmountOfPosts": 0,
@@ -141,6 +147,7 @@
     "Id": 7,
     "Name": "Факты",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 12,
     "KPI": {
       "AmountOfPosts": 0,
@@ -164,6 +171,7 @@
     "Id": 8,
     "Name": "Досье",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 11,
     "KPI": {
       "AmountOfPosts": 0,
@@ -187,6 +195,7 @@
     "Id": 9,
     "Name": "Фрагменты",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 0,
     "KPI": null,
     "Picture": {
@@ -204,6 +213,7 @@
     "Id": 10,
     "Name": "Обои",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 0,
     "KPI": null,
     "Picture": {
@@ -221,6 +231,7 @@
     "Id": 11,
     "Name": "ОСТ",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 0,
     "KPI": null,
     "Picture": {
@@ -238,6 +249,7 @@
     "Id": 12,
     "Name": "Рефлекшон",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 0,
     "KPI": null,
     "Picture": {
@@ -255,6 +267,7 @@
     "Id": 13,
     "Name": "Гэллери",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 0,
     "KPI": null,
     "Picture": {
@@ -272,6 +285,7 @@
     "Id": 14,
     "Name": "Новости",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 0,
     "KPI": null,
     "Picture": {
@@ -289,6 +303,7 @@
     "Id": 15,
     "Name": "Видео",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 0,
     "KPI": null,
     "Picture": {
@@ -306,6 +321,7 @@
     "Id": 16,
     "Name": "Коллаж",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 0,
     "KPI": null,
     "Picture": {
@@ -323,6 +339,7 @@
     "Id": 17,
     "Name": "Косплей",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 0,
     "KPI": null,
     "Picture": {
@@ -340,6 +357,7 @@
     "Id": 18,
     "Name": "Опинион",
     "Actual": true,
+    "SpecialProject": false,
     "DocumentId": 0,
     "KPI": null,
     "Picture": {
@@ -357,6 +375,7 @@
     "Id": 19,
     "Name": "Моменты",
     "Actual": false,
+    "SpecialProject": false,
     "DocumentId": 0,
     "KPI": null,
     "Picture": null,

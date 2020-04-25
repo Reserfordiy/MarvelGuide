@@ -2322,8 +2322,8 @@
     "ManagersPosition": null,
     "EditorsRubrics": [
       {
-        "RubricID": 2,
-        "Frequency": 2
+        "RubricID": 12,
+        "Frequency": 3
       },
       {
         "RubricID": 18,
@@ -3308,9 +3308,9 @@
     "Male": true,
     "Login": "aydark",
     "Password": "uXQRULDjSlQeM9YsXkGQbA==",
-    "WorkingNow": true,
+    "WorkingNow": false,
     "GotAJob": "2019-04-01T00:00:00",
-    "LostTheJob": "0001-01-01T00:00:00",
+    "LostTheJob": "2019-09-27T00:00:00",
     "SuperDeveloper": false,
     "HighDeveloper": false,
     "MediumDeveloper": false,
@@ -3348,7 +3348,7 @@
     "ManagersPosition": "Менеджер по кадрам",
     "EditorsRubrics": [
       {
-        "RubricID": 13,
+        "RubricID": 1,
         "Frequency": 2
       },
       {
@@ -3488,11 +3488,15 @@
     "ManagersPosition": null,
     "EditorsRubrics": [
       {
-        "RubricID": 11,
-        "Frequency": 2
+        "RubricID": 18,
+        "Frequency": 4
       },
       {
         "RubricID": 1,
+        "Frequency": 2
+      },
+      {
+        "RubricID": 14,
         "Frequency": 2
       }
     ],
@@ -3648,9 +3652,9 @@
     "Male": false,
     "Login": "darian",
     "Password": "PnGjUltfRWPuby68WYk/Fw==",
-    "WorkingNow": true,
+    "WorkingNow": false,
     "GotAJob": "2019-06-08T00:00:00",
-    "LostTheJob": "0001-01-01T00:00:00",
+    "LostTheJob": "2019-10-25T00:00:00",
     "SuperDeveloper": false,
     "HighDeveloper": false,
     "MediumDeveloper": false,
@@ -3689,7 +3693,7 @@
     "EditorsRubrics": [
       {
         "RubricID": 18,
-        "Frequency": 2
+        "Frequency": 3
       }
     ],
     "AgentsNumber": 0,
@@ -3713,7 +3717,7 @@
     "Login": "ilhamsh",
     "Password": "WosFwG88GOCuLX9vecyChw==",
     "WorkingNow": true,
-    "GotAJob": "2019-07-06T00:00:00",
+    "GotAJob": "2019-06-27T00:00:00",
     "LostTheJob": "0001-01-01T00:00:00",
     "SuperDeveloper": false,
     "HighDeveloper": false,
@@ -3752,20 +3756,8 @@
     "ManagersPosition": null,
     "EditorsRubrics": [
       {
-        "RubricID": 7,
-        "Frequency": 2
-      },
-      {
         "RubricID": 17,
         "Frequency": 3
-      },
-      {
-        "RubricID": 4,
-        "Frequency": 2
-      },
-      {
-        "RubricID": 11,
-        "Frequency": 1
       },
       {
         "RubricID": 12,
@@ -3800,9 +3792,9 @@
     "Male": true,
     "Login": "vadims",
     "Password": "3SEblOSxZ/szICcFiqxFmQ==",
-    "WorkingNow": true,
+    "WorkingNow": false,
     "GotAJob": "2019-08-15T00:00:00",
-    "LostTheJob": "0001-01-01T00:00:00",
+    "LostTheJob": "2019-09-14T00:00:00",
     "SuperDeveloper": false,
     "HighDeveloper": false,
     "MediumDeveloper": false,
@@ -3868,9 +3860,9 @@
     "Male": false,
     "Login": "kseniyak",
     "Password": "0b7ZWuB8HV/dQkVAsTXrAw==",
-    "WorkingNow": true,
+    "WorkingNow": false,
     "GotAJob": "2019-08-18T00:00:00",
-    "LostTheJob": "0001-01-01T00:00:00",
+    "LostTheJob": "2019-09-01T00:00:00",
     "SuperDeveloper": false,
     "HighDeveloper": false,
     "MediumDeveloper": false,
@@ -3932,9 +3924,9 @@
     "Male": true,
     "Login": "egors",
     "Password": "ooP2sw/JQhGekPQG57dapg==",
-    "WorkingNow": true,
+    "WorkingNow": false,
     "GotAJob": "2019-08-24T00:00:00",
-    "LostTheJob": "0001-01-01T00:00:00",
+    "LostTheJob": "2019-09-29T00:00:00",
     "SuperDeveloper": false,
     "HighDeveloper": false,
     "MediumDeveloper": false,
@@ -3987,6 +3979,154 @@
     "Avatar": {
       "Id": 0,
       "ImageSource": "smirnov.jpg",
+      "IsBorderRequired": true
+    },
+    "IsLightDeveloper": false,
+    "IsDeveloper": false,
+    "IsHead": false
+  },
+  {
+    "Id": 70,
+    "Name": "Чингиз",
+    "Surname": "Шуджаатли",
+    "Male": true,
+    "Login": "chingizsh",
+    "Password": "E5D3FR5CHsudTWXn/7lASg==",
+    "WorkingNow": false,
+    "GotAJob": "2019-09-05T00:00:00",
+    "LostTheJob": "2019-09-07T00:00:00",
+    "SuperDeveloper": false,
+    "HighDeveloper": false,
+    "MediumDeveloper": false,
+    "LightDeveloperGeneralDirector": false,
+    "LightDeveloperDirector": false,
+    "LightDeveloperDeputyGeneralDirector": false,
+    "LightDeveloperHeadOfManagers": false,
+    "LightDeveloperHeadOfEditors": false,
+    "LightDeveloperHeadOfAgents": false,
+    "LightDeveloperHeadOfModerators": false,
+    "LightDeveloperHeadOfSpecials": false,
+    "LightDeveloperHeadOfTechnicians": false,
+    "LightDeveloperManager": false,
+    "LightDeveloperEditor": false,
+    "LightDeveloperAgent": false,
+    "LightDeveloperModerator": false,
+    "LightDeveloperSpecial": false,
+    "LightDeveloperTechnician": false,
+    "GeneralDirector": false,
+    "Director": false,
+    "DeputyGeneralDirector": false,
+    "HeadOfManagers": false,
+    "HeadOfEditors": false,
+    "HeadOfAgents": false,
+    "HeadOfModerators": false,
+    "HeadOfSpecials": false,
+    "HeadOfTechnicians": false,
+    "Manager": false,
+    "Editor": true,
+    "Agent": false,
+    "Moderator": false,
+    "Special": false,
+    "Technician": false,
+    "DirectorsPosition": null,
+    "ManagersPosition": null,
+    "EditorsRubrics": [
+      {
+        "RubricID": 4,
+        "Frequency": 3
+      },
+      {
+        "RubricID": 7,
+        "Frequency": 2
+      },
+      {
+        "RubricID": 5,
+        "Frequency": 2
+      },
+      {
+        "RubricID": 14,
+        "Frequency": 1
+      },
+      {
+        "RubricID": 12,
+        "Frequency": 3
+      },
+      {
+        "RubricID": 18,
+        "Frequency": 4
+      }
+    ],
+    "AgentsNumber": 0,
+    "AgentsFirstWords": null,
+    "AgentsLastWords": null,
+    "SpecialsProject": null,
+    "Avatar": {
+      "Id": 0,
+      "ImageSource": "shudzhaatli_ch.jpg",
+      "IsBorderRequired": true
+    },
+    "IsLightDeveloper": false,
+    "IsDeveloper": false,
+    "IsHead": false
+  },
+  {
+    "Id": 71,
+    "Name": "Владислав",
+    "Surname": "Чернявский",
+    "Male": true,
+    "Login": "vladislavch",
+    "Password": "aDxZSzmRgYuqq7V5Az+irQ==",
+    "WorkingNow": true,
+    "GotAJob": "2019-09-19T00:00:00",
+    "LostTheJob": "0001-01-01T00:00:00",
+    "SuperDeveloper": false,
+    "HighDeveloper": false,
+    "MediumDeveloper": false,
+    "LightDeveloperGeneralDirector": false,
+    "LightDeveloperDirector": false,
+    "LightDeveloperDeputyGeneralDirector": false,
+    "LightDeveloperHeadOfManagers": false,
+    "LightDeveloperHeadOfEditors": false,
+    "LightDeveloperHeadOfAgents": false,
+    "LightDeveloperHeadOfModerators": false,
+    "LightDeveloperHeadOfSpecials": false,
+    "LightDeveloperHeadOfTechnicians": false,
+    "LightDeveloperManager": false,
+    "LightDeveloperEditor": false,
+    "LightDeveloperAgent": false,
+    "LightDeveloperModerator": false,
+    "LightDeveloperSpecial": false,
+    "LightDeveloperTechnician": false,
+    "GeneralDirector": false,
+    "Director": false,
+    "DeputyGeneralDirector": false,
+    "HeadOfManagers": false,
+    "HeadOfEditors": false,
+    "HeadOfAgents": false,
+    "HeadOfModerators": false,
+    "HeadOfSpecials": false,
+    "HeadOfTechnicians": false,
+    "Manager": false,
+    "Editor": true,
+    "Agent": false,
+    "Moderator": false,
+    "Special": false,
+    "Technician": false,
+    "DirectorsPosition": null,
+    "ManagersPosition": null,
+    "EditorsRubrics": [
+      {
+        "RubricID": 12,
+        "Frequency": 2
+      }
+    ],
+    "AgentsNumber": 0,
+    "AgentsFirstWords": null,
+    "AgentsLastWords": null,
+    "SpecialsProject": null,
+    "Avatar": {
+      "Id": 0,
+      "ImageSource": "chernyavskiy.jpg",
       "IsBorderRequired": true
     },
     "IsLightDeveloper": false,
