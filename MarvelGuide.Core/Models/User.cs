@@ -31,12 +31,14 @@ namespace MarvelGuide.Core.Models
         public bool LightDeveloperDirector { get; set; }
         public bool LightDeveloperDeputyGeneralDirector { get; set; }
         public bool LightDeveloperHeadOfManagers { get; set; }
+        public bool LightDeveloperHeadOfMarketers { get; set; }
         public bool LightDeveloperHeadOfEditors { get; set; }
         public bool LightDeveloperHeadOfAgents { get; set; }
         public bool LightDeveloperHeadOfModerators { get; set; }
         public bool LightDeveloperHeadOfSpecials { get; set; }
         public bool LightDeveloperHeadOfTechnicians { get; set; }
         public bool LightDeveloperManager { get; set; }
+        public bool LightDeveloperMarketer { get; set; }
         public bool LightDeveloperEditor { get; set; }
         public bool LightDeveloperAgent { get; set; }
         public bool LightDeveloperModerator { get; set; }
@@ -47,12 +49,14 @@ namespace MarvelGuide.Core.Models
         public bool Director { get; set; }
         public bool DeputyGeneralDirector { get; set; }
         public bool HeadOfManagers { get; set; }
+        public bool HeadOfMarketers { get; set; }
         public bool HeadOfEditors { get; set; }
         public bool HeadOfAgents { get; set; }
         public bool HeadOfModerators { get; set; }
         public bool HeadOfSpecials { get; set; }
         public bool HeadOfTechnicians { get; set; }
-        public bool Manager { get; set; }        
+        public bool Manager { get; set; }
+        public bool Marketer { get; set; }
         public bool Editor { get; set; }
         public bool Agent { get; set; }
         public bool Moderator { get; set; }
@@ -83,12 +87,14 @@ namespace MarvelGuide.Core.Models
             const string director = "Директор";
             const string deputyGeneralDirector = "Заместитель генерального директора";
             const string headOfManagers = "Руководитель аппаратного офиса";
+            const string headOfMarketers = "Руководитель отдела маркетинга";
             const string headOfEditors = "Руководитель отдела редакции";
             const string headOfAgents = "Руководитель отдела поддержки";
-            const string headOfModerators = "Руководитель отдела безопасности";
+            const string headOfModerators = "Руководитель отдела модерации";
             const string headOfSpecials = "Руководитель отдела спецпроектов";
             const string headOfTechnicians = "Руководитель технического отдела";
             const string manager = "Менеджер";
+            const string marketer = "Маркетолог";
             const string editor = "Редактор";
             const string agent = "Агент поддержки";
             const string moderator = "Модератор";
@@ -101,12 +107,14 @@ namespace MarvelGuide.Core.Models
             if (Director) { job += splitting + director; }
             if (DeputyGeneralDirector) { job += splitting + deputyGeneralDirector; }
             if (HeadOfManagers) { job += splitting + headOfManagers; }
+            if (HeadOfMarketers) { job += splitting + headOfMarketers; }
             if (HeadOfEditors) { job += splitting + headOfEditors; }
             if (HeadOfAgents) { job += splitting + headOfAgents; }
             if (HeadOfModerators) { job += splitting + headOfModerators; }
             if (HeadOfSpecials) { job += splitting + headOfSpecials; }
             if (HeadOfTechnicians) { job += splitting + headOfTechnicians; }
             if (Manager) { job += splitting + manager; }
+            if (Marketer) { job += splitting + marketer; }
             if (Editor) { job += splitting + editor; }
             if (Agent) { job += splitting + agent; }
             if (Moderator) { job += splitting + moderator; }
@@ -187,12 +195,14 @@ namespace MarvelGuide.Core.Models
                     LightDeveloperDirector ||
                     LightDeveloperDeputyGeneralDirector ||
                     LightDeveloperHeadOfManagers ||
+                    LightDeveloperHeadOfMarketers ||
                     LightDeveloperHeadOfEditors ||
                     LightDeveloperHeadOfAgents ||
                     LightDeveloperHeadOfModerators ||
                     LightDeveloperHeadOfSpecials ||
                     LightDeveloperHeadOfTechnicians ||
                     LightDeveloperManager ||
+                    LightDeveloperMarketer ||
                     LightDeveloperEditor ||
                     LightDeveloperAgent ||
                     LightDeveloperModerator ||
@@ -220,6 +230,7 @@ namespace MarvelGuide.Core.Models
                 return HeadOfAgents ||
                     HeadOfEditors ||
                     HeadOfManagers ||
+                    HeadOfMarketers ||
                     HeadOfModerators ||
                     HeadOfSpecials ||
                     HeadOfTechnicians;
@@ -237,12 +248,14 @@ namespace MarvelGuide.Core.Models
             LightDeveloperDirector = false;
             LightDeveloperDeputyGeneralDirector = false;
             LightDeveloperHeadOfManagers = false;
+            LightDeveloperHeadOfMarketers = false;
             LightDeveloperHeadOfEditors = false;
             LightDeveloperHeadOfAgents = false;
             LightDeveloperHeadOfModerators = false;
             LightDeveloperHeadOfSpecials = false;
             LightDeveloperHeadOfTechnicians = false;
             LightDeveloperManager = false;
+            LightDeveloperMarketer = false;
             LightDeveloperEditor = false;
             LightDeveloperAgent = false;
             LightDeveloperModerator = false;
