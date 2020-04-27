@@ -26,9 +26,9 @@
 
             <Button Name="BackButton" Grid.Row="1" HorizontalAlignment="Right" Width="160" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="0 20 50 0" Style="{DynamicResource AttentionButtonsStyle}" Click="BackButton_Click" FontFamily="Verdana">Вернуться назад</Button>
 
-            <Button Name="SwitchTheDesignButton" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="50 20 0 0" Style="{DynamicResource AttentionButtonsStyle}" Click="SwitchTheDesignButton_Click" FontFamily="Verdana">Переключить тему</Button>
-
-            <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Calibri" FontSize="27" Margin="0 15 0 5">Редактирование рубрики</TextBlock>
+            <!--<Button Name="SwitchTheDesignButton" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="50 20 0 0" Style="{DynamicResource AttentionButtonsStyle}" Click="SwitchTheDesignButton_Click" FontFamily="Verdana">Переключить тему</Button>
+            -->
+            <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Calibri" FontSize="27" Margin="0 -3 0 5">Редактирование рубрики</TextBlock>
 
             <Grid Grid.Row="3" Margin="50 12 50 40">
                 <Grid.ColumnDefinitions>
@@ -82,7 +82,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         
-                        <Border  Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Height="80" BorderThickness="1.2" BorderBrush="#FF715C4E">
+                        <Border  Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Height="80" BorderThickness="1.2" BorderBrush="#FF715C4E" MouseEnter="BorderLight_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonDown="BorderLight_MouseLeftButtonDown">
                             <Image Name="UploadPictureImage" HorizontalAlignment="Center" Stretch="UniformToFill" Initialized="UploadPictureImage_Initialized"></Image>
                         </Border>
 
@@ -95,7 +95,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         
-                        <Border Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Height="80" BorderThickness="1.2" BorderBrush="#FF715C4E">
+                        <Border Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Height="80" BorderThickness="1.2" BorderBrush="#FF715C4E" MouseEnter="BorderDark_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonDown="BorderDark_MouseLeftButtonDown">
                             <Image Name="UploadDarkPictureImage" HorizontalAlignment="Center" Stretch="UniformToFill" Initialized="UploadDarkPictureImage_Initialized"></Image>
                         </Border>
 

@@ -167,23 +167,23 @@ namespace MarvelGuide.GUI
         }
 
 
-        private void SwitchTheDesignButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (_ifDarkThemeIsSwitchedOn)
-            {
-                InitializingTheImageSource(_picture.ImageSource, defaultImageSource, imageFolder, PictureImage);
+        //private void SwitchTheDesignButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (_ifDarkThemeIsSwitchedOn)
+        //    {
+        //        InitializingTheImageSource(_picture.ImageSource, defaultImageSource, imageFolder, PictureImage);
 
-                RubricNameTextBlock.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                InitializingTheImageSource(_pictureDark.ImageSource, defaultDarkImageSource, imageFolder, PictureImage);
+        //        RubricNameTextBlock.Visibility = Visibility.Hidden;
+        //    }
+        //    else
+        //    {
+        //        InitializingTheImageSource(_pictureDark.ImageSource, defaultDarkImageSource, imageFolder, PictureImage);
 
-                RubricNameTextBlock.Visibility = Visibility.Visible;
-            }
+        //        RubricNameTextBlock.Visibility = Visibility.Visible;
+        //    }
 
-            _ifDarkThemeIsSwitchedOn = !_ifDarkThemeIsSwitchedOn;
-        }
+        //    _ifDarkThemeIsSwitchedOn = !_ifDarkThemeIsSwitchedOn;
+        //}
 
 
         private void InitializingTheImageSource(string regularSource, string defaultSource, string folder, Image Image)
@@ -448,6 +448,54 @@ namespace MarvelGuide.GUI
 
             if (_rubric.Document == null) { DocumentComboBox.SelectedIndex = 0; }
             else { DocumentComboBox.SelectedIndex = 1; }
+        }
+
+
+
+        private void BorderLight_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (_ifDarkThemeIsSwitchedOn)
+            {
+                Cursor = Cursors.Hand;
+            }
+        }
+
+        private void BorderDark_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (!_ifDarkThemeIsSwitchedOn)
+            {
+                Cursor = Cursors.Hand;
+            }
+        }
+
+        private void Border_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Arrow;
+        }
+
+
+        private void BorderLight_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (_ifDarkThemeIsSwitchedOn)
+            {
+                InitializingTheImageSource(_picture.ImageSource, defaultImageSource, imageFolder, PictureImage);
+
+                RubricNameTextBlock.Visibility = Visibility.Hidden;
+
+                _ifDarkThemeIsSwitchedOn = !_ifDarkThemeIsSwitchedOn;
+            }
+        }
+
+        private void BorderDark_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!_ifDarkThemeIsSwitchedOn)
+            {
+                InitializingTheImageSource(_pictureDark.ImageSource, defaultDarkImageSource, imageFolder, PictureImage);
+
+                RubricNameTextBlock.Visibility = Visibility.Visible;
+
+                _ifDarkThemeIsSwitchedOn = !_ifDarkThemeIsSwitchedOn;
+            }
         }
     }
 }
