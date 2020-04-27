@@ -610,7 +610,7 @@ namespace MarvelGuide.GUI
 
                 _personalData.Add(directorsEmployeesFirst + adding + numberOfEmployees.ToString() + employees + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfEmployees));
                 _personalData.Add(directorsEmployeesSecond);
-                _personalData.Add(directorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
+              //_personalData.Add(directorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeMarketers + adding + _storage.Users.Items.Count(u => u.Marketer && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeEditors + adding + _storage.Users.Items.Count(u => u.Editor && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeAgents + adding + _storage.Users.Items.Count(u => u.Agent && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
@@ -633,7 +633,7 @@ namespace MarvelGuide.GUI
             {
                 _personalData.Add(directorsEmployeesFirst + adding + numberOfEmployees.ToString() + employees + HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfEmployees));
                 _personalData.Add(directorsEmployeesSecond);
-                _personalData.Add(directorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
+              //_personalData.Add(directorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeMarketers + adding + _storage.Users.Items.Count(u => u.Marketer && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeEditors + adding + _storage.Users.Items.Count(u => u.Editor && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeAgents + adding + _storage.Users.Items.Count(u => u.Agent && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
@@ -2503,6 +2503,38 @@ namespace MarvelGuide.GUI
                     MessageBox.Show("Рубрика является неактивной, и на данный момент отсутствует", "Предупреждение");
                 }
             }
-        }        
+        }
+
+
+
+        private void HeadOfManagersCheckBox_Initialized(object sender, EventArgs e)
+        {
+            ManagersSpecification(sender);
+        }
+
+        private void ManagerCheckBox_Initialized(object sender, EventArgs e)
+        {
+            ManagersSpecification(sender);
+        }
+
+        private void HeadOfManagersDeveloperCheckBox_Initialized(object sender, EventArgs e)
+        {
+            ManagersSpecification(sender);
+        }
+
+        private void ManagerDeveloperCheckBox_Initialized(object sender, EventArgs e)
+        {
+            ManagersSpecification(sender);
+        }
+
+        private void ManagersSpecification(object sender)
+        {
+            if (_user.WorkingNow || _user.Id == -1) 
+            {
+                CheckBox checkBox = sender as CheckBox;
+
+                checkBox.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }
