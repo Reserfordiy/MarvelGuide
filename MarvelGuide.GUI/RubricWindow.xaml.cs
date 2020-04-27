@@ -497,5 +497,29 @@ namespace MarvelGuide.GUI
                 _ifDarkThemeIsSwitchedOn = !_ifDarkThemeIsSwitchedOn;
             }
         }
+
+
+
+        private void AutoDocumentButton_Click(object sender, RoutedEventArgs e)
+        {
+            var relevantDocuments = _storage.Documents.Items.Where(doc => doc.Name.Contains(NameTextBox.Text));
+
+            if (relevantDocuments.Count() == 0)
+            {
+                MessageBox.Show("К сожалению, совпадений не найдено.", "Уведомление");
+            }
+
+            else if (relevantDocuments.Count() >= 2)
+            {
+                MessageBox.Show("К сожалению, точного совпадения не найдено; есть несколько подходящих документов.", "Уведомление");
+            }
+
+            else
+            {
+                var relevantDocument = relevantDocuments.First();
+
+                DocumentComboBox.SelectedItem = relevantDocument;
+            }
+        }
     }
 }
