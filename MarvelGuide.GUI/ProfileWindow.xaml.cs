@@ -2449,6 +2449,12 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
+            if (StillWorkingCheckBox.IsChecked == false && IsDeveloperCheckBox.IsChecked == true && (MediumDeveloperRadioButton.IsChecked == true || HighDeveloperRadioButton.IsChecked == true))
+            {
+                MessageBox.Show("Неработающий сотрудник не может быть разработчиком с уровнем доступа выше базового.", "Ошибка");
+
+                return false;
+            }
 
             return true;
         }
