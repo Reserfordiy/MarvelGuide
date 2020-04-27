@@ -378,7 +378,15 @@
     "SpecialProject": false,
     "DocumentId": 0,
     "KPI": null,
-    "Picture": null,
-    "PictureDark": null
+    "Picture": {
+      "Id": 0,
+      "ImageSource": null,
+      "IsBorderRequired": false
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": null,
+      "IsBorderRequired": false
+    }
   }
 ]

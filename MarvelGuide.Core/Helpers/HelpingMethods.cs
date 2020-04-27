@@ -31,6 +31,18 @@ namespace MarvelGuide.Core.Helpers
             }
         }
 
+        public static string ChoosingTheCorrespondingEnding(string ending1, string ending2345, int number)
+        {
+            if (number == 1)
+            {
+                return ending1;
+            }
+            else
+            {
+                return ending2345;
+            }
+        }
+
 
 
         public static bool TryParsingTheDate(string dateString)

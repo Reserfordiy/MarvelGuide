@@ -51,23 +51,35 @@ namespace MarvelGuide.GUI
 
             _userWhoWatches = userWhoWatches;
 
-            _rubrics1 = new List<Rubric>();
-            _rubrics2 = new List<Rubric>();
-
             InitializeComponent();
 
-            FormingTheRubricsListBoxSource();
+            var ListBoxes = new ListBox[]
+            {
+                RubricsListBox1,
+                RubricsListBox2,
+                OldRubricsListBox1,
+                OldRubricsListBox2
+            };                
+
+            for (int i = 0; i < ListBoxes.Length; i+=2)
+            {
+                _rubrics1 = new List<Rubric>();
+                _rubrics2 = new List<Rubric>();
+
+                if (i == 0) { FormingTheRubricsListBoxSource(ListBoxes[i], ListBoxes[i + 1], rubr => rubr.Actual); }
+                else { FormingTheRubricsListBoxSource(ListBoxes[i], ListBoxes[i + 1], rubr => !rubr.Actual); }
+            }            
 
             WindowState = WindowState.Maximized;
         }
 
 
-        private void FormingTheRubricsListBoxSource()
+        private void FormingTheRubricsListBoxSource(ListBox listBox1, ListBox listBox2, Func<Rubric, bool> func)
         {
             int i = 0;
 
             foreach (var rubric in _storage.Rubrics.Items
-                .Where(rubr => rubr.Actual)
+                .Where(rubr => func(rubr))
                 .OrderByDescending(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.Rubric == rubr) && u.WorkingNow))
                 .ThenByDescending(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.Rubric == rubr)))
                 .ThenBy(rubr => rubr.Name))
@@ -78,8 +90,8 @@ namespace MarvelGuide.GUI
                 i += 1;
             }
 
-            RubricsListBox1.ItemsSource = _rubrics1;
-            RubricsListBox2.ItemsSource = _rubrics2;
+            listBox1.ItemsSource = _rubrics1;
+            listBox2.ItemsSource = _rubrics2;
         }
 
 

@@ -32,6 +32,13 @@ namespace MarvelGuide.GUI
         private const string defaultName = "Пример: Фильмарты";
         private const string defaultDocument = "Выберите документ";
 
+        private const string ending1 = ", который занимается";
+        private const string ending234 = "а, которые занимаются";
+        private const string ending5 = "ов, которые занимаются";
+
+        private const string endingAdj1 = ", который";
+        private const string endingAdj2345 = ", которые";
+
 
         IStorage _storage;
         
@@ -86,6 +93,9 @@ namespace MarvelGuide.GUI
             {
                 NameTextBox.Text = _rubric.Name;
                 NameTextBox.Foreground = Brushes.Black;
+
+                if (_rubric.Actual) { ActualRubricCheckBox.IsChecked = true; }
+                else { ActualRubricCheckBox.IsChecked = false; }
             }
         }
 
@@ -345,6 +355,9 @@ namespace MarvelGuide.GUI
             }
 
             _rubric.Name = NameTextBox.Text;
+
+            if (ActualRubricCheckBox.IsChecked == true) { _rubric.Actual = true; }
+            else { _rubric.Actual = false; }
         }
 
         private void FixingImagedDataAboutUser()
@@ -372,7 +385,20 @@ namespace MarvelGuide.GUI
                 NameTextBox.Focus();
 
                 return false;
-            }            
+            }
+            if (ActualRubricCheckBox.IsChecked == false)
+            {
+                var numberOfEditors = _storage.Users.Items.Count(u => u.WorkingNow && u.Editor && u.EditorsRubrics.Exists(r => r.Rubric == _rubric));
+
+                if (numberOfEditors > 0)
+                {
+                    MessageBox.Show("Эта рубрика не может быть назначена устаревшей, поскольку есть " + numberOfEditors.ToString() + " редактор" +
+                        HelpingMethods.ChoosingTheCorrespondingEnding(ending1, ending234, ending5, numberOfEditors) + 
+                        " данной рубрикой в настоящий момент.", "Ошибка");
+
+                    return false;
+                }
+            }
 
             return true;
         }
