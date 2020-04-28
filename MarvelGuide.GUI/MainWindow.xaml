@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
-        Title="Обучающий гайд" Height="480" MinHeight="460" MaxHeight="515" Width="580" MinWidth="550" MaxWidth="635" FontFamily="Verdana" KeyDown="Window_KeyDown">
+        Title="Management System" Height="480" MinHeight="460" MaxHeight="515" Width="580" MinWidth="550" MaxWidth="635" FontFamily="Verdana" KeyDown="Window_KeyDown">
     <Grid Background="#FFEAF6FB">
         <Grid.RowDefinitions>
             <RowDefinition/>
