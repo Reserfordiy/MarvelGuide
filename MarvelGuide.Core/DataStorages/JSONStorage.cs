@@ -64,6 +64,16 @@ namespace MarvelGuide.Core.DataStorages
                     }
                 }
 
+                foreach (var special in _users.Items.Where(u => u.Special))
+                {
+                    foreach (var specialProject in special.SpecialsProjects)
+                    {
+                        Rubric project = Rubrics.Items.FirstOrDefault(proj => proj.Id == specialProject.RubricID);
+
+                        specialProject.Rubric = project;
+                    }
+                }
+
                 return _users;
             }
         }

@@ -92,11 +92,11 @@ namespace MarvelGuide.GUI
         private const string editorsFrequencyInteger234End = " поста в сутки";
         private const string editorsFrequencyInteger5End = " постов в сутки";
 
+        private const string specialsProject = "Спецпроект";
+
         private const string agentsNumber = "Агентский номер";
         private const string agentsFirstWords = "Приветствие агента";
-        private const string agentsLastWords = "Подпись агента";
-
-        private const string specialsProject = "Спецпроект";
+        private const string agentsLastWords = "Подпись агента";        
 
 
         private const string showDetailsButton = "Показать подробности";
@@ -124,6 +124,7 @@ namespace MarvelGuide.GUI
         private const string defaultDirectorsPosition = "Пример: Генеральный директор";
         private const string defaultManagersPosition = "Пример: Менеджер по кадрам";
         private const string defaultEditorsRubric = "Выберите рубрику";
+        private const string defaultSpecialProject = "Выберите спецпроект";
         private const string defaultEditorsFrequency = "Пример: 3";
         private const string defaultAgentsNumber = "Пример: 14";
         private const string defaultAgentsFirstWords = "Пример: Здравствуйте!";
@@ -153,9 +154,12 @@ namespace MarvelGuide.GUI
         Picture _picture;
 
         List<string> _personalData;
-        List<EditorsPublication> _publications;
+
+        List<EditorsPublication> _editorsPublications;
+        List<EditorsPublication> _specialsProjects;
 
         Rubric _unselectedRubric;
+        Rubric _unselectedProject;
 
         int _amountOfRegularJobs;
         int _amountOfHeadJobs;
@@ -258,7 +262,24 @@ namespace MarvelGuide.GUI
                 Name = defaultEditorsRubric
             };
 
-            _publications = new List<EditorsPublication>
+            _unselectedProject = new Rubric
+            {
+                Id = -1,
+                Name = defaultSpecialProject,
+                SpecialProject = true
+            };
+
+            _editorsPublications = new List<EditorsPublication>
+            {
+                new EditorsPublication()
+                {
+                    Frequency = -1,
+                    Rubric = null,
+                    RubricID = -1
+                }
+            };
+
+            _specialsProjects = new List<EditorsPublication>
             {
                 new EditorsPublication()
                 {
@@ -339,9 +360,17 @@ namespace MarvelGuide.GUI
                 {
                     EditorCheckBox.IsChecked = true;
 
-                    _publications = _user.EditorsRubrics.Select(publication => new EditorsPublication { Rubric = publication.Rubric, RubricID = publication.RubricID, Frequency = publication.Frequency }).ToList();
+                    _editorsPublications = _user.EditorsRubrics.Select(publication => new EditorsPublication { Rubric = publication.Rubric, RubricID = publication.RubricID, Frequency = publication.Frequency }).ToList();
 
-                    EditorsInformationListBox.ItemsSource = _publications;
+                    EditorsInformationListBox.ItemsSource = _editorsPublications;
+                }
+                if (_user.Special)
+                {
+                    SpecialCheckBox.IsChecked = true;
+
+                    _specialsProjects = _user.SpecialsProjects.Select(publication => new EditorsPublication { Rubric = publication.Rubric, RubricID = publication.RubricID, Frequency = -1 }).ToList();
+
+                    SpecialsInformationListBox.ItemsSource = _specialsProjects;
                 }
                 if (_user.Agent)
                 {
@@ -357,13 +386,6 @@ namespace MarvelGuide.GUI
                     AgentsLastWordsTextBox.Foreground = Brushes.Black;
                 }
                 if (_user.Moderator) { ModeratorCheckBox.IsChecked = true; }
-                if (_user.Special)
-                {
-                    SpecialCheckBox.IsChecked = true;
-
-                    SpecialsProjectTextBox.Text = _user.SpecialsProject;
-                    SpecialsProjectTextBox.Foreground = Brushes.Black;
-                }
 
                 if (_user.IsDeveloper)
                 {
@@ -405,7 +427,8 @@ namespace MarvelGuide.GUI
                 Today1Button.Margin = new Thickness(Today1Button.Margin.Left, Today1Button.Margin.Top, Today1Button.Margin.Right, 13);
             }
 
-            EditorsInformationListBox.ItemsSource = _publications;
+            EditorsInformationListBox.ItemsSource = _editorsPublications;
+            SpecialsInformationListBox.ItemsSource = _specialsProjects;
         }
 
         private void CheckingWhetherWeEditPage()
@@ -859,6 +882,35 @@ namespace MarvelGuide.GUI
             }
         }
 
+        private void SpecialsDetails()
+        {
+            foreach (var publication in _user.SpecialsProjects)
+            {
+                _personalData.Add(specialsProject + adding + publication.Rubric.Name);
+
+                _additionalData++;
+            }
+
+            if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfSpecials)
+            {
+                User headOfSpecials = _storage.Users.Items.FirstOrDefault(u => u.HeadOfSpecials && u.WorkingNow) as User;
+
+                if (headOfSpecials != null)
+                {
+                    if (_amountOfRegularJobs + _amountOfHeadJobs == 1)
+                    {
+                        _personalData.Add(employer + adding + headOfSpecials.Name + " " + headOfSpecials.Surname);
+                    }
+                    else
+                    {
+                        _personalData.Add(employer + employerForSpecial + adding + headOfSpecials.Name + " " + headOfSpecials.Surname);
+                    }
+
+                    _additionalData++;
+                }
+            }
+        }
+
         private void AgentsDetails()
         {
             _personalData.Add(agentsNumber + adding + _user.AgentsNumber.ToString());
@@ -902,32 +954,6 @@ namespace MarvelGuide.GUI
                     else
                     {
                         _personalData.Add(employer + employerForModerator + adding + headOfModerators.Name + " " + headOfModerators.Surname);
-                    }
-
-                    _additionalData++;
-                }
-            }
-        }
-
-        private void SpecialsDetails()
-        {
-            _personalData.Add(specialsProject + adding + _user.SpecialsProject);
-
-            _additionalData++;
-
-            if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfSpecials)
-            {
-                User headOfSpecials = _storage.Users.Items.FirstOrDefault(u => u.HeadOfSpecials && u.WorkingNow) as User;
-
-                if (headOfSpecials != null)
-                {
-                    if (_amountOfRegularJobs + _amountOfHeadJobs == 1)
-                    {
-                        _personalData.Add(employer + adding + headOfSpecials.Name + " " + headOfSpecials.Surname);
-                    }
-                    else
-                    {
-                        _personalData.Add(employer + employerForSpecial + adding + headOfSpecials.Name + " " + headOfSpecials.Surname);
                     }
 
                     _additionalData++;
@@ -1234,6 +1260,16 @@ namespace MarvelGuide.GUI
                 _user.Editor = false;
                 _user.EditorsRubrics = new List<EditorsPublication>();
             }
+            if (SpecialCheckBox.IsChecked == true)
+            {
+                _user.Special = true;
+                FixingSpecialsData();
+            }
+            else
+            {
+                _user.Special = false;
+                _user.SpecialsProjects = new List<EditorsPublication>();
+            }
             if (AgentCheckBox.IsChecked == true)
             {
                 _user.Agent = true;
@@ -1250,16 +1286,6 @@ namespace MarvelGuide.GUI
             }
             if (ModeratorCheckBox.IsChecked == true) { _user.Moderator = true; }
             else { _user.Moderator = false; }
-            if (SpecialCheckBox.IsChecked == true)
-            {
-                _user.Special = true;
-                _user.SpecialsProject = SpecialsProjectTextBox.Text;
-            }
-            else
-            {
-                _user.Special = false;
-                _user.SpecialsProject = null;
-            }
 
             if (!_user.SuperDeveloper)
             {
@@ -1354,6 +1380,27 @@ namespace MarvelGuide.GUI
             _user.EditorsRubrics = editorsPublications;
         }
 
+        private void FixingSpecialsData()
+        {
+            var specialsProjects = new List<EditorsPublication>();
+
+            for (int i = 0; i < SpecialsInformationListBox.Items.Count; i++)
+            {
+                var SpecialProjectComboBox = UIElementsMethods.GetUIElementChildByNumberFromTemplatedListBox(SpecialsInformationListBox, i, 1, 0) as ComboBox;
+
+                var project = SpecialProjectComboBox.SelectedItem as Rubric;
+
+                specialsProjects.Add(new EditorsPublication
+                {
+                    Rubric = project,
+                    RubricID = project.Id,
+                    Frequency = -1
+                });
+            }
+
+            _user.SpecialsProjects = specialsProjects;
+        }
+
 
 
         private void Window_StateChanged(object sender, EventArgs e)
@@ -1430,7 +1477,7 @@ namespace MarvelGuide.GUI
         private void EditorsRubricComboBox_Initialized(object sender, EventArgs e)
         {
             var startRubrics = new List<Rubric> { _unselectedRubric };
-            var usedRubrics = _publications.Select(publ => publ.Rubric);
+            var usedRubrics = _editorsPublications.Select(publ => publ.Rubric);
 
             ComboBox EditorsRubricComboBox = sender as ComboBox;
 
@@ -1452,6 +1499,33 @@ namespace MarvelGuide.GUI
 
             if (publication.Rubric == null) { EditorsRubricComboBox.SelectedIndex = 0; }
             else { EditorsRubricComboBox.SelectedIndex = 1; }
+        }
+
+        private void SpecialsProjectComboBox_Initialized(object sender, EventArgs e)
+        {
+            var startProjects = new List<Rubric> { _unselectedProject };
+            var usedProjects = _specialsProjects.Select(publ => publ.Rubric);
+
+            ComboBox SpecialsProjectComboBox = sender as ComboBox;
+
+            EditorsPublication publication = SpecialsProjectComboBox.DataContext as EditorsPublication;
+
+            if (publication.Rubric != null)
+            {
+                startProjects = startProjects.Concat(new List<Rubric> { publication.Rubric }).ToList();
+            }
+
+            SpecialsProjectComboBox.ItemsSource = startProjects
+                .Concat(_storage.Rubrics.Items
+                    .Except(usedProjects)
+                    .Where(proj => (proj.Actual || StillWorkingCheckBox.IsChecked == false) && proj.SpecialProject)
+                    .OrderByDescending(proj => proj.Actual)
+                    .ThenBy(proj => _storage.Users.Items.Count(u => u.Special && u.SpecialsProjects.Exists(edPub => edPub.Rubric == proj) && u.WorkingNow))
+                    .ThenByDescending(proj => _storage.Users.Items.Count(u => u.Special && u.SpecialsProjects.Exists(edPub => edPub.Rubric == proj)))
+                    .ThenBy(proj => proj.Name));
+
+            if (publication.Rubric == null) { SpecialsProjectComboBox.SelectedIndex = 0; }
+            else { SpecialsProjectComboBox.SelectedIndex = 1; }
         }
 
         private void EditorsFrequencyTextBox_Initialized(object sender, EventArgs e)
@@ -1496,15 +1570,15 @@ namespace MarvelGuide.GUI
 
         private void AddRubricButton_Click(object sender, RoutedEventArgs e)
         {
-            if (StillWorkingCheckBox.IsChecked == true && _publications.Count == _storage.Rubrics.Items.Where(rubr => rubr.Actual).Count() ||
-                StillWorkingCheckBox.IsChecked == false && _publications.Count == _storage.Rubrics.Items.Count())
+            if (StillWorkingCheckBox.IsChecked == true && _editorsPublications.Count == _storage.Rubrics.Items.Where(rubr => rubr.Actual && !rubr.SpecialProject).Count() ||
+                StillWorkingCheckBox.IsChecked == false && _editorsPublications.Count == _storage.Rubrics.Items.Where(rubr => !rubr.SpecialProject).Count())
             {
                 MessageBox.Show("К сожалению, другие свободные рубрики в системе отсутствуют. Добавьте требуемую рубрику в систему через меню редактирования рубрик и повторите попытку.", "Ошибка");
             }
 
             else
             {
-                _publications.Add(new EditorsPublication()
+                _editorsPublications.Add(new EditorsPublication()
                 {
                     Frequency = -1,
                     Rubric = null,
@@ -1512,21 +1586,55 @@ namespace MarvelGuide.GUI
                 });
 
                 EditorsInformationListBox.ItemsSource = null;
-                EditorsInformationListBox.ItemsSource = _publications;
+                EditorsInformationListBox.ItemsSource = _editorsPublications;
+            }
+        }
+
+        private void AddSpecialProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (StillWorkingCheckBox.IsChecked == true && _specialsProjects.Count == _storage.Rubrics.Items.Where(rubr => rubr.Actual && rubr.SpecialProject).Count() ||
+                StillWorkingCheckBox.IsChecked == false && _editorsPublications.Count == _storage.Rubrics.Items.Where(rubr => rubr.SpecialProject).Count())
+            {
+                MessageBox.Show("К сожалению, другие спецпроекты в системе отсутствуют. Добавьте нужный спецпроект в систему через меню редактирования рубрик и повторите попытку.", "Ошибка");
+            }
+
+            else
+            {
+                _specialsProjects.Add(new EditorsPublication()
+                {
+                    Frequency = -1,
+                    Rubric = null,
+                    RubricID = -1
+                });
+
+                SpecialsInformationListBox.ItemsSource = null;
+                SpecialsInformationListBox.ItemsSource = _specialsProjects;
             }
         }
 
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private void EditorsDeleteButton_Click(object sender, RoutedEventArgs e)
         {
             var DeleteButton = sender as Button;
 
             var publication = DeleteButton.DataContext as EditorsPublication;
 
-            _publications.Remove(publication);
+            _editorsPublications.Remove(publication);
 
             EditorsInformationListBox.ItemsSource = null;
-            EditorsInformationListBox.ItemsSource = _publications;
+            EditorsInformationListBox.ItemsSource = _editorsPublications;
+        }
+
+        private void SpecialsDeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            var DeleteButton = sender as Button;
+
+            var publication = DeleteButton.DataContext as EditorsPublication;
+
+            _specialsProjects.Remove(publication);
+
+            SpecialsInformationListBox.ItemsSource = null;
+            SpecialsInformationListBox.ItemsSource = _specialsProjects;
         }
 
 
@@ -2037,24 +2145,6 @@ namespace MarvelGuide.GUI
             }
         }
 
-        private void SpecialsProjectTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (SpecialsProjectTextBox.Text == defaultSpecialsProject)
-            {
-                SpecialsProjectTextBox.Text = "";
-                SpecialsProjectTextBox.Foreground = Brushes.Black;
-            }
-        }
-
-        private void SpecialsProjectTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (SpecialsProjectTextBox.Text == "")
-            {
-                SpecialsProjectTextBox.Text = defaultSpecialsProject;
-                SpecialsProjectTextBox.Foreground = Brushes.Black;
-            }
-        }
-
 
 
         private void PasswordButton_Click(object sender, RoutedEventArgs e)
@@ -2236,6 +2326,11 @@ namespace MarvelGuide.GUI
             {
                 return false;
             }
+            if (SpecialCheckBox.IsChecked == true &&
+                (UIElementsMethods.CheckingWhetherComboBoxHasDefaultValueInTheTemplatedListBox(SpecialsInformationListBox, 1, 0, defaultSpecialProject, "Укажите все недостающие спецпроекты либо удалите ненужные.")))
+            {
+                return false;
+            }
             if (AgentCheckBox.IsChecked == true && AgentsNumberTextBox.Text == defaultAgentsNumber)
             {
                 MessageBox.Show("Укажите агентский номер сотрудника.", "Ошибка");
@@ -2257,14 +2352,6 @@ namespace MarvelGuide.GUI
                 MessageBox.Show("Укажите подпись сотрудника (как агента Поддержки).", "Ошибка");
 
                 AgentsLastWordsTextBox.Focus();
-
-                return false;
-            }
-            if (SpecialCheckBox.IsChecked == true && SpecialsProjectTextBox.Text == defaultSpecialsProject)
-            {
-                MessageBox.Show("Укажите название спецпроекта сотрудника.", "Ошибка");
-
-                SpecialsProjectTextBox.Focus();
 
                 return false;
             }
@@ -2410,7 +2497,7 @@ namespace MarvelGuide.GUI
             }
             if (EditorCheckBox.IsChecked == true)
             { 
-                if (_publications.Count() == 0)
+                if (_editorsPublications.Count() == 0)
                 {
                     MessageBox.Show("Если сотрудник — редактор, то у него должна быть хотя бы одна рубрика.", "Ошибка");
 
@@ -2429,6 +2516,12 @@ namespace MarvelGuide.GUI
                         return false;
                     }                    
                 }
+            }
+            if (SpecialCheckBox.IsChecked == true && _specialsProjects.Count() == 0)
+            {                
+                MessageBox.Show("Если сотрудник — спецредактор, то у него должен быть хотя бы один спецпроект.", "Ошибка");
+
+                return false;                
             }
             if (AgentCheckBox.IsChecked == true && (!int.TryParse(AgentsNumberTextBox.Text, out result) || result <= 0))
             {
@@ -2485,6 +2578,17 @@ namespace MarvelGuide.GUI
             CapturedComboBox = null;
         }
 
+        private void SpecialsProjectComboBox_DropDownOpened(object sender, EventArgs e)
+        {
+            CapturedComboBox = sender as ComboBox;
+        }
+
+        private void SpecialsProjectComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            CapturedComboBox = null;
+        }
+
+
 
         private void EditorsRubricComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -2502,11 +2606,36 @@ namespace MarvelGuide.GUI
                 if (rubric.Id == -1) { publication.Rubric = null; }
 
                 EditorsInformationListBox.ItemsSource = null;
-                EditorsInformationListBox.ItemsSource = _publications;
+                EditorsInformationListBox.ItemsSource = _editorsPublications;
 
                 if (!rubric.Actual && rubric.Id != -1)
                 {
-                    MessageBox.Show("Рубрика является неактивной, и на данный момент отсутствует", "Предупреждение");
+                    MessageBox.Show("Рубрика является неактивной, и на данный момент отсутствует.", "Предупреждение");
+                }
+            }
+        }
+
+        private void SpecialsProjectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.RemovedItems.Count == 1)
+            {
+                ComboBox SpecialsProjectComboBox = sender as ComboBox;
+
+                EditorsPublication publication = SpecialsProjectComboBox.DataContext as EditorsPublication;
+
+                var project = SpecialsProjectComboBox.SelectedItem as Rubric;
+
+                publication.Rubric = project;
+                publication.RubricID = project.Id;
+
+                if (project.Id == -1) { publication.Rubric = null; }
+
+                SpecialsInformationListBox.ItemsSource = null;
+                SpecialsInformationListBox.ItemsSource = _specialsProjects;
+
+                if (!project.Actual && project.Id != -1)
+                {
+                    MessageBox.Show("Спецпроект является на данный момент закрытым.", "Предупреждение");
                 }
             }
         }

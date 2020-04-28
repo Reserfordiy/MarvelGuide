@@ -33,16 +33,17 @@ namespace MarvelGuide.Core.Models
         public bool LightDeveloperHeadOfManagers { get; set; }
         public bool LightDeveloperHeadOfMarketers { get; set; }
         public bool LightDeveloperHeadOfEditors { get; set; }
+        public bool LightDeveloperHeadOfSpecials { get; set; }
         public bool LightDeveloperHeadOfAgents { get; set; }
         public bool LightDeveloperHeadOfModerators { get; set; }
-        public bool LightDeveloperHeadOfSpecials { get; set; }
         public bool LightDeveloperHeadOfTechnicians { get; set; }
         public bool LightDeveloperManager { get; set; }
         public bool LightDeveloperMarketer { get; set; }
         public bool LightDeveloperEditor { get; set; }
+        public bool LightDeveloperSpecial { get; set; }
         public bool LightDeveloperAgent { get; set; }
         public bool LightDeveloperModerator { get; set; }
-        public bool LightDeveloperSpecial { get; set; }
+
         public bool LightDeveloperTechnician { get; set; }
 
         public bool GeneralDirector { get; set; }
@@ -51,16 +52,16 @@ namespace MarvelGuide.Core.Models
         public bool HeadOfManagers { get; set; }
         public bool HeadOfMarketers { get; set; }
         public bool HeadOfEditors { get; set; }
+        public bool HeadOfSpecials { get; set; }
         public bool HeadOfAgents { get; set; }
         public bool HeadOfModerators { get; set; }
-        public bool HeadOfSpecials { get; set; }
         public bool HeadOfTechnicians { get; set; }
         public bool Manager { get; set; }
         public bool Marketer { get; set; }
         public bool Editor { get; set; }
+        public bool Special { get; set; }
         public bool Agent { get; set; }
         public bool Moderator { get; set; }
-        public bool Special { get; set; }
         public bool Technician { get; set; }
 
         public string DirectorsPosition { get; set; }
@@ -69,11 +70,11 @@ namespace MarvelGuide.Core.Models
 
         public List<EditorsPublication> EditorsRubrics { get; set; }
 
+        public List<EditorsPublication> SpecialsProjects { get; set; }
+
         public int AgentsNumber { get; set; }
         public string AgentsFirstWords { get; set; }
         public string AgentsLastWords { get; set; }
-
-        public string SpecialsProject { get; set; }
 
         public virtual Picture Avatar { get; set; }
 

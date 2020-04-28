@@ -134,14 +134,14 @@
                                         <CheckBox Name="HeadOfEditorsDeveloperCheckBox"  Margin="10 3.5" FontSize="14"  Grid.Row="5" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">
                                             <TextBlock TextWrapping="Wrap">Руководитель отдела редакции</TextBlock>
                                         </CheckBox>
-                                        <CheckBox Name="HeadOfAgentsDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="6" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">
+                                        <CheckBox Name="HeadOfSpecialsDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="6" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">
+                                            <TextBlock TextWrapping="Wrap">Руководитель отдела спецпроектов</TextBlock>
+                                        </CheckBox>
+                                        <CheckBox Name="HeadOfAgentsDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="7" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">
                                             <TextBlock TextWrapping="Wrap">Руководитель отдела поддержки</TextBlock>
                                         </CheckBox>
-                                        <CheckBox Name="HeadOfModeratorsDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="7" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">
+                                        <CheckBox Name="HeadOfModeratorsDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="8" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">
                                             <TextBlock TextWrapping="Wrap">Руководитель отдела модерации</TextBlock>
-                                        </CheckBox>
-                                        <CheckBox Name="HeadOfSpecialsDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="8" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">
-                                            <TextBlock TextWrapping="Wrap">Руководитель отдела спецпроектов</TextBlock>
                                         </CheckBox>
                                         <CheckBox Name="HeadOfTechniciansDeveloperCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="9" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">
                                             <TextBlock TextWrapping="Wrap">Руководитель технического отдела</TextBlock>
@@ -149,9 +149,9 @@
                                         <CheckBox Name="ManagerDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="10" Initialized="ManagerDeveloperCheckBox_Initialized" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Менеджеры</CheckBox>
                                         <CheckBox Name="MarketerDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="11" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Маркетологи</CheckBox>
                                         <CheckBox Name="EditorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="12" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Редакторы</CheckBox>
-                                        <CheckBox Name="AgentDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="13" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Агенты</CheckBox>
-                                        <CheckBox Name="ModeratorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="14" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Модераторы</CheckBox>
-                                        <CheckBox Name="SpecialDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="15" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Спецредакторы</CheckBox>
+                                        <CheckBox Name="SpecialDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="13" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Спецредакторы</CheckBox>
+                                        <CheckBox Name="AgentDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="14" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Агенты</CheckBox>
+                                        <CheckBox Name="ModeratorDeveloperCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="15" Checked="DeveloperCheckBox_Checked" Unchecked="DeveloperCheckBox_Unchecked">Модераторы</CheckBox>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -273,16 +273,16 @@
                             <CheckBox Name="HeadOfManagersCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="3" Initialized="HeadOfManagersCheckBox_Initialized">Руководитель аппаратного офиса</CheckBox>
                             <CheckBox Name="HeadOfMarketersCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="4">Руководитель отдела маркетинга</CheckBox>
                             <CheckBox Name="HeadOfEditorsCheckBox"  Margin="10 3.5" FontSize="14"  Grid.Row="5">Руководитель отдела редакции</CheckBox>
-                            <CheckBox Name="HeadOfAgentsCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="6">Руководитель отдела поддержки</CheckBox>
-                            <CheckBox Name="HeadOfModeratorsCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="7">Руководитель отдела модерации</CheckBox>
-                            <CheckBox Name="HeadOfSpecialsCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="8">Руководитель отдела спецпроектов</CheckBox>
+                            <CheckBox Name="HeadOfSpecialsCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="6">Руководитель отдела спецпроектов</CheckBox>
+                            <CheckBox Name="HeadOfAgentsCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="7">Руководитель отдела поддержки</CheckBox>
+                            <CheckBox Name="HeadOfModeratorsCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="8">Руководитель отдела модерации</CheckBox>
                             <CheckBox Name="HeadOfTechniciansCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="9">Руководитель технического отдела</CheckBox>
                             <CheckBox Name="ManagerCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="10" Initialized="ManagerCheckBox_Initialized" Checked="ManagerCheckBox_Checked" Unchecked="ManagerCheckBox_Unchecked">Менеджер</CheckBox>
                             <CheckBox Name="MarketerCheckBox" Margin="10 3.5" FontSize="14"  Grid.Row="11">Маркетолог</CheckBox>
                             <CheckBox Name="EditorCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="12" Checked="EditorCheckBox_Checked" Unchecked="EditorCheckBox_Unchecked">Редактор</CheckBox>
-                            <CheckBox Name="AgentCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="13" Checked="AgentCheckBox_Checked" Unchecked="AgentCheckBox_Unchecked">Агент</CheckBox>
-                            <CheckBox Name="ModeratorCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="14">Модератор</CheckBox>
-                            <CheckBox Name="SpecialCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="15" Checked="SpecialСheckBox_Checked" Unchecked="SpecialСheckBox_Unchecked">Спецредактор</CheckBox>
+                            <CheckBox Name="SpecialCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="13" Checked="SpecialСheckBox_Checked" Unchecked="SpecialСheckBox_Unchecked">Спецредактор</CheckBox>
+                            <CheckBox Name="AgentCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="14" Checked="AgentCheckBox_Checked" Unchecked="AgentCheckBox_Unchecked">Агент</CheckBox>
+                            <CheckBox Name="ModeratorCheckBox" Margin="10 3.5" FontSize="14" Grid.Row="15">Модератор</CheckBox>
                         </Grid>
 
                         <Grid Name="DirectorsRoleGrid" Grid.Row="25" Initialized="DirectorsRoleGrid_Initialized">
@@ -346,7 +346,7 @@
                                                 <TextBox Name="EditorsFrequencyTextBox" Grid.Column="1" FontSize="16" Margin="30 0 0 0" FontFamily="calibri" Padding="4 2" Foreground="Gray" Initialized="EditorsFrequencyTextBox_Initialized" GotFocus="EditorsFrequencyTextBox_GotFocus" LostFocus="EditorsFrequencyTextBox_LostFocus">Пример: 3</TextBox>
                                             </Grid>
 
-                                            <Button Name="DeleteButton" Margin="5 -5 0 0" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Right" Height="Auto" Width="Auto" Click="DeleteButton_Click" Style="{DynamicResource SmallDeleteButtonStyle}">
+                                            <Button Name="DeleteButton" Margin="5 -5 0 0" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Right" Height="Auto" Width="Auto" Click="EditorsDeleteButton_Click" Style="{DynamicResource SmallDeleteButtonStyle}">
                                                 <Image Source="Images/delete_icon.png" Height="18" Width="18"></Image>
                                             </Button>
                                         </Grid>
@@ -357,7 +357,55 @@
                             <Button Name="AddRubricButton" Grid.Row="2" HorizontalAlignment="Left" Padding="5.5 4.5" FontSize="13" Margin="11.5 8 150 13" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="AddRubricButton_Click">Добавить рубрику</Button>
                         </Grid>
 
-                        <Grid Name="AgentsRoleGrid" Grid.Row="28" Initialized="AgentsRoleGrid_Initialized">
+                        <Grid Name="SpecialsRoleGrid" Grid.Row="28" Initialized="SpecialsRoleGrid_Initialized">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="11.2 18 0 3.5">Должность спецредактора:</TextBlock>
+
+                            <ListBox Name="SpecialsInformationListBox" Grid.Row="3" Background="Transparent" BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{DynamicResource TransparentListBox}" PreviewMouseWheel="ListBox_PreviewMouseWheel">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Grid.Row="0" FontSize="14" Margin="5.8 1.55 0 5" TextWrapping="Wrap">Название спецпроекта:</TextBlock>
+
+                                            <Grid Margin="4.3 0 143 3.5" Grid.Row="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <ComboBox Name="SpecialsProjectComboBox" FontSize="16" FontFamily="Calibri" Padding="4 2" Margin="0 0 0 2.15" DisplayMemberPath="Name" Initialized="SpecialsProjectComboBox_Initialized" DropDownOpened="SpecialsProjectComboBox_DropDownOpened" DropDownClosed="SpecialsProjectComboBox_DropDownClosed" SelectionChanged="SpecialsProjectComboBox_SelectionChanged"></ComboBox>
+                                                <!--<TextBox Name="SpecialsFrequencyTextBox" Grid.Column="1" FontSize="16" Margin="30 0 0 0" FontFamily="calibri" Padding="4 2" Foreground="Gray" Initialized="EditorsFrequencyTextBox_Initialized" GotFocus="EditorsFrequencyTextBox_GotFocus" LostFocus="EditorsFrequencyTextBox_LostFocus">Пример: 3</TextBox>-->
+                                            </Grid>
+
+                                            <Button Name="DeleteButton" Margin="5 -5 0 0" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Right" Height="Auto" Width="Auto" Click="SpecialsDeleteButton_Click" Style="{DynamicResource SmallDeleteButtonStyle}">
+                                                <Image Source="Images/delete_icon.png" Height="18" Width="18"></Image>
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <Button Name="AddSpecialProjectButton" Grid.Row="4" HorizontalAlignment="Left" Padding="5.5 4.5" FontSize="13" Margin="11.5 8 150 13" Style="{DynamicResource AttentionButtonsStyle}" VerticalAlignment="Top" Click="AddSpecialProjectButton_Click">Добавить спецпроект</Button>
+
+                        </Grid>
+
+                        <Grid Name="AgentsRoleGrid" Grid.Row="29" Initialized="AgentsRoleGrid_Initialized">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
@@ -378,20 +426,7 @@
 
                             <TextBlock Grid.Row="5" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap" >Подпись агента:</TextBlock>
                             <TextBox Name="AgentsLastWordsTextBox" Grid.Row="6" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 11" Foreground="Gray" GotFocus="AgentsLastWordsTextBox_GotFocus" LostFocus="AgentsLastWordsTextBox_LostFocus">Пример: С любовью</TextBox>
-                        </Grid>
-
-                        <Grid Name="SpecialsRoleGrid" Grid.Row="29" Initialized="SpecialsRoleGrid_Initialized">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Grid.Row="0" TextWrapping="Wrap" FontSize="19.5" FontFamily="Calibri" Margin="11.2 18 0 3.5">Должность спецредактора:</TextBlock>
-
-                            <TextBlock Grid.Row="1" FontSize="14" Margin="11.5 5 0 5" TextWrapping="Wrap">Название спецпроекта:</TextBlock>
-                            <TextBox Name="SpecialsProjectTextBox" Grid.Row="2" FontSize="16" FontFamily="calibri" Padding="4 2" Margin="10 0 150 11" Foreground="Gray" GotFocus="SpecialsProjectTextBox_GotFocus" LostFocus="SpecialsProjectTextBox_LostFocus">Пример: Дайджест новостей</TextBox>
-                        </Grid>
+                        </Grid>                        
                     </Grid>
 
                     <Grid Grid.Row="1" Name="NormalModeGrid">
