@@ -383,9 +383,18 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (_storage.Rubrics.Items.Count(rubr => rubr != _rubric && rubr.Name == NameTextBox.Text) > 0)
+            if (SpecialProjectRadioButton.IsChecked == false && _storage.Rubrics.Items.Count(rubr => !rubr.SpecialProject && rubr != _rubric && rubr.Name == NameTextBox.Text) > 0)
             {
                 MessageBox.Show("В системе уже существует рубрика с таким названием.", "Ошибка");
+
+                NameTextBox.Text = "";
+                NameTextBox.Focus();
+
+                return false;
+            }
+            if (SpecialProjectRadioButton.IsChecked == true && _storage.Rubrics.Items.Count(rubr => rubr.SpecialProject && rubr != _rubric && rubr.Name == NameTextBox.Text) > 0)
+            {
+                MessageBox.Show("В системе уже существует спецпроект с таким названием.", "Ошибка");
 
                 NameTextBox.Text = "";
                 NameTextBox.Focus();

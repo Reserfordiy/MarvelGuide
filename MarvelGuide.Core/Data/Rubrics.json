@@ -380,13 +380,13 @@
     "KPI": null,
     "Picture": {
       "Id": 0,
-      "ImageSource": null,
-      "IsBorderRequired": false
+      "ImageSource": "moments.jpg",
+      "IsBorderRequired": true
     },
     "PictureDark": {
       "Id": 0,
-      "ImageSource": null,
-      "IsBorderRequired": false
+      "ImageSource": "moments_d.jpg",
+      "IsBorderRequired": true
     }
   },
   {
@@ -404,6 +404,24 @@
     "PictureDark": {
       "Id": 0,
       "ImageSource": "featureOrMistake_d.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 21,
+    "Name": "Новости",
+    "Actual": true,
+    "SpecialProject": true,
+    "DocumentId": 0,
+    "KPI": null,
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "news_spec.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "news_spec_d(1).jpg",
       "IsBorderRequired": true
     }
   }
