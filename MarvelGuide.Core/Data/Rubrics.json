@@ -388,5 +388,23 @@
       "ImageSource": null,
       "IsBorderRequired": false
     }
+  },
+  {
+    "Id": 20,
+    "Name": "Задумка или ошибка?",
+    "Actual": true,
+    "SpecialProject": true,
+    "DocumentId": 0,
+    "KPI": null,
+    "Picture": {
+      "Id": 0,
+      "ImageSource": "featureOrMistake.jpg",
+      "IsBorderRequired": true
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": "featureOrMistake_d.jpg",
+      "IsBorderRequired": true
+    }
   }
 ]

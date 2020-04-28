@@ -1444,7 +1444,7 @@ namespace MarvelGuide.GUI
             EditorsRubricComboBox.ItemsSource = startRubrics
                 .Concat(_storage.Rubrics.Items
                     .Except(usedRubrics)
-                    .Where(rubr => rubr.Actual || StillWorkingCheckBox.IsChecked == false)
+                    .Where(rubr => (rubr.Actual || StillWorkingCheckBox.IsChecked == false) && !rubr.SpecialProject)
                     .OrderByDescending(rubr => rubr.Actual)
                     .ThenBy(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.Rubric == rubr) && u.WorkingNow))
                     .ThenByDescending(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.Rubric == rubr)))

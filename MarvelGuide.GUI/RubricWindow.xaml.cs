@@ -96,6 +96,9 @@ namespace MarvelGuide.GUI
 
                 if (_rubric.Actual) { ActualRubricCheckBox.IsChecked = true; }
                 else { ActualRubricCheckBox.IsChecked = false; }
+
+                if (_rubric.SpecialProject) { SpecialProjectRadioButton.IsChecked = true; }
+                else { EditorsRubricRadioButton.IsChecked = true; }
             }
         }
 
@@ -358,6 +361,9 @@ namespace MarvelGuide.GUI
 
             if (ActualRubricCheckBox.IsChecked == true) { _rubric.Actual = true; }
             else { _rubric.Actual = false; }
+
+            if (SpecialProjectRadioButton.IsChecked == true) { _rubric.SpecialProject = true; }
+            else { _rubric.SpecialProject = false; }
         }
 
         private void FixingImagedDataAboutUser()
@@ -386,9 +392,15 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
+            if (SpecialProjectRadioButton.IsChecked == false && EditorsRubricRadioButton.IsChecked == false)
+            {
+                MessageBox.Show("Укажите тип рубрики.", "Ошибка");
+
+                return false;
+            }
             if (ActualRubricCheckBox.IsChecked == false)
             {
-                var numberOfEditors = _storage.Users.Items.Count(u => u.WorkingNow && u.Editor && u.EditorsRubrics.Exists(r => r.Rubric == _rubric));
+                var numberOfEditors = _storage.Users.Items.Count(u => u.WorkingNow && (u.Editor || u.Special) && u.EditorsRubrics.Exists(r => r.Rubric == _rubric));
 
                 if (numberOfEditors > 0)
                 {

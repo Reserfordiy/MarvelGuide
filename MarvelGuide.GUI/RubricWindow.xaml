@@ -44,6 +44,9 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
@@ -53,11 +56,14 @@
                     <TextBlock Grid.Row="2" FontSize="20" FontFamily="Calibri" Margin="4 10 45 10">Актульность:</TextBlock>
                     <CheckBox Grid.Row="3" Name="ActualRubricCheckBox" Margin="5.5 0 0 18" FontSize="18" FontFamily="Calibri" VerticalContentAlignment="Center" IsChecked="True">Рубрика актуальна</CheckBox>
 
+                    <TextBlock Grid.Row="4" FontSize="20" FontFamily="Calibri" Margin="4 10 45 10">Тип рубрики:</TextBlock>
+                    <RadioButton Name="EditorsRubricRadioButton" IsChecked="True" Grid.Row="5" Margin="5.5 0 0 5" FontSize="18" FontFamily="Calibri" VerticalContentAlignment="Center" >Редакторская рубрика</RadioButton>
+                    <RadioButton Name="SpecialProjectRadioButton" IsChecked="False" Grid.Row="6" Margin="5.5 0 0 18" FontSize="18" FontFamily="Calibri" VerticalContentAlignment="Center" >Спецпроект</RadioButton>
 
-                    <TextBlock Grid.Row="4" FontSize="20" FontFamily="Calibri" Margin="4 10 45 10">Документ для рубрики:</TextBlock>
-                    <ComboBox Name="DocumentComboBox" Grid.Row="5" HorizontalAlignment="Stretch" FontSize="18" FontFamily="Calibri" Padding="6 3" Margin="0 0 130 10" Initialized="DocumentComboBox_Initialized" DisplayMemberPath="Name"></ComboBox>
+                    <TextBlock Grid.Row="7" FontSize="20" FontFamily="Calibri" Margin="4 10 45 10">Документ для рубрики:</TextBlock>
+                    <ComboBox Name="DocumentComboBox" Grid.Row="8" HorizontalAlignment="Stretch" FontSize="18" FontFamily="Calibri" Padding="6 3" Margin="0 0 130 10" Initialized="DocumentComboBox_Initialized" DisplayMemberPath="Name"></ComboBox>
 
-                    <Button Name="AutoDocumentButton" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Style="{DynamicResource AttentionButtonsStyle}" FontFamily="Verdana" Click="AutoDocumentButton_Click">Подобрать автоматически</Button>
+                    <Button Name="AutoDocumentButton" Grid.Row="9" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Style="{DynamicResource AttentionButtonsStyle}" FontFamily="Verdana" Click="AutoDocumentButton_Click">Подобрать автоматически</Button>
                 </Grid>
 
                 <Grid Grid.Column="1" HorizontalAlignment="Center">

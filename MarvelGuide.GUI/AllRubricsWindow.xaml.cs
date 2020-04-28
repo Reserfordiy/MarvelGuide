@@ -38,6 +38,9 @@ namespace MarvelGuide.GUI
         List<Rubric> _rubrics1;
         List<Rubric> _rubrics2;
 
+        List<Rubric> _specialProjects1;
+        List<Rubric> _specialProjects2;
+
 
         bool _showingTheRubric = false;
 
@@ -68,7 +71,12 @@ namespace MarvelGuide.GUI
 
                 if (i == 0) { FormingTheRubricsListBoxSource(ListBoxes[i], ListBoxes[i + 1], rubr => rubr.Actual); }
                 else { FormingTheRubricsListBoxSource(ListBoxes[i], ListBoxes[i + 1], rubr => !rubr.Actual); }
-            }            
+            }
+
+            _specialProjects1 = new List<Rubric>();
+            _specialProjects2 = new List<Rubric>();
+
+            FormingTheSpecialProjectsListBoxSource();
 
             WindowState = WindowState.Maximized;
         }
@@ -79,7 +87,7 @@ namespace MarvelGuide.GUI
             int i = 0;
 
             foreach (var rubric in _storage.Rubrics.Items
-                .Where(rubr => func(rubr))
+                .Where(rubr => func(rubr) && !rubr.SpecialProject)
                 .OrderByDescending(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.Rubric == rubr) && u.WorkingNow))
                 .ThenByDescending(rubr => _storage.Users.Items.Count(u => u.Editor && u.EditorsRubrics.Exists(edPub => edPub.Rubric == rubr)))
                 .ThenBy(rubr => rubr.Name))
@@ -92,6 +100,23 @@ namespace MarvelGuide.GUI
 
             listBox1.ItemsSource = _rubrics1;
             listBox2.ItemsSource = _rubrics2;
+        }
+
+        private void FormingTheSpecialProjectsListBoxSource()
+        {
+            int i = 0;
+
+            foreach (var rubric in _storage.Rubrics.Items
+                .Where(rubr => rubr.SpecialProject))
+            {
+                if (i % 2 == 0) { _specialProjects1.Add(rubric); }
+                else { _specialProjects2.Add(rubric); }
+
+                i += 1;
+            }
+
+            SpecialProjectsListBox1.ItemsSource = _specialProjects1;
+            SpecialProjectsListBox2.ItemsSource = _specialProjects2;
         }
 
 
@@ -152,6 +177,11 @@ namespace MarvelGuide.GUI
             Rubric rubric = RubricNameTextBlock.DataContext as Rubric;
 
             RubricNameTextBlock.Text = rubric.Name;
+
+            if (rubric.Name.Split().Length > 1)
+            {
+                RubricNameTextBlock.FontSize = 26;
+            }
         }
 
 
