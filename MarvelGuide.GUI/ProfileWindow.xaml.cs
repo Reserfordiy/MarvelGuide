@@ -171,6 +171,7 @@ namespace MarvelGuide.GUI
         bool _goingToTheDeveloperMode = false;
         bool _goingToEditDocuments = false;
         bool _goingToEditRubrics = false;
+        bool _goingToTheUserDetailsWindow = false;
 
         bool _personalPage = true;
         bool _editingPage = false;
@@ -468,7 +469,14 @@ namespace MarvelGuide.GUI
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (_goingToEditRubrics)
+            if (_goingToTheUserDetailsWindow)
+            {
+                UserDetailsWindow userDetailsWindow = new UserDetailsWindow(_user);
+
+                userDetailsWindow.Show();
+            }
+
+            else if (_goingToEditRubrics)
             {
                 AllRubricsWindow allRubricsWindow = new AllRubricsWindow(_user);
 
@@ -577,16 +585,16 @@ namespace MarvelGuide.GUI
                 if (_user.HeadOfManagers) { HeadOfManagersDetails(); }
                 if (_user.HeadOfMarketers) { HeadOfMarketersDetails(); }
                 if (_user.HeadOfEditors) { HeadOfEditorsDetails(); }
+                if (_user.HeadOfSpecials) { HeadOfSpecialsDetails(); }
                 if (_user.HeadOfAgents) { HeadOfAgentsDetails(); }
                 if (_user.HeadOfModerators) { HeadOfModeratorsDetails(); }
-                if (_user.HeadOfSpecials) { HeadOfSpecialsDetails(); }
                 if (_user.HeadOfTechnicians) { HeadOfTechniciansDetails(); }
                 if (_user.Manager) { ManagersDetails(); }
                 if (_user.Marketer) { MarketersDetails(); }
                 if (_user.Editor) { EditorsDetails(); }
+                if (_user.Special) { SpecialsDetails(); }
                 if (_user.Agent) { AgentsDetails(); }
                 if (_user.Moderator) { ModeratorsDetails(); }
-                if (_user.Special) { SpecialsDetails(); }
 
                 _personalData.Add(firstDateOfWork + adding + _user.GotAJob.ToString("d"));
                 _additionalData++;
@@ -636,9 +644,9 @@ namespace MarvelGuide.GUI
               //_personalData.Add(directorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeMarketers + adding + _storage.Users.Items.Count(u => u.Marketer && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeEditors + adding + _storage.Users.Items.Count(u => u.Editor && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
+                _personalData.Add(directorsEmployeeSpecials + adding + _storage.Users.Items.Count(u => u.Special && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeAgents + adding + _storage.Users.Items.Count(u => u.Agent && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeModerators + adding + _storage.Users.Items.Count(u => u.Moderator && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
-                _personalData.Add(directorsEmployeeSpecials + adding + _storage.Users.Items.Count(u => u.Special && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
 
                 _additionalData += 7;
             }
@@ -659,9 +667,9 @@ namespace MarvelGuide.GUI
               //_personalData.Add(directorsEmployeeManagers + adding + _storage.Users.Items.Count(u => u.Manager && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeMarketers + adding + _storage.Users.Items.Count(u => u.Marketer && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeEditors + adding + _storage.Users.Items.Count(u => u.Editor && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
+                _personalData.Add(directorsEmployeeSpecials + adding + _storage.Users.Items.Count(u => u.Special && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeAgents + adding + _storage.Users.Items.Count(u => u.Agent && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
                 _personalData.Add(directorsEmployeeModerators + adding + _storage.Users.Items.Count(u => u.Moderator && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
-                _personalData.Add(directorsEmployeeSpecials + adding + _storage.Users.Items.Count(u => u.Special && u.WorkingNow && !u.Director && !u.GeneralDirector).ToString());
 
                 _additionalData += 7;
             }
@@ -1046,6 +1054,14 @@ namespace MarvelGuide.GUI
             }
         }
 
+        private void UserDetailsButton_Initialized(object sender, EventArgs e)
+        {
+            if (!_personalPage || !_user.SuperDeveloper)
+            {
+                UserDetailsButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
         private void DeveloperModeButton_Initialized(object sender, EventArgs e)
         {
             if (!(_user.SuperDeveloper || _user.HighDeveloper || _user.MediumDeveloper) || !_personalPage)
@@ -1137,6 +1153,13 @@ namespace MarvelGuide.GUI
 
             Close();
         }
+
+        private void UserDetailsButton_Click(object sender, RoutedEventArgs e)
+        {
+            _goingToTheUserDetailsWindow = true;
+
+            Close();
+        }        
 
         private void DeveloperModeButton_Click(object sender, RoutedEventArgs e)
         {

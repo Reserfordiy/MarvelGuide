@@ -1846,7 +1846,7 @@
     "Manager": false,
     "Marketer": true,
     "Editor": true,
-    "Special": false,
+    "Special": true,
     "Agent": false,
     "Moderator": false,
     "Technician": false,
@@ -1858,27 +1858,24 @@
         "Frequency": 3
       },
       {
-        "RubricID": 9,
-        "Frequency": 7
-      },
-      {
         "RubricID": 7,
-        "Frequency": 7
+        "Frequency": 5
       },
       {
-        "RubricID": 10,
-        "Frequency": 3
-      },
-      {
-        "RubricID": 14,
-        "Frequency": 1
+        "RubricID": 9,
+        "Frequency": 10
       },
       {
         "RubricID": 15,
         "Frequency": 10
       }
     ],
-    "SpecialsProjects": [],
+    "SpecialsProjects": [
+      {
+        "RubricID": 21,
+        "Frequency": -1
+      }
+    ],
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -2462,7 +2459,7 @@
     "Manager": false,
     "Marketer": false,
     "Editor": true,
-    "Special": false,
+    "Special": true,
     "Agent": false,
     "Moderator": false,
     "Technician": false,
@@ -2471,14 +2468,15 @@
     "EditorsRubrics": [
       {
         "RubricID": 12,
-        "Frequency": 3
-      },
-      {
-        "RubricID": 18,
-        "Frequency": 3
+        "Frequency": 5
       }
     ],
-    "SpecialsProjects": [],
+    "SpecialsProjects": [
+      {
+        "RubricID": 22,
+        "Frequency": -1
+      }
+    ],
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -3343,20 +3341,20 @@
     "HeadOfTechnicians": false,
     "Manager": false,
     "Marketer": false,
-    "Editor": true,
-    "Special": false,
+    "Editor": false,
+    "Special": true,
     "Agent": false,
     "Moderator": true,
     "Technician": false,
     "DirectorsPosition": null,
     "ManagersPosition": null,
-    "EditorsRubrics": [
+    "EditorsRubrics": [],
+    "SpecialsProjects": [
       {
-        "RubricID": 14,
-        "Frequency": 1
+        "RubricID": 21,
+        "Frequency": -1
       }
     ],
-    "SpecialsProjects": [],
     "AgentsNumber": 0,
     "AgentsFirstWords": null,
     "AgentsLastWords": null,
@@ -3785,11 +3783,35 @@
     "EditorsRubrics": [
       {
         "RubricID": 13,
-        "Frequency": 2
+        "Frequency": 5
+      },
+      {
+        "RubricID": 6,
+        "Frequency": 5
+      },
+      {
+        "RubricID": 1,
+        "Frequency": 10
       },
       {
         "RubricID": 16,
-        "Frequency": 4
+        "Frequency": 10
+      },
+      {
+        "RubricID": 17,
+        "Frequency": 20
+      },
+      {
+        "RubricID": 4,
+        "Frequency": 20
+      },
+      {
+        "RubricID": 18,
+        "Frequency": 20
+      },
+      {
+        "RubricID": 12,
+        "Frequency": 16
       }
     ],
     "SpecialsProjects": [],
@@ -4545,6 +4567,439 @@
     "Avatar": {
       "Id": 0,
       "ImageSource": "ozerov.jpg",
+      "IsBorderRequired": true
+    },
+    "IsLightDeveloper": false,
+    "IsDeveloper": false,
+    "IsHead": false
+  },
+  {
+    "Id": 74,
+    "Name": "Сергей",
+    "Surname": "Дюмин",
+    "Male": true,
+    "Login": "sergeyd",
+    "Password": "jKYRypqnkKPtvaepj4Ftaw==",
+    "WorkingNow": true,
+    "GotAJob": "2020-04-23T00:00:00",
+    "LostTheJob": "0001-01-01T00:00:00",
+    "SuperDeveloper": false,
+    "HighDeveloper": false,
+    "MediumDeveloper": false,
+    "LightDeveloperGeneralDirector": false,
+    "LightDeveloperDirector": false,
+    "LightDeveloperDeputyGeneralDirector": false,
+    "LightDeveloperHeadOfManagers": false,
+    "LightDeveloperHeadOfMarketers": false,
+    "LightDeveloperHeadOfEditors": false,
+    "LightDeveloperHeadOfSpecials": false,
+    "LightDeveloperHeadOfAgents": false,
+    "LightDeveloperHeadOfModerators": false,
+    "LightDeveloperHeadOfTechnicians": false,
+    "LightDeveloperManager": false,
+    "LightDeveloperMarketer": false,
+    "LightDeveloperEditor": false,
+    "LightDeveloperSpecial": false,
+    "LightDeveloperAgent": false,
+    "LightDeveloperModerator": false,
+    "LightDeveloperTechnician": false,
+    "GeneralDirector": false,
+    "Director": false,
+    "DeputyGeneralDirector": false,
+    "HeadOfManagers": false,
+    "HeadOfMarketers": false,
+    "HeadOfEditors": false,
+    "HeadOfSpecials": false,
+    "HeadOfAgents": false,
+    "HeadOfModerators": false,
+    "HeadOfTechnicians": false,
+    "Manager": false,
+    "Marketer": false,
+    "Editor": true,
+    "Special": true,
+    "Agent": false,
+    "Moderator": false,
+    "Technician": false,
+    "DirectorsPosition": null,
+    "ManagersPosition": null,
+    "EditorsRubrics": [
+      {
+        "RubricID": 7,
+        "Frequency": 4
+      },
+      {
+        "RubricID": 12,
+        "Frequency": 4
+      }
+    ],
+    "SpecialsProjects": [
+      {
+        "RubricID": 21,
+        "Frequency": -1
+      }
+    ],
+    "AgentsNumber": 0,
+    "AgentsFirstWords": null,
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 0,
+      "ImageSource": "dyumin.jpg",
+      "IsBorderRequired": true
+    },
+    "IsLightDeveloper": false,
+    "IsDeveloper": false,
+    "IsHead": false
+  },
+  {
+    "Id": 75,
+    "Name": "Александра",
+    "Surname": "Шаруба",
+    "Male": false,
+    "Login": "aleksandrash",
+    "Password": "u9Gxi0leqMd0mRztytLbig==",
+    "WorkingNow": true,
+    "GotAJob": "2020-04-26T00:00:00",
+    "LostTheJob": "0001-01-01T00:00:00",
+    "SuperDeveloper": false,
+    "HighDeveloper": false,
+    "MediumDeveloper": false,
+    "LightDeveloperGeneralDirector": false,
+    "LightDeveloperDirector": false,
+    "LightDeveloperDeputyGeneralDirector": false,
+    "LightDeveloperHeadOfManagers": false,
+    "LightDeveloperHeadOfMarketers": false,
+    "LightDeveloperHeadOfEditors": false,
+    "LightDeveloperHeadOfSpecials": false,
+    "LightDeveloperHeadOfAgents": false,
+    "LightDeveloperHeadOfModerators": false,
+    "LightDeveloperHeadOfTechnicians": false,
+    "LightDeveloperManager": false,
+    "LightDeveloperMarketer": false,
+    "LightDeveloperEditor": false,
+    "LightDeveloperSpecial": false,
+    "LightDeveloperAgent": false,
+    "LightDeveloperModerator": false,
+    "LightDeveloperTechnician": false,
+    "GeneralDirector": false,
+    "Director": false,
+    "DeputyGeneralDirector": false,
+    "HeadOfManagers": false,
+    "HeadOfMarketers": false,
+    "HeadOfEditors": false,
+    "HeadOfSpecials": false,
+    "HeadOfAgents": false,
+    "HeadOfModerators": false,
+    "HeadOfTechnicians": false,
+    "Manager": false,
+    "Marketer": false,
+    "Editor": true,
+    "Special": false,
+    "Agent": false,
+    "Moderator": false,
+    "Technician": false,
+    "DirectorsPosition": null,
+    "ManagersPosition": null,
+    "EditorsRubrics": [
+      {
+        "RubricID": 6,
+        "Frequency": 3
+      },
+      {
+        "RubricID": 5,
+        "Frequency": 3
+      }
+    ],
+    "SpecialsProjects": [],
+    "AgentsNumber": 0,
+    "AgentsFirstWords": null,
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 0,
+      "ImageSource": "sharuba.jpg",
+      "IsBorderRequired": true
+    },
+    "IsLightDeveloper": false,
+    "IsDeveloper": false,
+    "IsHead": false
+  },
+  {
+    "Id": 76,
+    "Name": "Диана",
+    "Surname": "Панфилова",
+    "Male": false,
+    "Login": "dianap",
+    "Password": "rs5ZtpBnIgmXzkQd12nUQw==",
+    "WorkingNow": true,
+    "GotAJob": "2020-04-25T00:00:00",
+    "LostTheJob": "0001-01-01T00:00:00",
+    "SuperDeveloper": false,
+    "HighDeveloper": false,
+    "MediumDeveloper": false,
+    "LightDeveloperGeneralDirector": false,
+    "LightDeveloperDirector": false,
+    "LightDeveloperDeputyGeneralDirector": false,
+    "LightDeveloperHeadOfManagers": false,
+    "LightDeveloperHeadOfMarketers": false,
+    "LightDeveloperHeadOfEditors": false,
+    "LightDeveloperHeadOfSpecials": false,
+    "LightDeveloperHeadOfAgents": false,
+    "LightDeveloperHeadOfModerators": false,
+    "LightDeveloperHeadOfTechnicians": false,
+    "LightDeveloperManager": false,
+    "LightDeveloperMarketer": false,
+    "LightDeveloperEditor": false,
+    "LightDeveloperSpecial": false,
+    "LightDeveloperAgent": false,
+    "LightDeveloperModerator": false,
+    "LightDeveloperTechnician": false,
+    "GeneralDirector": false,
+    "Director": false,
+    "DeputyGeneralDirector": false,
+    "HeadOfManagers": false,
+    "HeadOfMarketers": false,
+    "HeadOfEditors": false,
+    "HeadOfSpecials": false,
+    "HeadOfAgents": false,
+    "HeadOfModerators": false,
+    "HeadOfTechnicians": false,
+    "Manager": false,
+    "Marketer": false,
+    "Editor": true,
+    "Special": true,
+    "Agent": false,
+    "Moderator": false,
+    "Technician": false,
+    "DirectorsPosition": null,
+    "ManagersPosition": null,
+    "EditorsRubrics": [
+      {
+        "RubricID": 7,
+        "Frequency": 3
+      }
+    ],
+    "SpecialsProjects": [
+      {
+        "RubricID": 21,
+        "Frequency": -1
+      }
+    ],
+    "AgentsNumber": 0,
+    "AgentsFirstWords": null,
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 0,
+      "ImageSource": "panfilova.jpg",
+      "IsBorderRequired": true
+    },
+    "IsLightDeveloper": false,
+    "IsDeveloper": false,
+    "IsHead": false
+  },
+  {
+    "Id": 77,
+    "Name": "Валентин",
+    "Surname": "Шипулин",
+    "Male": true,
+    "Login": "valentinsh",
+    "Password": "uW4m8XC3B/xnhp3dtir8fQ==",
+    "WorkingNow": true,
+    "GotAJob": "2020-04-27T00:00:00",
+    "LostTheJob": "0001-01-01T00:00:00",
+    "SuperDeveloper": false,
+    "HighDeveloper": false,
+    "MediumDeveloper": false,
+    "LightDeveloperGeneralDirector": false,
+    "LightDeveloperDirector": false,
+    "LightDeveloperDeputyGeneralDirector": false,
+    "LightDeveloperHeadOfManagers": false,
+    "LightDeveloperHeadOfMarketers": false,
+    "LightDeveloperHeadOfEditors": false,
+    "LightDeveloperHeadOfSpecials": false,
+    "LightDeveloperHeadOfAgents": false,
+    "LightDeveloperHeadOfModerators": false,
+    "LightDeveloperHeadOfTechnicians": false,
+    "LightDeveloperManager": false,
+    "LightDeveloperMarketer": false,
+    "LightDeveloperEditor": false,
+    "LightDeveloperSpecial": false,
+    "LightDeveloperAgent": false,
+    "LightDeveloperModerator": false,
+    "LightDeveloperTechnician": false,
+    "GeneralDirector": false,
+    "Director": false,
+    "DeputyGeneralDirector": false,
+    "HeadOfManagers": false,
+    "HeadOfMarketers": false,
+    "HeadOfEditors": false,
+    "HeadOfSpecials": false,
+    "HeadOfAgents": false,
+    "HeadOfModerators": false,
+    "HeadOfTechnicians": false,
+    "Manager": false,
+    "Marketer": true,
+    "Editor": true,
+    "Special": false,
+    "Agent": false,
+    "Moderator": false,
+    "Technician": false,
+    "DirectorsPosition": null,
+    "ManagersPosition": null,
+    "EditorsRubrics": [
+      {
+        "RubricID": 7,
+        "Frequency": 2
+      },
+      {
+        "RubricID": 3,
+        "Frequency": 3
+      },
+      {
+        "RubricID": 1,
+        "Frequency": 3
+      },
+      {
+        "RubricID": 13,
+        "Frequency": 3
+      }
+    ],
+    "SpecialsProjects": [],
+    "AgentsNumber": 0,
+    "AgentsFirstWords": null,
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 0,
+      "ImageSource": "shipulin_v.jpg",
+      "IsBorderRequired": true
+    },
+    "IsLightDeveloper": false,
+    "IsDeveloper": false,
+    "IsHead": false
+  },
+  {
+    "Id": 78,
+    "Name": "Елизавета",
+    "Surname": "Бормотова",
+    "Male": false,
+    "Login": "elizavetab",
+    "Password": "6LC/YQBHOu6QXB+c5InhxA==",
+    "WorkingNow": true,
+    "GotAJob": "2020-04-26T00:00:00",
+    "LostTheJob": "0001-01-01T00:00:00",
+    "SuperDeveloper": false,
+    "HighDeveloper": false,
+    "MediumDeveloper": false,
+    "LightDeveloperGeneralDirector": false,
+    "LightDeveloperDirector": false,
+    "LightDeveloperDeputyGeneralDirector": false,
+    "LightDeveloperHeadOfManagers": false,
+    "LightDeveloperHeadOfMarketers": false,
+    "LightDeveloperHeadOfEditors": false,
+    "LightDeveloperHeadOfSpecials": false,
+    "LightDeveloperHeadOfAgents": false,
+    "LightDeveloperHeadOfModerators": false,
+    "LightDeveloperHeadOfTechnicians": false,
+    "LightDeveloperManager": false,
+    "LightDeveloperMarketer": false,
+    "LightDeveloperEditor": false,
+    "LightDeveloperSpecial": false,
+    "LightDeveloperAgent": false,
+    "LightDeveloperModerator": false,
+    "LightDeveloperTechnician": false,
+    "GeneralDirector": false,
+    "Director": false,
+    "DeputyGeneralDirector": false,
+    "HeadOfManagers": false,
+    "HeadOfMarketers": false,
+    "HeadOfEditors": false,
+    "HeadOfSpecials": false,
+    "HeadOfAgents": false,
+    "HeadOfModerators": false,
+    "HeadOfTechnicians": false,
+    "Manager": false,
+    "Marketer": false,
+    "Editor": false,
+    "Special": true,
+    "Agent": false,
+    "Moderator": false,
+    "Technician": false,
+    "DirectorsPosition": null,
+    "ManagersPosition": null,
+    "EditorsRubrics": [],
+    "SpecialsProjects": [
+      {
+        "RubricID": 22,
+        "Frequency": -1
+      }
+    ],
+    "AgentsNumber": 0,
+    "AgentsFirstWords": null,
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 0,
+      "ImageSource": "bormotova.jpg",
+      "IsBorderRequired": true
+    },
+    "IsLightDeveloper": false,
+    "IsDeveloper": false,
+    "IsHead": false
+  },
+  {
+    "Id": 79,
+    "Name": "Александр",
+    "Surname": "Ханукаев",
+    "Male": true,
+    "Login": "alexanderh",
+    "Password": "dYwpQEpeaU4PjJOGf1ERlw==",
+    "WorkingNow": true,
+    "GotAJob": "2020-04-28T00:00:00",
+    "LostTheJob": "0001-01-01T00:00:00",
+    "SuperDeveloper": false,
+    "HighDeveloper": false,
+    "MediumDeveloper": false,
+    "LightDeveloperGeneralDirector": false,
+    "LightDeveloperDirector": false,
+    "LightDeveloperDeputyGeneralDirector": false,
+    "LightDeveloperHeadOfManagers": false,
+    "LightDeveloperHeadOfMarketers": false,
+    "LightDeveloperHeadOfEditors": false,
+    "LightDeveloperHeadOfSpecials": false,
+    "LightDeveloperHeadOfAgents": false,
+    "LightDeveloperHeadOfModerators": false,
+    "LightDeveloperHeadOfTechnicians": false,
+    "LightDeveloperManager": false,
+    "LightDeveloperMarketer": false,
+    "LightDeveloperEditor": false,
+    "LightDeveloperSpecial": false,
+    "LightDeveloperAgent": false,
+    "LightDeveloperModerator": false,
+    "LightDeveloperTechnician": false,
+    "GeneralDirector": false,
+    "Director": false,
+    "DeputyGeneralDirector": false,
+    "HeadOfManagers": false,
+    "HeadOfMarketers": false,
+    "HeadOfEditors": false,
+    "HeadOfSpecials": false,
+    "HeadOfAgents": false,
+    "HeadOfModerators": false,
+    "HeadOfTechnicians": false,
+    "Manager": false,
+    "Marketer": true,
+    "Editor": false,
+    "Special": false,
+    "Agent": false,
+    "Moderator": false,
+    "Technician": false,
+    "DirectorsPosition": null,
+    "ManagersPosition": null,
+    "EditorsRubrics": [],
+    "SpecialsProjects": [],
+    "AgentsNumber": 0,
+    "AgentsFirstWords": null,
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 0,
+      "ImageSource": "hanukaev.jpg",
       "IsBorderRequired": true
     },
     "IsLightDeveloper": false,

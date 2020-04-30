@@ -110,16 +110,16 @@ namespace MarvelGuide.Core.Models
             if (HeadOfManagers) { job += splitting + headOfManagers; }
             if (HeadOfMarketers) { job += splitting + headOfMarketers; }
             if (HeadOfEditors) { job += splitting + headOfEditors; }
+            if (HeadOfSpecials) { job += splitting + headOfSpecials; }
             if (HeadOfAgents) { job += splitting + headOfAgents; }
             if (HeadOfModerators) { job += splitting + headOfModerators; }
-            if (HeadOfSpecials) { job += splitting + headOfSpecials; }
             if (HeadOfTechnicians) { job += splitting + headOfTechnicians; }
             if (Manager) { job += splitting + manager; }
             if (Marketer) { job += splitting + marketer; }
             if (Editor) { job += splitting + editor; }
+            if (Special) { job += splitting + special; }
             if (Agent) { job += splitting + agent; }
             if (Moderator) { job += splitting + moderator; }
-            if (Special) { job += splitting + special; }
             if (Technician) { job += splitting + technician; }
 
             if (job.Length >= 1)

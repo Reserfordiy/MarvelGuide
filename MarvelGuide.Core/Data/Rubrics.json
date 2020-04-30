@@ -424,5 +424,23 @@
       "ImageSource": "news_spec_d(1).jpg",
       "IsBorderRequired": true
     }
+  },
+  {
+    "Id": 22,
+    "Name": "Теории",
+    "Actual": true,
+    "SpecialProject": true,
+    "DocumentId": 0,
+    "KPI": null,
+    "Picture": {
+      "Id": 0,
+      "ImageSource": null,
+      "IsBorderRequired": false
+    },
+    "PictureDark": {
+      "Id": 0,
+      "ImageSource": null,
+      "IsBorderRequired": false
+    }
   }
 ]

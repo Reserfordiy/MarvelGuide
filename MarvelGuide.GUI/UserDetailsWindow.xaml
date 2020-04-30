@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
-        Title="Management System" Height="2580" MinHeight="470" Width="870" MinWidth="710" MaxWidth="1050" FontFamily="Verdana" Closing="Window_Closing" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" SizeChanged="Window_SizeChanged">
+        Title="Management System" Height="600" MinHeight="470" Width="870" MinWidth="710" MaxWidth="1050" FontFamily="Verdana" Closing="Window_Closing">
     <ScrollViewer Name="Scroll">
         <Grid Background="#FFEAF6FB">
             <Grid.RowDefinitions>
@@ -13,6 +13,47 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+
+            <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="0 20 30 0" Click="BackButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Вернуться назад</Button>
+
+            <Grid Name="EditorsDetailsGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="22.5" Margin="90 60 0 25">Редакторская должность:</TextBlock>
+
+                <ListBox Grid.Row="1" Name="EditorsDocumentsListBox" Margin="75 0 40 25"  HorizontalAlignment="Left" Width="455" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Style="{DynamicResource TransparentListBox}" PreviewMouseWheel="ListBox_PreviewMouseWheel">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <DockPanel Grid.Column="0" Grid.RowSpan="2" Margin="0 10 10 10" VerticalAlignment="Top">
+                                    <Border BorderThickness="0" BorderBrush="#FF715C4E">
+                                        <Image Name="DocumentImage" Width="64" Height="64" Source="Images/document_icon.png" HorizontalAlignment="Left"></Image>
+                                    </Border>
+                                </DockPanel>
+
+                                <TextBlock Grid.Column="1" Name="EditorsDocumentTextBlock" FontFamily="Calibri" VerticalAlignment="Top" FontSize="19" Margin="10 10 30 10" Initialized="EditorsDocumentTextBlock_Initialized"></TextBlock>
+
+                                <Button Grid.Row="1" Grid.Column="1" Name="ReadButton" FontFamily="Verdana" Margin="10 2 15 10" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="8 4" Click="ReadButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Читать</Button>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </Grid>
         </Grid>
     </ScrollViewer>
 </Window>
