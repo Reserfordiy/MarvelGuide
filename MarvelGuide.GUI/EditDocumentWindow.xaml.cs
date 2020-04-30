@@ -108,7 +108,7 @@ namespace MarvelGuide.GUI
         {
             if (_showingVersion)
             {
-                DocumentWindow documentWindow = new DocumentWindow(_document, _versionForShowing, true, true, _user);
+                DocumentWindow documentWindow = new DocumentWindow(_document, _versionForShowing, true, true, false, _user);
 
                 documentWindow.Show();
             }

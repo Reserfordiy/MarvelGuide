@@ -85,12 +85,7 @@ namespace MarvelGuide.GUI
         private const string managersJob = "Менеджерская должность";        
 
         private const string editorsRubric = "Редакторская рубрика";
-        private const string editorsFrequencyFractionStart = "Частота размещения постов:  1/";
-        private const string editorsFrequencyIntegerStart = "Частота размещения постов:  ";
-        private const string editorsFrequencyFractionEnd = " поста в сутки";
-        private const string editorsFrequencyInteger1End = " пост в сутки";
-        private const string editorsFrequencyInteger234End = " поста в сутки";
-        private const string editorsFrequencyInteger5End = " постов в сутки";
+        private const string editorsFrequency = "Частота размещения";
 
         private const string specialsProject = "Спецпроект";
 
@@ -469,9 +464,16 @@ namespace MarvelGuide.GUI
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (_goingToTheUserDetailsWindow)
+            if (_goingToTheUserDetailsWindow && _personalPage)
             {
                 UserDetailsWindow userDetailsWindow = new UserDetailsWindow(_user);
+
+                userDetailsWindow.Show();
+            }
+
+            else if (_goingToTheUserDetailsWindow && !_personalPage)
+            {
+                UserDetailsWindow userDetailsWindow = new UserDetailsWindow(_user, _userWhoWatches);
 
                 userDetailsWindow.Show();
             }
@@ -855,14 +857,7 @@ namespace MarvelGuide.GUI
 
                 if (_user.WorkingNow)
                 {
-                    if (publication.Frequency > 1)
-                    {
-                        _personalData.Add(editorsFrequencyFractionStart + publication.Frequency.ToString() + editorsFrequencyFractionEnd);
-                    }
-                    else
-                    {
-                        _personalData.Add(editorsFrequencyIntegerStart + publication.Frequency.ToString() + editorsFrequencyInteger1End);
-                    }
+                    _personalData.Add(editorsFrequency + adding + publication.StringFrequency());
 
                     _additionalData++;
                 }
@@ -1056,7 +1051,8 @@ namespace MarvelGuide.GUI
 
         private void UserDetailsButton_Initialized(object sender, EventArgs e)
         {
-            if (!_personalPage || !_user.SuperDeveloper)
+            if (!((_personalPage && _user.Editor) || 
+                (_user.Editor && (_userWhoWatches.LightDeveloperEditor || _userWhoWatches.MediumDeveloper || _userWhoWatches.HighDeveloper || _userWhoWatches.SuperDeveloper))))
             {
                 UserDetailsButton.Visibility = Visibility.Collapsed;
             }

@@ -87,6 +87,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DocumentVersion.cs" />
     <Compile Include="Models\EditorsPublication.cs" />
+    <Compile Include="Models\EditorsPublicationForVisualization.cs" />
     <Compile Include="Models\KPI.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Document.cs" />

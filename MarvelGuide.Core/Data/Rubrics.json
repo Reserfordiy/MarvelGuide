@@ -148,7 +148,7 @@
     "Name": "Факты",
     "Actual": true,
     "SpecialProject": false,
-    "DocumentId": 12,
+    "DocumentId": 0,
     "KPI": {
       "AmountOfPosts": 0,
       "AverageLikes": 0.0,
@@ -284,7 +284,7 @@
   {
     "Id": 14,
     "Name": "Новости",
-    "Actual": true,
+    "Actual": false,
     "SpecialProject": false,
     "DocumentId": 0,
     "KPI": null,

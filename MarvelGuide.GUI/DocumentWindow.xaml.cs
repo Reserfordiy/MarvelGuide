@@ -35,22 +35,26 @@ namespace MarvelGuide.GUI
 
         bool _readingInTheDeveloperMode = false;
         bool _readingFromEditDocumentWindow = false;
+        bool _readingFromUserDetailsWindow = false;
 
         bool _goingToAnotherVersion = false;
 
         User _userWhoReads = null;
+        User _userWhoWatchedWhoReads = null;
 
         
 
-        public DocumentWindow(Document document, DocumentVersion version, bool readingInTheDeveloperMode, bool readingFromEditDocumentWindow, User userWhoReads)
+        public DocumentWindow(Document document, DocumentVersion version, bool readingInTheDeveloperMode, bool readingFromEditDocumentWindow, bool readingFromUserDetailsWindow, User userWhoReads, User userWhoWatchedWhoRead)
         {
             _document = document;
             _version = version;
 
             _readingInTheDeveloperMode = readingInTheDeveloperMode;
             _readingFromEditDocumentWindow = readingFromEditDocumentWindow;
+            _readingFromUserDetailsWindow = readingFromUserDetailsWindow;
 
             _userWhoReads = userWhoReads;
+            _userWhoWatchedWhoReads = userWhoWatchedWhoRead;
 
             _storage = Factory.Instance.GetStorage();
 
@@ -61,8 +65,17 @@ namespace MarvelGuide.GUI
             FormingTheVisualData();            
         }
 
-        public DocumentWindow(Document document) : this(document, document.Versions[document.Versions.Count - 1], false, false, null) { }
-        public DocumentWindow(Document document, User userWhoReads) : this(document, document.Versions[document.Versions.Count - 1], true, false, userWhoReads) { }
+        public DocumentWindow(Document document) : this(document, document.Versions[document.Versions.Count - 1], false, false, false, null, null) { }
+        public DocumentWindow(Document document, User userWhoReads) : this(document, document.Versions[document.Versions.Count - 1], true, false, false, userWhoReads, null) { }
+        public DocumentWindow(Document document, bool readingInTheDeveloperMode, bool readingFromEditDocumentWindow, bool readingFromUserDetailsWindow, User userWhoReads) :
+            this(document, document.Versions[document.Versions.Count - 1], readingInTheDeveloperMode, readingFromEditDocumentWindow, readingFromUserDetailsWindow, userWhoReads, null)
+        { }
+        public DocumentWindow(Document document, bool readingInTheDeveloperMode, bool readingFromEditDocumentWindow, bool readingFromUserDetailsWindow, User userWhoReads, User userWhoWatchedWhoReads) :
+            this(document, document.Versions[document.Versions.Count - 1], readingInTheDeveloperMode, readingFromEditDocumentWindow, readingFromUserDetailsWindow, userWhoReads, userWhoWatchedWhoReads)
+        { }
+        public DocumentWindow(Document document, DocumentVersion documentVersion, bool readingInTheDeveloperMode, bool readingFromEditDocumentWindow, bool readingFromUserDetailsWindow, User userWhoReads) :
+            this(document, documentVersion, readingInTheDeveloperMode, readingFromEditDocumentWindow, readingFromUserDetailsWindow, userWhoReads, null)
+        { }
 
 
         private void FormingTheVisualData()
@@ -105,9 +118,15 @@ namespace MarvelGuide.GUI
         {
             if (_goingToAnotherVersion)
             {
-                DocumentWindow documentWindow = new DocumentWindow(_document, _followingVersion, _readingInTheDeveloperMode, _readingFromEditDocumentWindow, _userWhoReads);
+                DocumentWindow documentWindow = new DocumentWindow(_document, _followingVersion, _readingInTheDeveloperMode, _readingFromEditDocumentWindow, _readingFromUserDetailsWindow, _userWhoReads, _userWhoWatchedWhoReads);
 
                 documentWindow.Show();
+            }
+            else if (_readingFromUserDetailsWindow)
+            {
+                UserDetailsWindow userDetailsWindow = new UserDetailsWindow(_userWhoReads, _userWhoWatchedWhoReads);
+
+                userDetailsWindow.Show();
             }
             else if (_readingFromEditDocumentWindow && _readingInTheDeveloperMode)
             {
