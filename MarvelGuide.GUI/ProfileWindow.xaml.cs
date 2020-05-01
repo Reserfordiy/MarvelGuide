@@ -103,7 +103,7 @@ namespace MarvelGuide.GUI
         private const string updatePassword = "Обновить пароль";
         private const string oldPassword = "Старый пароль";
 
-        private const string personalPageTitle = "Личный кабинет";
+        private const string personalPageTitle = "Ваш профиль";
         private const string watchingForeignPageTitle = "Профиль ";
         private const string addingNewUserTitle = "Добавление нового сотрудника";
         private const string editingUserTitle = "Изменение профиля ";
@@ -1051,8 +1051,8 @@ namespace MarvelGuide.GUI
 
         private void UserDetailsButton_Initialized(object sender, EventArgs e)
         {
-            if (!((_personalPage && _user.Editor) || 
-                (_user.Editor && (_userWhoWatches.LightDeveloperEditor || _userWhoWatches.MediumDeveloper || _userWhoWatches.HighDeveloper || _userWhoWatches.SuperDeveloper))))
+            if (!((_personalPage && _user.Editor) || ((_userWhoWatches != null) &&
+                (_user.Editor && (_userWhoWatches.LightDeveloperEditor || _userWhoWatches.MediumDeveloper || _userWhoWatches.HighDeveloper || _userWhoWatches.SuperDeveloper)))))
             {
                 UserDetailsButton.Visibility = Visibility.Collapsed;
             }

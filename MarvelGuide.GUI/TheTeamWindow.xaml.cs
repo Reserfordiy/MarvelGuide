@@ -35,7 +35,7 @@ namespace MarvelGuide.GUI
         private const string noneText = "none";
 
         private const string defaultButtonContent = "Открыть профиль";
-        private const string yourProfileButtonContent = "В свой личный кабинет";
+        private const string yourProfileButtonContent = "В свой профиль";
         private const string editProfileButtonContent = "Редактировать";
         private const string addProfileButtonContent = "Добавить нового сотрудника";
 

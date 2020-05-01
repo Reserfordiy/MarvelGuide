@@ -5,18 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarvelGuide.GUI"
         mc:Ignorable="d"
-        Title="Management System" Height="650" MinHeight="470" Width="800" MinWidth="710" MaxWidth="800" FontFamily="Verdana" Closing="Window_Closing">
+        Title="Management System" Height="650" MinHeight="470" Width="800" MinWidth="800" MaxWidth="1200" FontFamily="Verdana" Closing="Window_Closing">
     <ScrollViewer Name="Scroll">
         <Grid Background="#FFEAF6FB">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-            <Button Name="BackButton" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="0 20 30 0" Click="BackButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Вернуться назад</Button>
+            <TextBlock Name="UserDetailsTitleTextBlock" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Calibri" FontSize="27" Margin="100 20 0 5" Initialized="UserDetailsTitleTextBlock_Initialized">Личный кабинет</TextBlock>
 
-            <Grid Name="EditorsDetailsGrid">
+
+            <Button Name="BackButton" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="9 5" FontSize="14.5" Margin="0 20 30 0" Click="BackButton_Click" Style="{DynamicResource AttentionButtonsStyle}">Вернуться назад</Button>
+
+            <Grid Name="EditorsDetailsGrid" Margin="0 40 0 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>

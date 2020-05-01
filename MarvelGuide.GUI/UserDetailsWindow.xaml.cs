@@ -92,6 +92,12 @@ namespace MarvelGuide.GUI
 
                 documentWindow.Show();                
             }
+            else if (_userWhoWatches == null)
+            {
+                ProfileWindow profileWindow = new ProfileWindow(_user);
+
+                profileWindow.Show();
+            }
             else
             {
                 ProfileWindow profileWindow = new ProfileWindow(_user, _userWhoWatches, false);
@@ -106,6 +112,15 @@ namespace MarvelGuide.GUI
             Close();
         }
 
+
+
+        private void UserDetailsTitleTextBlock_Initialized(object sender, EventArgs e)
+        {
+            if (_userWhoWatches != null)
+            {
+                UserDetailsTitleTextBlock.Text = UserDetailsTitleTextBlock.Text + " " + _user.GenitiveName();
+            }
+        }
 
 
         private void EditorsDocumentTextBlock_Initialized(object sender, EventArgs e)
