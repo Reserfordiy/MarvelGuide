@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -79,6 +80,19 @@ namespace MarvelGuide.Core.Models
         public virtual Picture Avatar { get; set; }
 
 
+        private Func<User, bool>[] _checksIfUserCanSeeUserDetails = new Func<User, bool>[]
+        {
+            u => u.Editor,
+            u => u.Special
+        };
+
+        private Func<User, bool>[] _checksIfUserWhoWatchCanSeeUsersDetails = new Func<User, bool>[]
+        {
+            uWW => uWW.LightDeveloperEditor || uWW.IsMoreThanLightDeveloper,
+            uWW => uWW.LightDeveloperSpecial || uWW.IsMoreThanLightDeveloper
+        };
+
+
 
         public string Job()
         {
@@ -128,6 +142,31 @@ namespace MarvelGuide.Core.Models
             }
 
             return job;
+        }
+
+
+
+        public bool CheckingWhichJobsDetailsCanBeDisplayedInUserDetailsWindow(User _userWhoWantsToWatch, out bool[] matches)
+        {
+            matches = new bool[_checksIfUserCanSeeUserDetails.Length];
+
+            for (int i = 0; i < _checksIfUserCanSeeUserDetails.Length; i++)
+            {
+                var funcForUser = _checksIfUserCanSeeUserDetails[i];
+                var funcForWatcher = _checksIfUserWhoWatchCanSeeUsersDetails[i];
+                if (_userWhoWantsToWatch == null) { funcForWatcher = u => true; }
+
+                if (funcForUser(this) && funcForWatcher(_userWhoWantsToWatch))
+                {
+                    matches[i] = true;
+                }
+                else
+                {
+                    matches[i] = false;
+                }
+            }
+
+            return matches.Any(b => b);
         }
 
 
@@ -187,7 +226,7 @@ namespace MarvelGuide.Core.Models
         }
 
 
-
+        [JsonIgnore]
         public bool IsLightDeveloper
         {
             get
@@ -212,6 +251,7 @@ namespace MarvelGuide.Core.Models
             }
         }
 
+        [JsonIgnore]
         public bool IsDeveloper
         {
             get
@@ -223,7 +263,16 @@ namespace MarvelGuide.Core.Models
             }
         }
 
+        [JsonIgnore]
+        public bool IsMoreThanLightDeveloper
+        {
+            get
+            {
+                return IsDeveloper && !IsLightDeveloper;
+            }
+        }
 
+        [JsonIgnore]
         public bool IsHead
         {
             get

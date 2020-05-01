@@ -28,12 +28,16 @@ namespace MarvelGuide.GUI
         private const string rubricFrequency = "Частота размещения: ";
 
 
-        IStorage _storage;
+        readonly IStorage _storage;
 
-        User _user;
-        User _userWhoWatches;
+        readonly User _user;
+        readonly User _userWhoWatches;
 
         List<EditorsPublicationForVisualization> _publicationsForVisualization;
+        List<EditorsPublicationForVisualization> _projectsForVisualization;
+
+
+        bool[] _demonstratingJobDetails;
 
 
         Document _documentForReading = null;
@@ -47,19 +51,66 @@ namespace MarvelGuide.GUI
             _storage = Factory.Instance.GetStorage();
 
             _user = user;
-            _userWhoWatches = userWhoWatches;
+            _userWhoWatches = userWhoWatches;           
 
             InitializeComponent();
 
-            if (_user.EditorsRubrics.Count() > 1)
-            {
-                WindowState = WindowState.Maximized;
-            }
+            SettingTheGridsVisibility();
 
-            FormingEditorsData();            
+            DefiningSizeAndState();
+
+            FormingEditorsData();
+            FormingSpecialsData();
         }
 
         public UserDetailsWindow(User user) : this(user, null) { }
+
+
+        private void SettingTheGridsVisibility()
+        {
+            var _ = _user.CheckingWhichJobsDetailsCanBeDisplayedInUserDetailsWindow(_userWhoWatches, out _demonstratingJobDetails);
+
+            Grid[] grids = new Grid[]
+            {
+                EditorsDetailsGrid,
+                SpecialsDetailsGrid
+            };
+
+            for (int i = 0; i < grids.Length; i++)
+            {
+                if (!_demonstratingJobDetails[i])
+                {
+                    grids[i].Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
+
+        private void DefiningSizeAndState()
+        {
+            var numberOfGrids = _demonstratingJobDetails.Count(b => b);
+
+            if (numberOfGrids == 1)
+            {
+                Width = 800;
+                MinWidth = 800;
+                MaxWidth = 1200;
+
+                Grid.SetColumnSpan(UserDetailsTitleTextBlock, 3);
+            }
+            else if(numberOfGrids == 2)
+            {
+                Width = 1200;
+                MinWidth = 1200;
+                
+                //UserDetailsTitleTextBlock.Margin = new Thickness(0, 20, 0, 5);
+            }
+
+            if (_user.Editor && _user.EditorsRubrics.Count() > 1)
+            {
+                Height = 750;
+            }
+        }
 
 
         private void FormingEditorsData()
@@ -79,6 +130,26 @@ namespace MarvelGuide.GUI
             else
             {
                 EditorsDetailsGrid.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void FormingSpecialsData()
+        {
+            if (_user.Special)
+            {
+                //EditorsDocumentsListBox.ItemsSource = new Document[]
+                //{
+                //_storage.Documents.Items.FirstOrDefault(doc => doc.Name == specialsDocument)
+                //};
+
+                _projectsForVisualization = _user.SpecialsProjects
+                    .Select(spProj => new EditorsPublicationForVisualization() { EditorsPublication = spProj, ShowDetails = false }).ToList();
+
+                SpecialsProjectListBox.ItemsSource = _projectsForVisualization;
+            }
+            else
+            {
+                SpecialsDetailsGrid.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -133,13 +204,13 @@ namespace MarvelGuide.GUI
         }
 
 
-        private void RubricNameTextBlock_Initialized(object sender, EventArgs e)
+        private void RubricOrProjectNameTextBlock_Initialized(object sender, EventArgs e)
         {
-            TextBlock RubricNameTextBlock = sender as TextBlock;
+            TextBlock RubricOrProjectNameTextBlock = sender as TextBlock;
 
-            var publicationForVisualization = RubricNameTextBlock.DataContext as EditorsPublicationForVisualization;
+            var publicationForVisualization = RubricOrProjectNameTextBlock.DataContext as EditorsPublicationForVisualization;
 
-            RubricNameTextBlock.Text = rubricName + publicationForVisualization.EditorsPublication.Rubric.Name;
+            RubricOrProjectNameTextBlock.Text = rubricName + publicationForVisualization.EditorsPublication.Rubric.Name;
         }
 
         private void RubricFrequencyTextBlock_Initialized(object sender, EventArgs e)

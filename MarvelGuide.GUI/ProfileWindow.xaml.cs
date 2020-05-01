@@ -54,9 +54,7 @@ namespace MarvelGuide.GUI
         private const string employerForEditor = " (отдел редакции)";
         private const string employerForModerator = " (отдел модерации)";
         private const string employerForSpecial = " (отдел спецпроектов)";
-        private const string employerForTechnician = " (технический отдел)";
 
-        private const string directorsEmployeeManagers = "Менеджеров";
         private const string directorsEmployeeMarketers = "Маркетологов";
         private const string directorsEmployeeEditors = "Редакторов";
         private const string directorsEmployeeAgents = "Агентов поддержки";
@@ -78,7 +76,7 @@ namespace MarvelGuide.GUI
         private const string employeeAgents = " агент";
         private const string employeeModerators = " модератор";
         private const string employeeSpecials = " спецредактор";
-        private const string employeeTechnicians = " техник";
+        //private const string employeeTechnicians = " техник";
 
         private const string directorsJob = "Полная должность директора";
 
@@ -113,7 +111,6 @@ namespace MarvelGuide.GUI
         private const string defaultName = "Пример: Иван";
         private const string defaultSurname = "Пример: Иванов";
         private const string defaultLogin = "Пример: ivani";
-        private const string defaultPassword = "Пример: 123456";
         private const string defaultStartWorkingDate = "Пример: 18.08.2018";
         private const string defaultEndWorkingDate = "Пример: 01.09.2018";
         private const string defaultDirectorsPosition = "Пример: Генеральный директор";
@@ -124,7 +121,6 @@ namespace MarvelGuide.GUI
         private const string defaultAgentsNumber = "Пример: 14";
         private const string defaultAgentsFirstWords = "Пример: Здравствуйте!";
         private const string defaultAgentsLastWords = "Пример: С любовью";
-        private const string defaultSpecialsProject = "Пример: Дайджест новостей";
 
         private const string defaultImageSource = "default.jpg";
 
@@ -141,10 +137,11 @@ namespace MarvelGuide.GUI
         private const int minimalEditorsFrequency = 5;
 
 
-        IStorage _storage;
 
-        User _user;
-        User _userWhoWatches;
+        readonly IStorage _storage;
+
+        readonly User _user;
+        readonly User _userWhoWatches;
 
         Picture _picture;
 
@@ -168,12 +165,13 @@ namespace MarvelGuide.GUI
         bool _goingToEditRubrics = false;
         bool _goingToTheUserDetailsWindow = false;
 
-        bool _personalPage = true;
-        bool _editingPage = false;
+        readonly bool _personalPage = true;
+        readonly bool _editingPage = false;
+
+        readonly bool _fullVersionOfTheTeamWasShown = false;
 
         bool _savingCompleted = false;
-
-        bool _fullVersionOfTheTeamWasShown = false;
+        
 
         bool _newImagesWereUploaded = false;
         Picture _lastUploadedImage = null;
@@ -515,7 +513,7 @@ namespace MarvelGuide.GUI
 
             else if (_goingToTheDeveloperMode)
             {
-                TheTeamWindow theTeamWindow = null;
+                TheTeamWindow theTeamWindow;
 
                 if (_editingPage)
                 {
@@ -632,9 +630,7 @@ namespace MarvelGuide.GUI
 
             if (_user.WorkingNow)
             {
-                User deputyGeneralDirector = _storage.Users.Items.FirstOrDefault(u => u.DeputyGeneralDirector) as User;
-
-                if (deputyGeneralDirector != null)
+                if (_storage.Users.Items.FirstOrDefault(u => u.DeputyGeneralDirector) is User deputyGeneralDirector)
                 {
                     _personalData.Add(deputy + adding + deputyGeneralDirector.Name + " " + deputyGeneralDirector.Surname);
 
@@ -809,9 +805,7 @@ namespace MarvelGuide.GUI
 
             if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfManagers)
             {
-                User headOfManagers = _storage.Users.Items.FirstOrDefault(u => u.HeadOfManagers && u.WorkingNow) as User;
-
-                if (headOfManagers != null)
+                if (_storage.Users.Items.FirstOrDefault(u => u.HeadOfManagers && u.WorkingNow) is User headOfManagers)
                 {
                     if (_amountOfRegularJobs + _amountOfHeadJobs == 1)
                     {
@@ -823,7 +817,7 @@ namespace MarvelGuide.GUI
                     }
 
                     _additionalData++;
-                }                
+                }
             }
         }
 
@@ -831,9 +825,7 @@ namespace MarvelGuide.GUI
         {
             if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfMarketers)
             {
-                User headOfMarketers = _storage.Users.Items.FirstOrDefault(u => u.HeadOfMarketers && u.WorkingNow) as User;
-
-                if (headOfMarketers != null)
+                if (_storage.Users.Items.FirstOrDefault(u => u.HeadOfMarketers && u.WorkingNow) is User headOfMarketers)
                 {
                     if (_amountOfRegularJobs + _amountOfHeadJobs == 1)
                     {
@@ -867,9 +859,7 @@ namespace MarvelGuide.GUI
 
             if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfEditors)
             {
-                User headOfEditors = _storage.Users.Items.FirstOrDefault(u => u.HeadOfEditors && u.WorkingNow) as User;
-
-                if (headOfEditors != null)
+                if (_storage.Users.Items.FirstOrDefault(u => u.HeadOfEditors && u.WorkingNow) is User headOfEditors)
                 {
                     if (_amountOfRegularJobs + _amountOfHeadJobs == 1)
                     {
@@ -896,9 +886,7 @@ namespace MarvelGuide.GUI
 
             if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfSpecials)
             {
-                User headOfSpecials = _storage.Users.Items.FirstOrDefault(u => u.HeadOfSpecials && u.WorkingNow) as User;
-
-                if (headOfSpecials != null)
+                if (_storage.Users.Items.FirstOrDefault(u => u.HeadOfSpecials && u.WorkingNow) is User headOfSpecials)
                 {
                     if (_amountOfRegularJobs + _amountOfHeadJobs == 1)
                     {
@@ -924,9 +912,7 @@ namespace MarvelGuide.GUI
 
             if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfAgents)
             {
-                User headOfAgents = _storage.Users.Items.FirstOrDefault(u => u.HeadOfAgents && u.WorkingNow) as User;
-
-                if (headOfAgents != null)
+                if (_storage.Users.Items.FirstOrDefault(u => u.HeadOfAgents && u.WorkingNow) is User headOfAgents)
                 {
                     if (_amountOfRegularJobs + _amountOfHeadJobs == 1)
                     {
@@ -946,9 +932,7 @@ namespace MarvelGuide.GUI
         {
             if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfModerators)
             {
-                User headOfModerators = _storage.Users.Items.FirstOrDefault(u => u.HeadOfModerators && u.WorkingNow) as User;
-
-                if (headOfModerators != null)
+                if (_storage.Users.Items.FirstOrDefault(u => u.HeadOfModerators && u.WorkingNow) is User headOfModerators)
                 {
                     if (_amountOfRegularJobs + _amountOfHeadJobs == 1)
                     {
@@ -1051,8 +1035,7 @@ namespace MarvelGuide.GUI
 
         private void UserDetailsButton_Initialized(object sender, EventArgs e)
         {
-            if (!((_personalPage && _user.Editor) || ((_userWhoWatches != null) &&
-                (_user.Editor && (_userWhoWatches.LightDeveloperEditor || _userWhoWatches.MediumDeveloper || _userWhoWatches.HighDeveloper || _userWhoWatches.SuperDeveloper)))))
+            if (!CheckingWhetherUserDetailsButtonIsShown())
             {
                 UserDetailsButton.Visibility = Visibility.Collapsed;
             }
@@ -2096,7 +2079,7 @@ namespace MarvelGuide.GUI
 
             int frequency = -1;
 
-            if (int.TryParse(EditorsFrequencyTextBox.Text, out int r))
+            if (int.TryParse(EditorsFrequencyTextBox.Text, out _))
             {
                 frequency = int.Parse(EditorsFrequencyTextBox.Text);
             }
@@ -2402,8 +2385,6 @@ namespace MarvelGuide.GUI
 
         private bool CheckingIfAllValuesAreValid()
         {
-            int result;
-
             if (LoginTextBox.Text.IndexOf(' ') != -1)
             {
                 MessageBox.Show("Пробелы не допускаются в логине.", "Ошибка");
@@ -2423,7 +2404,7 @@ namespace MarvelGuide.GUI
 
                 return false;
             }
-            if (PasswordTextBlock.Visibility == Visibility.Visible && (MainPasswordBox.Password.Length != 6 && MainPasswordBox.Password.Length != 2 || !int.TryParse(MainPasswordBox.Password, out result)))
+            if (PasswordTextBlock.Visibility == Visibility.Visible && (MainPasswordBox.Password.Length != 6 && MainPasswordBox.Password.Length != 2 || !int.TryParse(MainPasswordBox.Password, out int result)))
             {
                 MessageBox.Show("Пароль обязательно должен быть шестизначным числом. Пожалуйста, измените пароль и воспроизведите его в поле ниже.", "Ошибка");
 
@@ -2689,6 +2670,23 @@ namespace MarvelGuide.GUI
 
                 checkBox.Visibility = Visibility.Collapsed;
             }
+        }
+
+
+
+        private bool CheckingWhetherUserDetailsButtonIsShown()
+        {
+            if (_personalPage && _user.CheckingWhichJobsDetailsCanBeDisplayedInUserDetailsWindow(null, out _))
+            { 
+                return true; 
+            }
+
+            else if (!_personalPage && _user.CheckingWhichJobsDetailsCanBeDisplayedInUserDetailsWindow(_userWhoWatches, out _))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
