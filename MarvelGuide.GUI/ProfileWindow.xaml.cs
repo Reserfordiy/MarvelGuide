@@ -87,9 +87,7 @@ namespace MarvelGuide.GUI
 
         private const string specialsProject = "Спецпроект";
 
-        private const string agentsNumber = "Агентский номер";
-        private const string agentsFirstWords = "Приветствие агента";
-        private const string agentsLastWords = "Подпись агента";        
+        private const string agentsNumber = "Номер агента поддержки";      
 
 
         private const string showDetailsButton = "Показать подробности";
@@ -904,11 +902,9 @@ namespace MarvelGuide.GUI
 
         private void AgentsDetails()
         {
-            _personalData.Add(agentsNumber + adding + _user.AgentsNumber.ToString());
-            _personalData.Add(agentsFirstWords + adding + _user.AgentsFirstWords);
-            _personalData.Add(agentsLastWords + adding + _user.AgentsLastWords);
+            _personalData.Add(agentsNumber + adding + "#" + _user.AgentsNumber.ToString());
 
-            _additionalData += 3;
+            _additionalData++;
 
             if (_user.WorkingNow && !_user.GeneralDirector && !_user.Director && !_user.DeputyGeneralDirector && !_user.HeadOfAgents)
             {
