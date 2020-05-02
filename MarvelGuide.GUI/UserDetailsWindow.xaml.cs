@@ -23,9 +23,15 @@ namespace MarvelGuide.GUI
     public partial class UserDetailsWindow : Window
     {
         private const string editorsDocument = "Инструкции для редакторов";
+        private const string agentsDocument = "Инструкции для агентов";
+
 
         private const string rubricName = "";
         private const string rubricFrequency = "Частота размещения: ";
+
+        private const string agentsNumber = "Агент #";
+        private const string agentsFirstWords = "Приветствие: ";
+        private const string agentsLastWords = "Подпись: ";
 
 
         readonly IStorage _storage;
@@ -38,6 +44,8 @@ namespace MarvelGuide.GUI
 
 
         bool[] _demonstratingJobDetails;
+        //bool[] _demonstratingEditorsDetalization;
+        //bool[] _demonstratingSpecialsDetalization;
 
 
         Document _documentForReading = null;
@@ -61,6 +69,7 @@ namespace MarvelGuide.GUI
 
             FormingEditorsData();
             FormingSpecialsData();
+            FormingAgentsData();
         }
 
         public UserDetailsWindow(User user) : this(user, null) { }
@@ -73,7 +82,8 @@ namespace MarvelGuide.GUI
             Grid[] grids = new Grid[]
             {
                 EditorsDetailsGrid,
-                SpecialsDetailsGrid
+                SpecialsDetailsGrid,
+                AgentsDetailsGrid
             };
 
             for (int i = 0; i < grids.Length; i++)
@@ -96,17 +106,30 @@ namespace MarvelGuide.GUI
                 MinWidth = 800;
                 MaxWidth = 1200;
 
-                Grid.SetColumnSpan(UserDetailsTitleTextBlock, 3);
+                Grid.SetColumnSpan(UserDetailsTitleTextBlock, 4);
             }
             else if(numberOfGrids == 2)
             {
                 Width = 1200;
                 MinWidth = 1200;
-                
-                //UserDetailsTitleTextBlock.Margin = new Thickness(0, 20, 0, 5);
+
+                Grid.SetColumnSpan(UserDetailsTitleTextBlock, 3);
+            }
+            else
+            {
+                Width = 1200;
+                MinWidth = 1200;
+                WindowState = WindowState.Maximized;
+
+                UserDetailsTitleTextBlock.HorizontalAlignment = HorizontalAlignment.Left;
+                UserDetailsTitleTextBlock.Margin = new Thickness(710, 20, 0, 5);
+
+                Grid.SetColumnSpan(UserDetailsTitleTextBlock, 4);
             }
 
-            if (_user.Editor && _user.EditorsRubrics.Count() > 1)
+            if (_user.Editor && _user.EditorsRubrics.Count() > 1 ||
+                _user.Special && _user.SpecialsProjects.Count() > 1 ||
+                _user.Agent)
             {
                 Height = 750;
             }
@@ -119,7 +142,7 @@ namespace MarvelGuide.GUI
             {
                 EditorsDocumentsListBox.ItemsSource = new Document[]
                 {
-                _storage.Documents.Items.FirstOrDefault(doc => doc.Name == editorsDocument)
+                    _storage.Documents.Items.FirstOrDefault(doc => doc.Name == editorsDocument)
                 };
 
                 _publicationsForVisualization = _user.EditorsRubrics
@@ -127,19 +150,15 @@ namespace MarvelGuide.GUI
 
                 EditorsRubricsListBox.ItemsSource = _publicationsForVisualization;
             }
-            else
-            {
-                EditorsDetailsGrid.Visibility = Visibility.Collapsed;
-            }
         }
 
         private void FormingSpecialsData()
         {
             if (_user.Special)
             {
-                //EditorsDocumentsListBox.ItemsSource = new Document[]
+                //SpecialsDocumentsListBox.ItemsSource = new Document[]
                 //{
-                //_storage.Documents.Items.FirstOrDefault(doc => doc.Name == specialsDocument)
+                //  _storage.Documents.Items.FirstOrDefault(doc => doc.Name == specialsDocument)
                 //};
 
                 _projectsForVisualization = _user.SpecialsProjects
@@ -147,9 +166,20 @@ namespace MarvelGuide.GUI
 
                 SpecialsProjectListBox.ItemsSource = _projectsForVisualization;
             }
-            else
+        }
+
+        private void FormingAgentsData()
+        {
+            if (_user.Agent)
             {
-                SpecialsDetailsGrid.Visibility = Visibility.Collapsed;
+                AgentsDocumentsListBox.ItemsSource = new Document[]
+                {
+                    _storage.Documents.Items.FirstOrDefault(doc => doc.Name == agentsDocument)
+                };
+
+                AgentNumberTextBlock.Text = agentsNumber + _user.AgentsNumber.ToString();
+                AgentsFirstWordsTextBlock.Text = agentsFirstWords + _user.AgentsFirstWords;
+                AgentsLastWordsTextBlock.Text = agentsLastWords + _user.AgentsLastWords;
             }
         }
 
@@ -288,6 +318,6 @@ namespace MarvelGuide.GUI
         private void ListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             Scroll.ScrollToVerticalOffset(Scroll.VerticalOffset - (double)e.Delta * 5 / 12);
-        }        
+        }
     }
 }

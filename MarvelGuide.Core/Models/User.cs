@@ -80,16 +80,18 @@ namespace MarvelGuide.Core.Models
         public virtual Picture Avatar { get; set; }
 
 
-        private Func<User, bool>[] _checksIfUserCanSeeUserDetails = new Func<User, bool>[]
+        private readonly Func<User, bool>[] _checksIfUserCanSeeUserDetails = new Func<User, bool>[]
         {
             u => u.Editor,
-            u => u.Special
+            u => u.Special,
+            u => u.Agent
         };
 
-        private Func<User, bool>[] _checksIfUserWhoWatchCanSeeUsersDetails = new Func<User, bool>[]
+        private readonly Func<User, bool>[] _checksIfUserWhoWatchCanSeeUsersDetails = new Func<User, bool>[]
         {
             uWW => uWW.LightDeveloperEditor || uWW.IsMoreThanLightDeveloper,
-            uWW => uWW.LightDeveloperSpecial || uWW.IsMoreThanLightDeveloper
+            uWW => uWW.LightDeveloperSpecial || uWW.IsMoreThanLightDeveloper,
+            uWW => uWW.LightDeveloperAgent || uWW.IsMoreThanLightDeveloper
         };
 
 
