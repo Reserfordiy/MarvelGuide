@@ -32,6 +32,7 @@ namespace MarvelGuide.Core.Models
         public bool LightDeveloperDirector { get; set; }
         public bool LightDeveloperDeputyGeneralDirector { get; set; }
         public bool LightDeveloperHeadOfManagers { get; set; }
+        public bool LightDeveloperHeadOfExperts { get; set; }
         public bool LightDeveloperHeadOfMarketers { get; set; }
         public bool LightDeveloperHeadOfEditors { get; set; }
         public bool LightDeveloperHeadOfSpecials { get; set; }
@@ -39,6 +40,7 @@ namespace MarvelGuide.Core.Models
         public bool LightDeveloperHeadOfModerators { get; set; }
         public bool LightDeveloperHeadOfTechnicians { get; set; }
         public bool LightDeveloperManager { get; set; }
+        public bool LightDeveloperExpert { get; set; }
         public bool LightDeveloperMarketer { get; set; }
         public bool LightDeveloperEditor { get; set; }
         public bool LightDeveloperSpecial { get; set; }
@@ -51,6 +53,7 @@ namespace MarvelGuide.Core.Models
         public bool Director { get; set; }
         public bool DeputyGeneralDirector { get; set; }
         public bool HeadOfManagers { get; set; }
+        public bool HeadOfExperts { get; set; }
         public bool HeadOfMarketers { get; set; }
         public bool HeadOfEditors { get; set; }
         public bool HeadOfSpecials { get; set; }
@@ -58,6 +61,7 @@ namespace MarvelGuide.Core.Models
         public bool HeadOfModerators { get; set; }
         public bool HeadOfTechnicians { get; set; }
         public bool Manager { get; set; }
+        public bool Expert { get; set; }
         public bool Marketer { get; set; }
         public bool Editor { get; set; }
         public bool Special { get; set; }
@@ -104,18 +108,20 @@ namespace MarvelGuide.Core.Models
             const string director = "Директор";
             const string deputyGeneralDirector = "Заместитель генерального директора";
             const string headOfManagers = "Руководитель аппаратного офиса";
+            const string headOfExperts = "Руководитель отдела контроля";
             const string headOfMarketers = "Руководитель отдела маркетинга";
             const string headOfEditors = "Руководитель отдела редакции";
+            const string headOfSpecials = "Руководитель отдела спецпроектов";
             const string headOfAgents = "Руководитель отдела поддержки";
             const string headOfModerators = "Руководитель отдела модерации";
-            const string headOfSpecials = "Руководитель отдела спецпроектов";
             const string headOfTechnicians = "Руководитель технического отдела";
             const string manager = "Менеджер";
+            const string expert = "Эксперт";
             const string marketer = "Маркетолог";
             const string editor = "Редактор";
+            const string special = "Спецредактор";
             const string agent = "Агент поддержки";
             const string moderator = "Модератор";
-            const string special = "Спецредактор";
             const string technician = "Техник";
 
             string job = "";
@@ -124,6 +130,7 @@ namespace MarvelGuide.Core.Models
             if (Director) { job += splitting + director; }
             if (DeputyGeneralDirector) { job += splitting + deputyGeneralDirector; }
             if (HeadOfManagers) { job += splitting + headOfManagers; }
+            if (HeadOfExperts) { job += splitting + headOfExperts; }
             if (HeadOfMarketers) { job += splitting + headOfMarketers; }
             if (HeadOfEditors) { job += splitting + headOfEditors; }
             if (HeadOfSpecials) { job += splitting + headOfSpecials; }
@@ -131,6 +138,7 @@ namespace MarvelGuide.Core.Models
             if (HeadOfModerators) { job += splitting + headOfModerators; }
             if (HeadOfTechnicians) { job += splitting + headOfTechnicians; }
             if (Manager) { job += splitting + manager; }
+            if (Expert) { job += splitting + expert; }
             if (Marketer) { job += splitting + marketer; }
             if (Editor) { job += splitting + editor; }
             if (Special) { job += splitting + special; }
@@ -237,18 +245,20 @@ namespace MarvelGuide.Core.Models
                     LightDeveloperDirector ||
                     LightDeveloperDeputyGeneralDirector ||
                     LightDeveloperHeadOfManagers ||
+                    LightDeveloperHeadOfExperts ||
                     LightDeveloperHeadOfMarketers ||
                     LightDeveloperHeadOfEditors ||
+                    LightDeveloperHeadOfSpecials ||
                     LightDeveloperHeadOfAgents ||
                     LightDeveloperHeadOfModerators ||
-                    LightDeveloperHeadOfSpecials ||
                     LightDeveloperHeadOfTechnicians ||
                     LightDeveloperManager ||
+                    LightDeveloperExpert ||
                     LightDeveloperMarketer ||
                     LightDeveloperEditor ||
+                    LightDeveloperSpecial ||
                     LightDeveloperAgent ||
                     LightDeveloperModerator ||
-                    LightDeveloperSpecial ||
                     LightDeveloperTechnician;
             }
         }
@@ -279,12 +289,13 @@ namespace MarvelGuide.Core.Models
         {
             get
             {
-                return HeadOfAgents ||
+                return HeadOfManagers ||
+                    HeadOfExperts ||
+                    HeadOfMarketers ||                    
                     HeadOfEditors ||
-                    HeadOfManagers ||
-                    HeadOfMarketers ||
-                    HeadOfModerators ||
                     HeadOfSpecials ||
+                    HeadOfAgents ||
+                    HeadOfModerators ||
                     HeadOfTechnicians;
             } 
         }
@@ -300,18 +311,20 @@ namespace MarvelGuide.Core.Models
             LightDeveloperDirector = false;
             LightDeveloperDeputyGeneralDirector = false;
             LightDeveloperHeadOfManagers = false;
+            LightDeveloperHeadOfExperts = false;
             LightDeveloperHeadOfMarketers = false;
             LightDeveloperHeadOfEditors = false;
+            LightDeveloperHeadOfSpecials = false;
             LightDeveloperHeadOfAgents = false;
             LightDeveloperHeadOfModerators = false;
-            LightDeveloperHeadOfSpecials = false;
             LightDeveloperHeadOfTechnicians = false;
             LightDeveloperManager = false;
+            LightDeveloperExpert = false;
             LightDeveloperMarketer = false;
             LightDeveloperEditor = false;
+            LightDeveloperSpecial = false;
             LightDeveloperAgent = false;
             LightDeveloperModerator = false;
-            LightDeveloperSpecial = false;
             LightDeveloperTechnician = false;
         }
 

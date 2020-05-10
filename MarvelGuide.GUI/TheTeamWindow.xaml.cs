@@ -166,6 +166,7 @@ namespace MarvelGuide.GUI
             SwitchingTheMembers(u => u.Director);
             SwitchingTheMembers(u => u.DeputyGeneralDirector);
             SwitchingTheMembers(u => u.HeadOfManagers);
+            SwitchingTheMembers(u => u.HeadOfExperts);
             SwitchingTheMembers(u => u.HeadOfMarketers);
             SwitchingTheMembers(u => u.HeadOfEditors);
             SwitchingTheMembers(u => u.HeadOfSpecials);
@@ -173,6 +174,7 @@ namespace MarvelGuide.GUI
             SwitchingTheMembers(u => u.HeadOfModerators);
             SwitchingTheMembers(u => u.HeadOfTechnicians);
             SwitchingTheMembers(u => u.Manager);
+            SwitchingTheMembers(u => u.Expert);
             SwitchingTheMembers(u => u.Marketer);
             SwitchingTheMembers(u => u.Editor);
             SwitchingTheMembers(u => u.Special);
