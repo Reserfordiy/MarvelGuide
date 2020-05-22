@@ -2734,7 +2734,7 @@ namespace MarvelGuide.GUI
                 return true; 
             }
 
-            else if (!_personalPage && _user.CheckingWhichJobsDetailsCanBeDisplayedInUserDetailsWindow(_userWhoWatches, out _))
+            else if (!_personalPage && !_editingPage && _user.CheckingWhichJobsDetailsCanBeDisplayedInUserDetailsWindow(_userWhoWatches, out _))
             {
                 return true;
             }
