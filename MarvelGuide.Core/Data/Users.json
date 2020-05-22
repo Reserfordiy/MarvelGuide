@@ -2509,6 +2509,10 @@
       {
         "RubricID": 12,
         "Frequency": 5
+      },
+      {
+        "RubricID": 18,
+        "Frequency": 2
       }
     ],
     "SpecialsProjects": [
@@ -3360,9 +3364,9 @@
     "Male": true,
     "Login": "grigoriys",
     "Password": "1X3ESFhlphmYL5WZaCFejQ==",
-    "WorkingNow": true,
+    "WorkingNow": false,
     "GotAJob": "2019-03-24T00:00:00",
-    "LostTheJob": "0001-01-01T00:00:00",
+    "LostTheJob": "2020-05-19T00:00:00",
     "SuperDeveloper": false,
     "HighDeveloper": false,
     "MediumDeveloper": false,
@@ -3840,7 +3844,7 @@
     "Editor": true,
     "Special": false,
     "Agent": false,
-    "Moderator": false,
+    "Moderator": true,
     "Technician": false,
     "DirectorsPosition": null,
     "ManagersPosition": null,
@@ -3876,6 +3880,10 @@
       {
         "RubricID": 12,
         "Frequency": 16
+      },
+      {
+        "RubricID": 2,
+        "Frequency": 7
       }
     ],
     "SpecialsProjects": [],
@@ -4996,14 +5004,19 @@
     "Manager": false,
     "Expert": false,
     "Marketer": false,
-    "Editor": false,
+    "Editor": true,
     "Special": true,
     "Agent": false,
     "Moderator": false,
     "Technician": false,
     "DirectorsPosition": null,
     "ManagersPosition": null,
-    "EditorsRubrics": [],
+    "EditorsRubrics": [
+      {
+        "RubricID": 3,
+        "Frequency": 4
+      }
+    ],
     "SpecialsProjects": [
       {
         "RubricID": 22,
@@ -5351,6 +5364,75 @@
     "Avatar": {
       "Id": 0,
       "ImageSource": "abbyasov.jpg",
+      "IsBorderRequired": true
+    }
+  },
+  {
+    "Id": 84,
+    "Name": "Анатолий",
+    "Surname": "Балаев",
+    "Male": true,
+    "Login": "anatoliyb",
+    "Password": "gjb8kMSf60YIFRJzg1ActA==",
+    "WorkingNow": true,
+    "GotAJob": "2020-05-14T00:00:00",
+    "LostTheJob": "0001-01-01T00:00:00",
+    "SuperDeveloper": false,
+    "HighDeveloper": false,
+    "MediumDeveloper": false,
+    "LightDeveloperGeneralDirector": false,
+    "LightDeveloperDirector": false,
+    "LightDeveloperDeputyGeneralDirector": false,
+    "LightDeveloperHeadOfManagers": false,
+    "LightDeveloperHeadOfExperts": false,
+    "LightDeveloperHeadOfMarketers": false,
+    "LightDeveloperHeadOfEditors": false,
+    "LightDeveloperHeadOfSpecials": false,
+    "LightDeveloperHeadOfAgents": false,
+    "LightDeveloperHeadOfModerators": false,
+    "LightDeveloperHeadOfTechnicians": false,
+    "LightDeveloperManager": false,
+    "LightDeveloperExpert": false,
+    "LightDeveloperMarketer": false,
+    "LightDeveloperEditor": false,
+    "LightDeveloperSpecial": false,
+    "LightDeveloperAgent": false,
+    "LightDeveloperModerator": false,
+    "LightDeveloperTechnician": false,
+    "GeneralDirector": false,
+    "Director": false,
+    "DeputyGeneralDirector": false,
+    "HeadOfManagers": false,
+    "HeadOfExperts": false,
+    "HeadOfMarketers": false,
+    "HeadOfEditors": false,
+    "HeadOfSpecials": false,
+    "HeadOfAgents": false,
+    "HeadOfModerators": false,
+    "HeadOfTechnicians": false,
+    "Manager": false,
+    "Expert": false,
+    "Marketer": false,
+    "Editor": true,
+    "Special": false,
+    "Agent": false,
+    "Moderator": false,
+    "Technician": false,
+    "DirectorsPosition": null,
+    "ManagersPosition": null,
+    "EditorsRubrics": [
+      {
+        "RubricID": 4,
+        "Frequency": 2
+      }
+    ],
+    "SpecialsProjects": [],
+    "AgentsNumber": 0,
+    "AgentsFirstWords": null,
+    "AgentsLastWords": null,
+    "Avatar": {
+      "Id": 0,
+      "ImageSource": "balaev.jpg",
       "IsBorderRequired": true
     }
   }
